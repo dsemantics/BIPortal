@@ -26,5 +26,13 @@ namespace BIPortal.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Your Login page.";
+            return View();
+        }
+
+        
     }
 }

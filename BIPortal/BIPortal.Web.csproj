@@ -138,6 +138,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\login\forgot_password_close_u18.png" />
+    <Content Include="Images\login\remember_me_u12.svg" />
+    <Content Include="Images\login\remember_me_u12_disabled.svg" />
+    <Content Include="Images\login\remember_me_u12_selected.svg" />
+    <Content Include="Images\login\u1.png" />
+    <Content Include="Images\login\u14.svg" />
+    <Content Include="Images\login\u6.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -151,6 +158,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Styles\Login\axure_rp_page.css" />
+    <Content Include="Styles\Login\Data_Styles.css" />
+    <Content Include="Styles\Login\Login_Styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -165,6 +175,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
