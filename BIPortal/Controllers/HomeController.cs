@@ -33,6 +33,11 @@ namespace BIPortal.Controllers
             return View();
         }
 
+        public ActionResult AddRole()
+        {
+            ViewBag.Message = "Add Role";
+            return View();
+        }
         
     }
 }
