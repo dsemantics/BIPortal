@@ -38,6 +38,12 @@ namespace BIPortal.Controllers
             ViewBag.Message = "Add Role";
             return View();
         }
-        
+
+        public ActionResult Administration()
+        {
+            ViewBag.Message = "Administration Page";
+            return View();
+        }
+
     }
 }

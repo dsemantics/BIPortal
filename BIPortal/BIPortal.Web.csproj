@@ -139,6 +139,13 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\AddRole\rep2cb_u695_disabled.svg" />
+    <Content Include="Images\Administration\u167.png" />
+    <Content Include="Images\Administration\u169.png" />
+    <Content Include="Images\Administration\u220.png" />
+    <Content Include="Images\Administration\u230.png" />
+    <Content Include="Images\Administration\user_menu_line_u171.svg" />
+    <Content Include="Images\Administration\user_menu_line_u221.svg" />
+    <Content Include="Images\Administration\user_menu_line_u232.svg" />
     <Content Include="Images\Dashboard\hide_panel_button_u39.png" />
     <Content Include="Images\Dashboard\hide_panel_button_u49.png" />
     <Content Include="Images\Dashboard\open_panel_u29.png" />
@@ -228,6 +235,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Styles\AddRole\AddRole_Styles.css" />
+    <Content Include="Styles\Administartion\Administration_Styles.css" />
     <Content Include="Styles\Common\axure_rp_page.css" />
     <Content Include="Styles\Common\Data_Styles.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
@@ -247,6 +255,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\AddRole.cshtml" />
+    <Content Include="Views\Home\Administration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
