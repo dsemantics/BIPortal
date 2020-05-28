@@ -239,6 +239,7 @@
     <Content Include="Styles\Common\axure_rp_page.css" />
     <Content Include="Styles\Common\Data_Styles.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
+    <Content Include="Styles\WorkSpaces_Reports\ws_repos.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -256,6 +257,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\AddRole.cshtml" />
     <Content Include="Views\Home\Administration.cshtml" />
+    <Content Include="Views\Home\WorkSpaces_Reports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

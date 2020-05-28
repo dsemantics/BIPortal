@@ -45,5 +45,11 @@ namespace BIPortal.Controllers
             return View();
         }
 
+        public ActionResult WorkSpaces_Reports()
+        {
+            ViewBag.Message = "WorkSpaces and Reports Page";
+            return View();
+        }
+
     }
 }
