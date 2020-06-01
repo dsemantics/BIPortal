@@ -10,6 +10,7 @@ using System.Management.Automation.Runspaces;
 using System.Text;
 using System.Web.UI;
 using System.Web;
+using BIPortal.DTO;
 
 namespace BIPortalServices.Controllers
 {
@@ -17,15 +18,19 @@ namespace BIPortalServices.Controllers
     public class WorkSpacesController : ApiController
     {
         //Get Workspaces
-        public string GetPowerBIWorkspace()
+        //[HttpGet]  
+        [Route("api/GetWorkSpaces")]
+        public IHttpActionResult GetPowerBIWorkspace()
         {
+            List<WorkspaceDTO> workspaceDTOList = new List<WorkspaceDTO>();
+            //IList<WorkspaceDTO> workspaceDTOList = null;
             // Create the InitialSessionState Object
             InitialSessionState iss = InitialSessionState.CreateDefault2();
-
+            
             // Initialize PowerShell Engine
             var shell = PowerShell.Create(iss);
             shell.Commands.AddCommand("Connect-PowerBIServiceAccount");
-
+            
             var userName = "biassistant@datasemantics.in";
             var pwd = "Dac21568";
             
@@ -47,19 +52,20 @@ namespace BIPortalServices.Controllers
                 {
 
                     // We use a string builder to create our result text
-                    //var builder = new StringBuilder();
-
-                   
+                    //var builder = new StringBuilder();                   
 
                     var shell1 = PowerShell.Create(iss);
                     shell1.Commands.AddCommand("Get-PowerBIWorkspace");
                     //shell1.Commands.AddParameter("Scope", "Individual");
                    
                     var res = shell1.Invoke();
+                   
+                    //WorkspaceDTO workspaceDTO = new WorkspaceDTO();
                     if (res.Count > 0)
                     {
                         foreach (var psObject in res)
                         {
+                            WorkspaceDTO workspaceDTO = new WorkspaceDTO();
                             // Convert the Base Object to a string and append it to the string builder.
                             // Add \r\n for line breaks
                             var workSpaceName = psObject.Properties["Name"].Value;
@@ -67,7 +73,9 @@ namespace BIPortalServices.Controllers
                             //var workSpaceUser = psObject.Properties["User"].Value;
 
                             builder.Append(psObject.Properties["Name"].Value + "\r\n");
-                            //builder.Append(psObject.BaseObject.ToString());
+                            workspaceDTO.Id= (Guid) psObject.Properties["Id"].Value;
+                            workspaceDTO.Name= psObject.Properties["Name"].Value.ToString();
+                            workspaceDTOList.Add(workspaceDTO);
                         }
                         //Result.Text = Server.HtmlEncode(builder.ToString());
                     }                    
@@ -75,11 +83,19 @@ namespace BIPortalServices.Controllers
                 }
             }
             catch (ActionPreferenceStopException Error) { //Result.Text = Error.Message; 
+                workspaceDTOList = null;
             }
             catch (RuntimeException Error) { //Result.Text = Error.Message; 
+                workspaceDTOList = null;
             };
-            
-            return HttpUtility.HtmlEncode(builder.ToString());
+
+            if (workspaceDTOList.Count == 0)
+            {
+                return NotFound();
+            }
+
+            //return workspaceDTOList;
+            return Ok(workspaceDTOList);
         }
 
         //Add a new user to a workspace
