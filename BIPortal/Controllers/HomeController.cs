@@ -51,5 +51,17 @@ namespace BIPortal.Controllers
             return View();
         }
 
+        public ActionResult Roles_Rights()
+        {
+            ViewBag.Message = "Roles and Rights Page";
+            return View();
+        }
+
+        public ActionResult Dashboard()
+        {
+            ViewBag.Message = "Dashboard Page";
+            return View();
+        }
+
     }
 }

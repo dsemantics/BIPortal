@@ -315,7 +315,9 @@
     <Content Include="Styles\Administartion\Administration_Styles.css" />
     <Content Include="Styles\Common\axure_rp_page.css" />
     <Content Include="Styles\Common\Data_Styles.css" />
+    <Content Include="Styles\Dashboard\Dashboard.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
+    <Content Include="Styles\Roles_Rights\Roles_Rights.css" />
     <Content Include="Styles\WorkSpaces_Reports\ws_repos.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -335,6 +337,9 @@
     <Content Include="Views\Home\AddRole.cshtml" />
     <Content Include="Views\Home\Administration.cshtml" />
     <Content Include="Views\Home\WorkSpaces_Reports.cshtml" />
+    <Content Include="Views\Shared\_BIPortalLayout.cshtml" />
+    <Content Include="Views\Home\Roles_Rights.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
