@@ -1,4 +1,6 @@
-﻿using BIPortalServices;
+﻿using BIPortal.App_Start;
+using BIPortalServices;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,8 @@ namespace BIPortal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.Configure();
+            //AutoMapperConfig.ConfigureServices(IServiceCollection services);            
         }
     }
 }

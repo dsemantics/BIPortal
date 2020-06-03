@@ -23,7 +23,7 @@ namespace BIPortalServices.Controllers
         public IHttpActionResult GetPowerBIWorkspace()
         {
             List<WorkspaceDTO> workspaceDTOList = new List<WorkspaceDTO>();
-            //IList<WorkspaceDTO> workspaceDTOList = null;
+            
             // Create the InitialSessionState Object
             InitialSessionState iss = InitialSessionState.CreateDefault2();
             
@@ -39,21 +39,14 @@ namespace BIPortalServices.Controllers
 
             shell.Commands.AddParameter("Credential", cred);
 
-            var builder = new StringBuilder();
-
+            
             // Execute the script 
             try
             {
                 var results = shell.Invoke();
-
-                // display results, with BaseObject converted to string
-                // Note : use |out-string for console-like output
+                
                 if (results.Count > 0)
                 {
-
-                    // We use a string builder to create our result text
-                    //var builder = new StringBuilder();                   
-
                     var shell1 = PowerShell.Create(iss);
                     shell1.Commands.AddCommand("Get-PowerBIWorkspace");
                     //shell1.Commands.AddParameter("Scope", "Individual");
@@ -66,18 +59,30 @@ namespace BIPortalServices.Controllers
                         foreach (var psObject in res)
                         {
                             WorkspaceDTO workspaceDTO = new WorkspaceDTO();
-                            // Convert the Base Object to a string and append it to the string builder.
-                            // Add \r\n for line breaks
-                            var workSpaceName = psObject.Properties["Name"].Value;
+                            
+                            var workSpaceId= psObject.Properties["Id"].Value;
+                            //var workSpaceUser = psObject.Properties["User"].Value;                                                        
+                            workspaceDTO.WorkSpaceId = (Guid)psObject.Properties["Id"].Value;
+                            workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();
 
-                            //var workSpaceUser = psObject.Properties["User"].Value;
+                            var shell2 = PowerShell.Create(iss);
+                            shell2.Commands.AddCommand("Get-PowerBIReport");
+                            shell2.Commands.AddParameter("WorkspaceId", workSpaceId);
+                            var result = shell2.Invoke();
+                            if (result.Count > 0)
+                            {
+                                foreach (var psObjectReport in result)
+                                {
+                                    
+                                    var reportName = psObjectReport.Properties["Name"].Value;
 
-                            builder.Append(psObject.Properties["Name"].Value + "\r\n");
-                            workspaceDTO.Id= (Guid) psObject.Properties["Id"].Value;
-                            workspaceDTO.Name= psObject.Properties["Name"].Value.ToString();
+                                    workspaceDTO.ReportId = (Guid)psObjectReport.Properties["Id"].Value;
+                                    workspaceDTO.ReportName = psObjectReport.Properties["Name"].Value.ToString();
+                                    workspaceDTO.ReportCount = result.Count;                                
+                                }
+                            }
                             workspaceDTOList.Add(workspaceDTO);
                         }
-                        //Result.Text = Server.HtmlEncode(builder.ToString());
                     }                    
                     
                 }

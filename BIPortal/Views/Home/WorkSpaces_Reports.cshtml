@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_BIPortalLayout.cshtml";
     ViewBag.Title = "WorkSpace Reports";
 }
-
+@model IEnumerable<BIPortal.Models.WorkspacesModel>
 <!DOCTYPE html>
 
 <html>
@@ -18,329 +18,137 @@
         <!-- wsReps Panel (Dynamic Panel) -->
         <div id="u304" class="ax_default" data-label="wsReps Panel">
             <div id="u304_state0" class="panel_state" data-label="State1" style="">
-                <div id="u304_state0_content" class="panel_state_content">
+                @*<div id="u304_state0_content" class="panel_state_content">*@
 
-                    <!-- Finance Workspace (Dynamic Panel) -->
-                    <div id="u305" class="ax_default" data-label="Finance Workspace">
-                        <div id="u305_state0" class="panel_state" data-label="Collapsed" style="">
-                            <div id="u305_state0_content" class="panel_state_content">
+                <div class="ax_default">
+                    <table border="1">
+                        <tr>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Name)*@
+                                Workspace Name
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Id)*@
+                                No. of Reports
+                            </th>
+                            <th>
+                                Edit
+                            </th>
+                        </tr>
 
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u306" class="ax_default box_1">
-                                    <div id="u306_div" class=""></div>
-                                    <div id="u306_text" class="text ">
-                                        <p><span>Finance Workspace / 5 / PrinceV</span></p>
-                                    </div>
-                                </div>
+                        @foreach (var item in Model)
+                        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WorkSpaceName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReportCount)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit","EditWorkspaceUser")
+                        </td>
+                    </tr>
 
-                                <!-- OFinWS (Image) -->
-                                <div id="u307" class="ax_default image" data-label="OFinWS">
-                                    <img id="u307_img" class="img " src="~/Images/ws_reps/ofinws_u307.png" />
-                                    <div id="u307_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="u305_state1" class="panel_state" data-label="Extended" style="visibility: hidden;">
-                            <div id="u305_state1_content" class="panel_state_content">
+                        }
+                    </table>
+                </div>
+            @*</div>*@
+                
+                <!-- Workspace edit popup (Dynamic Panel) -->
+                <div id="u333" class="ax_default ax_default_hidden" data-label="Workspace edit popup" style="display:none; visibility: hidden">
+                    <div id="u333_state0" class="panel_state" data-label="State1" style="">
+                        <div id="u333_state0_content" class="panel_state_content">
 
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u308" class="ax_default box_1">
-                                    <div id="u308_div" class=""></div>
-                                    <div id="u308_text" class="text ">
-                                        <p><span>Finance Workspace / 5 / PrinceV</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- CFinWS (Image) -->
-                                <div id="u309" class="ax_default image" data-label="CFinWS">
-                                    <img id="u309_img" class="img " src="~/Images/ws_reps/ofinws_u307.png" />
-                                    <div id="u309_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sales Workspace (Dynamic Panel) -->
-                    <div id="u310" class="ax_default" data-label="Sales Workspace">
-                        <div id="u310_state0" class="panel_state" data-label="Collapsed" style="">
-                            <div id="u310_state0_content" class="panel_state_content">
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u311" class="ax_default box_1">
-                                    <div id="u311_div" class=""></div>
-                                    <div id="u311_text" class="text ">
-                                        <p><span>Sales Workspace / 5 / ChinmayP</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- OSalWS (Image) -->
-                                <div id="u312" class="ax_default image" data-label="OSalWS">
-                                    <img id="u312_img" class="img " src="~/Images/ws_reps/ofinws_u307.png" />
-                                    <div id="u312_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u334" class="ax_default box_1">
+                                <div id="u334_div" class=""></div>
+                                <div id="u334_text" class="text " style="display:none; visibility: hidden">
+                                    <p></p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- Purchase Workspace (Dynamic Panel) -->
-                    <div id="u313" class="ax_default" data-label="Purchase Workspace">
-                        <div id="u313_state0" class="panel_state" data-label="Collapsed" style="">
-                            <div id="u313_state0_content" class="panel_state_content">
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u314" class="ax_default box_1">
-                                    <div id="u314_div" class=""></div>
-                                    <div id="u314_text" class="text ">
-                                        <p><span>Purchase Workspace / 5 / PrinceV</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- OPurWS (Image) -->
-                                <div id="u315" class="ax_default image" data-label="OPurWS">
-                                    <img id="u315_img" class="img " src="~/Images/ws_reps/ofinws_u307.png" />
-                                    <div id="u315_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u335" class="ax_default box_1">
+                                <div id="u335_div" class=""></div>
+                                <div id="u335_text" class="text ">
+                                    <p><span>Finance Workspace</span></p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- Production Workspace (Dynamic Panel) -->
-                    <div id="u316" class="ax_default" data-label="Production Workspace">
-                        <div id="u316_state0" class="panel_state" data-label="Collapsed" style="">
-                            <div id="u316_state0_content" class="panel_state_content">
-
-                                <!-- Unnamed (Shape) -->
-                                <div id="u317" class="ax_default box_1">
-                                    <img id="u317_img" class="img " src="~/Images/ws_reps/u317.svg" />
-                                    <div id="u317_text" class="text ">
-                                        <p><span>Production Workspace / 5 / RoshanJ</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- OProWS (Image) -->
-                                <div id="u318" class="ax_default image" data-label="OProWS">
-                                    <img id="u318_img" class="img " src="~/Images/ws_reps/ofinws_u307.png" />
-                                    <div id="u318_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u336" class="ax_default label">
+                                <div id="u336_div" class=""></div>
+                                <div id="u336_text" class="text ">
+                                    <p><span>Report 1</span></p><p><span>Report 2 (has 2 pages)</span></p><p><span>Report 3</span></p><p><span>Report 4 (has 3 pages)</span></p><p><span>Report 5</span></p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- HR Workspace (Dynamic Panel) -->
-                    <div id="u319" class="ax_default" data-label="HR Workspace">
-                        <div id="u319_state0" class="panel_state" data-label="Collapsed" style="">
-                            <div id="u319_state0_content" class="panel_state_content">
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u320" class="ax_default box_1">
-                                    <div id="u320_div" class=""></div>
-                                    <div id="u320_text" class="text ">
-                                        <p><span>HR Workspace / 5 / PratikshaM</span></p>
-                                    </div>
+                            <!-- Unnamed (Vertical Line) -->
+                            <div id="u337" class="ax_default line">
+                                <img id="u337_img" class="img " src="~/Images/ws_reps/u337.svg" />
+                                <div id="u337_text" class="text " style="display:none; visibility: hidden">
+                                    <p></p>
                                 </div>
+                            </div>
 
-                                <!-- OHrWS (Image) -->
-                                <div id="u321" class="ax_default image" data-label="OHrWS">
-                                    <img id="u321_img" class="img " src="~/Images/ws_reps/ofinws_u307.png" />
-                                    <div id="u321_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u338" class="ax_default label">
+                                <div id="u338_div" class=""></div>
+                                <div id="u338_text" class="text ">
+                                    <p><span>Published</span></p><p><span>22nd July 2019</span></p>
                                 </div>
+                            </div>
+
+                            <!-- Unnamed (Vertical Line) -->
+                            <div id="u339" class="ax_default line">
+                                <img id="u339_img" class="img " src="~/Images/ws_reps/u337.svg" />
+                                <div id="u339_text" class="text " style="display:none; visibility: hidden">
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u340" class="ax_default label">
+                                <div id="u340_div" class=""></div>
+                                <div id="u340_text" class="text ">
+                                    <p><span>Owner</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Rectangle) -->
+                            <div id="u341" class="ax_default button">
+                                <div id="u341_div" class=""></div>
+                                <div id="u341_text" class="text ">
+                                    <p><span>Save</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Image) -->
+                            <div id="u342" class="ax_default image">
+                                <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" />
+                                <div id="u342_text" class="text " style="display:none; visibility: hidden">
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <!-- Unnamed (Droplist) -->
+                            <div id="u343" class="ax_default droplist">
+                                <div id="u343_div" class=""></div>
+                                <select id="u343_input" class="u343_input">
+                                    <option class="u343_input_option" selected value="PrinceV">PrinceV</option>
+                                    <option class="u343_input_option" value="ChinmayC">ChinmayC</option>
+                                    <option class="u343_input_option" value="RoshanJ">RoshanJ</option>
+                                    <option class="u343_input_option" value="PrateekshaM">PrateekshaM</option>
+                                    <option class="u343_input_option" value="SandeepS">SandeepS</option>
+                                    <option class="u343_input_option" value="ImadS">ImadS</option>
+                                    <option class="u343_input_option" value="AneeshK">AneeshK</option>
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Fin Reports Panel (Dynamic Panel) -->
-                    <div id="u322" class="ax_default ax_default_hidden" data-label="Fin Reports Panel" style="display:none; visibility: hidden">
-                        <div id="u322_state0" class="panel_state" data-label="State1" style="">
-                            <div id="u322_state0_content" class="panel_state_content">
-
-                                <!-- Report 1 (Rectangle) -->
-                                <div id="u323" class="ax_default label" data-label="Report 1">
-                                    <div id="u323_div" class=""></div>
-                                    <div id="u323_text" class="text ">
-                                        <p><span>Report 1</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Report 2 (Rectangle) -->
-                                <div id="u324" class="ax_default label" data-label="Report 2">
-                                    <div id="u324_div" class=""></div>
-                                    <div id="u324_text" class="text ">
-                                        <p><span>Report 2</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Report 3 (Rectangle) -->
-                                <div id="u325" class="ax_default label" data-label="Report 3">
-                                    <div id="u325_div" class=""></div>
-                                    <div id="u325_text" class="text ">
-                                        <p><span>Report 3</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Report 4 (Rectangle) -->
-                                <div id="u326" class="ax_default label" data-label="Report 4">
-                                    <div id="u326_div" class=""></div>
-                                    <div id="u326_text" class="text ">
-                                        <p><span>Report 4</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Report 5 (Rectangle) -->
-                                <div id="u327" class="ax_default label" data-label="Report 5">
-                                    <div id="u327_div" class=""></div>
-                                    <div id="u327_text" class="text ">
-                                        <p><span>Report 5</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Image) -->
-                    <div id="u328" class="ax_default image">
-                        <img id="u328_img" class="img " src="~/Images/ws_reps/u328.png" />
-                        <div id="u328_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Image) -->
-                    <div id="u329" class="ax_default image">
-                        <img id="u329_img" class="img " src="~/Images/ws_reps/u328.png" />
-                        <div id="u329_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Image) -->
-                    <div id="u330" class="ax_default image">
-                        <img id="u330_img" class="img " src="~/Images/ws_reps/u328.png" />
-                        <div id="u330_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Image) -->
-                    <div id="u331" class="ax_default image">
-                        <img id="u331_img" class="img " src="~/Images/ws_reps/u328.png" />
-                        <div id="u331_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Image) -->
-                    <div id="u332" class="ax_default image">
-                        <img id="u332_img" class="img " src="~/Images/ws_reps/u328.png" />
-                        <div id="u332_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
-                        </div>
-                    </div>
-
-                    <!-- Workspace edit popup (Dynamic Panel) -->
-                    <div id="u333" class="ax_default ax_default_hidden" data-label="Workspace edit popup" style="display:none; visibility: hidden">
-                        <div id="u333_state0" class="panel_state" data-label="State1" style="">
-                            <div id="u333_state0_content" class="panel_state_content">
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u334" class="ax_default box_1">
-                                    <div id="u334_div" class=""></div>
-                                    <div id="u334_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u335" class="ax_default box_1">
-                                    <div id="u335_div" class=""></div>
-                                    <div id="u335_text" class="text ">
-                                        <p><span>Finance Workspace</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u336" class="ax_default label">
-                                    <div id="u336_div" class=""></div>
-                                    <div id="u336_text" class="text ">
-                                        <p><span>Report 1</span></p><p><span>Report 2 (has 2 pages)</span></p><p><span>Report 3</span></p><p><span>Report 4 (has 3 pages)</span></p><p><span>Report 5</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Vertical Line) -->
-                                <div id="u337" class="ax_default line">
-                                    <img id="u337_img" class="img " src="~/Images/ws_reps/u337.svg" />
-                                    <div id="u337_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u338" class="ax_default label">
-                                    <div id="u338_div" class=""></div>
-                                    <div id="u338_text" class="text ">
-                                        <p><span>Published</span></p><p><span>22nd July 2019</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Vertical Line) -->
-                                <div id="u339" class="ax_default line">
-                                    <img id="u339_img" class="img " src="~/Images/ws_reps/u337.svg" />
-                                    <div id="u339_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u340" class="ax_default label">
-                                    <div id="u340_div" class=""></div>
-                                    <div id="u340_text" class="text ">
-                                        <p><span>Owner</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Rectangle) -->
-                                <div id="u341" class="ax_default button">
-                                    <div id="u341_div" class=""></div>
-                                    <div id="u341_text" class="text ">
-                                        <p><span>Save</span></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Image) -->
-                                <div id="u342" class="ax_default image">
-                                    <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" />
-                                    <div id="u342_text" class="text " style="display:none; visibility: hidden">
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <!-- Unnamed (Droplist) -->
-                                <div id="u343" class="ax_default droplist">
-                                    <div id="u343_div" class=""></div>
-                                    <select id="u343_input" class="u343_input">
-                                        <option class="u343_input_option" selected value="PrinceV">PrinceV</option>
-                                        <option class="u343_input_option" value="ChinmayC">ChinmayC</option>
-                                        <option class="u343_input_option" value="RoshanJ">RoshanJ</option>
-                                        <option class="u343_input_option" value="PrateekshaM">PrateekshaM</option>
-                                        <option class="u343_input_option" value="SandeepS">SandeepS</option>
-                                        <option class="u343_input_option" value="ImadS">ImadS</option>
-                                        <option class="u343_input_option" value="AneeshK">AneeshK</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -8,11 +8,27 @@ using BIPortal.DTO;
 using BIPortal.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using AutoMapper;
+using WebGrease;
+using BIPortal.Mapping;
 
 namespace BIPortal.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMapper mapper;
+
+        public HomeController(IMapper mapper)
+            {
+            this.mapper = mapper;
+            }
+
+        public HomeController()
+        {
+
+        }
+
+        
         public ActionResult Index()
         {
             return View();
@@ -53,7 +69,7 @@ namespace BIPortal.Controllers
         public ActionResult WorkSpaces_Reports()
         {
             ViewBag.Message = "WorkSpaces and Reports Page";
-            IEnumerable<WorkspaceDTO> workspacesList = null;
+            IEnumerable<WorkspacesModel> workspacesList = null;
             
             //Hosted web API REST Service base url  
             string Baseurl = "https://localhost:44383/";
@@ -74,13 +90,18 @@ namespace BIPortal.Controllers
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<IList<WorkspaceDTO>>();
+                    var readTask = result.Content.ReadAsAsync<List<WorkspaceDTO>>();
                     readTask.Wait();
+                   
+                    var config = new MapperConfiguration(cfg => {
+                        cfg.CreateMap<WorkspaceDTO, WorkspacesModel>();
+                    });
+                    IMapper mapper = config.CreateMapper();                    
 
-                    workspacesList = readTask.Result;
+                     workspacesList = mapper.Map<List<WorkspaceDTO>, List<WorkspacesModel>>(readTask.Result);
                 }
             }
-                return View();
+                return View(workspacesList);
 
         }
 

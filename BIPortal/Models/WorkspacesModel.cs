@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace BIPortal.DTO
+namespace BIPortal.Models
 {
-    public class WorkspaceDTO
+    public class WorkspacesModel
     {
         public Guid WorkSpaceId { get; set; }
         public string WorkSpaceName { get; set; }
