@@ -38,23 +38,23 @@
 
                         @foreach (var item in Model)
                         {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.WorkSpaceName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReportCount)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit","EditWorkspaceUser")
-                        </td>
-                    </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WorkSpaceName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReportCount)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditWorkspaceUser")
+                                </td>
+                            </tr>
 
                         }
                     </table>
                 </div>
-            @*</div>*@
-                
+                @*</div>*@
+
                 <!-- Workspace edit popup (Dynamic Panel) -->
                 <div id="u333" class="ax_default ax_default_hidden" data-label="Workspace edit popup" style="display:none; visibility: hidden">
                     <div id="u333_state0" class="panel_state" data-label="State1" style="">
@@ -149,9 +149,9 @@
                     </div>
                 </div>
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 </html>
