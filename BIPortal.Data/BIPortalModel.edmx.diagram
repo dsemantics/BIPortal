@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="500390e560e94a159a1e9d6d29f99a3f" Name="Diagram1">
+        <EntityTypeShape EntityType="BIPortalModel.GroupMaster" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BIPortalModel.RoleMaster" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BIPortalModel.UserMaster" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BIPortalModel.UserGroupRoleMapping" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="BIPortalModel.FK__UserGroup__Group__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="BIPortalModel.FK__UserGroup__RoleI__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="BIPortalModel.FK__UserGroup__UserI__2F10007B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
