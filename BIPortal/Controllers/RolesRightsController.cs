@@ -9,9 +9,15 @@ namespace BIPortal.Controllers
     public class RolesRightsController : Controller
     {
         // GET: RolesRights
-        public ActionResult Index()
+        public ActionResult AddRole()
         {
-            ViewBag.Message = "Roles and Rights Page";
+            ViewBag.Message = "AddRole Page";
+            return View();
+        }
+        
+        public ActionResult ViewRoles()
+        {
+            ViewBag.Message = "View Roles Page";
             return View();
         }
     }

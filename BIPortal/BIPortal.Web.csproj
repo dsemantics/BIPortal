@@ -184,12 +184,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddRoleController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RolesRightsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WorkspacesReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -351,6 +351,22 @@
     <Content Include="Images\Roles_Rights\u424.png" />
     <Content Include="Images\Roles_Rights\u429.svg" />
     <Content Include="Images\Roles_Rights\u436.svg" />
+    <Content Include="Images\Users\active_u1051.svg" />
+    <Content Include="Images\Users\active_u1051_disabled.svg" />
+    <Content Include="Images\Users\active_u1051_selected.svg" />
+    <Content Include="Images\Users\active_u1052.svg" />
+    <Content Include="Images\Users\active_u1052_disabled.svg" />
+    <Content Include="Images\Users\active_u1052_selected.svg" />
+    <Content Include="Images\Users\active_u1322.svg" />
+    <Content Include="Images\Users\active_u1322_disabled.svg" />
+    <Content Include="Images\Users\active_u1322_selected.svg" />
+    <Content Include="Images\Users\active_u1323.svg" />
+    <Content Include="Images\Users\active_u1323_disabled.svg" />
+    <Content Include="Images\Users\active_u1323_selected.svg" />
+    <Content Include="Images\Users\saveclosebutton_u1312.svg" />
+    <Content Include="Images\Users\saveclosebutton_u1312_mouseOver.svg" />
+    <Content Include="Images\Users\saveclosebutton_u1313.svg" />
+    <Content Include="Images\Users\saveclosebutton_u1313_mouseOver.svg" />
     <Content Include="Images\Ws_Reps\ofinws_u307.png" />
     <Content Include="Images\Ws_Reps\u317.svg" />
     <Content Include="Images\Ws_Reps\u328.png" />
@@ -386,6 +402,9 @@
     <Content Include="Styles\Dashboard\Dashboard.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
     <Content Include="Styles\Roles_Rights\Roles_Rights.css" />
+    <Content Include="Styles\Users\AddUser_Styles.css" />
+    <Content Include="Styles\Users\EditUser_Styles.css" />
+    <Content Include="Styles\Users\ViewUser_Styles.css" />
     <Content Include="Styles\WorkSpaces_Reports\ws_repos.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -403,11 +422,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_BIPortalLayout.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\AddRole\Index.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\RolesRights\Index.cshtml" />
+    <Content Include="Views\RolesRights\ViewRoles.cshtml" />
     <Content Include="Views\WorkspacesReports\Index.cshtml" />
+    <Content Include="Views\RolesRights\AddRole.cshtml" />
+    <Content Include="Views\Users\AddUser.cshtml" />
+    <Content Include="Views\Users\ViewUser.cshtml" />
+    <Content Include="Views\Users\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
