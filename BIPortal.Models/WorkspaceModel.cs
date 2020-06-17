@@ -8,9 +8,13 @@ namespace BIPortal.Models
 {
     public class WorkspaceModel
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
+        public Guid WorkSpaceId { get; set; }
+        public string WorkSpaceName { get; set; }
         public string Filter { get; set; }
-        public string User { get; set; }
+        public string WorkSpaceUser { get; set; }
+
+        public Guid ReportId { get; set; }
+        public string ReportName { get; set; }
+        public int ReportCount { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace BIPortal.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "WorkSpaces and Reports Page";
-            IEnumerable<WorkspacesModel> workspacesList = null;
+            IEnumerable<WorkspaceModel> workspacesList = null;
 
             //Hosted web API REST Service base url  
             string Baseurl = "https://localhost:44383/";
@@ -42,11 +42,11 @@ namespace BIPortal.Controllers
                     readTask.Wait();
 
                     var config = new MapperConfiguration(cfg => {
-                        cfg.CreateMap<WorkspaceDTO, WorkspacesModel>();
+                        cfg.CreateMap<WorkspaceDTO, WorkspaceModel>();
                     });
                     IMapper mapper = config.CreateMapper();
 
-                    workspacesList = mapper.Map<List<WorkspaceDTO>, List<WorkspacesModel>>(readTask.Result);
+                    workspacesList = mapper.Map<List<WorkspaceDTO>, List<WorkspaceModel>>(readTask.Result);
                 }
             }
             return View(workspacesList);
