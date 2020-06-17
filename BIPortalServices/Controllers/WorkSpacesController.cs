@@ -135,5 +135,57 @@ namespace BIPortalServices.Controllers
             //AddResult.Text = "User Removed from workspace successfully";
             return "User Removed from workspace successfully";
         }
+
+        public string GetPowerBIWorkspaceMigrationStatus()
+        {
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+            
+            var shell2 = PowerShell.Create(iss);
+            shell2.Commands.AddCommand("Get-PowerBIWorkspaceMigrationStatus");
+            shell2.Commands.AddParameter("Id", "ea5ec2c2-def9-4b74-9133-305511d96fdf");           
+            var resMigrationStatus = shell2.Invoke();
+            
+            return "Migration status";            
+        }
+
+        public string NewPowerBIWorkspace()
+        {
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+
+            var shell2 = PowerShell.Create(iss);
+            shell2.Commands.AddCommand("New-PowerBIWorkspace");
+            shell2.Commands.AddParameter("Name", "New Workspace");
+            var resNewWorkspace = shell2.Invoke();
+
+            return "New Workspace Created Successfully.";            
+        }
+        public string RestorePowerBIWorkspace()
+        {
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+
+            var shell2 = PowerShell.Create(iss);
+            shell2.Commands.AddCommand("Restore-PowerBIWorkspace");
+            shell2.Commands.AddParameter("Id", "ea5ec2c2-def9-4b74-9133-305511d96fdf");
+            shell2.Commands.AddParameter("RestoredName", "TestWorkspace");
+            shell2.Commands.AddParameter("AdminEmailAddress", "john@contoso.com");
+            var resRestoreWorkspace = shell2.Invoke();
+
+            return "Workspace Restored Successfully.";            
+        }
+        public string SetPowerBIWorkspace()
+        {
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+
+            var shell2 = PowerShell.Create(iss);
+            shell2.Commands.AddCommand("Set-PowerBIWorkspace");
+            shell2.Commands.AddParameter("Scope", "Organization");
+            shell2.Commands.AddParameter("Id", "ea5ec2c2-def9-4b74-9133-305511d96fdf");
+            shell2.Commands.AddParameter("Name", "Test Name");
+            shell2.Commands.AddParameter("Description", "Test Description");
+            var resSetWorkspace = shell2.Invoke();
+
+            return "Workspace Updated Successfully.";
+        }
+
     }
 }
