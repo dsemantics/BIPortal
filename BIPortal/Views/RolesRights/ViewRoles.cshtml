@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_BIPortalLayout.cshtml";
     ViewBag.Title = "View Roles";
 }
-
+@model IEnumerable<BIPortal.Models.RolesModel>
 <!DOCTYPE html>
 
 <html>
@@ -21,197 +21,38 @@
                 <!-- Unnamed (Table) -->
                 <div id="u400" class="ax_default">
 
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u401" class="ax_default table_cell">
-                        <img id="u401_img" class="img " src="~/Images/roles_rights/u401.png" />
-                        <div id="u401_text" class="text ">
-                            <p><span>Role Name</span></p>
-                        </div>
-                    </div>
+                    <table border="1">
+                        <tr>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Name)*@
+                                Role Name
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Id)*@
+                                Date Created
+                            </th>
+                            <th>
+                                Date Modified
+                            </th>
+                        </tr>
 
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u402" class="ax_default table_cell">
-                        <img id="u402_img" class="img " src="~/Images/roles_rights/u402.png" />
-                        <div id="u402_text" class="text ">
-                            <p><span>Date Created</span></p>
-                        </div>
-                    </div>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoleName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem=>item.ModifiedDate)
+                                </td>
+                            </tr>
 
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u403" class="ax_default table_cell">
-                        <img id="u403_img" class="img " src="~/Images/roles_rights/u403.png" />
-                        <div id="u403_text" class="text ">
-                            <p><span>Date Modified</span></p>
-                        </div>
-                    </div>
+                        }
+                    </table>
 
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u404" class="ax_default table_cell">
-                        <img id="u404_img" class="img " src="~/Images/roles_rights/u404.png" />
-                        <div id="u404_text" class="text ">
-                            <p><span>FINSUPER</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u405" class="ax_default table_cell">
-                        <img id="u405_img" class="img " src="~/Images/roles_rights/u405.png" />
-                        <div id="u405_text" class="text ">
-                            <p><span>9th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u406" class="ax_default table_cell">
-                        <img id="u406_img" class="img " src="~/Images/roles_rights/u406.png" />
-                        <div id="u406_text" class="text ">
-                            <p><span>9th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u407" class="ax_default table_cell">
-                        <img id="u407_img" class="img " src="~/Images/roles_rights/u404.png" />
-                        <div id="u407_text" class="text ">
-                            <p><span>FINAP</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u408" class="ax_default table_cell">
-                        <img id="u408_img" class="img " src="~/Images/roles_rights/u405.png" />
-                        <div id="u408_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u409" class="ax_default table_cell">
-                        <img id="u409_img" class="img " src="~/Images/roles_rights/u406.png" />
-                        <div id="u409_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u410" class="ax_default table_cell">
-                        <img id="u410_img" class="img " src="~/Images/roles_rights/u404.png" />
-                        <div id="u410_text" class="text ">
-                            <p><span>FINAR</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u411" class="ax_default table_cell">
-                        <img id="u411_img" class="img " src="~/Images/roles_rights/u405.png" />
-                        <div id="u411_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u412" class="ax_default table_cell">
-                        <img id="u412_img" class="img " src="~/Images/roles_rights/u406.png" />
-                        <div id="u412_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u413" class="ax_default table_cell">
-                        <img id="u413_img" class="img " src="~/Images/roles_rights/u404.png" />
-                        <div id="u413_text" class="text ">
-                            <p><span>PURSUPER</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u414" class="ax_default table_cell">
-                        <img id="u414_img" class="img " src="~/Images/roles_rights/u405.png" />
-                        <div id="u414_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u415" class="ax_default table_cell">
-                        <img id="u415_img" class="img " src="~/Images/roles_rights/u406.png" />
-                        <div id="u415_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u416" class="ax_default table_cell">
-                        <img id="u416_img" class="img " src="~/Images/roles_rights/u404.png" />
-                        <div id="u416_text" class="text ">
-                            <p><span>HRSUPER</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u417" class="ax_default table_cell">
-                        <img id="u417_img" class="img " src="~/Images/roles_rights/u405.png" />
-                        <div id="u417_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u418" class="ax_default table_cell">
-                        <img id="u418_img" class="img " src="~/Images/roles_rights/u406.png" />
-                        <div id="u418_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u419" class="ax_default table_cell">
-                        <img id="u419_img" class="img " src="~/Images/roles_rights/u404.png" />
-                        <div id="u419_text" class="text ">
-                            <p><span>PRODSUPER</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u420" class="ax_default table_cell">
-                        <img id="u420_img" class="img " src="~/Images/roles_rights/u405.png" />
-                        <div id="u420_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u421" class="ax_default table_cell">
-                        <img id="u421_img" class="img " src="~/Images/roles_rights/u406.png" />
-                        <div id="u421_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u422" class="ax_default table_cell">
-                        <img id="u422_img" class="img " src="~/Images/roles_rights/u422.png" />
-                        <div id="u422_text" class="text ">
-                            <p><span>SALESSUPER</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u423" class="ax_default table_cell">
-                        <img id="u423_img" class="img " src="~/Images/roles_rights/u423.png" />
-                        <div id="u423_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (Table Cell) -->
-                    <div id="u424" class="ax_default table_cell">
-                        <img id="u424_img" class="img " src="~/Images/roles_rights/u424.png" />
-                        <div id="u424_text" class="text ">
-                            <p><span>10th July 2019</span></p>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- RolesEditPanel (Dynamic Panel) -->
@@ -2040,7 +1881,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="resources/scripts/axure/ios.js"></script>
 
 </body>
