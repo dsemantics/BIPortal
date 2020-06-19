@@ -17,7 +17,7 @@ namespace BIPortal.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserMaster()
         {
-            this.UserGroupRoleMappings = new HashSet<UserGroupRoleMapping>();
+            this.UserRoleMappings = new HashSet<UserRoleMapping>();
         }
     
         public int UserID { get; set; }
@@ -25,13 +25,15 @@ namespace BIPortal.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailID { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public bool Active { get; set; }
+        public Nullable<int> GroupID { get; set; }
     
+        public virtual GroupMaster GroupMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserGroupRoleMapping> UserGroupRoleMappings { get; set; }
+        public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; }
     }
 }

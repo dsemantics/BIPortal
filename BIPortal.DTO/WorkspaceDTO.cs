@@ -12,9 +12,7 @@ namespace BIPortal.DTO
         public string WorkSpaceName { get; set; }
         public string Filter { get; set; }
         public string WorkSpaceUser { get; set; }
-
-        public Guid ReportId { get; set; }
-        public string ReportName { get; set; }
         public int ReportCount { get; set; }
+        public IEnumerable<ReportsDTO> Reports { get; set; }
     }
 }

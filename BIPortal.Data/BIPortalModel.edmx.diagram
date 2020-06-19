@@ -8,10 +8,10 @@
         <EntityTypeShape EntityType="BIPortalModel.GroupMaster" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BIPortalModel.RoleMaster" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BIPortalModel.UserMaster" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BIPortalModel.UserGroupRoleMapping" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="BIPortalModel.FK__UserGroup__Group__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="BIPortalModel.FK__UserGroup__RoleI__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="BIPortalModel.FK__UserGroup__UserI__2F10007B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BIPortalModel.UserRoleMapping" Width="1.5" PointX="3" PointY="7.875" />
+        <AssociationConnector Association="BIPortalModel.FK__UserMaste__Group__4F7CD00D" />
+        <AssociationConnector Association="BIPortalModel.FK__UserRoleM__RoleI__571DF1D5" />
+        <AssociationConnector Association="BIPortalModel.FK__UserRoleM__UserI__5629CD9C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

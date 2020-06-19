@@ -72,10 +72,10 @@
     <Compile Include="RoleMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserGroupRoleMapping.cs">
+    <Compile Include="UserMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserMaster.cs">
+    <Compile Include="UserRoleMapping.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -20,7 +20,8 @@
 
                 <!-- Unnamed (Table) -->
                 <div id="u400" class="ax_default">
-
+                    @if (Model != null && Model.Count() > 0)
+                    {
                     <table border="1">
                         <tr>
                             <th>
@@ -46,13 +47,17 @@
                                     @Html.DisplayFor(modelItem => item.CreatedDate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem=>item.ModifiedDate)
+                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
                                 </td>
                             </tr>
 
                         }
                     </table>
-
+                    }
+                    else
+                    {
+                        <div>Roles not yet defined in the system!</div>
+                    }
                 </div>
 
                 <!-- RolesEditPanel (Dynamic Panel) -->

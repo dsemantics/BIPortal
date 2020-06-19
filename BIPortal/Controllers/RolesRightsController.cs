@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using BIPortal.Models;
 using BIPortal.DTO;
 using AutoMapper;
+using System.Configuration;
 
 namespace BIPortal.Controllers
 {
@@ -25,7 +26,7 @@ namespace BIPortal.Controllers
             ViewBag.Message = "View Roles Page";
             IEnumerable<RolesModel> rolesList = null;
 
-            string Baseurl = "https://localhost:44383/";
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
 
             using (var client = new HttpClient())
             {

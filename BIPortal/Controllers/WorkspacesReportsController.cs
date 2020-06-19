@@ -8,6 +8,7 @@ using BIPortal.Models;
 using AutoMapper;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Configuration;
 
 namespace BIPortal.Controllers
 {
@@ -20,7 +21,7 @@ namespace BIPortal.Controllers
             IEnumerable<WorkspaceModel> workspacesList = null;
 
             //Hosted web API REST Service base url  
-            string Baseurl = "https://localhost:44383/";
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
 
             using (var client = new HttpClient())
             {
@@ -43,6 +44,7 @@ namespace BIPortal.Controllers
 
                     var config = new MapperConfiguration(cfg => {
                         cfg.CreateMap<WorkspaceDTO, WorkspaceModel>();
+                        cfg.CreateMap<ReportsDTO, ReportsModel>();
                     });
                     IMapper mapper = config.CreateMapper();
 

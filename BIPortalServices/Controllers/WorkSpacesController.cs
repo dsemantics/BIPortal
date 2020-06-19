@@ -65,6 +65,7 @@ namespace BIPortalServices.Controllers
                             workspaceDTO.WorkSpaceId = (Guid)psObject.Properties["Id"].Value;
                             workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();
 
+                            List<ReportsDTO> reportsDTOList = new List<ReportsDTO>();
                             var shell2 = PowerShell.Create(iss);
                             shell2.Commands.AddCommand("Get-PowerBIReport");
                             shell2.Commands.AddParameter("WorkspaceId", workSpaceId);
@@ -73,13 +74,15 @@ namespace BIPortalServices.Controllers
                             {
                                 foreach (var psObjectReport in result)
                                 {
-                                    
+                                    ReportsDTO reportsDTO = new ReportsDTO();
                                     var reportName = psObjectReport.Properties["Name"].Value;
 
-                                    workspaceDTO.ReportId = (Guid)psObjectReport.Properties["Id"].Value;
-                                    workspaceDTO.ReportName = psObjectReport.Properties["Name"].Value.ToString();
-                                    workspaceDTO.ReportCount = result.Count;                                
+                                    reportsDTO.ReportId = (Guid)psObjectReport.Properties["Id"].Value;
+                                    reportsDTO.ReportName = psObjectReport.Properties["Name"].Value.ToString();                                    
+                                    reportsDTOList.Add(reportsDTO);                                    
                                 }
+                                workspaceDTO.ReportCount = result.Count;
+                                workspaceDTO.Reports = reportsDTOList;
                             }
                             workspaceDTOList.Add(workspaceDTO);
                         }

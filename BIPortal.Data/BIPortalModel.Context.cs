@@ -28,6 +28,6 @@ namespace BIPortal.Data
         public virtual DbSet<GroupMaster> GroupMasters { get; set; }
         public virtual DbSet<RoleMaster> RoleMasters { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
-        public virtual DbSet<UserGroupRoleMapping> UserGroupRoleMappings { get; set; }
+        public virtual DbSet<UserRoleMapping> UserRoleMappings { get; set; }
     }
 }
