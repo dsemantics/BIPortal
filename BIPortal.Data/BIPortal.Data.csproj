@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -40,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -72,12 +76,17 @@
     <Compile Include="RoleMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="RoleRightsMapping.cs">
+      <DependentUpon>BIPortalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Roles\RolesData.cs" />
     <Compile Include="UserMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRoleMapping.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="WorkSpaces\WorkSpaceData.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="BIPortalModel.edmx">
@@ -106,6 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BIPortal.DTO\BIPortal.DTO.csproj">
+      <Project>{47112d9c-f614-427e-9b1e-1b01ee663b10}</Project>
+      <Name>BIPortal.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

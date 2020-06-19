@@ -17,6 +17,7 @@ namespace BIPortal.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RoleMaster()
         {
+            this.RoleRightsMappings = new HashSet<RoleRightsMapping>();
             this.UserRoleMappings = new HashSet<UserRoleMapping>();
         }
     
@@ -29,6 +30,8 @@ namespace BIPortal.Data
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleRightsMapping> RoleRightsMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; }
     }

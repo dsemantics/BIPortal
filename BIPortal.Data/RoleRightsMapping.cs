@@ -12,11 +12,14 @@ namespace BIPortal.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRoleMapping
+    public partial class RoleRightsMapping
     {
         public int ID { get; set; }
-        public Nullable<int> UserID { get; set; }
         public Nullable<int> RoleID { get; set; }
+        public System.Guid WorkspaceID { get; set; }
+        public string WorkspaceName { get; set; }
+        public System.Guid ReportID { get; set; }
+        public string ReportName { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
@@ -24,6 +27,5 @@ namespace BIPortal.Data
         public bool Active { get; set; }
     
         public virtual RoleMaster RoleMaster { get; set; }
-        public virtual UserMaster UserMaster { get; set; }
     }
 }

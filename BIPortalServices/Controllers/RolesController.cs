@@ -7,6 +7,8 @@ using System.Web.Http;
 using AutoMapper;
 using BIPortal.Data;
 using BIPortal.DTO;
+using BIPortal.Data.Roles;
+using BIPortal.Data.WorkSpaces;
 
 namespace BIPortalServices.Controllers
 {
@@ -17,20 +19,13 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                List<RolesDTO> rolesDTO = new List<RolesDTO>();
-                using (var context = new BIPortalEntities())
-                {
-                    var rolesResult = context.RoleMasters.ToList();
+                RolesData rolesData = new RolesData();
+                var roles = rolesData.GetRoles();
 
-                    var config = new MapperConfiguration(cfg =>
-                    {
-                        cfg.CreateMap<RoleMaster, RolesDTO>();
-                    });
-                    IMapper mapper = config.CreateMapper();
+                WorkSpaceData workSpaceData = new WorkSpaceData();
+                var workSpaceAndReports = workSpaceData.GetPowerBIWorkspace();
 
-                    rolesDTO = mapper.Map<List<RoleMaster>, List<RolesDTO>>(rolesResult);
-                }
-                return Ok(rolesDTO);
+                return Ok(roles);
             }
             catch (Exception ex)
             {

@@ -11,6 +11,8 @@ using System.Text;
 using System.Web.UI;
 using System.Web;
 using BIPortal.DTO;
+using BIPortal.Data;
+using BIPortal.Data.WorkSpaces;
 
 namespace BIPortalServices.Controllers
 {
@@ -22,88 +24,17 @@ namespace BIPortalServices.Controllers
         [Route("api/GetWorkSpaces")]
         public IHttpActionResult GetPowerBIWorkspace()
         {
-            List<WorkspaceDTO> workspaceDTOList = new List<WorkspaceDTO>();
-            
-            // Create the InitialSessionState Object
-            InitialSessionState iss = InitialSessionState.CreateDefault2();
-            
-            // Initialize PowerShell Engine
-            var shell = PowerShell.Create(iss);
-            shell.Commands.AddCommand("Connect-PowerBIServiceAccount");
-            
-            var userName = "biassistant@datasemantics.in";
-            var pwd = "Dac21568";
-            
-            System.Security.SecureString theSecureString = new NetworkCredential(userName, pwd).SecurePassword;
-            PSCredential cred = new PSCredential(userName, theSecureString);
-
-            shell.Commands.AddParameter("Credential", cred);
-
-            
-            // Execute the script 
             try
             {
-                var results = shell.Invoke();
-                
-                if (results.Count > 0)
-                {
-                    var shell1 = PowerShell.Create(iss);
-                    shell1.Commands.AddCommand("Get-PowerBIWorkspace");
-                    //shell1.Commands.AddParameter("Scope", "Individual");
-                   
-                    var res = shell1.Invoke();
-                   
-                    //WorkspaceDTO workspaceDTO = new WorkspaceDTO();
-                    if (res.Count > 0)
-                    {
-                        foreach (var psObject in res)
-                        {
-                            WorkspaceDTO workspaceDTO = new WorkspaceDTO();
-                            
-                            var workSpaceId= psObject.Properties["Id"].Value;
-                            //var workSpaceUser = psObject.Properties["User"].Value;                                                        
-                            workspaceDTO.WorkSpaceId = (Guid)psObject.Properties["Id"].Value;
-                            workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();
+                WorkSpaceData workSpaceData = new WorkSpaceData();
+                var workSpaceAndReports = workSpaceData.GetPowerBIWorkspace();
+                return Ok(workSpaceAndReports);
 
-                            List<ReportsDTO> reportsDTOList = new List<ReportsDTO>();
-                            var shell2 = PowerShell.Create(iss);
-                            shell2.Commands.AddCommand("Get-PowerBIReport");
-                            shell2.Commands.AddParameter("WorkspaceId", workSpaceId);
-                            var result = shell2.Invoke();
-                            if (result.Count > 0)
-                            {
-                                foreach (var psObjectReport in result)
-                                {
-                                    ReportsDTO reportsDTO = new ReportsDTO();
-                                    var reportName = psObjectReport.Properties["Name"].Value;
-
-                                    reportsDTO.ReportId = (Guid)psObjectReport.Properties["Id"].Value;
-                                    reportsDTO.ReportName = psObjectReport.Properties["Name"].Value.ToString();                                    
-                                    reportsDTOList.Add(reportsDTO);                                    
-                                }
-                                workspaceDTO.ReportCount = result.Count;
-                                workspaceDTO.Reports = reportsDTOList;
-                            }
-                            workspaceDTOList.Add(workspaceDTO);
-                        }
-                    }                    
-                    
-                }
             }
-            catch (ActionPreferenceStopException Error) { //Result.Text = Error.Message; 
-                workspaceDTOList = null;
-            }
-            catch (RuntimeException Error) { //Result.Text = Error.Message; 
-                workspaceDTOList = null;
-            };
-
-            if (workspaceDTOList.Count == 0)
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest("Could not fetch workspace details");
             }
-
-            //return workspaceDTOList;
-            return Ok(workspaceDTOList);
         }
 
         //Add a new user to a workspace
