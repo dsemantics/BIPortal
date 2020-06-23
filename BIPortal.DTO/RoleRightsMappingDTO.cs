@@ -10,9 +10,9 @@ namespace BIPortal.DTO
     {
         public int ID { get; set; }
         public int? RoleID { get; set; }
-        public Guid WorkspaceID { get; set; }
+        public string WorkspaceID { get; set; }
         public string WorkspaceName { get; set; }
-        public Guid ReportID { get; set; }
+        public string ReportID { get; set; }
         public string ReportName { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }

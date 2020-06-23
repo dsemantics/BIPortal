@@ -12,18 +12,17 @@ namespace BIPortal.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class RoleMaster
+    public partial class PermissionMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RoleMaster()
+        public PermissionMaster()
         {
-            this.UserRoleMappings = new HashSet<UserRoleMapping>();
-            this.RoleRightsMappings = new HashSet<RoleRightsMapping>();
+            this.UserMasters = new HashSet<UserMaster>();
         }
     
-        public int RoleID { get; set; }
-        public string RoleName { get; set; }
-        public string RoleDescription { get; set; }
+        public int PermissionID { get; set; }
+        public string PermissionName { get; set; }
+        public string PermissionDescription { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
@@ -31,8 +30,6 @@ namespace BIPortal.Data
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoleRightsMapping> RoleRightsMappings { get; set; }
+        public virtual ICollection<UserMaster> UserMasters { get; set; }
     }
 }

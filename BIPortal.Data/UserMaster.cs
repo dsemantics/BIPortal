@@ -18,6 +18,9 @@ namespace BIPortal.Data
         public UserMaster()
         {
             this.UserRoleMappings = new HashSet<UserRoleMapping>();
+            this.WorkFlowMasters = new HashSet<WorkFlowMaster>();
+            this.WorkFlowMasters1 = new HashSet<WorkFlowMaster>();
+            this.WorkSpaceOwnerMasters = new HashSet<WorkSpaceOwnerMaster>();
         }
     
         public int UserID { get; set; }
@@ -25,15 +28,21 @@ namespace BIPortal.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailID { get; set; }
+        public Nullable<int> PermissionID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
-        public Nullable<int> GroupID { get; set; }
     
-        public virtual GroupMaster GroupMaster { get; set; }
+        public virtual PermissionMaster PermissionMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkFlowMaster> WorkFlowMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkFlowMaster> WorkFlowMasters1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
     }
 }

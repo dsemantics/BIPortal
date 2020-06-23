@@ -25,10 +25,13 @@ namespace BIPortal.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GroupMaster> GroupMasters { get; set; }
         public virtual DbSet<RoleMaster> RoleMasters { get; set; }
-        public virtual DbSet<UserMaster> UserMasters { get; set; }
-        public virtual DbSet<RoleRightsMapping> RoleRightsMappings { get; set; }
         public virtual DbSet<UserRoleMapping> UserRoleMappings { get; set; }
+        public virtual DbSet<PermissionMaster> PermissionMasters { get; set; }
+        public virtual DbSet<WorkFlowDetail> WorkFlowDetails { get; set; }
+        public virtual DbSet<WorkFlowMaster> WorkFlowMasters { get; set; }
+        public virtual DbSet<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
+        public virtual DbSet<RoleRightsMapping> RoleRightsMappings { get; set; }
+        public virtual DbSet<UserMaster> UserMasters { get; set; }
     }
 }

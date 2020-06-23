@@ -16,9 +16,9 @@ namespace BIPortal.Data
     {
         public int ID { get; set; }
         public Nullable<int> RoleID { get; set; }
-        public System.Guid WorkspaceID { get; set; }
+        public string WorkspaceID { get; set; }
         public string WorkspaceName { get; set; }
-        public System.Guid ReportID { get; set; }
+        public string ReportID { get; set; }
         public string ReportName { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }

@@ -15,11 +15,12 @@ namespace BIPortal.Data.Roles
             //List<RolesDTO> rolesDTO = new List<RolesDTO>();
             using (var context = new BIPortalEntities())
             {
+                //var rolesResult = context.RoleMasters.Include("RoleRightsMappings").Select(p => p).ToList();
                 var rolesResult = context.RoleMasters.ToList();
-
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<RoleMaster, RolesDTO>();
+                    cfg.CreateMap<RoleRightsMapping,RoleRightsMappingDTO>();
                 });
                 IMapper mapper = config.CreateMapper();
 

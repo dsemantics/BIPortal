@@ -69,7 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BIPortalModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="GroupMaster.cs">
+    <Compile Include="PermissionMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +84,15 @@
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRoleMapping.cs">
+      <DependentUpon>BIPortalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkFlowDetail.cs">
+      <DependentUpon>BIPortalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkFlowMaster.cs">
+      <DependentUpon>BIPortalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpaceOwnerMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkSpaces\WorkSpaceData.cs" />

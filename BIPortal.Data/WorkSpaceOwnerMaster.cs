@@ -12,24 +12,17 @@ namespace BIPortal.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class GroupMaster
+    public partial class WorkSpaceOwnerMaster
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GroupMaster()
-        {
-            this.UserMasters = new HashSet<UserMaster>();
-        }
-    
-        public int GroupID { get; set; }
-        public string GroupName { get; set; }
-        public string GroupDescription { get; set; }
+        public int ID { get; set; }
+        public string WorkspaceID { get; set; }
+        public Nullable<int> OwnerID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserMaster> UserMasters { get; set; }
+        public virtual UserMaster UserMaster { get; set; }
     }
 }
