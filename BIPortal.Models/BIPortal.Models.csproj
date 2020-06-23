@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PermissionMasterModel.cs" />
     <Compile Include="ReportsModel.cs" />
     <Compile Include="RolesModel.cs" />
+    <Compile Include="UsersModel.cs" />
     <Compile Include="WorkspaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -86,6 +86,7 @@
     <Compile Include="UserRoleMapping.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Users\UsersData.cs" />
     <Compile Include="WorkFlowDetail.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>

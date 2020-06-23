@@ -397,6 +397,7 @@
     <Content Include="Styles\AddRole\AddRole_Styles.css" />
     <Content Include="Styles\Administartion\Administration_Styles.css" />
     <Content Include="Styles\Common\axure_rp_page.css" />
+    <Content Include="Styles\Common\bootstrap.min.css" />
     <Content Include="Styles\Common\Data_Styles.css" />
     <Content Include="Styles\Dashboard\Dashboard.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
