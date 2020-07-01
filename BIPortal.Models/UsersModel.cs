@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BIPortal.Models
 {
     public class UsersModel
@@ -20,6 +21,7 @@ namespace BIPortal.Models
         public bool Active { get; set; }
         public int PermissionID { get; set; }
         public PermissionMasterModel PermissionMaster { get; set; }
+        
 
     }
 }

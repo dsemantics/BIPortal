@@ -15,39 +15,129 @@ namespace BIPortal.Controllers
     public class UsersController : Controller
     {
         // GET: Users
+        
         public ActionResult AddUser()
         {
             ViewBag.Message = "Add Users Page";
+
+           ViewBag.type = new SelectList("","AccountId", "AccountName");
+           ViewBag.Salutation = new SelectList("", "AccountId", "AccountName");
+
+
+
+            IEnumerable<PermissionMasterModel> PermissionTypeList = null;
+
+            string Baseurl = "https://localhost:44383/";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var responseTask = client.GetAsync("api/GetPermissionTypes");
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<List<PermissionMasterDTO>>();
+                    readTask.Wait();
+
+                    var config = new MapperConfiguration(cfg =>
+                    {
+                        //cfg.CreateMap<UsersDTO, UsersModel>();
+                        cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+
+                    });
+                    IMapper mapper = config.CreateMapper();
+
+                    PermissionTypeList = mapper.Map<List<PermissionMasterDTO>, List<PermissionMasterModel>>(readTask.Result);
+                }
+            }
+
+            //ViewBag.type = new SelectList(PermissionTypeList);
+            //ViewBag.type = PermissionTypeList;
+
+            return View();
+        }
+
+        // GET: MyProfile
+        public ActionResult MyProfile()
+        {
+            ViewBag.Message = "My Profile Page";
             IEnumerable<UsersModel> UsersList = null;
 
-            //string Baseurl = "https://localhost:44383/";
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
 
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri(Baseurl);
-            //    client.DefaultRequestHeaders.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //    var responseTask = client.GetAsync("api/GetUsers");
-            //    responseTask.Wait();
-            //    var result = responseTask.Result;
-            //    if (result.IsSuccessStatusCode)
-            //    {
-            //        var readTask = result.Content.ReadAsAsync<List<UsersDTO>>();
-            //        readTask.Wait();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var responseTask = client.GetAsync("api/GetCurrentUser");
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<List<UsersDTO>>();
+                    readTask.Wait();
 
-            //        var config = new MapperConfiguration(cfg =>
-            //        {
-            //            //cfg.CreateMap<UsersDTO, UsersModel>();
-            //            cfg.CreateMap<UsersModel, UsersDTO>();
+                    var config = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<UsersDTO, UsersModel>();
+                        cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+                    });
+                    IMapper mapper = config.CreateMapper();
 
-            //        });
-            //        IMapper mapper = config.CreateMapper();
+                    UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
+                }
+            }
 
-            //        UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
-            //    }
-            //}
+            //ViewBag.Name = "Selva";
+            //ViewBag.EmailID = UsersList.Select(l => l.EmailID).ToString();
+
+            foreach (var item in UsersList)
+            {
+                ViewBag.EmailID = item.EmailID;
+                ViewBag.FirstName = item.FirstName;
+                ViewBag.LastName = item.LastName;
+                //ViewBag.Creationdate = item.CreatedDate;
+                ViewBag.Creationdate = item.CreatedDate.ToString("dd/MM/yyyy");
+                ViewBag.PermissionType = item.PermissionMaster.PermissionName;
+                ViewBag.Saluation = item.Salutation;
+            }
 
             return View(UsersList);
+        }
+
+        [HttpPost]
+        public ActionResult AddUser(UsersModel AddUserModel)
+        {
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/" + "api/AddNewUser";
+            //string Baseurl = "https://localhost:44383/api/AddNewUser";
+
+            using (var client = new HttpClient())
+            {
+                //IEnumerable<UsersModel> AddUserList = null;
+
+                //HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<UsersModel>(Baseurl,AddUserModel);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    //return RedirectToAction("AddUser");
+                    return RedirectToAction("ViewUser");
+                }
+
+            }
+
+            return View(AddUserModel);
         }
 
         public ActionResult ViewUser()

@@ -403,6 +403,7 @@
     <Content Include="Styles\Common\Data_Styles.css" />
     <Content Include="Styles\Dashboard\Dashboard.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
+    <Content Include="Styles\MyProfile\MyProfile_Styles.css" />
     <Content Include="Styles\Roles_Rights\Roles_Rights.css" />
     <Content Include="Styles\Users\AddUser_Styles.css" />
     <Content Include="Styles\Users\EditUser_Styles.css" />
@@ -432,6 +433,7 @@
     <Content Include="Views\Users\AddUser.cshtml" />
     <Content Include="Views\Users\ViewUser.cshtml" />
     <Content Include="Views\Users\EditUser.cshtml" />
+    <Content Include="Views\Users\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

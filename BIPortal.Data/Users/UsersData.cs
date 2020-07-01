@@ -30,5 +30,28 @@ namespace BIPortal.Data.Users
             }
         }
 
+        public IEnumerable<UsersDTO> GetCurrentUer(string sCurrentUserDetail)
+        {
+
+            using (var context = new BIPortalEntities())
+            {
+                var CurusersResult = (from u in context.UserMasters
+                            where u.EmailID == sCurrentUserDetail
+                            select u).ToList();
+
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<UserMaster, UsersDTO>();
+                    cfg.CreateMap<PermissionMaster, PermissionMasterDTO>();
+                });
+                IMapper mapper = config.CreateMapper();
+
+                return mapper.Map<List<UserMaster>, List<UsersDTO>>(CurusersResult);
+
+            }
+        }
+
+
+
     }
 }

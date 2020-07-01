@@ -168,7 +168,7 @@
       <Name>BIPortal.DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\BIPortal.Models\BIPortal.Models.csproj">
-      <Project>{10f1119a-2af4-4b35-b192-1b6f5964d8ec}</Project>
+      <Project>{10F1119A-2AF4-4B35-B192-1B6F5964D8EC}</Project>
       <Name>BIPortal.Models</Name>
     </ProjectReference>
   </ItemGroup>

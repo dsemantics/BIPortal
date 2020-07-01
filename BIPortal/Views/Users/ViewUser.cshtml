@@ -51,13 +51,17 @@
         <div id="u7900" class="ax_default">
             <div id="u832" class="ax_default button" data-label="AddUserButton">
                 <div id="u832_text" class="text ">
-                    <input id="EditUser" value="Edit User" type="button" style="width:175px" onclick="alert('Edit User Clicked')" />                   
+                    <input id="EditUser" value="Edit User" type="button" style="width:175px" onclick="alert('Edit User Clicked')" />     
+                    
+                    
                 </div>
             </div>
 
             <div id="u8322" class="ax_default button" data-label="AddUserButton">
                 <div id="u832_text" class="text ">
-                    <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="alert('Add User Clicked')" />
+                    @* <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="alert('Add User Clicked')" />*@
+                    <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
+
                 </div>
             </div>
 
