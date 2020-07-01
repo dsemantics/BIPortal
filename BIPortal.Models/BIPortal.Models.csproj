@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="PermissionMasterModel.cs" />
     <Compile Include="ReportsModel.cs" />
+    <Compile Include="RoleRightsMappingModel.cs" />
     <Compile Include="RolesModel.cs" />
     <Compile Include="UsersModel.cs" />
     <Compile Include="WorkspaceModel.cs" />

@@ -19,5 +19,7 @@ namespace BIPortal.DTO
         public DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
+
+        public IEnumerable<RolesDTO> Roles { get; set; }
     }
 }

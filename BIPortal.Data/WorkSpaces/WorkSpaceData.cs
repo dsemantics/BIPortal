@@ -45,12 +45,12 @@ namespace BIPortal.Data.WorkSpaces
                 {
                     foreach (var psObject in res)
                     {
-                        WorkspaceDTO workspaceDTO = new WorkspaceDTO();
+                        //WorkspaceDTO workspaceDTO = new WorkspaceDTO();
 
                         var workSpaceId = psObject.Properties["Id"].Value;
                         //var workSpaceUser = psObject.Properties["User"].Value;                                                        
-                        workspaceDTO.WorkSpaceId = (Guid)psObject.Properties["Id"].Value;
-                        workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();
+                        //workspaceDTO.WorkSpaceId = psObject.Properties["Id"].Value.ToString();
+                        //workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();
 
                         List<ReportsDTO> reportsDTOList = new List<ReportsDTO>();
                         var shell2 = PowerShell.Create(iss);
@@ -61,16 +61,28 @@ namespace BIPortal.Data.WorkSpaces
                         {
                             foreach (var psObjectReport in result)
                             {
-                                ReportsDTO reportsDTO = new ReportsDTO();
-                                
-                                reportsDTO.ReportId = (Guid)psObjectReport.Properties["Id"].Value;
-                                reportsDTO.ReportName = psObjectReport.Properties["Name"].Value.ToString();
-                                reportsDTOList.Add(reportsDTO);
-                            }
-                            workspaceDTO.ReportCount = result.Count;
-                            workspaceDTO.Reports = reportsDTOList;
+                                //ReportsDTO reportsDTO = new ReportsDTO();
+                                //reportsDTO.ReportId = psObjectReport.Properties["Id"].Value.ToString();
+                                //reportsDTO.ReportName = psObjectReport.Properties["Name"].Value.ToString();
+                                //reportsDTOList.Add(reportsDTO);
+                                WorkspaceDTO workspaceDTO = new WorkspaceDTO();
+                                workspaceDTO.WorkSpaceId = psObject.Properties["Id"].Value.ToString();
+                                workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();
+                                workspaceDTO.ReportId= psObjectReport.Properties["Id"].Value.ToString();
+                                workspaceDTO.ReportName= psObjectReport.Properties["Name"].Value.ToString();
+                                workspaceDTO.ReportCount = result.Count;
+                                workspaceDTOList.Add(workspaceDTO);
+                            }                            
+                            //workspaceDTO.Reports = reportsDTOList;
                         }
-                        workspaceDTOList.Add(workspaceDTO);
+                        else
+                        {
+                            WorkspaceDTO workspaceDTO = new WorkspaceDTO();
+                            workspaceDTO.WorkSpaceId = psObject.Properties["Id"].Value.ToString();
+                            workspaceDTO.WorkSpaceName = psObject.Properties["Name"].Value.ToString();                          
+                            workspaceDTOList.Add(workspaceDTO);
+                        }
+                       
                     }
                 }
             }

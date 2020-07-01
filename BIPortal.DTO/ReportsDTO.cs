@@ -8,7 +8,7 @@ namespace BIPortal.DTO
 {
     public class ReportsDTO
     {
-        public Guid ReportId { get; set; }
+        public string ReportId { get; set; }
         public string ReportName { get; set; }
     }
 }

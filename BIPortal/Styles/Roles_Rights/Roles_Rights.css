@@ -19,6 +19,16 @@
     z-index: 0;
 }
 
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
 #u344_div {
     border-width: 0px;
     position: absolute;
@@ -2749,8 +2759,8 @@
     position: absolute;
     left: 250px;
     top: 68px;
-    width: 836px;
-    height: 474px;
+    width: 465px;
+    height: 200px;
 }
 
 #u399_state0 {
@@ -3761,7 +3771,7 @@
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 357px;
+    width: 337px;
     height: 37px;
     background: inherit;
     background-color: rgba(92, 205, 222, 1);
@@ -6268,8 +6278,8 @@
 #u475 {
     border-width: 0px;
     position: absolute;
-    left: 8px;
-    top: 281px;
+    left: 260px;
+    top: 450px;
     width: 180px;
     height: 25px;
     display: flex;
@@ -6277,6 +6287,35 @@
     font-weight: 400;
     font-style: normal;
     color: #FFFFFF;
+}
+
+#u4750 {
+    border-width: 0px;
+    position: absolute;
+    left: 760px;
+    top: 100px;
+    width: 180px;
+    height: 25px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+}
+
+#UpdatePanel {
+    border-width: 0px;
+    position: absolute;
+    left: 760px;
+    top: 140px;
+    width: 180px;
+    height: 25px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+/*    font-weight: 400;*/
+    font-style: normal;
+    font-size:small;
+    color: black;
 }
 
     #u475 .text {

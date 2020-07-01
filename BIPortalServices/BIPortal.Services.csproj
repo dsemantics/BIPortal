@@ -167,6 +167,10 @@
       <Project>{47112d9c-f614-427e-9b1e-1b01ee663b10}</Project>
       <Name>BIPortal.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BIPortal.Models\BIPortal.Models.csproj">
+      <Project>{10f1119a-2af4-4b35-b192-1b6f5964d8ec}</Project>
+      <Name>BIPortal.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
