@@ -19,8 +19,8 @@ namespace BIPortal.Controllers
         public ActionResult AddRole()
         {
             ViewBag.Message = "AddRole Page";
-            RolesModel rolesModel = new RolesModel();            
-            return View(rolesModel);          
+            RolesModel rolesModel = new RolesModel();
+            return View(rolesModel);
         }
 
         //To get access rights for a given roleid
@@ -34,7 +34,7 @@ namespace BIPortal.Controllers
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var responseTask = client.GetAsync(string.Format("api/GetRights/?roleID={0}",roleId));
+                var responseTask = client.GetAsync(string.Format("api/GetRights/?roleID={0}", roleId));
                 responseTask.Wait();
 
                 var result = responseTask.Result;
@@ -67,8 +67,8 @@ namespace BIPortal.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();                  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));               
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var responseTask = client.GetAsync("api/GetWorkSpaces");
                 responseTask.Wait();
@@ -78,7 +78,8 @@ namespace BIPortal.Controllers
                     var readTask = result.Content.ReadAsAsync<List<WorkspaceDTO>>();
                     readTask.Wait();
 
-                    var config = new MapperConfiguration(cfg => {
+                    var config = new MapperConfiguration(cfg =>
+                    {
                         cfg.CreateMap<WorkspaceDTO, WorkspaceModel>();
                         cfg.CreateMap<ReportsDTO, ReportsModel>();
                     });
@@ -125,7 +126,7 @@ namespace BIPortal.Controllers
 
             return View(rolesList);
         }
-                
+
         [HttpPost]
         public ActionResult SaveRoleAndRights(List<RoleRightsMappingModel> WorkspaceandReportList, string RoleName)
         {
@@ -143,11 +144,11 @@ namespace BIPortal.Controllers
             //roleRightsMappingModel = WorkspaeandReportList;
 
             //roleRightsViewModel.RoleRightsMapping = roleRightsMappingModel;
-            
+
             RolesModel rolesModel = new RolesModel()
             {
-                RoleName = RoleName,                
-                RoleRightsMappings= WorkspaceandReportList
+                RoleName = RoleName,
+                RoleRightsMappings = WorkspaceandReportList
             };
 
             string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/SaveRoleAndRights";
@@ -169,6 +170,29 @@ namespace BIPortal.Controllers
             }
             return View();
         }
-        
+        [HttpPost]
+        //public ActionResult UpdateRoleAndRights(List<RoleRightsMappingModel> WorkspaceandReportList, int RoleID)
+        public ActionResult UpdateRoleAndRights(List<RoleRightsMappingModel> WorkspaceandReportList)
+        {
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/UpdateRoleAndRights";
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<List<RoleRightsMappingModel>>(Baseurl, WorkspaceandReportList);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("ViewRoles");
+                }
+            }
+
+            return View();
+        }
     }
 }

@@ -47,13 +47,13 @@
 
             if (i == 0) {
                 var trow = $('<tr></tr>');
-                trow.append('<td>' + workspaces.WorkSpaceName + '<input type="checkbox" name="chkWorkSpaces" value ="' + workspaces.WorkSpaceName + '" id=' + workspaces.WorkSpaceId + '>' + '</td>');
+                trow.append('<td style="font-weight:bold">' + workspaces.WorkSpaceName + '<input type="checkbox" name="chkWorkSpaces" value ="' + workspaces.WorkSpaceName + '" id=' + workspaces.WorkSpaceId + '>' + '</td>');
             }
             else {
                 var previousWorkspaceid = data[i - 1].WorkSpaceId;
                 if (previousWorkspaceid != workspaceid) {
                     var trow = $('<tr></tr>');
-                    trow.append('<td>' + workspaces.WorkSpaceName + '<input type="checkbox" name="chkWorkSpaces" value ="' + workspaces.WorkSpaceName + '" id=' + workspaces.WorkSpaceId + '>' + '</td>');
+                    trow.append('<td style="font-weight:bold">' + workspaces.WorkSpaceName + '<input type="checkbox" name="chkWorkSpaces" value ="' + workspaces.WorkSpaceName + '" id=' + workspaces.WorkSpaceId + '>' + '</td>');
                 }
             }
             tab.append(trow);
@@ -73,7 +73,7 @@
     };
 
     $(".btnSaveRoleRights").click(function () {
-        alert("Save rights clicked");
+        //alert("Save rights clicked");
         //check if any workspaces are selected
         var checkedWorkspaces = document.querySelectorAll('input[name=chkWorkSpaces]:checked');
         var workSpacesdata = [];
@@ -109,6 +109,7 @@
         var data = { WorkspaceandReportList: workSpacesdata, RoleName: roleName };
         $.post(saveRolesandRightsurl, data, function (result) {
             // TODO: do something with the response from the controller action
+            window.location.reload();
         });
     });
 

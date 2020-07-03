@@ -14,93 +14,145 @@
     <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="~/Scripts/RolesRights/ViewRole.js"></script>
     <script type="text/javascript">
-        var geRightsurl = '@Url.Action("GetRights", "RolesRights")';                
+        var geRightsurl = '@Url.Action("GetRights", "RolesRights")';
+        var updateRolesandRightsurl = '@Url.Action("UpdateRoleAndRights", "RolesRights")';
     </script>
 </head>
 <body>
+    @using (Html.BeginForm())
+    {
+        <!-- R&R Panel (Dynamic Panel) -->
+        <div id="u399" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" data-label="R&amp;R Panel">
 
-    <!-- R&R Panel (Dynamic Panel) -->
-    <div id="u399" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" data-label="R&amp;R Panel">
 
-
-        <!-- Unnamed (Table) -->
-        <div id="u400" class="ax_default">
-            @if (Model != null && Model.Count() > 0)
-            {
-                <table class="table table-bordered table-striped mb-0 table-hover">
-                    <tr>
-                        <th style="display:none;">
-                            @*@Html.DisplayNameFor(model => model.Name)*@
-                            RoleID
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.Name)*@
-                            Role Name
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.Id)*@
-                            Date Created
-                        </th>
-                        <th>
-                            Date Modified
-                        </th>
-                        <th>
-                            View Rights
-                        </th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+            <!-- Unnamed (Table) -->
+            <div id="u400" class="ax_default">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    <table class="table table-bordered table-striped mb-0 table-hover">
                         <tr>
-                            <td style="display:none;">
-                                <input type="text" value="@item.RoleID" name="RoleID" />
-                            </td>
-                            <td style="display:none;">
-                                <input type="text" value="@item.RoleName" name="RoleName" />
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.RoleName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreatedDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifiedDate)
-                            </td>
-                            <td>
-                                <input id="btnViewRights" value="View Rights" type="button" class="btnViewRights" style="width:75px" />
-                            </td>
+                            <th style="display:none;">
+                                @*@Html.DisplayNameFor(model => model.Name)*@
+                                RoleID
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Name)*@
+                                Role Name
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Id)*@
+                                Date Created
+                            </th>
+                            <th>
+                                Date Modified
+                            </th>
+                            <th>
+                                View Rights
+                            </th>
                         </tr>
 
-                    }
-                </table>
-            }
-            else
-            {
-                <div>Roles not yet defined in the system!</div>
-            }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="display:none;">
+                                    <input type="text" value="@item.RoleID" name="RoleID" />
+                                </td>
+                                <td style="display:none;">
+                                    <input type="text" value="@item.RoleName" name="RoleName" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoleName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                </td>
+                                <td>
+                                    <input id="btnViewRights" value="View Rights" type="button" class="btnViewRights" style="width:75px" />
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                }
+                else
+                {
+                    <div>Roles not yet defined in the system!</div>
+                }
+            </div>
+
+
         </div>
 
 
-    </div>
-    <!-- AddRoleButton (Shape) -->
-    <div id="u475" class="ax_default button" data-label="AddRoleButton">
-        @*<img id="u475_img" class="img " src="~/Images/roles_rights/addrolebutton_u475.svg" />*@
-        <div id="u475_text" class="text ">
-            <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
+        <!-- RolesEditPanel (Dynamic Panel) -->
+        <div id="u425" class="ax_default" data-label="RolesEditPanel" style="display:none">
+            <div id="u425_state0" class="panel_state" data-label="State1" style="">
+                <div id="u425_state0_content" class="panel_state_content">
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u426" class="ax_default box_1">
+                        <div id="u426_div" class=""></div>
+                        <div id="u426_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u427" class="ax_default box_1">
+                        <div id="u427_div" class=""></div>
+                        <div id="u427_text" class="text ">
+                            @*<p><span>FINSUPER</span></p>*@
+                            <label id="lblRoleName" style="color:black" />
+                        </div>
+                    </div>
+
+                    <!-- PurchaseWsPanel (Dynamic Panel) -->
+                    <div id="u452" class="ax_default" data-label="PurchaseWsPanel" style="display:none">
+
+
+                    </div>
+
+                    <!-- Save (Rectangle) -->
+                    <div id="u474" class="ax_default button " data-label="Save">
+                        <div id="u474_div" class=""></div>
+                        <div id="u474_text" class="text ">
+                            @*<p><span>Save</span></p>*@
+                            <input id="btnSaveRoleRights" value="Edit" type="button" class="btnSaveRoleRights" style="width:85px" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div id="u4750" class="ax_default" data-label="AddRoleButton">
-        @*<img id="u475_img" class="img " src="~/Images/roles_rights/addrolebutton_u475.svg" />*@
-        <div id="u475_text" class="text ">
-            <div id="u427_div" style="display:none"><label id="lblRoleName" style="color:black" /></div>
 
-        </div>
-    </div>
-    <div id="UpdatePanel">
 
-    </div>
 
-</body>
+        <!-- AddRoleButton (Shape) -->
+        @*<div id="u475" class="ax_default button" data-label="AddRoleButton">
+                <div id="u475_text" class="text ">
+                    <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
+                </div>
+            </div>*@
+
+        @*<div id="u4750" class="ax_default" data-label="AddRoleButton">
+                <div id="u475_text" class="text ">
+                    <div id="u427_div" style="display:none"><label id="lblRoleName" style="color:black" /></div>
+                    <div id="u426" class="ax_default box_1">
+                        <div id="u426_div" class=""></div>
+                        <div id="u426_text" class="text ">
+                            <div id="UpdatePanel">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+    }
+
+    </body>
 </html>

@@ -39,8 +39,8 @@
           <Property Name="RoleID" Type="int" />
           <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="WorkspaceName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ReportID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ReportName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ReportID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportName" Type="nvarchar" MaxLength="200" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -413,8 +413,8 @@
           <Property Name="RoleID" Type="Int32" />
           <Property Name="WorkspaceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WorkspaceName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ReportID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ReportName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
