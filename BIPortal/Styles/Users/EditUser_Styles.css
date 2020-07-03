@@ -19,6 +19,35 @@
     z-index: 0;
 }
 
+
+#u1322 {
+    border-width: 0px;
+    position: absolute;
+    left: 14px;
+    top: 249px;
+    width: 134px;
+    height: 19px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+
+#u13191 {
+    border-width: 0px;
+    position: absolute;
+    left: 160px;
+    top: 249px;
+    width: 230px;
+    height: 25px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+
 #u984_div {
     border-width: 0px;
     position: absolute;

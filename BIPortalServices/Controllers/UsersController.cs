@@ -20,43 +20,68 @@ namespace BIPortalServices.Controllers
         [HttpPost]
         [Route("api/AddNewUser")]
         public IHttpActionResult AddNewUser(UsersModel AddUserModel)
-
+        //public IHttpActionResult AddNewUser()
         {
+            //var AddUserModel = new UsersModel();
+
+            //AddUserModel.Salutation = "Mr";
+            //AddUserModel.EmailID = "";
+            //AddUserModel.FirstName = "";
+            //AddUserModel.LastName = "";
+
             try
             {
 
                 if (!ModelState.IsValid)
-                    return BadRequest("Not a valid model");
-
-                using (var ctx = new BIPortalEntities())
                 {
-                    ctx.UserMasters.Add(new UserMaster
+                    return BadRequest("Not a valid model");
+                }
+                else
+                {
+                    UsersData SaveUserData = new UsersData();
+                    var config = new MapperConfiguration(cfg =>
                     {
-                       
-                        Salutation = "Mr.",
-                        FirstName = AddUserModel.FirstName,
-                        LastName = AddUserModel.LastName,
-                        EmailID = AddUserModel.EmailID,
-                        PermissionID = 1,
-                        //CreatedDate = DateTime.Now,
-                        CreatedDate = AddUserModel.CreatedDate,
-                        CreatedBy = "SK",
-                        ModifiedDate = DateTime.Now,
-                        //ModifiedBy = "sk",
-                        Active = AddUserModel.Active
-
-
+                        cfg.CreateMap<UsersModel, UsersDTO>();
+                        cfg.CreateMap<UserRoleMappingModel, UserRoleMappingDTO>();
+                        cfg.CreateMap<WorkFlowMasterModel, WorkFlowMasterDTO>();
+                        cfg.CreateMap<WorkFlowDetailsModel, WorkFlowDetailsDTO>();
                     });
+                    IMapper mapper = config.CreateMapper();
 
-                    ctx.SaveChanges();
+                    var userData = mapper.Map<UsersModel, UsersDTO>(AddUserModel);
+
+                    SaveUserData.SaveUsersData(userData);
+
+                    return Created("api/AddNewUser", true);
                 }
 
-                return Ok();
+
+               
+
+                //using (var ctx = new BIPortalEntities())
+                //{
+                //    ctx.UserMasters.Add(new UserMaster
+                //    {
+                //        Salutation = "Mr.",
+                //        FirstName = AddUserModel.FirstName,
+                //        LastName = AddUserModel.LastName,
+                //        EmailID = AddUserModel.EmailID,
+                //        PermissionID = 1,
+                //        //CreatedDate = DateTime.Now,
+                //        CreatedDate = AddUserModel.CreatedDate,
+                //        CreatedBy = "SK",
+                //        ModifiedDate = DateTime.Now,
+                //        Active = AddUserModel.Active
+                //    });
+                //    ctx.SaveChanges();
+                //}
+
+                //return Ok();
 
             }
             catch (Exception ex)
             {
-                return BadRequest("Could not fetch roles");
+                return BadRequest("Can't add new User");
             }
         }
 
@@ -103,11 +128,87 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                string sCurrentUserDetail = "demo@ds.com";
+                string sCurrentUserDetail = "Selva.kumar@datasematics.in";
                 UsersData usersData = new UsersData();
-                var users = usersData.GetCurrentUer(sCurrentUserDetail);
+                var users = usersData.GetCurrentUser(sCurrentUserDetail);
 
                 return Ok(users);
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch roles");
+            }
+        }
+
+        [Route("api/GetSelectedUser")]
+        public IHttpActionResult GetSelectedUser(int iUSERID)
+        {
+            try
+            {
+               // int iUSERID = 1006;
+                UsersData usersData = new UsersData();
+                var users = usersData.GetSeletedUser(iUSERID);
+
+                return Ok(users);
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch roles");
+            }
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        [Route("api/UpdateUser")]
+        public IHttpActionResult UpdateUser(UsersModel EditUserModel)
+        {
+            try
+            {
+                //string sCurrentUserDetail = "demo@ds.com";
+                //UsersData usersData = new UsersData();
+                //var users = usersData.GetCurrentUer(sCurrentUserDetail);
+
+                //return Ok(users);
+
+                //var EditUserModel = new UsersModel();
+
+                if (!ModelState.IsValid)
+                    return BadRequest("Not a valid model");
+
+                using (var ctx = new BIPortalEntities())
+                {
+
+                    var EditUserData = ctx.UserMasters.Where(x => x.UserID == EditUserModel.UserID).FirstOrDefault();
+                    if (EditUserData != null)
+                    {
+                        EditUserData.EmailID = EditUserModel.EmailID;
+                        EditUserData.FirstName = EditUserModel.FirstName;
+                        EditUserData.LastName = EditUserModel.LastName;
+                        //EditUserData.PermissionMaster.PermissionID = EditUserModel.PermissionMaster.PermissionID;
+                        EditUserData.PermissionID = EditUserModel.PermissionID;
+                        EditUserData.Salutation = EditUserModel.Salutation;
+                        //EditUserData.CreatedDate = EditUserModel.CreatedDate;
+                        EditUserData.ModifiedBy = "Selva";
+                        EditUserData.ModifiedDate  = DateTime.Now;
+                        //EditUserData.CreatedBy = EditUserModel.CreatedBy;
+                        EditUserData.Active = EditUserModel.Active;
+
+
+                        //EditUserData.EmailID = "demooooo@ds.com";
+                        //EditUserData.FirstName = "Demooooo";
+                        //EditUserData.LastName = "Demoooouserrrrr1";
+                        //EditUserData.PermissionMaster.PermissionName = "1";
+                        //EditUserData.Salutation = "Miss";
+                        //EditUserData.Active = true;
+
+                        ctx.SaveChanges();
+                    }
+                }
+
+                return Ok();
 
 
             }

@@ -1,0 +1,170 @@
+﻿@model BIPortal.Models.UsersModel
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_BIPortalLayout.cshtml";
+    ViewBag.Title = "Edit User";
+}
+@*@model IEnumerable<BIPortal.Models.UsersModel>*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Load Edit User</title>
+    <link href="~/Styles/Users/EditUser_Styles.css" type="text/css" rel="stylesheet" />
+    <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Styles/MyProfile/MyProfile_Styles.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    @using (Html.BeginForm("EditUser", "Users", FormMethod.Post))
+    {
+
+        <div id="base" class="">
+
+            <!-- Welcome out (Rectangle) -->
+            @*<div id="u1556" class="ax_default label" data-label="Welcome out">
+                    <div id="u1556_div" class=""></div>
+                    <div id="u1556_text" class="text ">
+                        <p><span>My Profile</span></p>
+                    </div>
+                </div>*@
+
+            <!-- User Panel (Dynamic Panel) -->
+            <div id="u1581" class="ax_default" data-label="User Panel">
+                <div id="u1581_state0_content" class="panel_state_content">
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u1582" class="ax_default label">
+                        <div id="u1582_div" class=""></div>
+                        <div id="u1582_text" class="text ">
+                            <p><span>Email ID</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Text Field) -->
+                    <div id="u1583" class="ax_default text_field disabled">
+                        @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
+                        @*@Html.TextBox("Name", (object)ViewBag.EmailID, new { @class = "form-control", style = "height:28px;" })*@
+                        @Html.HiddenFor(Model => Model.UserID)
+                        @Html.HiddenFor(Model => Model.PermissionID)
+                        @*@Html.HiddenFor(Model => Model.CreatedBy)*@
+                        @* @Html.HiddenFor(Model => Model.PermissionMaster.PermissionID)*@
+                        @Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u1584" class="ax_default label">
+                        <div id="u1584_div" class=""></div>
+                        <div id="u1584_text" class="text ">
+                            <p><span>First Name</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Text Field) -->
+                    <div id="u1585" class="ax_default text_field disabled">
+                        @*@Html.TextBox("Name", (object)ViewBag.FirstName, new { @class = "form-control", style = "height:28px;" })*@
+                        @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", style = "height:28px;" })
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u1586" class="ax_default label">
+                        <div id="u1586_div" class=""></div>
+                        <div id="u1586_text" class="text ">
+                            <p><span>Last Name</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Text Field) -->
+                    <div id="u1587" class="ax_default text_field disabled">
+                        @*@Html.TextBox("Name", (object)ViewBag.LastName, new { @class = "form-control", style = "height:28px;" })*@
+                        @Html.TextBoxFor(Model => Model.LastName, new { @class = "form-control", style = "height:28px;" })
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    @*<div id="u1588" class="ax_default label">
+                        <div id="u1588_div" class=""></div>
+                        <div id="u1588_text" class="text ">
+                            <p><span>Creation Date</span></p>
+                        </div>
+                    </div>*@
+
+                    <!-- Unnamed (Text Field) -->
+                    <div id="u1589" class="ax_default text_field disabled">
+                        @*@Html.TextBox("Name", (object)ViewBag.Creationdate, new { @class = "form-control", style = "height:28px;" })*@
+                        @*@Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;" })*@
+                        @*@Html.TextBoxFor(model => model.CreatedDate, new { @type = "date", @class = "form-control datepicker", style = "height:28px;" })*@
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u1590" class="ax_default label">
+                        <div id="u1590_div" class=""></div>
+                        <div id="u1590_text" class="text ">
+                            <p><span>Type</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Droplist) -->
+                    <div id="u1591" class="ax_default droplist disabled">
+                        @*@Html.TextBox("Name", (object)ViewBag.PermissionType, new { @class = "form-control", style = "height:28px;" })*@
+                        @Html.TextBoxFor(Model => Model.PermissionMaster.PermissionName, new { @class = "form-control", style = "height:28px;" })
+                    </div>
+
+                    <!-- CloseButton (Shape) -->
+                    <div id="u1592" class="ax_default button" data-label="CloseButton">
+                        @*<input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" />*@
+                        <input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
+
+                    </div>
+
+
+                    <!-- CloseButton (Shape) -->
+                    <div id="u1041" class="ax_default button" data-label="CloseButton">
+                        @*<input id="submit" value="Close Without Saving" type="button" style="width:175px" />*@
+                        <input id="submit" type="submit" name="button" value="Close Without Saving" style="width:175px" />
+                    </div>
+
+
+                    <!-- DeactButton (Shape) -->
+                    @*<div id="u1050" class="ax_default button" data-label="DeactButton">
+                        <input id="submit" type="submit" name="button" value="Deactivate User" style="width:175px" />
+                    </div>*@
+
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u1593" class="ax_default label">
+                        <div id="u1593_div" class=""></div>
+                        <div id="u1593_text" class="text ">
+                            <p><span>Salutation</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Droplist) -->
+                    <div id="u1594" class="ax_default droplist disabled">
+                        @*@Html.TextBox("Name", (object)ViewBag.Saluation, new { @class = "form-control", style = "height:28px;" })*@
+                        @Html.TextBoxFor(Model => Model.Salutation, new { @class = "form-control", style = "height:28px;" })
+                    </div>
+
+                    <!-- Active label (Checkbox) -->
+                    <div id="u1322" class="ax_default checkbox selected" data-label="Active">
+                        @Html.Label("Active", "Active")
+                    </div>
+
+                    <!-- Active (Checkbox) -->
+                    <div id="u13191" class="ax_default">
+                        @Html.CheckBoxFor(model => model.Active, new { @id = "ActiveStatus" })
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+
+ </body>
+
+</html>

@@ -432,7 +432,7 @@
     <Content Include="Views\RolesRights\AddRole.cshtml" />
     <Content Include="Views\Users\AddUser.cshtml" />
     <Content Include="Views\Users\ViewUser.cshtml" />
-    <Content Include="Views\Users\EditUser.cshtml" />
+    <Content Include="Views\Users\LoadEditUser.cshtml" />
     <Content Include="Views\Users\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     //Layout = null;
     Layout = "~/Views/Shared/_BIPortalLayout.cshtml";
     ViewBag.Title = "View User";
@@ -14,63 +13,74 @@
     <title>View Users</title>
     <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Users/ViewUser_Styles.css" type="text/css" rel="stylesheet" />
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
-    <div id="base" class="">
 
-        <!-- User Panel (Dynamic Panel) -->
-        <div id="u790" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" style="height:400px" data-label="User Panel">
-            <div id="u791" class="ax_default" data-label="Users Table">
-                <!-- Users Table (Table) -->
-                <table class="table table-bordered table-striped mb-0 table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Email</th>
-                            <th scope="col">Permission</th>
-                            <th scope="col">CreatedDate</th>
-                            <th scope="col">Active</th>
-                        </tr>
-                    </thead>
+    @using (Html.BeginForm())
+    {
 
-                    @foreach (var item in Model)
-                    {
-                        <tbody>
+      <div id="base" class="">
+
+            <!-- User Panel (Dynamic Panel) -->
+            <div id="u790" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" style="height:400px" data-label="User Panel">
+                <div id="u791" class="ax_default" data-label="Users Table">
+                    <!-- Users Table (Table) -->
+                    <table class="table table-bordered table-striped mb-0 table-hover">
+                        <thead>
                             <tr>
-                                <td>@item.EmailID</td>
-                                <td>@item.PermissionMaster.PermissionName</td>
-                                <td>@item.CreatedDate</td>
-                                <td>@item.Active</td>
+                                <th scope="col">Email</th>
+                                <th scope="col">Permission</th>
+                                <th scope="col">CreatedDate</th>
+                                <th scope="col">Active</th>
+                                <th scope="col">Edit Users</th>
                             </tr>
-                        </tbody>
-                    }
-                </table>
-            </div>
-        </div>
+                        </thead>
 
-        <div id="u7900" class="ax_default">
-            <div id="u832" class="ax_default button" data-label="AddUserButton">
-                <div id="u832_text" class="text ">
-                    <input id="EditUser" value="Edit User" type="button" style="width:175px" onclick="alert('Edit User Clicked')" />     
-                    
-                    
+                        @foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@item.EmailID</td>
+                                    <td style="display:none;">
+                                        <input type="text" value="@item.UserID" name="UserId" />
+                                    </td>
+                                    <td>@item.PermissionMaster.PermissionName</td>
+                                    <td>@item.CreatedDate</td>
+                                    <td>@item.Active</td>
+                                    <td><input id="btnViewRights" value="EditUser" type="button" style="width:75px" onclick="location.href='@Url.Action("LoadEditUser", "Users")?UserId=' + @item.UserID"/></td>
+                                    
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
                 </div>
             </div>
 
-            <div id="u8322" class="ax_default button" data-label="AddUserButton">
-                <div id="u832_text" class="text ">
-                    @* <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="alert('Add User Clicked')" />*@
-                    <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
+            <div id="u7900" class="ax_default">
+                <div id="u832" class="ax_default button" data-label="AddUserButton">
+                    <div id="u832_text" class="text ">
+                        @*<input id="EditUser" value="Edit User" type="button" style="width:175px" onclick="alert('Edit User Clicked')" />*@
+                        <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
 
+                    </div>
                 </div>
+
+                @*<div id="u8322" class="ax_default button" data-label="AddUserButton">
+                    <div id="u832_text" class="text ">
+                         <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="alert('Add User Clicked')" />
+                        <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
+                    </div>
+                </div>*@
+
             </div>
-
         </div>
-    </div>
 
+    }
 
-    <script src="resources/scripts/axure/ios.js"></script>
-</body>
+        <script src="resources/scripts/axure/ios.js"></script>
+    </body>
 </html>
 
 

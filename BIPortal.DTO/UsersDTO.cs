@@ -20,6 +20,9 @@ namespace BIPortal.DTO
         public bool Active { get; set; }
         public int PermissionID { get; set; }
         public PermissionMasterDTO PermissionMaster { get; set; }
+        public IEnumerable<UserRoleMappingDTO> UserRoleMappings { get; set; }
+        public IEnumerable<WorkFlowMasterDTO> WorkFlowMasterMappings { get; set; }
+        //public IEnumerable<WorkFlowDetailsDTO> WorkFlowDetailsMappings { get; set; }
 
     }
 }

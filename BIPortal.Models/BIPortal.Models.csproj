@@ -45,7 +45,10 @@
     <Compile Include="ReportsModel.cs" />
     <Compile Include="RoleRightsMappingModel.cs" />
     <Compile Include="RolesModel.cs" />
+    <Compile Include="UserRoleMappingModel.cs" />
     <Compile Include="UsersModel.cs" />
+    <Compile Include="WorkFlowDetailsModel.cs" />
+    <Compile Include="WorkFlowMasterModel.cs" />
     <Compile Include="WorkspaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
