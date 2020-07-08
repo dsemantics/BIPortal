@@ -9,6 +9,7 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Text;
 using System.Web;
+using BIPortal.Data.WorkSpaces;
 
 namespace BIPortalServices.Controllers
 {
@@ -76,6 +77,24 @@ namespace BIPortalServices.Controllers
 
             return HttpUtility.HtmlEncode(builder.ToString());
         }
+
+        //Get Workspaces
+        //[HttpGet]  
+        //[Route("api/GetReports")]
+        //public IHttpActionResult GetReports()
+        //{
+        //    try
+        //    {
+        //        WorkSpaceData workSpaceData = new WorkSpaceData();
+        //        var workSpaceAndReports = workSpaceData.GetReports();
+        //        return Ok(workSpaceAndReports);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("Could not fetch report details");
+        //    }
+        //}
 
         //Get datasets
         public string GetPowerBIDataset()

@@ -13,11 +13,72 @@
     <meta name="viewport" content="width=device-width" />
     <title>AddRole</title>
     <link href="~/Styles/AddRole/AddRole_Styles.css" type="text/css" rel="stylesheet" />
-    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    @*<script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>*@
     <script language="JavaScript" type="text/javascript" src="~/Scripts/RolesRights/AddRole.js"></script>
     <script type="text/javascript">
         var getworkspaceurl = '@Url.Action("GetWorkSpaceReports", "RolesRights")';
-        var saveRolesandRightsurl = '@Url.Action("SaveRoleAndRights", "RolesRights")';                
+        var saveRolesandRightsurl = '@Url.Action("SaveRoleAndRights", "RolesRights")';
+        var selectedItems = [];
+        $(function () {
+            $('#u723').on('changed.jstree', function (e, data) {
+                var i, j;
+                //var selectedItems = [];
+                selectedItems = [];
+
+                //var selectedElmsIds = [];
+                var selectedElms = $('#u723').jstree("get_selected", true);
+                $.each(selectedElms, function (i, selectedElm) {
+
+                    selectedItems.push(
+                        {
+                            id: this.id,
+                            parent: this.parent,
+                            text: this.text,
+                            parenttext: this.original.parenttext                            
+                        }
+                    );
+                });
+                //for(i = 0, j = data.selected.length; i < j; i++) {
+
+                //    //Fetch the Id.
+                //    var id = data.selected[i];
+                //    var asd = data[i];
+                //    //Remove the ParentId.
+                //    if(id.indexOf('/') != -1){
+                //        id = id.split("/")[1];
+                //    }
+
+                //    //Add the Node to the JSON Array.
+                //    selectedItems.push({
+                //        text: data.instance.get_node(data.selected[i]).text,
+                //        id: id,
+                //        parent: data.node.parents[0],
+                //        parenttext: data.instance.get_node(data.node.parent).text,
+                //        a: data.instance.get_parent(data.node),
+                //        b: data.node.text
+                //    });
+                //}
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                    },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+        });
     </script>
 </head>
 <body>
@@ -31,7 +92,8 @@
 
                         <!-- RolesEditPanel (Dynamic Panel) -->
                         <div id="u682" class="ax_default " data-label="RolesEditPanel" style="display:none" >
-                            <div id="u682_state0" class="panel_state" data-label="State1" >
+                        @*<div id="u682" class="ax_default " data-label="RolesEditPanel">*@
+                            <div id="u682_state0" class="panel_state" data-label="State1">
                                 <div id="u682_state0_content" class="panel_state_content">
 
                                     <!-- Unnamed (Rectangle) -->
@@ -49,12 +111,12 @@
                                             @*<p><span>xxxxxxxxxxxx</span></p>*@
                                         </div>
                                     </div>
-                                                                       
+
 
                                     <!-- HRWsPanel (Dynamic Panel) -->
-                                    <div id="u723" class="ax_default" data-label="HRWsPanel" style="display:none">                                       
+                                    <div id="u723" class="ax_default" data-label="HRWsPanel" style="display:none">
 
-                                    </div>
+                                    </div>                                 
 
                                     <!-- Save (Rectangle) -->
                                     <div id="u730" class="ax_default button" data-label="Save">
@@ -62,7 +124,8 @@
                                         <div id="u730_text" class="text ">
                                             @*<p><span>Save</span></p>*@
                                             @*<input id="btnSaveRoleRights" value="Save" type="submit" class="btnSaveRoleRights" style="width:85px" />*@
-                                            <input id="btnSaveRoleRights" value="Save" type="button" class="btnSaveRoleRights" style="width:85px" />
+                                            <input type="hidden" name="selectedItems" id="selectedItems" />
+                                            <input id="btnSaveRoleRights" value="Save" type="button" class="btnSaveRoleRights" style="width:88px" />
                                         </div>
                                     </div>
                                 </div>
@@ -81,23 +144,23 @@
                         <div id="u732" class="ax_default label">
                             <div id="u732_div" class=""></div>
                             <div id="u732_text" class="text ">
-                                <p><span>Role Name</span></p>                                
+                                <p><span>Role Name</span></p>
                             </div>
                         </div>
 
                         <!-- RoleNameEntry (Text Field) -->
                         <div id="u733" class="ax_default text_field" data-label="RoleNameEntry">
-                            <div id="u733_div" class=""></div>                            
-                            @Html.TextBoxFor(model=>model.RoleName, new { id = "u733_input" })
+                            <div id="u733_div" class=""></div>
+                            @Html.TextBoxFor(model => model.RoleName, new { id = "u733_input" })
                         </div>
 
                         <!-- AddRightsButton (Shape) -->
                         <div id="u734" class="ax_default button" data-label="AddRightsButton">
-                            @*<img id="u734_img" class="img " src="~/Images/Roles_Rights/addrolebutton_u475.svg" />*@
+                            @*<img id="u734_img" class="img"  src="~/Images/Roles_Rights/addrolebutton_u475.svg" />*@
                             <div id="u734_text" class="text ">
                                 @*<p><span>Add Rights</span></p>*@
                                 <input id="btnAddRights" value="Add Rights" type="button" class="btnAddRights" style="width:175px" />
-                                
+
                             </div>
                         </div>
                     </div>

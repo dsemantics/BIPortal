@@ -42,18 +42,20 @@ namespace BIPortalServices.Controllers
                 RolesData roleRightsData = new RolesData();
                 var rights = roleRightsData.GetRights(roleID);
 
-                WorkSpaceData workSpaceData = new WorkSpaceData();
-                var workSpaceAndReports = workSpaceData.GetPowerBIWorkspace();
+                var workspaceReports = roleRightsData.GetWorkspacesAndReports();
+
+                //WorkSpaceData workSpaceData = new WorkSpaceData();
+                //var workSpaceAndReports = workSpaceData.GetPowerBIWorkspace();
 
                 List<RoleRightsMappingDTO> roleRightsMappingsList = new List<RoleRightsMappingDTO>();
                                 
-                foreach(var b in workSpaceAndReports)
+                foreach(var b in workspaceReports)
                 {
                     RoleRightsMappingDTO a = new RoleRightsMappingDTO();
                     //a.ID = 0;
-                    a.WorkspaceID = b.WorkSpaceId;
-                    a.WorkspaceName = b.WorkSpaceName;
-                    a.ReportID = b.ReportId;
+                    a.WorkspaceID = b.WorkspaceID;
+                    a.WorkspaceName = b.WorkspaceName;
+                    a.ReportID = b.ReportID;
                     a.ReportName = b.ReportName;                    
                     roleRightsMappingsList.Add(a);
                 }
@@ -80,8 +82,7 @@ namespace BIPortalServices.Controllers
                         updatedRoleRightsMappingsList.Remove(l1);
                     }                    
                 }
-
-                //rights = rights.Concat(roleRightsMappingsList);
+                                
                 rights = rights.Concat(updatedRoleRightsMappingsList);
                 return Ok(rights);
             }
@@ -89,7 +90,24 @@ namespace BIPortalServices.Controllers
             {
                 return BadRequest("Could not fetch rights");
             }
-        }       
+        }
+
+        [Route("api/GetWorkspacesAndReports")]
+        //To get Workspace and Reports
+        public IHttpActionResult GetWorkspacesAndReports()
+        {
+            try
+            {
+                RolesData rolesData = new RolesData();
+                var workspaceReports = rolesData.GetWorkspacesAndReports();
+
+                return Ok(workspaceReports);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch workspace and reports");
+            }
+        }
 
         [HttpPost]
         [Route("api/SaveRoleAndRights")]

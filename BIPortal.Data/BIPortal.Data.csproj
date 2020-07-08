@@ -96,6 +96,9 @@
     <Compile Include="WorkSpaceOwnerMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="WorkspaceReportsMaster.cs">
+      <DependentUpon>BIPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="WorkSpaces\WorkSpaceData.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -47,6 +47,21 @@ namespace BIPortal.Data.Roles
             }
         }
 
+        public IEnumerable<WorkspaceReportsDTO> GetWorkspacesAndReports()
+        {
+            using (var context = new BIPortalEntities())
+            {
+                var workspaceReportsResult = context.WorkspaceReportsMasters.ToList();
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<WorkspaceReportsMaster, WorkspaceReportsDTO>();                    
+                });
+                IMapper mapper = config.CreateMapper();
+
+                return mapper.Map<List<WorkspaceReportsMaster>, List<WorkspaceReportsDTO>>(workspaceReportsResult);
+            }
+        }
+
         //Save role and access rights
         public void SaveRoleAndRights(RolesDTO rolesDTO)
         {
@@ -107,10 +122,10 @@ namespace BIPortal.Data.Roles
             var roleID = roleAndRights[0].RoleID;
             using (var context = new BIPortalEntities())
             {
-                var roleRightsMappingExists = context.RoleRightsMappings.FirstOrDefault(c => c.RoleID == roleID);
+                var roleRightsMappingExists = context.RoleRightsMappings.Where(c => c.RoleID == roleID);
                 if (roleRightsMappingExists!=null)
                 {
-                    context.RoleRightsMappings.Remove(roleRightsMappingExists);
+                    context.RoleRightsMappings.RemoveRange(roleRightsMappingExists);
                     context.SaveChanges();
                 }
                 

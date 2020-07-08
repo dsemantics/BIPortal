@@ -33,5 +33,6 @@ namespace BIPortal.Data
         public virtual DbSet<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
         public virtual DbSet<RoleRightsMapping> RoleRightsMappings { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
+        public virtual DbSet<WorkspaceReportsMaster> WorkspaceReportsMasters { get; set; }
     }
 }

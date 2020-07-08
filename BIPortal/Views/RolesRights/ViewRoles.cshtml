@@ -9,13 +9,75 @@
 <html>
 <head>
     <title>Administartion</title>
+    <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Roles_Rights/Roles_Rights.css" type="text/css" rel="stylesheet" />
-    @*<link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />*@
-    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    @*<script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>*@
     <script language="JavaScript" type="text/javascript" src="~/Scripts/RolesRights/ViewRole.js"></script>
     <script type="text/javascript">
         var geRightsurl = '@Url.Action("GetRights", "RolesRights")';
         var updateRolesandRightsurl = '@Url.Action("UpdateRoleAndRights", "RolesRights")';
+        var selectedItems = [];
+        @*$(function () {
+            $('#u452').on('changed.jstree', function (e, data) {
+                var i, j;
+                //var selectedItems = [];
+                selectedItems = [];
+
+                //var selectedElmsIds = [];
+                var selectedElms = $('#u452').jstree("get_selected", true);
+                $.each(selectedElms, function (i, selectedElm) {
+
+                    selectedItems.push(
+                        {
+                            id: this.id,
+                            parent: this.parent,
+                            text: this.text,
+                            parenttext: this.original.parenttext
+                        }
+                    );
+                });
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                    },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+        });*@
+
+        //function roleNameClicked(RoleID, RoleName) {
+        //    alert("Clicked");
+        //    var tr = $(this).closest('tr');
+        //    //roleId = tr.find('input[name="RoleID"]').val();
+        //    //roleName = tr.find('input[name="RoleName"]').val();
+        //    roleId = RoleID;
+        //    roleName = RoleName;
+        //    $.ajax({
+        //        url: geRightsurl,
+        //        data: { roleId: RoleID },
+        //        type: "GET",
+        //        dataType: "json",
+        //        success: function (data) {
+        //            loadData(data);
+        //        },
+        //        error: function () {
+        //            alert("Failed to get rights! Please try again.");
+        //        }
+        //    });
+        //};
     </script>
 </head>
 <body>
@@ -24,12 +86,14 @@
         <!-- R&R Panel (Dynamic Panel) -->
         <div id="u399" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" data-label="R&amp;R Panel">
 
-
             <!-- Unnamed (Table) -->
             <div id="u400" class="ax_default">
                 @if (Model != null && Model.Count() > 0)
-                {
-                    <table class="table table-bordered table-striped mb-0 table-hover">
+                    {
+                        
+            <table id="tblViewRoles" class="table table table-bordered table-striped mb-0 table-hover">
+
+                    <thead>
                         <tr>
                             <th style="display:none;">
                                 @*@Html.DisplayNameFor(model => model.Name)*@
@@ -46,41 +110,44 @@
                             <th>
                                 Date Modified
                             </th>
-                            <th>
-                                View Rights
-                            </th>
+                            @*<th>
+                            View Rights
+                            </th>*@
                         </tr>
-
+                     </thead>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td style="display:none;">
-                                    <input type="text" value="@item.RoleID" name="RoleID" />
-                                </td>
-                                <td style="display:none;">
-                                    <input type="text" value="@item.RoleName" name="RoleName" />
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RoleName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                                </td>
-                                <td>
-                                    <input id="btnViewRights" value="View Rights" type="button" class="btnViewRights" style="width:75px" />
-                                </td>
-                            </tr>
-
+                <tbody>
+                    <tr>
+                        <td style="display:none;">
+                            <input type="text" value="@item.RoleID" name="RoleID" />
+                        </td>
+                        <td style="display:none;">
+                            <input type="text" value="@item.RoleName" name="RoleName" />
+                        </td>
+                        <td style="text-align:left;">
+                            @*@Html.DisplayFor(modelItem => item.RoleName)*@
+                            @*<a href="" class="btnViewRights">@item.RoleName</a>*@
+                            <button type="button" class="btn btn-link btnViewRights">@item.RoleName</button>
+                        </td>
+                        <td style="text-align:left;">
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td style="text-align:left;">
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </td>
+                        @*<td>
+                        <input id="btnViewRights" value="View Rights" type="button" class="btnViewRights" style="width:75px" />
+                        </td>*@
+                    </tr>
+                </tbody>
                         }
-                    </table>
-                }
-                else
-                {
-                    <div>Roles not yet defined in the system!</div>
-                }
+                </table>
+                    }
+                    else
+                    {
+                    < div > Roles not yet defined in the system!</ div >
+                    }
             </div>
 
 
@@ -120,7 +187,8 @@
                         <div id="u474_div" class=""></div>
                         <div id="u474_text" class="text ">
                             @*<p><span>Save</span></p>*@
-                            <input id="btnSaveRoleRights" value="Edit" type="button" class="btnSaveRoleRights" style="width:85px" />
+                            <input type="hidden" name="selectedItems" id="selectedItems" />
+                            <input id="btnSaveRoleRights" value="Save" type="button" class="btnSaveRoleRights" style="width:88px" />
                         </div>
                     </div>
 
@@ -132,11 +200,11 @@
 
 
         <!-- AddRoleButton (Shape) -->
-        @*<div id="u475" class="ax_default button" data-label="AddRoleButton">
+        <div id="u475" class="ax_default button" data-label="AddRoleButton">
                 <div id="u475_text" class="text ">
                     <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
                 </div>
-            </div>*@
+            </div>
 
         @*<div id="u4750" class="ax_default" data-label="AddRoleButton">
                 <div id="u475_text" class="text ">

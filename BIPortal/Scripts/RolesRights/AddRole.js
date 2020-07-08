@@ -6,20 +6,21 @@
             alert("Please enter a role");
             return false;
         }
-        
-        $.ajax({
-            url: getworkspaceurl,
-            //data: { roleid: $('#txtSearch').val() },
-            data: "",
-            type: "GET",
-            dataType: "json",
-            success: function (data) {
-                loadData(data);
-            },
-            error: function () {
-                alert("Failed to get workspaces and reports! Please try again.");
-            }
-        });
+        document.getElementById("u682").style.display = "block";
+        document.getElementById("u723").style.display = "block";
+        //$.ajax({
+        //    url: getworkspaceurl,
+        //    //data: { roleid: $('#txtSearch').val() },
+        //    data: "",
+        //    type: "GET",
+        //    dataType: "json",
+        //    success: function (data) {
+        //        loadData(data);
+        //    },
+        //    error: function () {
+        //        alert("Failed to get workspaces and reports! Please try again.");
+        //    }
+        //});
 
     });
     function loadData(data) {
@@ -75,42 +76,43 @@
     $(".btnSaveRoleRights").click(function () {
         //alert("Save rights clicked");
         //check if any workspaces are selected
-        var checkedWorkspaces = document.querySelectorAll('input[name=chkWorkSpaces]:checked');
-        var workSpacesdata = [];
-        if (checkedWorkspaces.length > 0) {
-            for (var i = 0; i < checkedWorkspaces.length; i++) {
-                //Check if any reports are selected
-                var checkedReports = document.querySelectorAll('input[name=chkReports_' + i + ']:checked');
-                if (checkedReports.length > 0) {
-                    for (var j = 0; j < checkedReports.length; j++) {
-                        var obj = {};
-                        obj["WorkSpaceID"] = checkedWorkspaces[i].id;
-                        obj["WorkspaceName"] = checkedWorkspaces[i].value;
-                        obj["ReportID"] = checkedReports[j].id;
-                        obj["ReportName"] = checkedReports[j].value;
+        //var checkedWorkspaces = document.querySelectorAll('input[name=chkWorkSpaces]:checked');
+        //var workSpacesdata = [];
+        //if (checkedWorkspaces.length > 0) {
+        //    for (var i = 0; i < checkedWorkspaces.length; i++) {
+        //        //Check if any reports are selected
+        //        var checkedReports = document.querySelectorAll('input[name=chkReports_' + i + ']:checked');
+        //        if (checkedReports.length > 0) {
+        //            for (var j = 0; j < checkedReports.length; j++) {
+        //                var obj = {};
+        //                obj["WorkSpaceID"] = checkedWorkspaces[i].id;
+        //                obj["WorkspaceName"] = checkedWorkspaces[i].value;
+        //                obj["ReportID"] = checkedReports[j].id;
+        //                obj["ReportName"] = checkedReports[j].value;
 
-                        workSpacesdata.push(obj);
-                    }
-                } else {
-                    var obj = {};
-                    obj["WorkSpaceID"] = checkedWorkspaces[i].id;
-                    obj["WorkspaceName"] = checkedWorkspaces[i].value;
-                    obj["ReportID"] = null;
-                    obj["ReportName"] = null;
+        //                workSpacesdata.push(obj);
+        //            }
+        //        } else {
+        //            var obj = {};
+        //            obj["WorkSpaceID"] = checkedWorkspaces[i].id;
+        //            obj["WorkspaceName"] = checkedWorkspaces[i].value;
+        //            obj["ReportID"] = null;
+        //            obj["ReportName"] = null;
 
-                    workSpacesdata.push(obj);
-                }
-            }
-        } else {
-            alert("Please select any one workspace");
-            return false;
-        }
+        //            workSpacesdata.push(obj);
+        //        }
+        //    }
+        //} else {
+        //    alert("Please select any one workspace");
+        //    return false;
+        //}
                
-        var data = { WorkspaceandReportList: workSpacesdata, RoleName: roleName };
+        //var data = { WorkspaceandReportList: workSpacesdata, RoleName: roleName };
+        var data = { WorkspaceandReportList: selectedItems, RoleName: roleName };
         $.post(saveRolesandRightsurl, data, function (result) {
             // TODO: do something with the response from the controller action
             window.location.reload();
         });
-    });
+    }); 
 
 });

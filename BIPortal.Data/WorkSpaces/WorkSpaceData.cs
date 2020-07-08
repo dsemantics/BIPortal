@@ -6,6 +6,7 @@ using System.Management.Automation.Runspaces;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BIPortal.DTO;
 
 namespace BIPortal.Data.WorkSpaces
@@ -88,5 +89,39 @@ namespace BIPortal.Data.WorkSpaces
             }
             return workspaceDTOList;
         }
+
+        //To get workspaces
+        //public IEnumerable<WorkSpaceMasterDTO> GetWorkspaces()
+        //{
+        //    using (var context = new BIPortalEntities())
+        //    {
+        //        var workspaceResult = context.WorkSpaceMasters.ToList();
+        //        var config = new MapperConfiguration(cfg =>
+        //        {
+        //            cfg.CreateMap<WorkSpaceMaster, WorkSpaceMasterDTO>();
+        //            //cfg.CreateMap<RoleRightsMapping, RoleRightsMappingDTO>();
+        //        });
+        //        IMapper mapper = config.CreateMapper();
+
+        //        return mapper.Map<List<WorkSpaceMaster>, List<WorkSpaceMasterDTO>>(workspaceResult);
+        //    }
+        //}
+
+        //To get workspaces
+        //public IEnumerable<ReportsMasterDTO> GetReports()
+        //{
+        //    using (var context = new BIPortalEntities())
+        //    {
+        //        var reportsResult = context.ReportsMasters.ToList();
+        //        var config = new MapperConfiguration(cfg =>
+        //        {
+        //            cfg.CreateMap<ReportsMaster, ReportsMasterDTO>();
+        //            //cfg.CreateMap<RoleRightsMapping, RoleRightsMappingDTO>();
+        //        });
+        //        IMapper mapper = config.CreateMapper();
+
+        //        return mapper.Map<List<ReportsMaster>, List<ReportsMasterDTO>>(reportsResult);
+        //    }
+        //}
     }
 }

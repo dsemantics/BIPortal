@@ -37,6 +37,25 @@ namespace BIPortalServices.Controllers
             }
         }
 
+        //Get Workspaces
+        //[HttpGet]  
+        //[Route("api/GetWorkSpace")]
+        //public IHttpActionResult GetWorkspaces()
+        //{
+        //    try
+        //    {
+        //        WorkSpaceData workSpaceData = new WorkSpaceData();
+        //        var workSpaceAndReports = workSpaceData.GetWorkspaces();
+        //        return Ok(workSpaceAndReports);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("Could not fetch workspace details");
+        //    }
+        //}
+
+       
         //Add a new user to a workspace
         public string AddPowerBIWorkspaceUser()
         {

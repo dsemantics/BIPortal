@@ -6,7 +6,9 @@
 
         var tr = $(this).closest('tr');
         roleId = tr.find('input[name="RoleID"]').val();
-        roleName = tr.find('input[name="RoleName"]').val();        
+        roleName = tr.find('input[name="RoleName"]').val();   
+
+        
         $.ajax({
             url: geRightsurl,
             //data: { roleid: $('#txtSearch').val() },
@@ -14,7 +16,8 @@
             type: "GET",
             dataType: "json",
             success: function (data) {
-                loadData(data);
+                //loadData(data);
+                loadTree(data);
             },
             error: function () {
                 alert("Failed to get rights! Please try again.");
@@ -22,9 +25,55 @@
         });
 
     });
+
+    function loadTree(data) {
+
+        document.getElementById("u425").style.display = "block";
+        document.getElementById("u452").style.display = "block";
+        document.getElementById("lblRoleName").innerHTML = roleName;
+
+        //var selectedItems = [];
+        $(function () {
+            $('#u452').on('changed.jstree', function (e, data) {
+                var i, j;
+                //var selectedItems = [];
+                selectedItems = [];
+
+                //var selectedElmsIds = [];
+                var selectedElms = $('#u452').jstree("get_selected", true);
+                $.each(selectedElms, function (i, selectedElm) {
+
+                    selectedItems.push(
+                        {
+                            id: this.id,
+                            parent: this.parent,
+                            text: this.text,
+                            parenttext: this.original.parenttext
+                        }
+                    );
+                });
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": data
+                },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            })
+        });
+
+    };
+
     function loadData(data) {
         document.getElementById("u425").style.display = "block";
-        document.getElementById("u452").style.display = "block";        
+        document.getElementById("u452").style.display = "block";
         document.getElementById("lblRoleName").innerHTML = roleName;
 
         var tab = $('<table class="myTable"></table>');
@@ -47,7 +96,7 @@
                 if (isWorkspaceActive) {
                     trow.append('<td style="font-weight:bold">' + workspaces.WorkspaceName + '<input type="checkbox" name="chkWorkSpaces" checked value ="' + workspaces.WorkspaceName + '" id=' + workspaces.WorkspaceID + '>' + '</td>');
                 }
-                else {                    
+                else {
                     trow.append('<td style="font-weight:bold">' + workspaces.WorkspaceName + '<input type="checkbox" name="chkWorkSpaces" value ="' + workspaces.WorkspaceName + '" id=' + workspaces.WorkspaceID + '>' + '</td>');
                 }
                 tab.append(trow);
@@ -122,7 +171,7 @@
             //            //    trow.append('<td>' + reports.ReportName + '<input type="checkbox" name="chkReports_' + i + '" value ="' + reports.ReportName + '" id=' + reports.ReportID + '>' + '</td>');
             //            //}
             //            trow.append('<td>' + reports.ReportName + '<input type="checkbox" id="chkReport_' + j + '"/>' + '</td>');
-                        
+
             //        }
             //        tab.append(trow);
 
@@ -131,51 +180,52 @@
         });
         //$("#UpdatePanel").html(tab);
         $("#u452").html(tab);
-
-        $(".btnSaveRoleRights").click(function () {
-            //alert("Save rights clicked");
-            //check if any workspaces are selected
-            var checkedWorkspaces = document.querySelectorAll('input[name=chkWorkSpaces]:checked');
-            var workSpacesdata = [];
-            if (checkedWorkspaces.length > 0) {
-                for (var i = 0; i < checkedWorkspaces.length; i++) {
-                    //Check if any reports are selected
-                    var checkedReports = document.querySelectorAll('input[name=chkReports_' + i + ']:checked');
-                    if (checkedReports.length > 0) {
-                        for (var j = 0; j < checkedReports.length; j++) {
-                            var obj = {};
-                            obj["WorkSpaceID"] = checkedWorkspaces[i].id;
-                            obj["WorkspaceName"] = checkedWorkspaces[i].value;
-                            obj["ReportID"] = checkedReports[j].id;
-                            obj["ReportName"] = checkedReports[j].value;
-                            obj["Active"] = true;
-                            obj["RoleID"] = roleId;
-
-                            workSpacesdata.push(obj);
-                        }
-                    } else {
-                        var obj = {};
-                        obj["WorkSpaceID"] = checkedWorkspaces[i].id;
-                        obj["WorkspaceName"] = checkedWorkspaces[i].value;
-                        obj["ReportID"] = null;
-                        obj["ReportName"] = null;
-                        obj["Active"] = true;
-                        obj["RoleID"] = roleId;
-
-                        workSpacesdata.push(obj);
-                    }
-                }
-            } else {
-                alert("Please select any one workspace");
-                return false;
-            }
-
-            //var data = { WorkspaceandReportList: workSpacesdata, RoleID: roleId };
-            var data = { WorkspaceandReportList: workSpacesdata };
-            $.post(updateRolesandRightsurl, data, function (result) {
-                // TODO: do something with the response from the controller action
-                window.location.reload();
-            });
-        });
     };
+
+    $(".btnSaveRoleRights").click(function () {
+        //alert("Save rights clicked");
+        //check if any workspaces are selected
+        //var checkedWorkspaces = document.querySelectorAll('input[name=chkWorkSpaces]:checked');
+        //var workSpacesdata = [];
+        //if (checkedWorkspaces.length > 0) {
+        //    for (var i = 0; i < checkedWorkspaces.length; i++) {
+        //        //Check if any reports are selected
+        //        var checkedReports = document.querySelectorAll('input[name=chkReports_' + i + ']:checked');
+        //        if (checkedReports.length > 0) {
+        //            for (var j = 0; j < checkedReports.length; j++) {
+        //                var obj = {};
+        //                obj["WorkSpaceID"] = checkedWorkspaces[i].id;
+        //                obj["WorkspaceName"] = checkedWorkspaces[i].value;
+        //                obj["ReportID"] = checkedReports[j].id;
+        //                obj["ReportName"] = checkedReports[j].value;
+        //                obj["Active"] = true;
+        //                obj["RoleID"] = roleId;
+
+        //                workSpacesdata.push(obj);
+        //            }
+        //        } else {
+        //            var obj = {};
+        //            obj["WorkSpaceID"] = checkedWorkspaces[i].id;
+        //            obj["WorkspaceName"] = checkedWorkspaces[i].value;
+        //            obj["ReportID"] = null;
+        //            obj["ReportName"] = null;
+        //            obj["Active"] = true;
+        //            obj["RoleID"] = roleId;
+
+        //            workSpacesdata.push(obj);
+        //        }
+        //    }
+        //} else {
+        //    alert("Please select any one workspace");
+        //    return false;
+        //}
+
+        //var data = { WorkspaceandReportList: workSpacesdata, RoleID: roleId };
+        //var data = { WorkspaceandReportList: workSpacesdata };
+        var data = { WorkspaceandReportList: selectedItems, RoleID: roleId };
+        $.post(updateRolesandRightsurl, data, function (result) {
+            // TODO: do something with the response from the controller action
+            window.location.reload();
+        });
+    });
 });
