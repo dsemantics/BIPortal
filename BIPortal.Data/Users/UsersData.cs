@@ -67,6 +67,12 @@ namespace BIPortal.Data.Users
                                       where u.UserID == iUSERID
                                       select u).ToList();
 
+                // Join 2 Tables
+                //var CurusersResult = (from a in context.UserMasters
+                //                      join b in context.UserRoleMappings on a.UserID equals b.UserID
+                //                      where a.UserID == iUSERID
+                //                      select a).ToList();
+
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<UserMaster, UsersDTO>();
@@ -81,8 +87,39 @@ namespace BIPortal.Data.Users
             }
         }
 
+
+        //public IEnumerable<UsersDTO> GetSelectedUserRoles(int iUSERID)
+        //{
+        //    using (var context = new BIPortalEntities())
+        //    {
+        //        var curUsersRolesResult = (from u in context.UserRoleMappings
+        //                                   where u.UserID == iUSERID
+        //                                   select u).FirstOrDefault();
+
+        //        // Join 2 Tables
+        //        //var CurusersResult = (from a in context.UserMasters
+        //        //                      join b in context.UserRoleMappings on a.UserID equals b.UserID
+        //        //                      where a.UserID == iUSERID
+        //        //                      select a).ToList();
+
+        //        var config = new MapperConfiguration(cfg =>
+        //        {
+        //            cfg.CreateMap<UserMaster, UsersDTO>();
+        //            cfg.CreateMap<PermissionMaster, PermissionMasterDTO>();
+        //            cfg.CreateMap<UserRoleMapping, UserRoleMappingDTO>();
+        //            cfg.CreateMap<WorkFlowMaster, WorkFlowMasterDTO>();
+        //        });
+        //        IMapper mapper = config.CreateMapper();
+
+        //        //return mapper.Map<List<UserRoleMapping>, List<UserRoleMappingDTO>>(curUsersRolesResult);
+
+        //        return mapper.Map<List<UserRoleMapping>, List<UserRoleMappingDTO>>(curUsersRolesResult);
+
+        //    }
+        //}
+
         public void SaveUsersData(UsersDTO userDTO)
-        {
+         {
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<UsersDTO, UserMaster>();
@@ -104,56 +141,54 @@ namespace BIPortal.Data.Users
                     //CreatedBy = "Venkat",
                     //Active = true
 
-                    Salutation = "Mr.",
+                    //Salutation = "Mr.",
+                    Salutation = SaveUserDetails.Salutation,
                     FirstName = SaveUserDetails.FirstName,
                     LastName = SaveUserDetails.LastName,
                     EmailID = SaveUserDetails.EmailID,
-                    PermissionID = 1,
-                    //CreatedDate = DateTime.Now,
-                    CreatedDate = SaveUserDetails.CreatedDate,
+                    //PermissionID = 1,
+                    PermissionID = SaveUserDetails.PermissionID,
+                    CreatedDate = DateTime.Now,
+                    //CreatedDate = SaveUserDetails.CreatedDate,
                     CreatedBy = "SK",
                     ModifiedDate = DateTime.Now,
                     Active = SaveUserDetails.Active
 
                 };
 
-                var testUsermap = new UserRoleMapping
-                {
-                    RoleID = 1, //should come from UI
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = "Selva",
-                    Active = true
-                };
-                saveUserMaster.UserRoleMappings.Add(testUsermap);
-
-
-
                 // Insert UserRoleMapping
-                //foreach (var d in SaveUserDetails.UserRoleMappings)
-                //{
-                //    var userrolemapping = new UserRoleMapping
-                //    {
-                //        //UserID = d.UserID,
-                //        //RoleID = d.RoleID,
-                //        RoleID = 1, //should come from UI
-                //        CreatedDate = DateTime.Now,
-                //        CreatedBy = "Selva",
-                //        Active = d.Active
-                //    };
-                //    UserMaster.UserRoleMappings.Add(userrolemapping);
-                //}
+                foreach (var d in userDTO.SelectedRolesValues)
+                {
+                    var userrolemapping = new UserRoleMapping
+                    {
+                        //RoleID = 1, //should come from UI
+                        RoleID = d,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = "Selva",
+                        Active = true
+                    };
+                    saveUserMaster.UserRoleMappings.Add(userrolemapping);
+                }
 
                 // Insert WorkFlowMaster
                 //foreach (var e in SaveUserDetails.WorkFlowMasters)
                 //{
                 //    var userworkflowmastermapping = new WorkFlowMaster
                 //    {
+                //        WorkspaceID = e.WorkspaceID
+                //    };
+                //    saveUserMaster.WorkFlowMasters.Add(userworkflowmastermapping);
+                //}
+
+                // Insert WorkFlowDetails
+                //foreach (var e in SaveUserDetails.)
+                //{
+                //    var userworkflowmastermapping = new WorkFlowMaster
+                //    {
                 //        //RequestID  = e.RequestID,
                 //        WorkspaceID = e.WorkspaceID
-                        
-
                 //    };
-                //    UserMaster.WorkFlowMasters.Add(userworkflowmastermapping);
+                //    saveUserMaster.WorkFlowMasters.Add(userworkflowmastermapping);
                 //}
 
                 context.UserMasters.Add(saveUserMaster);

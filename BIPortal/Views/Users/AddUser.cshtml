@@ -14,6 +14,11 @@
     <title>AddUser</title>
     <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Users/AddUser_Styles.css" type="text/css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
 </head>
 <body>
 
@@ -30,14 +35,15 @@
                 <div id="u1312" class="ax_default button" data-label="SaveCloseButton">
                     <div id="u1312_text" class="text ">
                         @*<input id="Save" value="Save &amp; Send for Approval" type="button" style="width:175px" />*@
-                        <input id="submit" type="submit" name="button" value="Save" style="width:175px" />
+                        <input id="Applyroles" value="Apply Roles" type="button" style="width:175px" />
                     </div>
                 </div>
 
                 <!-- CloseButton (Shape) -->
                 <div id="u1313" class="ax_default button" data-label="SaveCloseButton">
                     <div id="u1312_text" class="text ">
-                        <input id="submit" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")"; />
+                        @*<input id="submit" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />*@
+                        <input id="submit" type="submit" name="button" value="Save &amp; Send for Approval" style="width:175px" />
                     </div>
                 </div>
 
@@ -45,12 +51,9 @@
                 <div id="u1377" class="ax_default button" data-label="CloseButton">
                     <div id="u1377_text" class="text ">
                         @*<input id="Applyroles" value="Apply Roles" type="button" style="width:175px" onclick="alert('Close  Clicked')" />*@
-                        @*<input id="Applyroles" value="Apply Roles" type="button" style="width:175px" />*@
+                        <input id="submit" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />
                     </div>
                 </div>
-
-
-
 
 
                 <!-- EmailID label (Rectangle) -->
@@ -61,112 +64,84 @@
 
                 <!-- EmailID (Text Field) -->
                 <div id="u1315" class="ax_default text_field">
-                    @* @Html.TextBox("myTextbox", ViewBag.Emailid as string, new { @class = "form-control", style = "height:28px;" })*@
+                    @*@Html.TextBoxFor(model => model.EmailID, new { @class = "form-control", style = "height:28px;", @required = "required" })*@
                     @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control", style = "height:28px;" })
-
+                    &nbsp;
+                    @Html.ValidationMessageFor(m => m.EmailID, "", new { @class = "error" })
                 </div>
 
+                @*@Html.ValidationMessageFor(model => model.EmailID)*@
 
+                <!-- Salutation label (Rectangle) -->
+                <div id="u1373" class="ax_default label">
+                    @Html.Label("Salutation", "Salutation")
+                </div>
+
+                <!-- Salutation (Droplist) -->
+                <div id="u1374" class="ax_default droplist">
+                    @Html.DropDownListFor(model => model.Salutation, ViewBag.Salutation as SelectList, null, new { @class = "form-control", style = "height:28px;" })
+                </div>
 
                 <!-- FirstName label (Rectangle) -->
                 <div id="u1316" class="ax_default label">
                     @Html.Label("First Name", "First Name")
                 </div>
 
-                <!-- Unnamed (Text Field) -->
+                <!-- FirstNmae (Text Field) -->
                 <div id="u1317" class="ax_default text_field">
                     @*@Html.TextBox("myTextBox", "FirstName", new { @class = "form-control", style = "height:28px;" })*@
                     @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", style = "height:28px;" })
+                    &nbsp;
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error" })
                 </div>
 
-                <!-- Unnamed (Rectangle) -->
+                <!-- Last Name label (Rectangle) -->
                 <div id="u1318" class="ax_default label">
                     @Html.Label("Last Name", "Last Name")
                 </div>
 
-                <!-- Unnamed (Text Field) -->
+                <!-- LastName  (Text Field) -->
                 <div id="u1319" class="ax_default text_field">
                     @* @Html.TextBox("myTextBox", "LastName", new { @class = "form-control", style = "height:28px;" })*@
                     @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", style = "height:28px;" })
+                    &nbsp;
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "error" })
                 </div>
 
                 <!-- Unnamed (Rectangle) -->
                 <div id="u1320" class="ax_default label">
-                    <div id="u1320_div" class=""></div>
-                    <div id="u1320_text" class="text ">
-                        <p><span>Creation Date</span></p>
-                    </div>
+                    @*<p><span>Creation Date</span></p>*@
+                    @*@Html.Label("Creation Date", "Creation Date")*@
+                    @Html.Label("Permission Type", "Permission Type")
                 </div>
 
                 <!-- Creation Date (Text Field) -->
                 <div id="u1321" class="ax_default text_field" data-label="Creation Date">
-                    @Html.TextBoxFor(model => model.CreatedDate, new { @type = "date", @class = "form-control datepicker", style = "height:28px;" })
+                    @*@Html.TextBoxFor(model => model.CreatedDate, new { @type = "date", @class = "form-control datepicker", style = "height:28px;" })*@
+                    @Html.DropDownListFor(model => model.PermissionID, (IEnumerable<SelectListItem>)ViewBag.PermissionTypes, null, new { @class = "form-control", style = "height:28px;" })
                 </div>
 
-                <!-- Active label (Checkbox) -->
-                <div id="u1322" class="ax_default checkbox selected" data-label="Active">
+                <!-- Active (Checkbox) Label (Rectangle) -->
+                <div id="u1323" class="ax_default label">
+                    @*@Html.Label("Permission Type", "Permission Type")*@
                     @Html.Label("Active", "Active")
                 </div>
 
-                <!-- Active (Checkbox) -->
-                <div id="u13191" class="ax_default">
-                    @Html.CheckBoxFor(model => model.Active, new { @id = "ActiveStatus" , @checked = true })
-                </div>
-
-
-                <!-- Permission Type Label (Rectangle) -->
-                <div id="u1323" class="ax_default label">
-                    @Html.Label("Permission Type", "Permission Type")
-                </div>
-
-                <!-- Permission Type DropDown (Droplist) -->
+                <!-- Active (Checkbox) DropDown (Droplist) -->
                 <div id="u1324" class="ax_default droplist">
-                     @Html.DropDownList("PermissionName", (IEnumerable<SelectListItem>)ViewBag.type, null, new { @class = "form-control", style = "height:28px;" })
-                    @*@Html.DropDownList("PermissionType", new List<SelectListItem>
-                    {
-                       new SelectListItem{ Text="Basic", Value = "1" },
-                       new SelectListItem{ Text="Super", Value = "2" },
-                       new SelectListItem{ Text="Admin", Value = "3" },
-                    }, null , new { @class = "form-control", style = "height:32px;" })*@
-
-                    @*@Html.DropDownList("PermissionName", ViewBag.type, null, new { @class = "form-control", style = "height:28px;" })*@
-
+                    @Html.CheckBoxFor(model => model.Active, new { @id = "ActiveStatus", @checked = true })
                 </div>
 
-
-                <!-- Unnamed (Rectangle) -->
-                <div id="u1373" class="ax_default label">
-                    @Html.Label("Salutation", "Salutation")
-                </div>
-
-                <!-- Unnamed (Droplist) -->
-                <div id="u1374" class="ax_default droplist">
-                    @* @Html.DropDownList("Salutation", (IEnumerable<SelectListItem>)ViewBag.Salutation, null, new { @class = "form-control", style = "height:28px;" })*@
-                    @Html.DropDownList("--Select--", new List<SelectListItem>
-                            {
-                               new SelectListItem{ Text="Mr.", Value = "1" },
-                               new SelectListItem{ Text="Miss.", Value = "2" },
-                               new SelectListItem{ Text="Mrs.", Value = "3" },
-                               new SelectListItem{ Text="Ms.", Value = "4" },
-                            }, null, new { @class = "form-control", style = "height:28px;" })
-                </div>
-
-                <!-- Unnamed (Rectangle) -->
-                <div id="u1375" class="ax_default label">
+                <!-- Role Selection label (Checkbox) -->
+                <div id="u1322" class="ax_default checkbox selected" data-label="Active">
                     @Html.Label("Role Selection", "Role Selection")
                 </div>
 
-                <!-- Unnamed (List Box) -->
+                <!-- Role Selection (List Box) -->
                 <div id="u1376" class="ax_default list_box">
-                    @*<div id="u1376_div" class=""></div>
-                    <select id="u1376_input" size="2" class="u1376_input" multiple>
-                        <option class="u1376_input_option" value="FINSUPER">FINSUPER</option>
-                        <option class="u1376_input_option" value="FINAP">FINAP</option>
-                        <option class="u1376_input_option" value="FINAR">FINAR</option>
-                        <option class="u1376_input_option" value="PURSUPER">PURSUPER</option>
-                        <option class="u1376_input_option" value="HRSUPER">HRSUPER</option>
-                        <option class="u1376_input_option" value="PRODSUPER">PRODSUPER</option>
-                    </select>*@                   
+                    @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.Roles, new { @class = "listbox" })
+                    &nbsp;
+                    @Html.ValidationMessageFor(m => m.SelectedRolesValues, "", new { @class = "error" })
                 </div>
 
             </div>
@@ -174,6 +149,18 @@
 
 
     }
-    <script src="resources/scripts/axure/ios.js"></script>
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#example-getting-started').multiselect();
+        });
+    </script>
+    <script src="resources/scripts/axure/ios.js"></script>*@
+
+
+
 </body>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 </html>

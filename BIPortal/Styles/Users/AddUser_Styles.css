@@ -20,12 +20,19 @@
 }
 
 
+.error {
+    font-family: Arial;
+    font-size: 10pt;
+    color: red;
+}
+
+
 
 #u1314 {
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 12px;
+    top: 19px;
     width: 134px;
     height: 25px;
     display: flex;
@@ -3072,7 +3079,7 @@
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 88px;
+    top: 102px;
     width: 134px;
     height: 25px;
     display: flex;
@@ -3163,7 +3170,7 @@
     border-width: 0px;
     position: absolute;
     left: 160px;
-    top: 88px;
+    top: 95px;
     width: 230px;
     height: 25px;
     display: flex;
@@ -3231,7 +3238,7 @@
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 122px;
+    top: 142px;
     width: 134px;
     height: 25px;
     display: flex;
@@ -3322,7 +3329,7 @@
     border-width: 0px;
     position: absolute;
     left: 160px;
-    top: 122px;
+    top: 137px;
     width: 230px;
     height: 25px;
     display: flex;
@@ -3390,7 +3397,7 @@
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 160px;
+    top: 186px;
     width: 134px;
     height: 25px;
     display: flex;
@@ -3481,7 +3488,7 @@
     border-width: 0px;
     position: absolute;
     left: 160px;
-    top: 160px;
+    top: 180px;
     width: 230px;
     height: 25px;
     display: flex;
@@ -3543,7 +3550,8 @@
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 249px;
+    /*top: 233px;*/
+    top: 259px;
     width: 134px;
     height: 19px;
     display: flex;
@@ -3616,7 +3624,7 @@
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 197px;
+    top: 226px;
     width: 134px;
     height: 25px;
     display: flex;
@@ -3707,7 +3715,7 @@
     border-width: 0px;
     position: absolute;
     left: 160px;
-    top: 197px;
+    top: 226px;
     width: 230px;
     height: 25px;
     display: flex;
@@ -6261,7 +6269,7 @@
     border-width: 0px;
     position: absolute;
     left: 14px;
-    top: 53px;
+    top: 58px;
     width: 134px;
     height: 25px;
     display: flex;
@@ -6513,7 +6521,8 @@
     border-width: 0px;
     position: absolute;
     left: 160px;
-    top: 277px;
+    /*top: 235px;*/
+    top: 259px;
     width: 230px;
     height: 125px;
     display: flex;

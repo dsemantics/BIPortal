@@ -45,7 +45,7 @@
                         <!-- Unnamed (Text Field) -->
                         <div id="u1583" class="ax_default text_field disabled">
                             @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
-                            @Html.TextBox("Name",(object)ViewBag.EmailID,new { @class = "form-control", style = "height:28px;" })
+                            @Html.TextBox("Name",(object)ViewBag.EmailID,new { @class = "form-control", style = "height:28px;",@disabled = "disabled" })
                         </div>
 
                         <!-- Unnamed (Rectangle) -->
@@ -58,7 +58,7 @@
 
                         <!-- Unnamed (Text Field) -->
                         <div id="u1585" class="ax_default text_field disabled">
-                            @Html.TextBox("Name", (object)ViewBag.FirstName, new { @class = "form-control", style = "height:28px;" })
+                            @Html.TextBox("Name", (object)ViewBag.FirstName, new { @class = "form-control", style = "height:28px;" ,@disabled = "disabled" })
                         </div>
 
                         <!-- Unnamed (Rectangle) -->
@@ -71,7 +71,7 @@
 
                         <!-- Unnamed (Text Field) -->
                         <div id="u1587" class="ax_default text_field disabled">
-                            @Html.TextBox("Name", (object)ViewBag.LastName, new { @class = "form-control", style = "height:28px;" })
+                            @Html.TextBox("Name", (object)ViewBag.LastName, new { @class = "form-control", style = "height:28px;" ,@disabled = "disabled" })
                         </div>
 
                         <!-- Unnamed (Rectangle) -->
@@ -84,7 +84,7 @@
 
                         <!-- Unnamed (Text Field) -->
                         <div id="u1589" class="ax_default text_field disabled">
-                            @Html.TextBox("Name", (object)ViewBag.Creationdate, new { @class = "form-control", style = "height:28px;" })
+                            @Html.TextBox("Name", (object)ViewBag.Creationdate, new { @class = "form-control", style = "height:28px;" ,@disabled = "disabled" })
                         </div>
 
                         <!-- Unnamed (Rectangle) -->
@@ -97,7 +97,7 @@
 
                         <!-- Unnamed (Droplist) -->
                         <div id="u1591" class="ax_default droplist disabled">
-                            @Html.TextBox("Name", (object)ViewBag.PermissionType, new { @class = "form-control", style = "height:28px;"  })
+                            @Html.TextBox("Name", (object)ViewBag.PermissionType, new { @class = "form-control", style = "height:28px;" ,@disabled = "disabled"  })
                         </div>
 
                         <!-- CloseButton (Shape) -->
@@ -105,7 +105,7 @@
                             @*<img id="u1592_img" class="img " src="images/my_profile/closebutton_u1592.svg" />*@
                             <div id="u1592_text" class="text ">
                                 @*<p><span>Reset Password</span></p>*@
-                                <input id="submit" value="Reset Password" type="button" style="width:175px" />
+                                @*<input id="submit" value="Reset Password" type="button" style="width:175px" />*@
                             </div>
                         </div>
 
@@ -119,7 +119,7 @@
 
                         <!-- Unnamed (Droplist) -->
                         <div id="u1594" class="ax_default droplist disabled">
-                            @Html.TextBox("Name", (object)ViewBag.Saluation, new { @class = "form-control", style = "height:28px;" })
+                            @Html.TextBox("Name", (object)ViewBag.Saluation, new { @class = "form-control", style = "height:28px;" ,@disabled = "disabled" })
                         </div>
                     </div>
                 </div>

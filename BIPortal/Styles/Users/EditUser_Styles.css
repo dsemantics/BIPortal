@@ -19,6 +19,29 @@
     z-index: 0;
 }
 
+#u1322322 {
+    border-width: 0px;
+    position: absolute;
+    left: 14px;
+    top: 283px;
+    width: 134px;
+    height: 19px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+
+#u137666 {
+    border-width: 0px;
+    position: absolute;
+    left: 160px;
+    top: 235px;
+    width: 230px;
+    height: 125px;
+    display: flex;
+}
 
 #u1322 {
     border-width: 0px;
@@ -2866,7 +2889,7 @@
     border-width: 0px;
     position: absolute;
     left: 210px;
-    top: 434px;
+    top: 439px;
     width: 180px;
     height: 25px;
     display: flex;

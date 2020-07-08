@@ -65,6 +65,28 @@
     color: #FFFFFF;
 }
 
+#u1312 {
+    border-width: 0px;
+    position: absolute;
+    left: 8px;
+    top: 434px;
+    width: 180px;
+    height: 25px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+}
+
+    #u1312 .text {
+        position: absolute;
+        align-self: center;
+        padding: 2px 2px 2px 2px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
 #u735_div {
     border-width: 0px;
     position: absolute;

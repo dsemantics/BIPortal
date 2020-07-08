@@ -15,6 +15,10 @@
     <link href="~/Styles/Users/EditUser_Styles.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/MyProfile/MyProfile_Styles.css" type="text/css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
 
 <body>
@@ -50,7 +54,7 @@
                         @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
                         @*@Html.TextBox("Name", (object)ViewBag.EmailID, new { @class = "form-control", style = "height:28px;" })*@
                         @Html.HiddenFor(Model => Model.UserID)
-                        @Html.HiddenFor(Model => Model.PermissionID)
+                        @*@Html.HiddenFor(Model => Model.PermissionID)*@
                         @*@Html.HiddenFor(Model => Model.CreatedBy)*@
                         @* @Html.HiddenFor(Model => Model.PermissionMaster.PermissionID)*@
                         @Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })
@@ -85,32 +89,35 @@
                     </div>
 
                     <!-- Unnamed (Rectangle) -->
-                    @*<div id="u1588" class="ax_default label">
+                    <div id="u1588" class="ax_default label">
                         <div id="u1588_div" class=""></div>
                         <div id="u1588_text" class="text ">
                             <p><span>Creation Date</span></p>
                         </div>
-                    </div>*@
+                    </div>
 
                     <!-- Unnamed (Text Field) -->
                     <div id="u1589" class="ax_default text_field disabled">
                         @*@Html.TextBox("Name", (object)ViewBag.Creationdate, new { @class = "form-control", style = "height:28px;" })*@
-                        @*@Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;" })*@
+                        @*@Html.TextBox(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;" })*@
                         @*@Html.TextBoxFor(model => model.CreatedDate, new { @type = "date", @class = "form-control datepicker", style = "height:28px;" })*@
+                        @Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;", @disabled = "disabled" })
                     </div>
 
                     <!-- Unnamed (Rectangle) -->
                     <div id="u1590" class="ax_default label">
                         <div id="u1590_div" class=""></div>
                         <div id="u1590_text" class="text ">
-                            <p><span>Type</span></p>
+                            <p><span>Permission Type</span></p>
                         </div>
                     </div>
 
                     <!-- Unnamed (Droplist) -->
                     <div id="u1591" class="ax_default droplist disabled">
                         @*@Html.TextBox("Name", (object)ViewBag.PermissionType, new { @class = "form-control", style = "height:28px;" })*@
-                        @Html.TextBoxFor(Model => Model.PermissionMaster.PermissionName, new { @class = "form-control", style = "height:28px;" })
+                        @*@Html.TextBoxFor(Model => Model.PermissionMaster.PermissionName, new { @class = "form-control", style = "height:28px;" })*@
+
+                        @Html.DropDownListFor(model => model.PermissionID, (IEnumerable<SelectListItem>)ViewBag.PermissionTypes, null, new { @class = "form-control", style = "height:28px;" })
                     </div>
 
                     <!-- CloseButton (Shape) -->
@@ -130,8 +137,8 @@
 
                     <!-- DeactButton (Shape) -->
                     @*<div id="u1050" class="ax_default button" data-label="DeactButton">
-                        <input id="submit" type="submit" name="button" value="Deactivate User" style="width:175px" />
-                    </div>*@
+            <input id="submit" type="submit" name="button" value="Deactivate User" style="width:175px" />
+        </div>*@
 
 
                     <!-- Unnamed (Rectangle) -->
@@ -158,6 +165,18 @@
                         @Html.CheckBoxFor(model => model.Active, new { @id = "ActiveStatus" })
                     </div>
 
+                    <!-- Role Selection label (Checkbox) -->
+                    <div id="u1322322" class="ax_default checkbox selected" data-label="Active">
+                        @Html.Label("Role Selection", "Role Selection")
+                    </div>
+
+                    <!-- Role Selection (List Box) -->
+                    <div id="u1376" class="ax_default list_box">
+                        @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new { @class = "listbox" })
+                        &nbsp;
+                        @Html.ValidationMessageFor(m => m.SelectedRolesValues, "", new { @class = "error" })
+                    </div>
+
                 </div>
             </div>
 
@@ -165,6 +184,8 @@
 
     }
 
- </body>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 
 </html>

@@ -20,16 +20,8 @@ namespace BIPortalServices.Controllers
         [HttpPost]
         [Route("api/AddNewUser")]
         public IHttpActionResult AddNewUser(UsersModel AddUserModel)
-        //public IHttpActionResult AddNewUser()
         {
-            //var AddUserModel = new UsersModel();
-
-            //AddUserModel.Salutation = "Mr";
-            //AddUserModel.EmailID = "";
-            //AddUserModel.FirstName = "";
-            //AddUserModel.LastName = "";
-
-            try
+             try
             {
 
                 if (!ModelState.IsValid)
@@ -91,30 +83,9 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                //List<UsersDTO> usersDTO = new List<UsersDTO>();
-                //using (var context = new BIPortalEntities())
-                //{
-
-                //    var usersResult = context.UserMasters.Include("GroupMaster").ToList();
-
-                //    var config = new MapperConfiguration(cfg =>
-                //    {
-                //        cfg.CreateMap<UserMaster, UsersDTO>();
-                //        cfg.CreateMap<GroupMaster, GroupMasterDTO>();
-                //    });
-                //    IMapper mapper = config.CreateMapper();
-
-
-                //    usersDTO = mapper.Map<List<UserMaster>, List<UsersDTO>>(usersResult);
-                //}
-                //return Ok(usersDTO);
-
                 UsersData usersData = new UsersData();
                 var users = usersData.GetUsers();
-
                 return Ok(users);
-
-
             }
             catch (Exception ex)
             {
@@ -147,13 +118,9 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-               // int iUSERID = 1006;
                 UsersData usersData = new UsersData();
                 var users = usersData.GetSeletedUser(iUSERID);
-
                 return Ok(users);
-
-
             }
             catch (Exception ex)
             {
@@ -161,22 +128,30 @@ namespace BIPortalServices.Controllers
             }
         }
 
+        //[Route("api/GetSelectedUserRoles")]
+        //public IHttpActionResult GetSelectedUserRoles(int iUSERID)
+        //{
+        //    try
+        //    {
+        //        UsersData usersData = new UsersData();
+        //        var users = usersData.GetSelectedUserRoles(iUSERID);
+        //        return Ok(users);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("Could not fetch roles");
+        //    }
+        //}
+
         [AcceptVerbs("GET", "POST")]
         [Route("api/UpdateUser")]
         public IHttpActionResult UpdateUser(UsersModel EditUserModel)
         {
             try
             {
-                //string sCurrentUserDetail = "demo@ds.com";
-                //UsersData usersData = new UsersData();
-                //var users = usersData.GetCurrentUer(sCurrentUserDetail);
 
-                //return Ok(users);
-
-                //var EditUserModel = new UsersModel();
-
-                if (!ModelState.IsValid)
-                    return BadRequest("Not a valid model");
+                //if (!ModelState.IsValid)
+                //    return BadRequest("Not a valid model");
 
                 using (var ctx = new BIPortalEntities())
                 {
@@ -225,28 +200,6 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                //List<UsersDTO> usersDTO = new List<UsersDTO>();
-                //using (var context = new BIPortalEntities())
-                //{
-
-                //    var usersResult = context.UserMasters.Include("GroupMaster").ToList();
-
-                //    var config = new MapperConfiguration(cfg =>
-                //    {
-                //        cfg.CreateMap<UserMaster, UsersDTO>();
-                //        cfg.CreateMap<GroupMaster, GroupMasterDTO>();
-                //    });
-                //    IMapper mapper = config.CreateMapper();
-
-
-                //    usersDTO = mapper.Map<List<UserMaster>, List<UsersDTO>>(usersResult);
-                //}
-                //return Ok(usersDTO);
-
-                //UsersData usersData = new UsersData();
-                //var users = usersData.GetUsers();
-
-
                 List<PermissionMasterDTO> PermissionMasterDTO = new List<PermissionMasterDTO>();
                 using (var context = new BIPortalEntities())
                 {
@@ -265,20 +218,13 @@ namespace BIPortalServices.Controllers
                     PermissionMasterDTO = mapper.Map<List<PermissionMaster>, List<PermissionMasterDTO>>(objpermissiontypeslist).ToList();
                 }
                 return Ok(PermissionMasterDTO);
-
-
-                // SelectList objmodeldata = new SelectList(objcountrylist, "PermissionID", "PermissionName", 0);
-
-                ///*Assign value to model*/
-                //UsersModel objcountrymodel = new UsersModel();
-                //objcountrymodel.PermissionListModel = objmodeldata;
-
             }
 
             catch (Exception ex)
             {
-                return BadRequest("Could not fetch roles");
+                return BadRequest("Could not fetch Permission Types");
             }
         }
+
     }
 }

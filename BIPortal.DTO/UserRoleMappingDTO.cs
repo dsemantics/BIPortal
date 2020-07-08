@@ -16,6 +16,6 @@ namespace BIPortal.DTO
         public DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
-
+        public int[] SelectedRolesValues { get; set; }
     }
 }

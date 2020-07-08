@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,10 @@ namespace BIPortal.DTO
         public bool Active { get; set; }
         public int PermissionID { get; set; }
         public PermissionMasterDTO PermissionMaster { get; set; }
-        public IEnumerable<UserRoleMappingDTO> UserRoleMappings { get; set; }
-        public IEnumerable<WorkFlowMasterDTO> WorkFlowMasterMappings { get; set; }
+        public int[] SelectedRolesValues { get; set; }
+        public List<UserRoleMappingDTO> UserRoleMappings { get; set; }
+
+        //public IEnumerable<WorkFlowMasterDTO> WorkFlowMasterMappings { get; set; }
         //public IEnumerable<WorkFlowDetailsDTO> WorkFlowDetailsMappings { get; set; }
 
     }
