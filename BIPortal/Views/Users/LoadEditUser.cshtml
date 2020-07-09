@@ -15,6 +15,7 @@
     <link href="~/Styles/Users/EditUser_Styles.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/MyProfile/MyProfile_Styles.css" type="text/css" rel="stylesheet" />
+ 
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -41,16 +42,13 @@
             <div id="u1581" class="ax_default" data-label="User Panel">
                 <div id="u1581_state0_content" class="panel_state_content">
 
-                    <!-- Unnamed (Rectangle) -->
-                    <div id="u1582" class="ax_default label">
-                        <div id="u1582_div" class=""></div>
-                        <div id="u1582_text" class="text ">
-                            <p><span>Email ID</span></p>
-                        </div>
+                    <!-- EmailID label (Rectangle) -->
+                    <div id="u1314" class="ax_default label">
+                        @Html.Label("Email ID", "Email ID")
                     </div>
 
                     <!-- Unnamed (Text Field) -->
-                    <div id="u1583" class="ax_default text_field disabled">
+                    <div id="u1315" class="ax_default text_field disabled">
                         @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
                         @*@Html.TextBox("Name", (object)ViewBag.EmailID, new { @class = "form-control", style = "height:28px;" })*@
                         @Html.HiddenFor(Model => Model.UserID)
@@ -60,12 +58,10 @@
                         @Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })
                     </div>
 
-                    <!-- Unnamed (Rectangle) -->
-                    <div id="u1584" class="ax_default label">
-                        <div id="u1584_div" class=""></div>
-                        <div id="u1584_text" class="text ">
-                            <p><span>First Name</span></p>
-                        </div>
+
+                    <!-- FirstName label (Rectangle) -->
+                    <div id="u1316" class="ax_default label">
+                        @Html.Label("First Name", "First Name")
                     </div>
 
                     <!-- Unnamed (Text Field) -->
@@ -74,12 +70,10 @@
                         @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", style = "height:28px;" })
                     </div>
 
-                    <!-- Unnamed (Rectangle) -->
-                    <div id="u1586" class="ax_default label">
-                        <div id="u1586_div" class=""></div>
-                        <div id="u1586_text" class="text ">
-                            <p><span>Last Name</span></p>
-                        </div>
+
+                    <!-- Last Name label (Rectangle) -->
+                    <div id="u1318" class="ax_default label">
+                        @Html.Label("Last Name", "Last Name")
                     </div>
 
                     <!-- Unnamed (Text Field) -->
@@ -89,11 +83,8 @@
                     </div>
 
                     <!-- Unnamed (Rectangle) -->
-                    <div id="u1588" class="ax_default label">
-                        <div id="u1588_div" class=""></div>
-                        <div id="u1588_text" class="text ">
-                            <p><span>Creation Date</span></p>
-                        </div>
+                    <div id="u158888" class="ax_default label">
+                        @Html.Label("Creation Date", "Creation Date")
                     </div>
 
                     <!-- Unnamed (Text Field) -->
@@ -105,11 +96,9 @@
                     </div>
 
                     <!-- Unnamed (Rectangle) -->
-                    <div id="u1590" class="ax_default label">
-                        <div id="u1590_div" class=""></div>
-                        <div id="u1590_text" class="text ">
-                            <p><span>Permission Type</span></p>
-                        </div>
+                    <div id="u1314444" class="ax_default label">
+                        @*<p><span>Permission Type</span></p>*@
+                        @Html.Label("Permission Type", "Permission Type")
                     </div>
 
                     <!-- Unnamed (Droplist) -->
@@ -123,7 +112,7 @@
                     <!-- CloseButton (Shape) -->
                     <div id="u1592" class="ax_default button" data-label="CloseButton">
                         @*<input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" />*@
-                        <input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
+                        <input id="btnAddUser" type="submit" name="button" value="Save &amp; Close" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
 
                     </div>
 
@@ -131,7 +120,7 @@
                     <!-- CloseButton (Shape) -->
                     <div id="u1041" class="ax_default button" data-label="CloseButton">
                         @*<input id="submit" value="Close Without Saving" type="button" style="width:175px" />*@
-                        <input id="submit" type="submit" name="button" value="Close Without Saving" style="width:175px" />
+                        <input id="btnAddUser" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />
                     </div>
 
 
@@ -141,18 +130,14 @@
         </div>*@
 
 
-                    <!-- Unnamed (Rectangle) -->
-                    <div id="u1593" class="ax_default label">
-                        <div id="u1593_div" class=""></div>
-                        <div id="u1593_text" class="text ">
-                            <p><span>Salutation</span></p>
-                        </div>
+                    <!-- Salutation label (Rectangle) -->
+                    <div id="u1373" class="ax_default label">
+                        @Html.Label("Salutation", "Salutation")
                     </div>
 
-                    <!-- Unnamed (Droplist) -->
-                    <div id="u1594" class="ax_default droplist disabled">
-                        @*@Html.TextBox("Name", (object)ViewBag.Saluation, new { @class = "form-control", style = "height:28px;" })*@
-                        @Html.TextBoxFor(Model => Model.Salutation, new { @class = "form-control", style = "height:28px;" })
+                    <!-- Salutation (Droplist) -->
+                    <div id="u1374" class="ax_default droplist">
+                        @Html.DropDownListFor(model => model.Salutation, ViewBag.Salutation as SelectList, null, new { @class = "form-control", style = "height:28px;" })
                     </div>
 
                     <!-- Active label (Checkbox) -->

@@ -21,81 +21,87 @@
     @using (Html.BeginForm())
     {
 
-      @*<div id="base" class="">*@
-            <!-- User Panel (Dynamic Panel) -->
-            <div id="u790" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" style="height:400px" data-label="User Panel">
-                <div id="u791" class="ax_default" data-label="Users Table">
-                    <!-- Users Table (Table) -->
-                    @if (Model != null && Model.Count() > 0)
-                    {
-                        <table class="table table table-bordered table-striped mb-0 table-hover">
-                            @*<thead class="thead-dark">*@
-                            <thead>
-                                <tr>
-                                    <th scope="col">Email (Username)</th>
-                                    <th scope="col">Permission</th>
-                                    <th scope="col">Date Created</th>
-                                    <th scope="col">Active</th>
-                                    @*<th scope="col">Edit Users</th>*@
-                                </tr>
-                            </thead>
+        @*<div id="base" class="">*@
+        <!-- User Panel (Dynamic Panel) -->
+        <div id="u790" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" style="height:400px" data-label="User Panel">
+            @*<div id="u791" class="ax_default" data-label="Users Table">*@
+            <!-- Users Table (Table) -->
+            @if (Model != null && Model.Count() > 0)
+            {
+                <table id="tblViewRoles" class="table table table-bordered table-striped mb-0 table-hover">
+                    @*<thead class="thead-dark">*@
+                    <thead>
+                        <tr>
+                            <th scope="col">Email (Username)</th>
+                            <th scope="col">Permission</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Active</th>
+                            @*<th scope="col">Edit Users</th>*@
+                        </tr>
+                    </thead>
 
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                <tr>
-                                    <td style="display:none;">
-                                        <input type="text" value="@item.UserID" name="UserId" />
-                                    </td>
-                                    <td style="text-align:left;">
-                                        @Html.ActionLink(@item.EmailID,"LoadEditUser","Users",new { UserId = @item.UserID },null)
-                                    </td>
-                                    <td style="text-align:left;">
-                                        @Html.DisplayFor(modelItem => item.PermissionMaster.PermissionName)
-                                    </td>
-                                    <td>
-                                        @item.CreatedDate.ToShortDateString()
-                                    </td>
-                                    <td style="text-align:left;">
-                                        @item.Active
-                                    </td>
-                                    @*<td><input id="btnViewRights" value="EditUser" type="button" style="width:75px" onclick="location.href='@Url.Action("LoadEditUser", "Users")?UserId=' + @item.UserID" /></td>*@
-                                </tr>
-                                }
-                            </tbody>
-                        </table>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="display:none;">
+                                    <input type="text" value="@item.UserID" name="UserId" />
+                                </td>
+                                <td style="text-align:left;">
+                                    @Html.ActionLink(@item.EmailID, "LoadEditUser", "Users", new { UserId = @item.UserID }, null)
+                                    @*<button type="button" class="btn btn-link btnViewRights">@item.RoleName</button>*@
+                                </td>
+                                <td style="text-align:left;">
+                                    @Html.DisplayFor(modelItem => item.PermissionMaster.PermissionName)
+                                </td>
+                                <td>
+                                    @item.CreatedDate.ToShortDateString()
+                                </td>
+                                <td style="text-align:left;">
+                                    @item.Active
+                                </td>
+                                @*<td><input id="btnViewRights" value="EditUser" type="button" style="width:75px" onclick="location.href='@Url.Action("LoadEditUser", "Users")?UserId=' + @item.UserID" /></td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
-                    }
-                    else
-                    {
-                        <div>User not yet defined in the system!</div>
-                    }
-                </div>  
+            }
+            else
+            {
+                <div>User not yet defined in the system!</div>
+            }
+            @*</div>*@
+        </div>
+
+        @*<div id="u7900" class="ax_default">*@
+        @*<div id="u832" class="ax_default button" data-label="AddUserButton">
+            <div id="u832_text" class="text ">
+                <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
             </div>
+        </div>*@
 
-            <div id="u7900" class="ax_default">
-                <div id="u832" class="ax_default button" data-label="AddUserButton">
-                    <div id="u832_text" class="text ">
-                        @*<input id="EditUser" value="Edit User" type="button" style="width:175px" onclick="alert('Edit User Clicked')" />*@
-                        
-                        <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
-                    </div>
+        <div id="u475" class="ax_default button" data-label="AddRoleButton">
+            <div id="u475_text" class="text ">
+                <input id="btnAddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
+            </div>
+        </div>
+
+
+        @*<div id="u8322" class="ax_default button" data-label="AddUserButton">
+                <div id="u832_text" class="text ">
+                     <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="alert('Add User Clicked')" />
+                    <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
                 </div>
+            </div>*@
 
-                @*<div id="u8322" class="ax_default button" data-label="AddUserButton">
-                    <div id="u832_text" class="text ">
-                         <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="alert('Add User Clicked')" />
-                        <input id="AddUser" value="Add User" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("AddUser", "Users") + "'");" />
-                    </div>
-                </div>*@
-
-            </div>
+        @*</div>*@
         @*</div>*@
 
     }
 
-        <script src="resources/scripts/axure/ios.js"></script>
-    </body>
+    <script src="resources/scripts/axure/ios.js"></script>
+</body>
 </html>
 
 

@@ -6336,11 +6336,29 @@
     border-radius: 5px;
 }
 
+    #btnAddRole:hover {
+        border-width: 1px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 180px;
+        height: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: #000000;
+        background-color: rgba(255, 255, 255,1);
+        border-radius: 5px;
+    }
+
 .btn {
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     font-style: normal;
 }
+
+
+
 
 #u4750 {
     border-width: 0px;

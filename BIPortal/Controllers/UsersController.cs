@@ -110,6 +110,7 @@ namespace BIPortal.Controllers
                     {
                         cfg.CreateMap<UsersDTO, UsersModel>();
                         cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+
                     });
                     IMapper mapper = config.CreateMapper();
 
@@ -161,6 +162,7 @@ namespace BIPortal.Controllers
                     {
                         cfg.CreateMap<UsersDTO, UsersModel>();
                         cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+                        cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
                     });
                     IMapper mapper = config.CreateMapper();
 
@@ -176,6 +178,15 @@ namespace BIPortal.Controllers
         public ActionResult LoadEditUser(int UserId)
         {
             ViewBag.Message = "Edit User Page";
+
+
+            //saluation
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "Mr.", Value = "1", Selected = true });
+            items.Add(new SelectListItem { Text = "Miss.", Value = "2" });
+            items.Add(new SelectListItem { Text = "Mrs.", Value = "3" });
+            items.Add(new SelectListItem { Text = "Ms.", Value = "4" });
+
             IEnumerable<UsersModel> UsersList = null;
             IEnumerable<PermissionMasterModel> PermissionTypeList = null;
             List<RolesModel> rolesList = null;
@@ -202,7 +213,6 @@ namespace BIPortal.Controllers
                     {
                         cfg.CreateMap<UsersDTO, UsersModel>();
                         cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
-
                         cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
                     });
                     IMapper mapper = config.CreateMapper();
@@ -269,6 +279,7 @@ namespace BIPortal.Controllers
                 //rolesList.Add(item.SelectedRolesValues.ToList());
             }
 
+            ViewBag.Salutation = new SelectList(items, "Text", "Text");
             ViewBag.PermissionTypes = new SelectList(PermissionTypeList.ToList(), "PermissionID", "PermissionName");
 
             ViewBag.RoleSelection = new SelectList(rolesList.ToList(), "RoleID", "RoleName");

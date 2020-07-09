@@ -14,7 +14,40 @@
     background-color: transparent;
 }
 
+#tblViewRoles {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
 
+#u475 {
+    border-width: 0px;
+    position: absolute;
+    left: 260px;
+    top: 500px;
+    width: 180px;
+    height: 25px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+}
+
+#btnAddUser {
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 180px;
+    height: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+    background-color: rgba(92, 205, 222, 1);
+    border-radius: 5px;
+}
 
 #base {
     position: absolute;
