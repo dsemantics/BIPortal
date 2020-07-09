@@ -12,5 +12,7 @@ namespace BIPortal.Models
         public string parent { get; set; }
         public string text { get; set; }
         public string parenttext { get; set; }
+        public string type { get; set; }
+        public TreeAttributes state { get; set; }
     }
 }

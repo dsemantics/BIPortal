@@ -21,63 +21,7 @@
     <script type="text/javascript">
         var geRightsurl = '@Url.Action("GetRights", "RolesRights")';
         var updateRolesandRightsurl = '@Url.Action("UpdateRoleAndRights", "RolesRights")';
-        var selectedItems = [];
-        @*$(function () {
-            $('#u452').on('changed.jstree', function (e, data) {
-                var i, j;
-                //var selectedItems = [];
-                selectedItems = [];
-
-                //var selectedElmsIds = [];
-                var selectedElms = $('#u452').jstree("get_selected", true);
-                $.each(selectedElms, function (i, selectedElm) {
-
-                    selectedItems.push(
-                        {
-                            id: this.id,
-                            parent: this.parent,
-                            text: this.text,
-                            parenttext: this.original.parenttext
-                        }
-                    );
-                });
-
-                //Serialize the JSON Array and save in HiddenField.
-                $('#selectedItems').val(JSON.stringify(selectedItems));
-            }).jstree({
-                "core": {
-                    "themes": {
-                        "variant": "large"
-                    },
-                    "data": @Html.Raw(ViewBag.Json)
-                    },
-                "checkbox": {
-                    "keep_selected_style": false
-                },
-                "plugins": ["wholerow", "checkbox"],
-            });
-        });*@
-
-        //function roleNameClicked(RoleID, RoleName) {
-        //    alert("Clicked");
-        //    var tr = $(this).closest('tr');
-        //    //roleId = tr.find('input[name="RoleID"]').val();
-        //    //roleName = tr.find('input[name="RoleName"]').val();
-        //    roleId = RoleID;
-        //    roleName = RoleName;
-        //    $.ajax({
-        //        url: geRightsurl,
-        //        data: { roleId: RoleID },
-        //        type: "GET",
-        //        dataType: "json",
-        //        success: function (data) {
-        //            loadData(data);
-        //        },
-        //        error: function () {
-        //            alert("Failed to get rights! Please try again.");
-        //        }
-        //    });
-        //};
+        var selectedItems = [];        
     </script>
 </head>
 <body>
@@ -210,21 +154,7 @@
             <div id="u475_text" class="text ">
                 <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
             </div>
-        </div>
-
-        @*<div id="u4750" class="ax_default" data-label="AddRoleButton">
-                <div id="u475_text" class="text ">
-                    <div id="u427_div" style="display:none"><label id="lblRoleName" style="color:black" /></div>
-                    <div id="u426" class="ax_default box_1">
-                        <div id="u426_div" class=""></div>
-                        <div id="u426_text" class="text ">
-                            <div id="UpdatePanel">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+        </div>       
 
     }
 

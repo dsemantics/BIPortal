@@ -28,144 +28,144 @@
     @using (Html.BeginForm("EditUser", "Users", FormMethod.Post))
     {
 
-        <div id="base" class="">
+    <div id="base" class="">
 
-            <!-- Welcome out (Rectangle) -->
-            @*<div id="u1556" class="ax_default label" data-label="Welcome out">
-                    <div id="u1556_div" class=""></div>
-                    <div id="u1556_text" class="text ">
-                        <p><span>My Profile</span></p>
-                    </div>
-                </div>*@
+        <!-- Welcome out (Rectangle) -->
+        <div id="u654" class="ax_default label" data-label="Welcome out">
+            <div id="u654_div" class=""></div>
+            <div id="u654_text" class="text ">
+                <p><span>ADMINISTRATION - Edit User</span></p>
+            </div>
+        </div>
 
-            <!-- User Panel (Dynamic Panel) -->
-            <div id="u1581" class="ax_default" data-label="User Panel">
-                <div id="u1581_state0_content" class="panel_state_content">
+        <!-- User Panel (Dynamic Panel) -->
+        <div id="u1581" class="ax_default" data-label="User Panel">
+            <div id="u1581_state0_content" class="panel_state_content">
 
-                    <!-- EmailID label (Rectangle) -->
-                    <div id="u1314" class="ax_default label">
-                        @Html.Label("Email ID", "Email ID")
-                    </div>
+                <!-- EmailID label (Rectangle) -->
+                <div id="u1314" class="ax_default label">
+                    @Html.Label("Email ID", "Email ID")
+                </div>
 
-                    <!-- Unnamed (Text Field) -->
-                    <div id="u1315" class="ax_default text_field disabled">
-                        @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
-                        @*@Html.TextBox("Name", (object)ViewBag.EmailID, new { @class = "form-control", style = "height:28px;" })*@
-                        @Html.HiddenFor(Model => Model.UserID)
-                        @*@Html.HiddenFor(Model => Model.PermissionID)*@
-                        @*@Html.HiddenFor(Model => Model.CreatedBy)*@
-                        @* @Html.HiddenFor(Model => Model.PermissionMaster.PermissionID)*@
-                        @Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })
-                    </div>
-
-
-                    <!-- FirstName label (Rectangle) -->
-                    <div id="u1316" class="ax_default label">
-                        @Html.Label("First Name", "First Name")
-                    </div>
-
-                    <!-- Unnamed (Text Field) -->
-                    <div id="u1585" class="ax_default text_field disabled">
-                        @*@Html.TextBox("Name", (object)ViewBag.FirstName, new { @class = "form-control", style = "height:28px;" })*@
-                        @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", style = "height:28px;" })
-                    </div>
+                <!-- Unnamed (Text Field) -->
+                <div id="u1315" class="ax_default text_field disabled">
+                    @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
+                    @*@Html.TextBox("Name", (object)ViewBag.EmailID, new { @class = "form-control", style = "height:28px;" })*@
+                    @Html.HiddenFor(Model => Model.UserID)
+                    @*@Html.HiddenFor(Model => Model.PermissionID)*@
+                    @*@Html.HiddenFor(Model => Model.CreatedBy)*@
+                    @* @Html.HiddenFor(Model => Model.PermissionMaster.PermissionID)*@
+                    @Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })
+                </div>
 
 
-                    <!-- Last Name label (Rectangle) -->
-                    <div id="u1318" class="ax_default label">
-                        @Html.Label("Last Name", "Last Name")
-                    </div>
+                <!-- FirstName label (Rectangle) -->
+                <div id="u1316" class="ax_default label">
+                    @Html.Label("First Name", "First Name")
+                </div>
 
-                    <!-- Unnamed (Text Field) -->
-                    <div id="u1587" class="ax_default text_field disabled">
-                        @*@Html.TextBox("Name", (object)ViewBag.LastName, new { @class = "form-control", style = "height:28px;" })*@
-                        @Html.TextBoxFor(Model => Model.LastName, new { @class = "form-control", style = "height:28px;" })
-                    </div>
-
-                    <!-- Unnamed (Rectangle) -->
-                    <div id="u158888" class="ax_default label">
-                        @Html.Label("Creation Date", "Creation Date")
-                    </div>
-
-                    <!-- Unnamed (Text Field) -->
-                    <div id="u1589" class="ax_default text_field disabled">
-                        @*@Html.TextBox("Name", (object)ViewBag.Creationdate, new { @class = "form-control", style = "height:28px;" })*@
-                        @*@Html.TextBox(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;" })*@
-                        @*@Html.TextBoxFor(model => model.CreatedDate, new { @type = "date", @class = "form-control datepicker", style = "height:28px;" })*@
-                        @Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;", @disabled = "disabled" })
-                    </div>
-
-                    <!-- Unnamed (Rectangle) -->
-                    <div id="u1314444" class="ax_default label">
-                        @*<p><span>Permission Type</span></p>*@
-                        @Html.Label("Permission Type", "Permission Type")
-                    </div>
-
-                    <!-- Unnamed (Droplist) -->
-                    <div id="u1591" class="ax_default droplist disabled">
-                        @*@Html.TextBox("Name", (object)ViewBag.PermissionType, new { @class = "form-control", style = "height:28px;" })*@
-                        @*@Html.TextBoxFor(Model => Model.PermissionMaster.PermissionName, new { @class = "form-control", style = "height:28px;" })*@
-
-                        @Html.DropDownListFor(model => model.PermissionID, (IEnumerable<SelectListItem>)ViewBag.PermissionTypes, null, new { @class = "form-control", style = "height:28px;" })
-                    </div>
-
-                    <!-- CloseButton (Shape) -->
-                    <div id="u1592" class="ax_default button" data-label="CloseButton">
-                        @*<input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" />*@
-                        <input id="btnAddUser" type="submit" name="button" value="Save &amp; Close" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
-
-                    </div>
+                <!-- Unnamed (Text Field) -->
+                <div id="u1585" class="ax_default text_field disabled">
+                    @*@Html.TextBox("Name", (object)ViewBag.FirstName, new { @class = "form-control", style = "height:28px;" })*@
+                    @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", style = "height:28px;" })
+                </div>
 
 
-                    <!-- CloseButton (Shape) -->
-                    <div id="u1041" class="ax_default button" data-label="CloseButton">
-                        @*<input id="submit" value="Close Without Saving" type="button" style="width:175px" />*@
-                        <input id="btnAddUser" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />
-                    </div>
+                <!-- Last Name label (Rectangle) -->
+                <div id="u1318" class="ax_default label">
+                    @Html.Label("Last Name", "Last Name")
+                </div>
 
+                <!-- Unnamed (Text Field) -->
+                <div id="u1587" class="ax_default text_field disabled">
+                    @*@Html.TextBox("Name", (object)ViewBag.LastName, new { @class = "form-control", style = "height:28px;" })*@
+                    @Html.TextBoxFor(Model => Model.LastName, new { @class = "form-control", style = "height:28px;" })
+                </div>
 
-                    <!-- DeactButton (Shape) -->
-                    @*<div id="u1050" class="ax_default button" data-label="DeactButton">
-            <input id="submit" type="submit" name="button" value="Deactivate User" style="width:175px" />
-        </div>*@
+                <!-- Unnamed (Rectangle) -->
+                <div id="u158888" class="ax_default label">
+                    @Html.Label("Creation Date", "Creation Date")
+                </div>
 
+                <!-- Unnamed (Text Field) -->
+                <div id="u1589" class="ax_default text_field disabled">
+                    @*@Html.TextBox("Name", (object)ViewBag.Creationdate, new { @class = "form-control", style = "height:28px;" })*@
+                    @*@Html.TextBox(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;" })*@
+                    @*@Html.TextBoxFor(model => model.CreatedDate, new { @type = "date", @class = "form-control datepicker", style = "height:28px;" })*@
+                    @Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control", style = "height:28px;", @disabled = "disabled" })
+                </div>
 
-                    <!-- Salutation label (Rectangle) -->
-                    <div id="u1373" class="ax_default label">
-                        @Html.Label("Salutation", "Salutation")
-                    </div>
+                <!-- Unnamed (Rectangle) -->
+                <div id="u1314444" class="ax_default label">
+                    @*<p><span>Permission Type</span></p>*@
+                    @Html.Label("Permission Type", "Permission Type")
+                </div>
 
-                    <!-- Salutation (Droplist) -->
-                    <div id="u1374" class="ax_default droplist">
-                        @Html.DropDownListFor(model => model.Salutation, ViewBag.Salutation as SelectList, null, new { @class = "form-control", style = "height:28px;" })
-                    </div>
+                <!-- Unnamed (Droplist) -->
+                <div id="u1591" class="ax_default droplist disabled">
+                    @*@Html.TextBox("Name", (object)ViewBag.PermissionType, new { @class = "form-control", style = "height:28px;" })*@
+                    @*@Html.TextBoxFor(Model => Model.PermissionMaster.PermissionName, new { @class = "form-control", style = "height:28px;" })*@
 
-                    <!-- Active label (Checkbox) -->
-                    <div id="u1322" class="ax_default checkbox selected" data-label="Active">
-                        @Html.Label("Active", "Active")
-                    </div>
+                    @Html.DropDownListFor(model => model.PermissionID, (IEnumerable<SelectListItem>)ViewBag.PermissionTypes, null, new { @class = "form-control", style = "height:28px;" })
+                </div>
 
-                    <!-- Active (Checkbox) -->
-                    <div id="u13191" class="ax_default">
-                        @Html.CheckBoxFor(model => model.Active, new { @id = "ActiveStatus" })
-                    </div>
-
-                    <!-- Role Selection label (Checkbox) -->
-                    <div id="u1322322" class="ax_default checkbox selected" data-label="Active">
-                        @Html.Label("Role Selection", "Role Selection")
-                    </div>
-
-                    <!-- Role Selection (List Box) -->
-                    <div id="u1376" class="ax_default list_box">
-                        @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new { @class = "listbox" })
-                        &nbsp;
-                        @Html.ValidationMessageFor(m => m.SelectedRolesValues, "", new { @class = "error" })
-                    </div>
+                <!-- CloseButton (Shape) -->
+                <div id="u1592" class="ax_default button" data-label="CloseButton">
+                    @*<input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" />*@
+                    <input id="btnAddUser" type="submit" name="button" value="Save &amp; Close" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
 
                 </div>
-            </div>
 
+
+                <!-- CloseButton (Shape) -->
+                <div id="u1041" class="ax_default button" data-label="CloseButton">
+                    @*<input id="submit" value="Close Without Saving" type="button" style="width:175px" />*@
+                    <input id="btnAddUser" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />
+                </div>
+
+
+                <!-- DeactButton (Shape) -->
+                @*<div id="u1050" class="ax_default button" data-label="DeactButton">
+                    <input id="submit" type="submit" name="button" value="Deactivate User" style="width:175px" />
+                </div>*@
+
+
+                <!-- Salutation label (Rectangle) -->
+                <div id="u1373" class="ax_default label">
+                    @Html.Label("Salutation", "Salutation")
+                </div>
+
+                <!-- Salutation (Droplist) -->
+                <div id="u1374" class="ax_default droplist">
+                    @Html.DropDownListFor(model => model.Salutation, ViewBag.Salutation as SelectList, null, new { @class = "form-control", style = "height:28px;" })
+                </div>
+
+                <!-- Active label (Checkbox) -->
+                <div id="u1322" class="ax_default checkbox selected" data-label="Active">
+                    @Html.Label("Active", "Active")
+                </div>
+
+                <!-- Active (Checkbox) -->
+                <div id="u13191" class="ax_default">
+                    @Html.CheckBoxFor(model => model.Active, new { @id = "ActiveStatus" })
+                </div>
+
+                <!-- Role Selection label (Checkbox) -->
+                <div id="u1322322" class="ax_default checkbox selected" data-label="Active">
+                    @Html.Label("Role Selection", "Role Selection")
+                </div>
+
+                <!-- Role Selection (List Box) -->
+                <div id="u1376" class="ax_default list_box">
+                    @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new { @class = "listbox" })
+                    &nbsp;
+                    @Html.ValidationMessageFor(m => m.SelectedRolesValues, "", new { @class = "error" })
+                </div>
+
+            </div>
         </div>
+
+    </div>
 
     }
 

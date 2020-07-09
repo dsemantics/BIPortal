@@ -108,6 +108,10 @@
         //}
                
         //var data = { WorkspaceandReportList: workSpacesdata, RoleName: roleName };
+        if (selectedItems.length == 0) {
+            alert("Please select any one workspace or report");
+            return false;
+        }
         var data = { WorkspaceandReportList: selectedItems, RoleName: roleName };
         $.post(saveRolesandRightsurl, data, function (result) {
             // TODO: do something with the response from the controller action

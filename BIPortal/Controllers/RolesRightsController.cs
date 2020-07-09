@@ -214,7 +214,15 @@ namespace BIPortal.Controllers
 
             foreach (var workspace in workspaces)
             {
-                nodes.Add(new TreeViewNode { id = workspace.WorkspaceID.ToString().Trim(), parent = "#", text = workspace.WorkspaceName.Trim(), parenttext = workspace.WorkspaceName.Trim() });
+                if (workspace.ReportID == null)
+                {
+                    nodes.Add(new TreeViewNode { id = workspace.WorkspaceID.ToString().Trim(), parent = "#", text = workspace.WorkspaceName.Trim(), parenttext = workspace.WorkspaceName.Trim(), type = "default", state = new TreeAttributes { id = workspace.WorkspaceID.ToString().Trim(), selected = workspace.Active } });
+                }
+                else
+                {
+                    nodes.Add(new TreeViewNode { id = workspace.WorkspaceID.ToString().Trim(), parent = "#", text = workspace.WorkspaceName.Trim(), parenttext = workspace.WorkspaceName.Trim(), type = "default" });
+                }
+                
             }
 
             //Loop and add the Child Nodes.
@@ -222,7 +230,15 @@ namespace BIPortal.Controllers
             {
                 if (report.ReportID != null)
                 {
-                    nodes.Add(new TreeViewNode { id = report.ReportID.ToString().Trim(), parent = report.WorkspaceID.ToString().Trim(), text = report.ReportName.Trim(), parenttext = report.WorkspaceName.Trim() });
+                    nodes.Add(new TreeViewNode
+                    {
+                        id = report.ReportID.ToString().Trim(),
+                        parent = report.WorkspaceID.ToString().Trim(),
+                        text = report.ReportName.Trim(),
+                        parenttext = report.WorkspaceName.Trim(),
+                        type = "element",
+                        state = new TreeAttributes { id = report.ReportID.ToString().Trim(), selected = report.Active }
+                    });
                 }
             }
 

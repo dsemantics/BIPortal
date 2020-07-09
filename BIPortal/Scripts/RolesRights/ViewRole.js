@@ -31,15 +31,13 @@
         document.getElementById("u425").style.display = "block";
         document.getElementById("u452").style.display = "block";
         document.getElementById("lblRoleName").innerHTML = roleName;
-
+        $('#u452').jstree('destroy');
         //var selectedItems = [];
         $(function () {
             $('#u452').on('changed.jstree', function (e, data) {
-                var i, j;
-                //var selectedItems = [];
+                var i, j;                
                 selectedItems = [];
 
-                //var selectedElmsIds = [];
                 var selectedElms = $('#u452').jstree("get_selected", true);
                 $.each(selectedElms, function (i, selectedElm) {
 
@@ -60,13 +58,18 @@
                     "themes": {
                         "variant": "large"
                     },
-                    "data": data
+                    "data": data                                      
                 },
+                //"types": {
+                //    "default": { "icon": "//jstree.com/tree.png" },
+                //    "element": { "icon": "//jstree.com/tree.png" }
+                //},
                 "checkbox": {
                     "keep_selected_style": false
                 },
-                "plugins": ["wholerow", "checkbox"],
+                "plugins": ["wholerow", "checkbox", "types"],
             })
+            
         });
 
     };
@@ -222,6 +225,10 @@
 
         //var data = { WorkspaceandReportList: workSpacesdata, RoleID: roleId };
         //var data = { WorkspaceandReportList: workSpacesdata };
+        if (selectedItems.length == 0) {
+            alert("Please select any one workspace or report");
+            return false;
+        }
         var data = { WorkspaceandReportList: selectedItems, RoleID: roleId };
         $.post(updateRolesandRightsurl, data, function (result) {
             // TODO: do something with the response from the controller action
