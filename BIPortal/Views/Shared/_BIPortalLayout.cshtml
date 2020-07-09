@@ -267,14 +267,12 @@
         
 
         <!-- Welcome out (Rectangle) -->
-        <div id="u654" class="ax_default label" data-label="Welcome out">
+        @*<div id="u654" class="ax_default label" data-label="Welcome out">
             <div id="u654_div" class=""></div>
             <div id="u654_text" class="text ">
-                @*<p><span>ADMINISTRATION - Roles &amp; Rights</span></p>*@
-                <p><span>ADMINISTRATION - Test Mappings</span></p>
-
+                <p><span>ADMINISTRATION</span></p>
             </div>
-        </div>
+        </div>*@
 
         <!-- Dashboard Icon (Dynamic Panel) -->
         <div id="u655" class="ax_default" data-label="Dashboard Icon">
@@ -338,12 +336,14 @@
                     </div>
 
                     <!-- Unnamed (Image) -->
-                    <div id="u662" class="ax_default image">
-                        <img id="u662_img" class="img " src="~/Images/Dashboard/u60.png" />
-                        <div id="u662_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
+                    <a href="@Url.Action("Index","Administration")" class="defaultpage_menu">
+                        <div id="u662" class="ax_default image">
+                            <img id="u662_img" class="img " src="~/Images/Dashboard/u60.png" />
+                            <div id="u662_text" class="text " style="display:none; visibility: hidden">
+                                <p></p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div id="u660_state1" class="panel_state" data-label="State2" style="visibility: hidden;">
@@ -402,12 +402,14 @@
                     </div>
 
                     <!-- Unnamed (Image) -->
-                    <div id="u669" class="ax_default image">
-                        <img id="u669_img" class="img " src="~/Images/Dashboard/u67.png" />
-                        <div id="u669_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
+                    <a href="@Url.Action("Index","users/MyProfile")" class="defaultpage_menu">
+                        <div id="u669" class="ax_default image">
+                            <img id="u669_img" class="img " src="~/Images/Dashboard/u67.png" />
+                            <div id="u669_text" class="text " style="display:none; visibility: hidden">
+                                <p></p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div id="u667_state1" class="panel_state" data-label="State2" style="visibility: hidden;">

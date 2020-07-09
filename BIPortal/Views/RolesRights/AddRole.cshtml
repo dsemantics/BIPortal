@@ -84,89 +84,97 @@
 <body>
     @using (Html.BeginForm())
     {
-        <div id="base" class="">
-            <!-- R&R Panel (Dynamic Panel) -->
-            <div id="u681" class="ax_default" data-label="R&amp;R Panel">
-                <div id="u681_state0" class="panel_state" data-label="ADD" style="">
-                    <div id="u681_state0_content" class="panel_state_content">
+    <div id="base" class="">
+        <!-- R&R Panel (Dynamic Panel) -->
+        <div id="u681" class="ax_default" data-label="R&amp;R Panel">
+            <div id="u681_state0" class="panel_state" data-label="ADD" style="">
+                <div id="u681_state0_content" class="panel_state_content">
 
-                        <!-- RolesEditPanel (Dynamic Panel) -->
-                        <div id="u682" class="ax_default " data-label="RolesEditPanel" style="display:none" >
+                    <!-- RolesEditPanel (Dynamic Panel) -->
+                    <div id="u682" class="ax_default " data-label="RolesEditPanel" style="display:none">
                         @*<div id="u682" class="ax_default " data-label="RolesEditPanel">*@
-                            <div id="u682_state0" class="panel_state" data-label="State1">
-                                <div id="u682_state0_content" class="panel_state_content">
+                        <div id="u682_state0" class="panel_state" data-label="State1">
+                            <div id="u682_state0_content" class="panel_state_content">
 
-                                    <!-- Unnamed (Rectangle) -->
-                                    <div id="u683" class="ax_default box_1">
-                                        <div id="u683_div" class=""></div>
-                                        <div id="u683_text" class="text ">
-                                            <p></p>
-                                        </div>
+                                <!-- Unnamed (Rectangle) -->
+                                <div id="u683" class="ax_default box_1">
+                                    <div id="u683_div" class=""></div>
+                                    <div id="u683_text" class="text ">
+                                        <p></p>
                                     </div>
+                                </div>
 
-                                    <!-- Role Name Blue (Rectangle) -->
-                                    <div id="u684" class="ax_default box_1" data-label="Role Name Blue">
-                                        <div id="u684_div" class=""></div>
-                                        <div id="u684_text" class="text ">
-                                            @*<p><span>xxxxxxxxxxxx</span></p>*@
-                                        </div>
+                                <!-- Role Name Blue (Rectangle) -->
+                                <div id="u684" class="ax_default box_1" data-label="Role Name Blue">
+                                    <div id="u684_div" class=""></div>
+                                    <div id="u684_text" class="text ">
+                                        @*<p><span>xxxxxxxxxxxx</span></p>*@
                                     </div>
+                                </div>
 
 
-                                    <!-- HRWsPanel (Dynamic Panel) -->
-                                    <div id="u723" class="ax_default" data-label="HRWsPanel" style="display:none">
+                                <!-- HRWsPanel (Dynamic Panel) -->
+                                <div id="u723" class="ax_default" data-label="HRWsPanel" style="display:none">
 
-                                    </div>                                 
+                                </div>
 
-                                    <!-- Save (Rectangle) -->
-                                    <div id="u730" class="ax_default button" data-label="Save">
-                                        <div id="u730_div" class=""></div>
-                                        <div id="u730_text" class="text ">
-                                            @*<p><span>Save</span></p>*@
-                                            @*<input id="btnSaveRoleRights" value="Save" type="submit" class="btnSaveRoleRights" style="width:85px" />*@
-                                            <input type="hidden" name="selectedItems" id="selectedItems" />
-                                            <input id="btnSaveRoleRights" value="Save" type="button" class="btnSaveRoleRights" style="width:88px" />
-                                        </div>
+                                <!-- Save (Rectangle) -->
+                                <div id="u730" class="ax_default button" data-label="Save">
+                                    <div id="u730_div" class=""></div>
+                                    <div id="u730_text" class="text ">
+                                        @*<p><span>Save</span></p>*@
+                                        @*<input id="btnSaveRoleRights" value="Save" type="submit" class="btnSaveRoleRights" style="width:85px" />*@
+                                        <input type="hidden" name="selectedItems" id="selectedItems" />
+                                        <input id="btnSaveRoleRights" value="Save" type="button" class="btnSaveRoleRights" style="width:88px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Unnamed (Rectangle) -->
-                        <div id="u731" class="ax_default box_1">
-                            <div id="u731_div" class=""></div>
-                            <div id="u731_text" class="text " style="display:none; visibility: hidden">
-                                <p></p>
-                            </div>
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u731" class="ax_default box_1">
+                        <div id="u731_div" class=""></div>
+                        <div id="u731_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
                         </div>
+                    </div>
 
-                        <!-- Unnamed (Rectangle) -->
-                        <div id="u732" class="ax_default label">
-                            <div id="u732_div" class=""></div>
-                            <div id="u732_text" class="text ">
-                                <p><span>Role Name</span></p>
-                            </div>
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u732" class="ax_default label">
+                        <div id="u732_div" class=""></div>
+                        <div id="u732_text" class="text ">
+                            <p><span>Role Name</span></p>
                         </div>
+                    </div>
 
-                        <!-- RoleNameEntry (Text Field) -->
-                        <div id="u733" class="ax_default text_field" data-label="RoleNameEntry">
-                            <div id="u733_div" class=""></div>
-                            @Html.TextBoxFor(model => model.RoleName, new { id = "u733_input" })
-                        </div>
+                    <!-- RoleNameEntry (Text Field) -->
+                    <div id="u733" class="ax_default text_field" data-label="RoleNameEntry">
+                        <div id="u733_div" class=""></div>
+                        @Html.TextBoxFor(model => model.RoleName, new { id = "u733_input" })
+                    </div>
 
-                        <!-- AddRightsButton (Shape) -->
-                        <div id="u734" class="ax_default button" data-label="AddRightsButton">
-                            @*<img id="u734_img" class="img"  src="~/Images/Roles_Rights/addrolebutton_u475.svg" />*@
-                            <div id="u734_text" class="text ">
-                                @*<p><span>Add Rights</span></p>*@
-                                <input id="btnAddRights" value="Add Rights" type="button" class="btnAddRights" style="width:175px" />
+                    <!-- AddRightsButton (Shape) -->
+                    <div id="u734" class="ax_default button" data-label="AddRightsButton">
+                        @*<img id="u734_img" class="img"  src="~/Images/Roles_Rights/addrolebutton_u475.svg" />*@
+                        <div id="u734_text" class="text ">
+                            @*<p><span>Add Rights</span></p>*@
+                            <input id="btnAddRights" value="Add Rights" type="button" class="btnAddRights" style="width:175px" />
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Welcome out (Rectangle) -->
+        <div id="u654" class="ax_default label" data-label="Welcome out">
+            <div id="u654_div" class=""></div>
+            <div id="u654_text" class="text ">
+                <p><span>ADMINISTRATION - Roles &amp; Rights</span></p>
+            </div>
+        </div>
+    </div>
     }
     </body>
 </html>

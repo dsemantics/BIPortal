@@ -110,7 +110,7 @@ namespace BIPortal.Controllers
                     {
                         cfg.CreateMap<UsersDTO, UsersModel>();
                         cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
-
+                        cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
                     });
                     IMapper mapper = config.CreateMapper();
 

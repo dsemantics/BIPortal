@@ -89,65 +89,65 @@
             <!-- Unnamed (Table) -->
             <div id="u400" class="ax_default">
                 @if (Model != null && Model.Count() > 0)
-                    {
-                        
-            <table id="tblViewRoles" class="table table table-bordered table-striped mb-0 table-hover">
+                {
 
-                    <thead>
-                        <tr>
-                            <th style="display:none;">
-                                @*@Html.DisplayNameFor(model => model.Name)*@
-                                RoleID
-                            </th>
-                            <th>
-                                @*@Html.DisplayNameFor(model => model.Name)*@
-                                Role Name
-                            </th>
-                            <th>
-                                @*@Html.DisplayNameFor(model => model.Id)*@
-                                Date Created
-                            </th>
-                            <th>
-                                Date Modified
-                            </th>
-                            @*<th>
-                            View Rights
-                            </th>*@
-                        </tr>
-                     </thead>
+                    <table id="tblViewRoles" class="table table table-bordered table-striped mb-0 table-hover">
+
+                        <thead>
+                            <tr>
+                                <th style="display:none;">
+                                    @*@Html.DisplayNameFor(model => model.Name)*@
+                                    RoleID
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.Name)*@
+                                    Role Name
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.Id)*@
+                                    Date Created
+                                </th>
+                                <th>
+                                    Date Modified
+                                </th>
+                                @*<th>
+                                    View Rights
+                                    </th>*@
+                            </tr>
+                        </thead>
                         @foreach (var item in Model)
                         {
-                <tbody>
-                    <tr>
-                        <td style="display:none;">
-                            <input type="text" value="@item.RoleID" name="RoleID" />
-                        </td>
-                        <td style="display:none;">
-                            <input type="text" value="@item.RoleName" name="RoleName" />
-                        </td>
-                        <td style="text-align:left;">
-                            @*@Html.DisplayFor(modelItem => item.RoleName)*@
-                            @*<a href="" class="btnViewRights">@item.RoleName</a>*@
-                            <button type="button" class="btn btn-link btnViewRights">@item.RoleName</button>
-                        </td>
-                        <td style="text-align:left;">
-                            @Html.DisplayFor(modelItem => item.CreatedDate)
-                        </td>
-                        <td style="text-align:left;">
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>
-                        @*<td>
-                        <input id="btnViewRights" value="View Rights" type="button" class="btnViewRights" style="width:75px" />
-                        </td>*@
-                    </tr>
-                </tbody>
+                            <tbody>
+                                <tr>
+                                    <td style="display:none;">
+                                        <input type="text" value="@item.RoleID" name="RoleID" />
+                                    </td>
+                                    <td style="display:none;">
+                                        <input type="text" value="@item.RoleName" name="RoleName" />
+                                    </td>
+                                    <td style="text-align:left;">
+                                        @*@Html.DisplayFor(modelItem => item.RoleName)*@
+                                        @*<a href="" class="btnViewRights">@item.RoleName</a>*@
+                                        <button type="button" class="btn btn-link btnViewRights">@item.RoleName</button>
+                                    </td>
+                                    <td style="text-align:left;">
+                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    </td>
+                                    <td style="text-align:left;">
+                                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                    </td>
+                                    @*<td>
+                                        <input id="btnViewRights" value="View Rights" type="button" class="btnViewRights" style="width:75px" />
+                                        </td>*@
+                                </tr>
+                            </tbody>
                         }
-                </table>
-                    }
-                    else
-                    {
+                    </table>
+                }
+                else
+                {
                     < div > Roles not yet defined in the system!</ div >
-                    }
+                }
             </div>
 
 
@@ -196,15 +196,21 @@
             </div>
         </div>
 
-
+        <!-- Welcome out (Rectangle) -->
+        <div id="u654" class="ax_default label" data-label="Welcome out">
+            <div id="u654_div" class=""></div>
+            <div id="u654_text" class="text ">
+                <p><span>ADMINISTRATION - Roles &amp; Rights</span></p>
+            </div>
+        </div>
 
 
         <!-- AddRoleButton (Shape) -->
         <div id="u475" class="ax_default button" data-label="AddRoleButton">
-                <div id="u475_text" class="text ">
-                    <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
-                </div>
+            <div id="u475_text" class="text ">
+                <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
             </div>
+        </div>
 
         @*<div id="u4750" class="ax_default" data-label="AddRoleButton">
                 <div id="u475_text" class="text ">
@@ -222,5 +228,5 @@
 
     }
 
-    </body>
+</body>
 </html>
