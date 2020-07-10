@@ -19,6 +19,14 @@
     z-index: 0;
 }
 
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    padding: 0px 0px 0px 0px;
+    height: 15px;
+}
+
 #u249_div {
     border-width: 0px;
     position: absolute;
@@ -3905,8 +3913,7 @@
     left: 122px;
     top: 237px;
     width: 582px;
-    height: 170px;
-    visibility: hidden;
+    height: 170px;    
 }
 
 #u333_state0 {
@@ -4238,9 +4245,9 @@
     border-width: 0px;
     position: absolute;
     left: 0px;
-    top: 0px;
+    top: -2px;
     width: 48px;
-    height: 23px;
+    height: 22px;
     background: inherit;
     background-color: rgba(255, 255, 255, 1);
     box-sizing: border-box;
@@ -4267,6 +4274,36 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+#btnSaveOwner {
+    border-width: 0px;
+    position: absolute;
+    left: -40px;
+    top: -12px;
+    width: 88px;
+    height: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+    background-color: rgba(92, 205, 222, 1);
+    border-radius: 5px;
+}
+
+#btnSaveOwner:hover {
+    border-width: 1px;
+    position: absolute;
+    left: -40px;
+    top: -12px;
+    width: 88px;
+    height: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000;
+    background-color: rgba(255, 255, 255,1);
+    border-radius: 5px;
 }
 
     #u341 .text {
@@ -4324,7 +4361,7 @@
     width: 225px;
     height: 22px;
     padding: 3px 2px 3px 2px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 13px;
@@ -4334,7 +4371,7 @@
     text-align: left;
     text-transform: none;
     background-color: transparent;
-    border-color: transparent;
+    //border-color: transparent;
 }
 
     #u343_input.disabled {

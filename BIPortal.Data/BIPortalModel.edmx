@@ -224,6 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetWorkspaceOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BIPortalModelStoreContainer">
           <EntitySet Name="PermissionMaster" EntityType="Self.PermissionMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
@@ -328,6 +329,7 @@
             <End Role="WorkSpaceOwnerMaster" EntitySet="WorkSpaceOwnerMasters" />
           </AssociationSet>
           <EntitySet Name="WorkspaceReportsMasters" EntityType="BIPortalModel.WorkspaceReportsMaster" />
+          <FunctionImport Name="GetWorkspaceOwner" ReturnType="Collection(BIPortalModel.GetWorkspaceOwner_Result)" />
         </EntityContainer>
         <EntityType Name="UserRoleMapping">
           <Key>
@@ -549,6 +551,13 @@
           <Property Name="WorkspaceActive" Type="Boolean" Nullable="false" />
           <Property Name="ReportActive" Type="Boolean" Nullable="false" />
         </EntityType>
+        <ComplexType Name="GetWorkspaceOwner_Result">
+          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="OwnerID" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="false" MaxLength="201" />
+          <Property Type="Int32" Name="ReportCount" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -687,6 +696,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetWorkspaceOwner" FunctionName="BIPortalModel.Store.GetWorkspaceOwner">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BIPortalModel.GetWorkspaceOwner_Result">
+                <ScalarProperty Name="WorkspaceID" ColumnName="WorkspaceID" />
+                <ScalarProperty Name="WorkspaceName" ColumnName="WorkspaceName" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="ReportCount" ColumnName="ReportCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

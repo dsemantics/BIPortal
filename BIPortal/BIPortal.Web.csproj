@@ -396,6 +396,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\RolesRights\AddRole.js" />
     <Content Include="Scripts\RolesRights\ViewRole.js" />
+    <Content Include="Scripts\WorkspaceReports\WorkspaceReports.js" />
     <Content Include="Styles\AddRole\AddRole_Styles.css" />
     <Content Include="Styles\Administartion\Administration_Styles.css" />
     <Content Include="Styles\Common\axure_rp_page.css" />

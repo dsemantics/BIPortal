@@ -10,5 +10,7 @@ namespace BIPortal.DTO
     {
         public string ReportId { get; set; }
         public string ReportName { get; set; }
+        public List<UsersDTO> Users { get; set; }
+        public List<ReportsDTO> Reports { get; set; }
     }
 }

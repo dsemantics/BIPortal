@@ -6249,28 +6249,6 @@
     font-style: normal;
 }
 
-#btnSaveRoleRights {
-    border-width: 0px;
-    position: absolute;
-    left: 0px;
-    top: -9px;
-    width: 88px;
-    height: 22px;
-    background: inherit;
-    background-color: rgba(255, 255, 255, 1);
-    box-sizing: border-box;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(121, 121, 121, 1);
-    border-radius: 5px;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
 #u474 {
     border-width: 0px;
     position: absolute;
@@ -6336,67 +6314,58 @@
     border-radius: 5px;
 }
 
-    #btnAddRole:hover {
-        border-width: 1px;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 180px;
-        height: 25px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        color: #000000;
-        background-color: rgba(255, 255, 255,1);
-        border-radius: 5px;
-    }
+#btnAddRole:hover {
+    border-width: 1px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 180px;
+    height: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000;
+    background-color: rgba(255, 255, 255,1);
+    border-radius: 5px;
+}
+
+#btnSaveRoleRights {
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: -9px;
+    width: 88px;
+    height: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+    background-color: rgba(92, 205, 222, 1);
+    border-radius: 5px;    
+}
+
+#btnSaveRoleRights:hover {
+    border-width: 1px;
+    position: absolute;
+    left: 0px;
+    top: -9px;
+    width: 88px;
+    height: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000;
+    background-color: rgba(255, 255, 255,1);
+    border-radius: 5px;
+}
 
 .btn {
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     font-style: normal;
     padding: 0px 0px 0px 0px;
+    height:15px;
 }
-
-
-
-
-#u4750 {
-    border-width: 0px;
-    position: absolute;
-    left: 735px;
-    top: 100px;
-    width: 180px;
-    height: 25px;
-    display: flex;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: #FFFFFF;
-}
-
-#UpdatePanel {
-    border-width: 0px;
-    position: absolute;
-    left: 760px;
-    top: 140px;
-    width: 200px;
-    height: 25px;
-    display: flex;
-    font-family: 'Montserrat', sans-serif;
-/*    font-weight: 400;*/
-    font-style: normal;
-    font-size:small;
-    color: black;
-}
-
-    #u475 .text {
-        position: absolute;
-        align-self: center;
-        padding: 2px 2px 2px 2px;
-        box-sizing: border-box;
-        width: 100%;
-    }
 
 #u475_img.mouseOver {
 }

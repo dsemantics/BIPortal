@@ -13,6 +13,8 @@ using System.Web;
 using BIPortal.DTO;
 using BIPortal.Data;
 using BIPortal.Data.WorkSpaces;
+using BIPortal.Models;
+using AutoMapper;
 
 namespace BIPortalServices.Controllers
 {
@@ -37,6 +39,72 @@ namespace BIPortalServices.Controllers
             }
         }
 
+        [Route("api/GetWorkSpaceOwner")]
+        public IHttpActionResult GetWorkSpaceOwner()
+        {
+            try
+            {
+                WorkSpaceData workSpaceData = new WorkSpaceData();
+                var workSpaceAndReports = workSpaceData.GetWorkSpaceOwner();
+                return Ok(workSpaceAndReports);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch workspace details");
+            }
+        }
+
+        [Route("api/GetReportsAndOwner")]
+        public IHttpActionResult GetReportsAndOwner(string workspaceid)
+        {
+            try
+            {
+                WorkSpaceData workSpaceData = new WorkSpaceData();
+                var reportsOwners = workSpaceData.GetReportsAndOwner(workspaceid);
+                return Ok(reportsOwners);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch workspace details");
+            }
+        }
+
+        [HttpPost]
+        [Route("api/SaveWorkspaceOwner")]
+        //To save role and access rights
+        public IHttpActionResult SaveWorkspaceOwner(WorkSpaceOwnerModel workSpaceOwnerModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    WorkSpaceData workSpaceData = new WorkSpaceData();
+
+                    var config = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<WorkSpaceOwnerModel, WorkSpaceOwnerDTO>();                        
+                    });
+                    IMapper mapper = config.CreateMapper();
+
+                    var workspaceOwner = mapper.Map<WorkSpaceOwnerModel, WorkSpaceOwnerDTO>(workSpaceOwnerModel);
+
+                    workSpaceData.SaveWorkspaceOwner(workspaceOwner);
+
+                    return Created("api/SaveWorkspaceOwner", true);
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not save workspace Owner");
+            }
+        }
+
         //Get Workspaces
         //[HttpGet]  
         //[Route("api/GetWorkSpace")]
@@ -55,7 +123,7 @@ namespace BIPortalServices.Controllers
         //    }
         //}
 
-       
+
         //Add a new user to a workspace
         public string AddPowerBIWorkspaceUser()
         {

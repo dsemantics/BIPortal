@@ -9,6 +9,8 @@ namespace BIPortal.Models
     public class ReportsModel
     {
         public Guid ReportId { get; set; }
-        public string ReportName { get; set; }        
+        public string ReportName { get; set; }
+        public List<UsersModel> Users { get; set; }
+        public List<ReportsModel> Reports { get; set; }
     }
 }

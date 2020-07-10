@@ -3,60 +3,78 @@
     Layout = "~/Views/Shared/_BIPortalLayout.cshtml";
     ViewBag.Title = "WorkSpace Reports";
 }
-@model IEnumerable<BIPortal.Models.WorkspaceModel>
+@model IEnumerable<BIPortal.Models.WorkSpaceOwnerModel>
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>WorkSpace and Reports</title>
-
+    <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/WorkSpaces_Reports/ws_repos.css" type="text/css" rel="stylesheet" />
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/WorkspaceReports/WorkspaceReports.js"></script>
+    <script type="text/javascript">
+        var getReportsOwnerurl = '@Url.Action("GetReportsAndOwner", "WorkspacesReports")';
+        var saveWorkspaceOwnerurl = '@Url.Action("SaveWorkspaceOwner", "WorkspacesReports")';
+    </script>
 </head>
 <body>
     <div id="base" class="">
         <!-- wsReps Panel (Dynamic Panel) -->
-        <div id="u304" class="ax_default" data-label="wsReps Panel">
+        <div id="u304" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" data-label="wsReps Panel">
             <div id="u304_state0" class="panel_state" data-label="State1" style="">
                 @*<div id="u304_state0_content" class="panel_state_content">*@
 
                 <div class="ax_default">
-                    <table border="1">
-                        <tr>
-                            <th>
-                                @*@Html.DisplayNameFor(model => model.Name)*@
-                                Workspace Name
-                            </th>
-                            <th>
-                                @*@Html.DisplayNameFor(model => model.Id)*@
-                                No. of Reports
-                            </th>
-                            <th>
-                                Edit
-                            </th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
+                    <table class="table table table-bordered table-striped mb-0 table-hover">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.WorkSpaceName)
+                                <th style="text-align:left;">
+                                    @*@Html.DisplayNameFor(model => model.Name)*@
+                                    Workspace Name
+                                </th>
+                                <th style="text-align:left;">
+                                    @*@Html.DisplayNameFor(model => model.Id)*@
+                                    No. of Reports
+                                </th>
+                                <th style="text-align:left;">
+                                    Owner
+                                </th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td style="display:none;">
+                                    <input type="text" value="@item.WorkspaceID" name="WorkspaceID" />
                                 </td>
-                                <td>
+                                <td style="display:none;">
+                                    <input type="text" value="@item.WorkspaceName" name="WorkspaceName" />
+                                </td>
+                                <td style="display:none;">
+                                    <input type="text" value="@item.OwnerID" name="OwnerID" />
+                                </td>
+                                <td style="text-align:left;">                                    
+                                    <button type="button" class="btn btn-link btnViewRights">@item.WorkspaceName</button>
+                                </td>
+                                <td style="text-align:right;">
                                     @Html.DisplayFor(modelItem => item.ReportCount)
                                 </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "EditWorkspaceUser")
-                                </td>
+                                <td style="text-align:left;">
+                                    @Html.DisplayFor(modelItem => item.OwnerName)
+                                </td>                                
                             </tr>
 
-                        }
+                            }
+                        </tbody>
                     </table>
                 </div>
                 @*</div>*@
 
                 <!-- Workspace edit popup (Dynamic Panel) -->
-                <div id="u333" class="ax_default ax_default_hidden" data-label="Workspace edit popup" style="display:none; visibility: hidden">
+                <div id="u333" class="ax_default" data-label="Workspace edit popup" style="display:none;">
                     <div id="u333_state0" class="panel_state" data-label="State1" style="">
                         <div id="u333_state0_content" class="panel_state_content">
 
@@ -72,7 +90,8 @@
                             <div id="u335" class="ax_default box_1">
                                 <div id="u335_div" class=""></div>
                                 <div id="u335_text" class="text ">
-                                    <p><span>Finance Workspace</span></p>
+                                    @*<p><span>Finance Workspace</span></p>*@
+                                    <label id="lblWorkspaceName" style="color:black" />
                                 </div>
                             </div>
 
@@ -80,25 +99,25 @@
                             <div id="u336" class="ax_default label">
                                 <div id="u336_div" class=""></div>
                                 <div id="u336_text" class="text ">
-                                    <p><span>Report 1</span></p><p><span>Report 2 (has 2 pages)</span></p><p><span>Report 3</span></p><p><span>Report 4 (has 3 pages)</span></p><p><span>Report 5</span></p>
+                                    @*<p><span>Report 1</span></p><p><span>Report 2 (has 2 pages)</span></p><p><span>Report 3</span></p><p><span>Report 4 (has 3 pages)</span></p><p><span>Report 5</span></p>*@
                                 </div>
                             </div>
 
                             <!-- Unnamed (Vertical Line) -->
-                            <div id="u337" class="ax_default line">
+                            @*<div id="u337" class="ax_default line">
                                 <img id="u337_img" class="img " src="~/Images/ws_reps/u337.svg" />
                                 <div id="u337_text" class="text " style="display:none; visibility: hidden">
                                     <p></p>
                                 </div>
-                            </div>
+                            </div>*@
 
                             <!-- Unnamed (Rectangle) -->
-                            <div id="u338" class="ax_default label">
+                            @*<div id="u338" class="ax_default label">
                                 <div id="u338_div" class=""></div>
                                 <div id="u338_text" class="text ">
                                     <p><span>Published</span></p><p><span>22nd July 2019</span></p>
                                 </div>
-                            </div>
+                            </div>*@
 
                             <!-- Unnamed (Vertical Line) -->
                             <div id="u339" class="ax_default line">
@@ -120,22 +139,23 @@
                             <div id="u341" class="ax_default button">
                                 <div id="u341_div" class=""></div>
                                 <div id="u341_text" class="text ">
-                                    <p><span>Save</span></p>
+                                    @*<p><span>Save</span></p>*@
+                                    <input id="btnSaveOwner" value="Save" type="button" class="btnSaveOwner" />
                                 </div>
                             </div>
 
                             <!-- Unnamed (Image) -->
                             <div id="u342" class="ax_default image">
-                                <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" />
+                                <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png"/>
                                 <div id="u342_text" class="text " style="display:none; visibility: hidden">
                                     <p></p>
                                 </div>
                             </div>
-
+                            
                             <!-- Unnamed (Droplist) -->
                             <div id="u343" class="ax_default droplist">
                                 <div id="u343_div" class=""></div>
-                                <select id="u343_input" class="u343_input">
+                                @*<select id="u343_input" class="u343_input">
                                     <option class="u343_input_option" selected value="PrinceV">PrinceV</option>
                                     <option class="u343_input_option" value="ChinmayC">ChinmayC</option>
                                     <option class="u343_input_option" value="RoshanJ">RoshanJ</option>
@@ -143,7 +163,7 @@
                                     <option class="u343_input_option" value="SandeepS">SandeepS</option>
                                     <option class="u343_input_option" value="ImadS">ImadS</option>
                                     <option class="u343_input_option" value="AneeshK">AneeshK</option>
-                                </select>
+                                </select>*@
                             </div>
                         </div>
                     </div>

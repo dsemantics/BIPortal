@@ -12,6 +12,8 @@ namespace BIPortal.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BIPortalEntities : DbContext
     {
@@ -34,5 +36,10 @@ namespace BIPortal.Data
         public virtual DbSet<RoleRightsMapping> RoleRightsMappings { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<WorkspaceReportsMaster> WorkspaceReportsMasters { get; set; }
+    
+        public virtual ObjectResult<GetWorkspaceOwner_Result> GetWorkspaceOwner()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWorkspaceOwner_Result>("GetWorkspaceOwner");
+        }
     }
 }

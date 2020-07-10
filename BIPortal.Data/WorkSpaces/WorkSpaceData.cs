@@ -4,6 +4,7 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -88,6 +89,76 @@ namespace BIPortal.Data.WorkSpaces
                 }
             }
             return workspaceDTOList;
+        }
+
+        //To get workspaces
+        public IEnumerable<WorkSpaceOwnerDTO> GetWorkSpaceOwner()
+        {
+            using (var context = new BIPortalEntities())
+            {
+                //var workspaceOwnerResult = context.WorkspaceReportsMasters.Include("WorkSpaceOwnerMaster").ToList();
+                var workspaceOwnerResult = context.GetWorkspaceOwner().ToList();
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<GetWorkspaceOwner_Result, WorkSpaceOwnerDTO>();
+                    //cfg.CreateMap<WorkspaceReportsMaster, WorkspaceReportsDTO>();
+                    //cfg.CreateMap<WorkSpaceOwnerMaster,WorkSpaceOwnerDTO>();
+                });
+                IMapper mapper = config.CreateMapper();
+
+                return mapper.Map<List<GetWorkspaceOwner_Result>, List<WorkSpaceOwnerDTO>>(workspaceOwnerResult);
+            }
+        }
+
+        //To get workspaces
+        public ReportsDTO GetReportsAndOwner(string workspaceid)
+        {
+            using (var context = new BIPortalEntities())
+            {
+                var result = new ReportsDTO();
+                result.Users = context.UserMasters.Where(x => x.Active == true).Select(x => new UsersDTO() { UserID = x.UserID, UserName = x.FirstName + " " + x.LastName }).ToList();
+                
+                result.Reports = context.WorkspaceReportsMasters.Where(x => x.WorkspaceID == workspaceid && x.ReportID != null).Select(x => new ReportsDTO() { ReportId = x.ReportID, ReportName = x.ReportName }).ToList();
+                               
+                return result;
+            }
+        }
+
+        //Save workspace Owner
+        public void SaveWorkspaceOwner(WorkSpaceOwnerDTO workspaceOwnerDTO)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<WorkSpaceOwnerDTO, WorkSpaceOwnerMaster>();                
+            });
+            IMapper mapper = config.CreateMapper();
+
+            var workspaceOwner = mapper.Map<WorkSpaceOwnerDTO, WorkSpaceOwnerMaster>(workspaceOwnerDTO);
+
+            using (var context = new BIPortalEntities())
+            {
+                var workspaceOwnerExists = context.WorkSpaceOwnerMasters.FirstOrDefault(c => c.WorkspaceID == workspaceOwner.WorkspaceID);
+                if (workspaceOwnerExists != null)
+                {
+                    workspaceOwnerExists.OwnerID = workspaceOwner.OwnerID;
+                    workspaceOwnerExists.ModifiedDate = DateTime.Now;
+                    workspaceOwnerExists.ModifiedBy = "Venkat";
+                }
+                else
+                {
+                    var workspaceOwnerMaster = new WorkSpaceOwnerMaster
+                    {
+                        WorkspaceID = workspaceOwner.WorkspaceID,
+                        OwnerID = workspaceOwner.OwnerID,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = "Venkat",
+                        Active = true
+                    };
+                    context.WorkSpaceOwnerMasters.Add(workspaceOwnerMaster);
+                }
+
+                context.SaveChanges();
+            }
         }
 
         //To get workspaces

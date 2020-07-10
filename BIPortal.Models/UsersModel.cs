@@ -33,6 +33,7 @@ namespace BIPortal.Models
         [Required(ErrorMessage = "Role Selection is required.")]
         public int[] SelectedRolesValues { get; set; }
         public List<UserRoleMappingModel> UserRoleMappings { get; set; }
+        public string UserName { get; set; }
 
         //public IEnumerable<WorkFlowMasterModel> WorkFlowMasterMappings { get; set; }
         //public IEnumerable<WorkFlowDetailsModel> WorkFlowDetailsMappings { get; set; }

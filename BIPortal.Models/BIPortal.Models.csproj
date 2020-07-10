@@ -54,6 +54,7 @@
     <Compile Include="WorkFlowMasterModel.cs" />
     <Compile Include="WorkspaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkSpaceOwnerModel.cs" />
     <Compile Include="WorkspaceReportsModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

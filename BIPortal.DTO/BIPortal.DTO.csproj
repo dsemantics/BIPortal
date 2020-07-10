@@ -51,6 +51,7 @@
     <Compile Include="WorkFlowMasterDTO.cs" />
     <Compile Include="WorkspaceDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkSpaceOwnerDTO.cs" />
     <Compile Include="WorkspaceReportsDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
