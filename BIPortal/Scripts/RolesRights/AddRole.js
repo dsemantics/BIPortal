@@ -115,7 +115,8 @@
         var data = { WorkspaceandReportList: selectedItems, RoleName: roleName };
         $.post(saveRolesandRightsurl, data, function (result) {
             // TODO: do something with the response from the controller action
-            window.location.reload();
+            //window.location.reload();            
+            window.location.href = viewrolesurl;
         });
     }); 
 

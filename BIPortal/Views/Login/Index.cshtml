@@ -1,4 +1,4 @@
-﻿
+﻿@model BIPortal.Models.LoginModel
 @{
     Layout = null;
     ViewBag.Title = "Login";
@@ -10,11 +10,14 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
+    <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Login/Login_Styles.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Common/Data_Styles.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Common/axure_rp_page.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+    @using (Html.BeginForm())
+    {
     <div id="base" class="">
 
         <!-- Unnamed (Rectangle) -->
@@ -87,10 +90,14 @@
 
         <!-- Email Entry (Text Field) -->
         <div id="u9" class="ax_default text_field" data-label="Email Entry">
-            <div id="u9_div" class=""></div>
-            <input id="u9_input" type="text" value="" class="u9_input" placeholder="Enter your Email" />
-        </div>
-
+            @*<div id="u9_div" class=""></div>*@
+            @*<input id="u9_input" type="text" value="" class="u9_input" placeholder="Enter your Email" />*@
+            @*@Html.TextBoxFor(model => model.UserName, new { id = "u9_input", @class = "u9_input", placeholder = "Enter your Email" })*@
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", style = "height:28px;", placeholder = "Enter your Email" })
+            &nbsp;
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "error" })
+        </div>          
+        
         <!-- Password (Rectangle) -->
         <div id="u10" class="ax_default heading_1" data-label="Password">
             <div id="u10_div" class=""></div>
@@ -101,18 +108,22 @@
 
         <!-- Password Entry (Text Field) -->
         <div id="u11" class="ax_default text_field" data-label="Password Entry">
-            <div id="u11_div" class=""></div>
-            <input id="u11_input" type="password" value="" class="u11_input" placeholder="Enter Password" />
+            @*<div id="u11_div" class=""></div>*@
+            @*<input id="u11_input" type="password" value="" class="u11_input" placeholder="Enter Password" />*@
+            @*@Html.PasswordFor(model => model.Password, new { id = "u11_input", @class = "u11_input", placeholder = "Enter Password" })*@
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", style = "height:28px;", placeholder = "Enter Password" })
+            &nbsp;
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
         </div>
 
         <!-- Remember Me (Checkbox) -->
         <div id="u12" class="ax_default checkbox" data-label="Remember Me">
             @*<label id="u12_input_label" for="u12_input" style="position: absolute; left: 0px;">
-                    <img id="u12_img" class="img " src="~/Images/login/remember_me_u12.svg" />
-                    <div id="u12_text" class="text ">
-                        <p><span>Remember Me</span></p>
-                    </div>
-                </label>*@
+                <img id="u12_img" class="img " src="~/Images/login/remember_me_u12.svg" />
+                <div id="u12_text" class="text ">
+                    <p><span>Remember Me</span></p>
+                </div>
+            </label>*@
             @*<input id="u12_input" type="checkbox" value="checkbox" />*@
             <label id="u12_input_label" for="u12_input" style="position: absolute; left: 0px;">
                 <input id="chkRememberMe" name="chkRememberMe" type="checkbox" />
@@ -126,9 +137,11 @@
         @*<div id="u13"  data-label="Login Button">*@
         @*<div id="u13_div" class="">
 
-            </div>*@
+        </div>*@
         <div id="u13_text" class="text ">
-            <input id="btnLogin" value="Log In" type="button" onclick="alert('Login Clicked')" class="ax_default primary_button" />
+            @*@Html.ActionLink("Sign in", "SignIn", "Login", routeValues: null, htmlAttributes: new { id = "btnLogin" })*@
+            @*<input id="btnLogin" value="Log In" type="button" onclick="@("window.location.href='" + @Url.Action("SignIn", "Login") + "'")" class="ax_default primary_button" />*@
+            <input id="btnLogin" value="Log In" type="submit" class="ax_default primary_button" />
             @*<p><span><input id="btnLogin" value="Log In" type="button" /></span></p>*@
         </div>
         @*</div>*@
@@ -146,7 +159,7 @@
             <div id="u15_div" class=""></div>
             <div id="u15_text" class="text ">
                 @*<p><span>Forgot Password</span></p>*@
-                <p><label onclick="alert('Forgot Password Clicked')"> Forgot Password</label></p>
+                @*<p><label onclick="alert('Forgot Password Clicked')"> Forgot Password</label></p>*@
             </div>
         </div>
 
@@ -194,6 +207,8 @@
             </div>
         </div>
     </div>
-
+    }
 </body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 </html>

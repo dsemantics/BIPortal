@@ -23,6 +23,7 @@
     <script type="text/javascript">
         var getworkspaceurl = '@Url.Action("GetWorkSpaceReports", "RolesRights")';
         var saveRolesandRightsurl = '@Url.Action("SaveRoleAndRights", "RolesRights")';
+        var viewrolesurl = '@Url.Action("ViewRoles", "RolesRights")';
         var selectedItems = [];
         $(function () {
             $('#u723').on('changed.jstree', function (e, data) {
@@ -39,7 +40,7 @@
                             id: this.id,
                             parent: this.parent,
                             text: this.text,
-                            parenttext: this.original.parenttext                            
+                            parenttext: this.original.parenttext
                         }
                     );
                 });
@@ -152,6 +153,8 @@
                     <div id="u733" class="ax_default text_field" data-label="RoleNameEntry">
                         <div id="u733_div" class=""></div>
                         @Html.TextBoxFor(model => model.RoleName, new { id = "u733_input" })
+                        &nbsp;
+                        @Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "error" })
                     </div>
 
                     <!-- AddRightsButton (Shape) -->

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginDTO.cs" />
     <Compile Include="PermissionMasterDTO.cs" />
     <Compile Include="ReportsDTO.cs" />
     <Compile Include="RolesDTO.cs" />

@@ -40,32 +40,32 @@
                                 </th>
                                 <th style="text-align:left;">
                                     Owner
-                                </th>                                
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td style="display:none;">
-                                    <input type="text" value="@item.WorkspaceID" name="WorkspaceID" />
-                                </td>
-                                <td style="display:none;">
-                                    <input type="text" value="@item.WorkspaceName" name="WorkspaceName" />
-                                </td>
-                                <td style="display:none;">
-                                    <input type="text" value="@item.OwnerID" name="OwnerID" />
-                                </td>
-                                <td style="text-align:left;">                                    
-                                    <button type="button" class="btn btn-link btnViewRights">@item.WorkspaceName</button>
-                                </td>
-                                <td style="text-align:right;">
-                                    @Html.DisplayFor(modelItem => item.ReportCount)
-                                </td>
-                                <td style="text-align:left;">
-                                    @Html.DisplayFor(modelItem => item.OwnerName)
-                                </td>                                
-                            </tr>
+                                <tr>
+                                    <td style="display:none;">
+                                        <input type="text" value="@item.WorkspaceID" name="WorkspaceID" />
+                                    </td>
+                                    <td style="display:none;">
+                                        <input type="text" value="@item.WorkspaceName" name="WorkspaceName" />
+                                    </td>
+                                    <td style="display:none;">
+                                        <input type="text" value="@item.OwnerID" name="OwnerID" />
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <button type="button" class="btn btn-link btnViewRights">@item.WorkspaceName</button>
+                                    </td>
+                                    <td style="text-align:right;">
+                                        @Html.DisplayFor(modelItem => item.ReportCount)
+                                    </td>
+                                    <td style="text-align:left;">
+                                        @Html.DisplayFor(modelItem => item.OwnerName)
+                                    </td>
+                                </tr>
 
                             }
                         </tbody>
@@ -73,102 +73,104 @@
                 </div>
                 @*</div>*@
 
-                <!-- Workspace edit popup (Dynamic Panel) -->
-                <div id="u333" class="ax_default" data-label="Workspace edit popup" style="display:none;">
-                    <div id="u333_state0" class="panel_state" data-label="State1" style="">
-                        <div id="u333_state0_content" class="panel_state_content">
 
-                            <!-- Unnamed (Rectangle) -->
-                            <div id="u334" class="ax_default box_1">
-                                <div id="u334_div" class=""></div>
-                                <div id="u334_text" class="text " style="display:none; visibility: hidden">
-                                    <p></p>
-                                </div>
-                            </div>
 
-                            <!-- Unnamed (Rectangle) -->
-                            <div id="u335" class="ax_default box_1">
-                                <div id="u335_div" class=""></div>
-                                <div id="u335_text" class="text ">
-                                    @*<p><span>Finance Workspace</span></p>*@
-                                    <label id="lblWorkspaceName" style="color:black" />
-                                </div>
-                            </div>
+            </div>
+        </div>
 
-                            <!-- Unnamed (Rectangle) -->
-                            <div id="u336" class="ax_default label">
-                                <div id="u336_div" class=""></div>
-                                <div id="u336_text" class="text ">
-                                    @*<p><span>Report 1</span></p><p><span>Report 2 (has 2 pages)</span></p><p><span>Report 3</span></p><p><span>Report 4 (has 3 pages)</span></p><p><span>Report 5</span></p>*@
-                                </div>
-                            </div>
+        <!-- Workspace edit popup (Dynamic Panel) -->
+        <div id="u333" class="ax_default" data-label="Workspace edit popup" style="display:none;">
+            <div id="u333_state0" class="panel_state" data-label="State1" style="">
+                <div id="u333_state0_content" class="panel_state_content">
 
-                            <!-- Unnamed (Vertical Line) -->
-                            @*<div id="u337" class="ax_default line">
-                                <img id="u337_img" class="img " src="~/Images/ws_reps/u337.svg" />
-                                <div id="u337_text" class="text " style="display:none; visibility: hidden">
-                                    <p></p>
-                                </div>
-                            </div>*@
-
-                            <!-- Unnamed (Rectangle) -->
-                            @*<div id="u338" class="ax_default label">
-                                <div id="u338_div" class=""></div>
-                                <div id="u338_text" class="text ">
-                                    <p><span>Published</span></p><p><span>22nd July 2019</span></p>
-                                </div>
-                            </div>*@
-
-                            <!-- Unnamed (Vertical Line) -->
-                            <div id="u339" class="ax_default line">
-                                <img id="u339_img" class="img " src="~/Images/ws_reps/u337.svg" />
-                                <div id="u339_text" class="text " style="display:none; visibility: hidden">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <!-- Unnamed (Rectangle) -->
-                            <div id="u340" class="ax_default label">
-                                <div id="u340_div" class=""></div>
-                                <div id="u340_text" class="text ">
-                                    <p><span>Owner</span></p>
-                                </div>
-                            </div>
-
-                            <!-- Unnamed (Rectangle) -->
-                            <div id="u341" class="ax_default button">
-                                <div id="u341_div" class=""></div>
-                                <div id="u341_text" class="text ">
-                                    @*<p><span>Save</span></p>*@
-                                    <input id="btnSaveOwner" value="Save" type="button" class="btnSaveOwner" />
-                                </div>
-                            </div>
-
-                            <!-- Unnamed (Image) -->
-                            <div id="u342" class="ax_default image">
-                                <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png"/>
-                                <div id="u342_text" class="text " style="display:none; visibility: hidden">
-                                    <p></p>
-                                </div>
-                            </div>
-                            
-                            <!-- Unnamed (Droplist) -->
-                            <div id="u343" class="ax_default droplist">
-                                <div id="u343_div" class=""></div>
-                                @*<select id="u343_input" class="u343_input">
-                                    <option class="u343_input_option" selected value="PrinceV">PrinceV</option>
-                                    <option class="u343_input_option" value="ChinmayC">ChinmayC</option>
-                                    <option class="u343_input_option" value="RoshanJ">RoshanJ</option>
-                                    <option class="u343_input_option" value="PrateekshaM">PrateekshaM</option>
-                                    <option class="u343_input_option" value="SandeepS">SandeepS</option>
-                                    <option class="u343_input_option" value="ImadS">ImadS</option>
-                                    <option class="u343_input_option" value="AneeshK">AneeshK</option>
-                                </select>*@
-                            </div>
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u334" class="ax_default box_1">
+                        <div id="u334_div" class=""></div>
+                        <div id="u334_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
                         </div>
                     </div>
-                </div>
 
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u335" class="ax_default box_1">
+                        <div id="u335_div" class=""></div>
+                        <div id="u335_text" class="text ">
+                            @*<p><span>Finance Workspace</span></p>*@
+                            <label id="lblWorkspaceName" style="color:black" />
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u336" class="ax_default label">
+                        <div id="u336_div" class=""></div>
+                        <div id="u336_text" class="text ">
+                            @*<p><span>Report 1</span></p><p><span>Report 2 (has 2 pages)</span></p><p><span>Report 3</span></p><p><span>Report 4 (has 3 pages)</span></p><p><span>Report 5</span></p>*@
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Vertical Line) -->
+                    @*<div id="u337" class="ax_default line">
+                        <img id="u337_img" class="img " src="~/Images/ws_reps/u337.svg" />
+                        <div id="u337_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>*@
+
+                    <!-- Unnamed (Rectangle) -->
+                    @*<div id="u338" class="ax_default label">
+                        <div id="u338_div" class=""></div>
+                        <div id="u338_text" class="text ">
+                            <p><span>Published</span></p><p><span>22nd July 2019</span></p>
+                        </div>
+                    </div>*@
+
+                    <!-- Unnamed (Vertical Line) -->
+                    <div id="u339" class="ax_default line">
+                        <img id="u339_img" class="img " src="~/Images/ws_reps/u337.svg" />
+                        <div id="u339_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u340" class="ax_default label">
+                        <div id="u340_div" class=""></div>
+                        <div id="u340_text" class="text ">
+                            <p><span>Owner</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u341" class="ax_default button">
+                        <div id="u341_div" class=""></div>
+                        <div id="u341_text" class="text ">
+                            @*<p><span>Save</span></p>*@
+                            <input id="btnSaveOwner" value="Save" type="button" class="btnSaveOwner" />
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Image) -->
+                    <div id="u342" class="ax_default image">
+                        <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" />
+                        <div id="u342_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Droplist) -->
+                    <div id="u343" class="ax_default droplist">
+                        <div id="u343_div" class=""></div>
+                        @*<select id="u343_input" class="u343_input">
+                            <option class="u343_input_option" selected value="PrinceV">PrinceV</option>
+                            <option class="u343_input_option" value="ChinmayC">ChinmayC</option>
+                            <option class="u343_input_option" value="RoshanJ">RoshanJ</option>
+                            <option class="u343_input_option" value="PrateekshaM">PrateekshaM</option>
+                            <option class="u343_input_option" value="SandeepS">SandeepS</option>
+                            <option class="u343_input_option" value="ImadS">ImadS</option>
+                            <option class="u343_input_option" value="AneeshK">AneeshK</option>
+                        </select>*@
+                    </div>
+                </div>
             </div>
         </div>
     </div>

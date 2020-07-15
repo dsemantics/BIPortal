@@ -19,6 +19,12 @@
     z-index: 0;
 }
 
+.error {
+    font-family: Arial;
+    font-size: 10pt;
+    color: red;
+}
+
 #u0_div {
     border-width: 0px;
     position: absolute;
@@ -432,7 +438,7 @@
     position: absolute;
     left: 429px;
     top: 259px;
-    width: 235px;
+    width: 250px;
     height: 25px;
     display: flex;
 }
@@ -579,7 +585,7 @@
     position: absolute;
     left: 429px;
     top: 325px;
-    width: 235px;
+    width: 250px;
     height: 25px;
     display: flex;
 }

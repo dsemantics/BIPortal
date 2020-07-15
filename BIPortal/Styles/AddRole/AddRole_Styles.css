@@ -5594,6 +5594,11 @@
     border-radius: 5px;
 }
 
+.error {
+    font-family: Arial;
+    font-size: 10pt;
+    color: red;
+}
 
     #u734 .text {
         position: absolute;
