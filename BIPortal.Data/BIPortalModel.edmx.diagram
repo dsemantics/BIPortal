@@ -22,6 +22,8 @@
         <AssociationConnector Association="BIPortalModel.FK__WorkFlowM__Reque__06CD04F7" />
         <AssociationConnector Association="BIPortalModel.FK__WorkSpace__Owner__02084FDA" />
         <EntityTypeShape EntityType="BIPortalModel.WorkspaceReportsMaster" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BIPortalModel.UserAccessRight" Width="1.5" PointX="5.25" PointY="20.375" />
+        <AssociationConnector Association="BIPortalModel.FK__UserAcces__UserI__25518C17" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

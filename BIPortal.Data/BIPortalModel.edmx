@@ -47,6 +47,22 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserAccessRights">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WorkspaceName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ReportID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="UserID" />
@@ -140,6 +156,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UserAcces__UserI__25518C17">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="UserAccessRights" Type="Self.UserAccessRights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserAccessRights">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserMaste__Permi__72C60C4A">
           <End Role="PermissionMaster" Type="Self.PermissionMaster" Multiplicity="0..1" />
           <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
@@ -229,6 +257,7 @@
           <EntitySet Name="PermissionMaster" EntityType="Self.PermissionMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleRightsMapping" EntityType="Self.RoleRightsMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccessRights" EntityType="Self.UserAccessRights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoleMapping" EntityType="Self.UserRoleMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkFlowDetails" EntityType="Self.WorkFlowDetails" Schema="dbo" store:Type="Tables" />
@@ -238,6 +267,10 @@
           <AssociationSet Name="FK__RoleRight__RoleI__797309D9" Association="Self.FK__RoleRight__RoleI__797309D9">
             <End Role="RoleMaster" EntitySet="RoleMaster" />
             <End Role="RoleRightsMapping" EntitySet="RoleRightsMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAcces__UserI__25518C17" Association="Self.FK__UserAcces__UserI__25518C17">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="UserAccessRights" EntitySet="UserAccessRights" />
           </AssociationSet>
           <AssociationSet Name="FK__UserMaste__Permi__72C60C4A" Association="Self.FK__UserMaste__Permi__72C60C4A">
             <End Role="PermissionMaster" EntitySet="PermissionMaster" />
@@ -330,6 +363,11 @@
           </AssociationSet>
           <EntitySet Name="WorkspaceReportsMasters" EntityType="BIPortalModel.WorkspaceReportsMaster" />
           <FunctionImport Name="GetWorkspaceOwner" ReturnType="Collection(BIPortalModel.GetWorkspaceOwner_Result)" />
+          <EntitySet Name="UserAccessRights" EntityType="BIPortalModel.UserAccessRight" />
+          <AssociationSet Name="FK__UserAcces__UserI__25518C17" Association="BIPortalModel.FK__UserAcces__UserI__25518C17">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="UserAccessRight" EntitySet="UserAccessRights" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="UserRoleMapping">
           <Key>
@@ -474,6 +512,7 @@
           <NavigationProperty Name="WorkFlowMasters" Relationship="BIPortalModel.FK__WorkFlowM__Owner__05D8E0BE" FromRole="UserMaster" ToRole="WorkFlowMaster" />
           <NavigationProperty Name="WorkFlowMasters1" Relationship="BIPortalModel.FK__WorkFlowM__Reque__06CD04F7" FromRole="UserMaster" ToRole="WorkFlowMaster" />
           <NavigationProperty Name="WorkSpaceOwnerMasters" Relationship="BIPortalModel.FK__WorkSpace__Owner__02084FDA" FromRole="UserMaster" ToRole="WorkSpaceOwnerMaster" />
+          <NavigationProperty Name="UserAccessRights" Relationship="BIPortalModel.FK__UserAcces__UserI__25518C17" FromRole="UserMaster" ToRole="UserAccessRight" />
         </EntityType>
         <Association Name="FK__UserMaste__Permi__72C60C4A">
           <End Type="BIPortalModel.PermissionMaster" Role="PermissionMaster" Multiplicity="0..1" />
@@ -558,6 +597,35 @@
           <Property Type="String" Name="OwnerName" Nullable="false" MaxLength="201" />
           <Property Type="Int32" Name="ReportCount" Nullable="true" />
         </ComplexType>
+        <EntityType Name="UserAccessRight">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="WorkspaceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkspaceName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserMaster" Relationship="BIPortalModel.FK__UserAcces__UserI__25518C17" FromRole="UserAccessRight" ToRole="UserMaster" />
+        </EntityType>
+        <Association Name="FK__UserAcces__UserI__25518C17">
+          <End Type="BIPortalModel.UserMaster" Role="UserMaster" Multiplicity="0..1" />
+          <End Type="BIPortalModel.UserAccessRight" Role="UserAccessRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserAccessRight">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -707,6 +775,23 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserAccessRights">
+            <EntityTypeMapping TypeName="BIPortalModel.UserAccessRight">
+              <MappingFragment StoreEntitySet="UserAccessRights">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="WorkspaceName" ColumnName="WorkspaceName" />
+                <ScalarProperty Name="WorkspaceID" ColumnName="WorkspaceID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

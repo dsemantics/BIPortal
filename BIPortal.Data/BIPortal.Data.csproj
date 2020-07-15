@@ -83,6 +83,9 @@
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles\RolesData.cs" />
+    <Compile Include="UserAccessRight.cs">
+      <DependentUpon>BIPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
