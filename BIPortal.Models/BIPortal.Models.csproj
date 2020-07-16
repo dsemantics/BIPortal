@@ -49,6 +49,7 @@
     <Compile Include="RolesModel.cs" />
     <Compile Include="TreeAttributes.cs" />
     <Compile Include="TreeViewNode.cs" />
+    <Compile Include="UserAccessRightsModel.cs" />
     <Compile Include="UserRoleMappingModel.cs" />
     <Compile Include="UsersModel.cs" />
     <Compile Include="WorkFlowDetailsModel.cs" />

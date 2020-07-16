@@ -463,6 +463,8 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\RolesRights\AddRole.js" />
     <Content Include="Scripts\RolesRights\ViewRole.js" />
+    <Content Include="Scripts\Users\AddUser.js" />
+    <Content Include="Scripts\Users\EditUser.js" />
     <Content Include="Scripts\WorkspaceReports\WorkspaceReports.js" />
     <Content Include="Styles\AddRole\AddRole_Styles.css" />
     <Content Include="Styles\Administartion\Administration_Styles.css" />
@@ -520,6 +522,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BIPortal.Data\BIPortal.Data.csproj">
+      <Project>{ABBE9123-6989-420B-8003-AB0F1B6BCA5E}</Project>
+      <Name>BIPortal.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BIPortal.DTO\BIPortal.DTO.csproj">
       <Project>{47112d9c-f614-427e-9b1e-1b01ee663b10}</Project>
       <Name>BIPortal.DTO</Name>

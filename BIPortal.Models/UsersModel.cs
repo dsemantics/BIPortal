@@ -12,7 +12,8 @@ namespace BIPortal.Models
     public class UsersModel
     {
         public int UserID { get; set; }
-        public string Salutation { get; set; }
+
+         public string Salutation { get; set; }
 
         [Required(ErrorMessage = "Firstame is required.")]
         public string FirstName { get; set; }
@@ -34,10 +35,9 @@ namespace BIPortal.Models
         public int[] SelectedRolesValues { get; set; }
         public List<UserRoleMappingModel> UserRoleMappings { get; set; }
         public string UserName { get; set; }
-
-        //public IEnumerable<WorkFlowMasterModel> WorkFlowMasterMappings { get; set; }
-        //public IEnumerable<WorkFlowDetailsModel> WorkFlowDetailsMappings { get; set; }
-
+        public List<WorkFlowMasterModel> WorkFlowMasterMappings { get; set; }
+        public List<WorkFlowDetailsModel> WorkFlowDetailsMappings { get; set; }
+        public List<UserAccessRightsModel> UserAccessRightsMappings { get; set; }
 
     }
 }

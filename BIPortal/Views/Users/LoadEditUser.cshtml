@@ -15,11 +15,24 @@
     <link href="~/Styles/Users/EditUser_Styles.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/MyProfile/MyProfile_Styles.css" type="text/css" rel="stylesheet" />
- 
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/Users/EditUser.js"></script>
+    <script type="text/javascript">
+        var geRightsurl = '@Url.Action("GetEditUserRights", "Users")';
+        //var SaveUserRightsurl = '@Url.Action("AddUser", "Users")';
+        var userID;
+        var selectedItems = [];
+    </script>
+
 </head>
 
 <body>
@@ -47,6 +60,26 @@
                     @Html.Label("Email ID", "Email ID")
                 </div>
 
+
+                <!-- SaveCloseButton (Shape) -->
+                <div id="u1312" class="ax_default button" data-label="SaveCloseButton">
+                    <input id="btnViewRights" value="Apply Roles" type="button" class="btnViewRights" style="width:175px" />
+                </div>
+
+                <!-- CloseButton (Shape) -->
+                <div id="u1313" class="ax_default button" data-label="CloseButton">
+                    @*<input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" />*@
+                    <input id="btnAddUser" type="submit" name="button" value="Save &amp; Send for Approval" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
+
+                </div>
+
+
+                <!-- CloseButton (Shape) -->
+                <div id="u1377" class="ax_default button" data-label="CloseButton">
+                    <input id="btnAddUser" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />
+                </div>
+
+
                 <!-- Unnamed (Text Field) -->
                 <div id="u1315" class="ax_default text_field disabled">
                     @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
@@ -56,6 +89,8 @@
                     @*@Html.HiddenFor(Model => Model.CreatedBy)*@
                     @* @Html.HiddenFor(Model => Model.PermissionMaster.PermissionID)*@
                     @Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })
+
+                    @*<input type="hidden" name="userID" id="userID" />*@
                 </div>
 
 
@@ -109,19 +144,7 @@
                     @Html.DropDownListFor(model => model.PermissionID, (IEnumerable<SelectListItem>)ViewBag.PermissionTypes, null, new { @class = "form-control", style = "height:28px;" })
                 </div>
 
-                <!-- CloseButton (Shape) -->
-                <div id="u1592" class="ax_default button" data-label="CloseButton">
-                    @*<input id="submit" type="submit" name="button" value="Save &amp; Close" style="width:175px" />*@
-                    <input id="btnAddUser" type="submit" name="button" value="Save &amp; Close" style="width:175px" onclick="location.href='@Url.Action("EditUser", "Users")" />
 
-                </div>
-
-
-                <!-- CloseButton (Shape) -->
-                <div id="u1041" class="ax_default button" data-label="CloseButton">
-                    @*<input id="submit" value="Close Without Saving" type="button" style="width:175px" />*@
-                    <input id="btnAddUser" value="Close Without Saving" type="button" style="width:175px" onclick="@("window.location.href='" + @Url.Action("ViewUser", "Users") + "'")" ; />
-                </div>
 
 
                 <!-- DeactButton (Shape) -->
@@ -157,11 +180,46 @@
 
                 <!-- Role Selection (List Box) -->
                 <div id="u1376" class="ax_default list_box">
-                    @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new { @class = "listbox" })
+                    @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new {  @class = "listbox",  @id = "lstSelect" })
                     &nbsp;
                     @Html.ValidationMessageFor(m => m.SelectedRolesValues, "", new { @class = "error" })
                 </div>
 
+            </div>
+        </div>
+
+
+        <!-- RolesEditPanel (Dynamic Panel) -->
+        <div id="u425" class="ax_default" data-label="RolesEditPanel" style="display:none">
+            <div id="u425_state0" class="panel_state" data-label="State1" style="">
+                <div id="u425_state0_content" class="panel_state_content">
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u426" class="ax_default box_1">
+                        <div id="u426_div" class=""></div>
+                        <div id="u426_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Rectangle) -->
+                    <div id="u427" class="ax_default box_1">
+                        <div id="u427_div" class=""></div>
+                        <div id="u427_text" class="text ">
+                            <input type="hidden" name="selectedItems" id="selectedItems" />
+                            <label id="lblRoleName" style="color:black" />
+                        </div>
+                    </div>
+
+
+                    <!-- PurchaseWsPanel (Dynamic Panel) -->
+                    <div id="u452" class="ax_default" data-label="PurchaseWsPanel" style="display:none">
+
+
+                    </div>
+
+
+                </div>
             </div>
         </div>
 
@@ -170,7 +228,7 @@
     }
 
 </body>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
+@*@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")*@
 
 </html>

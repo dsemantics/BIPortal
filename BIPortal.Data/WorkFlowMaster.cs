@@ -16,13 +16,15 @@ namespace BIPortal.Data
     {
         public int RequestID { get; set; }
         public string WorkspaceID { get; set; }
+        public string WorkspaceName { get; set; }
+        public string ReportID { get; set; }
+        public string ReportName { get; set; }
         public Nullable<int> OwnerID { get; set; }
-        public Nullable<int> RequestedBy { get; set; }
-        public Nullable<System.DateTime> RequestedDate { get; set; }
+        public string RequestedBy { get; set; }
+        public System.DateTime RequestedDate { get; set; }
         public Nullable<System.DateTime> ProcessedDate { get; set; }
         public string Status { get; set; }
     
         public virtual UserMaster UserMaster { get; set; }
-        public virtual UserMaster UserMaster1 { get; set; }
     }
 }

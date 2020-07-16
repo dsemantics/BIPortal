@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BIPortal.Data;
+using BIPortal.Data.Roles;
 using BIPortal.Data.Users;
 using BIPortal.DTO;
 using BIPortal.Models;
@@ -37,6 +38,7 @@ namespace BIPortalServices.Controllers
                         cfg.CreateMap<UserRoleMappingModel, UserRoleMappingDTO>();
                         cfg.CreateMap<WorkFlowMasterModel, WorkFlowMasterDTO>();
                         cfg.CreateMap<WorkFlowDetailsModel, WorkFlowDetailsDTO>();
+                        cfg.CreateMap<UserAccessRightsModel, UserAccessRightsDTO>();
                     });
                     IMapper mapper = config.CreateMapper();
 
@@ -143,6 +145,172 @@ namespace BIPortalServices.Controllers
         //    }
         //}
 
+
+        [Route("api/GetUserRights")]
+        //To get access rights
+        public IHttpActionResult GetUserRights([FromUri] List<string> roleID)
+        {
+            try
+            {
+
+                RolesData roleRightsData = new RolesData();
+                UsersData addUserData = new UsersData();
+                var rights = addUserData.GetRights(roleID);
+
+                var workspaceReports = roleRightsData.GetWorkspacesAndReports();
+
+                //WorkSpaceData workSpaceData = new WorkSpaceData();
+                //var workSpaceAndReports = workSpaceData.GetPowerBIWorkspace();
+
+                List<RoleRightsMappingDTO> roleRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var b in workspaceReports)
+                {
+                    RoleRightsMappingDTO a = new RoleRightsMappingDTO();
+                    //a.ID = 0;
+                    a.WorkspaceID = b.WorkspaceID;
+                    a.WorkspaceName = b.WorkspaceName;
+                    a.ReportID = b.ReportID;
+                    a.ReportName = b.ReportName;
+                    roleRightsMappingsList.Add(a);
+                }
+                List<RoleRightsMappingDTO> updatedRoleRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var s in roleRightsMappingsList)
+                {
+                    updatedRoleRightsMappingsList.Add(s);
+                }
+
+                foreach (var l1 in roleRightsMappingsList)
+                {
+                    bool existed = false;
+                    foreach (var l2 in rights)
+                    {
+                        if (l1.WorkspaceID == l2.WorkspaceID && l1.ReportID == l2.ReportID)
+                        {
+                            existed = true;
+                            break;
+                        }
+                    }
+                    if (existed)
+                    {
+                        updatedRoleRightsMappingsList.Remove(l1);
+                    }
+                }
+
+                rights = rights.Concat(updatedRoleRightsMappingsList);
+                return Ok(rights);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch rights");
+            }
+        }
+
+
+        [Route("api/GetEditUserRights")]
+        //To get access rights
+        public IHttpActionResult GetEditUserRights([FromUri] List<string> roleID, int userID)
+        {
+            try
+            {
+
+                RolesData roleRightsData = new RolesData();
+                UsersData addUserData = new UsersData();
+
+                var roleRights = addUserData.GetRights(roleID);
+
+                var accessRights = addUserData.GetEditUserRights(userID);
+
+                var workspaceReports = roleRightsData.GetWorkspacesAndReports();
+
+                List<RoleRightsMappingDTO> roleRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var b in workspaceReports)
+                {
+                    RoleRightsMappingDTO a = new RoleRightsMappingDTO();
+                    //a.ID = 0;
+                    a.WorkspaceID = b.WorkspaceID;
+                    a.WorkspaceName = b.WorkspaceName;
+                    a.ReportID = b.ReportID;
+                    a.ReportName = b.ReportName;
+                    roleRightsMappingsList.Add(a);
+                }
+                List<RoleRightsMappingDTO> updatedRoleRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var s in roleRightsMappingsList)
+                {
+                    updatedRoleRightsMappingsList.Add(s);
+                }
+
+                foreach (var l1 in roleRightsMappingsList)
+                {
+                    bool existed = false;
+                    foreach (var l2 in roleRights)
+                    {
+                        if (l1.WorkspaceID == l2.WorkspaceID && l1.ReportID == l2.ReportID)
+                        {
+                            existed = true;
+                            break;
+                        }
+                    }
+                    if (existed)
+                    {
+                        updatedRoleRightsMappingsList.Remove(l1);
+                    }
+                }
+
+                roleRights = roleRights.Concat(updatedRoleRightsMappingsList);
+
+                // User Access right mapping to roles rights
+                List<RoleRightsMappingDTO> roleAccessRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var b in accessRights)
+                {
+                    RoleRightsMappingDTO c = new RoleRightsMappingDTO();
+                    c.WorkspaceID = b.WorkspaceID;
+                    c.WorkspaceName = b.WorkspaceName;
+                    c.ReportID = b.ReportID;
+                    c.ReportName = b.ReportName;
+                    roleAccessRightsMappingsList.Add(c);
+                }
+
+                List<RoleRightsMappingDTO> updateUserRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var s in roleAccessRightsMappingsList)
+                {
+                    updateUserRightsMappingsList.Add(s);
+                }
+
+                foreach (var l1 in roleAccessRightsMappingsList)
+                {
+                    bool existed = false;
+                    foreach (var l2 in roleRights)
+                    {
+                        if (l1.WorkspaceID == l2.WorkspaceID && l1.ReportID == l2.ReportID)
+                        {
+                            existed = true;
+                            break;
+                        }
+                    }
+                    if (existed)
+                    {
+                        updateUserRightsMappingsList.Remove(l1);
+                    }
+                }
+
+                roleRights = roleRights.Concat(updateUserRightsMappingsList);
+
+
+                return Ok(roleRights);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch rights");
+            }
+        }
+
+
         [AcceptVerbs("GET", "POST")]
         [Route("api/UpdateUser")]
         public IHttpActionResult UpdateUser(UsersModel EditUserModel)
@@ -153,38 +321,29 @@ namespace BIPortalServices.Controllers
                 //if (!ModelState.IsValid)
                 //    return BadRequest("Not a valid model");
 
-                using (var ctx = new BIPortalEntities())
+                if (!ModelState.IsValid)
                 {
-
-                    var EditUserData = ctx.UserMasters.Where(x => x.UserID == EditUserModel.UserID).FirstOrDefault();
-                    if (EditUserData != null)
-                    {
-                        EditUserData.EmailID = EditUserModel.EmailID;
-                        EditUserData.FirstName = EditUserModel.FirstName;
-                        EditUserData.LastName = EditUserModel.LastName;
-                        //EditUserData.PermissionMaster.PermissionID = EditUserModel.PermissionMaster.PermissionID;
-                        EditUserData.PermissionID = EditUserModel.PermissionID;
-                        EditUserData.Salutation = EditUserModel.Salutation;
-                        //EditUserData.CreatedDate = EditUserModel.CreatedDate;
-                        EditUserData.ModifiedBy = "Selva";
-                        EditUserData.ModifiedDate  = DateTime.Now;
-                        //EditUserData.CreatedBy = EditUserModel.CreatedBy;
-                        EditUserData.Active = EditUserModel.Active;
-
-
-                        //EditUserData.EmailID = "demooooo@ds.com";
-                        //EditUserData.FirstName = "Demooooo";
-                        //EditUserData.LastName = "Demoooouserrrrr1";
-                        //EditUserData.PermissionMaster.PermissionName = "1";
-                        //EditUserData.Salutation = "Miss";
-                        //EditUserData.Active = true;
-
-                        ctx.SaveChanges();
-                    }
+                    return BadRequest("Not a valid model");
                 }
+                else
+                {
+                    UsersData updateUserData = new UsersData();
+                    var config = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<UsersModel, UsersDTO>();
+                        cfg.CreateMap<UserRoleMappingModel, UserRoleMappingDTO>();
+                        cfg.CreateMap<WorkFlowMasterModel, WorkFlowMasterDTO>();
+                        cfg.CreateMap<WorkFlowDetailsModel, WorkFlowDetailsDTO>();
+                        cfg.CreateMap<UserAccessRightsModel, UserAccessRightsDTO>();
+                    });
+                    IMapper mapper = config.CreateMapper();
 
-                return Ok();
+                    var updateUserDatamapping = mapper.Map<UsersModel, UsersDTO>(EditUserModel);
 
+                    updateUserData.UpdateUsersData(updateUserDatamapping);
+
+                    return Created("api/UpdateUser", true);
+                }
 
             }
             catch (Exception ex)
