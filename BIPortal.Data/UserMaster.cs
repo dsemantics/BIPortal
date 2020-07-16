@@ -17,10 +17,10 @@ namespace BIPortal.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserMaster()
         {
-            this.UserRoleMappings = new HashSet<UserRoleMapping>();
-            this.WorkSpaceOwnerMasters = new HashSet<WorkSpaceOwnerMaster>();
             this.UserAccessRights = new HashSet<UserAccessRight>();
+            this.UserRoleMappings = new HashSet<UserRoleMapping>();
             this.WorkFlowMasters = new HashSet<WorkFlowMaster>();
+            this.WorkSpaceOwnerMasters = new HashSet<WorkSpaceOwnerMaster>();
         }
     
         public int UserID { get; set; }
@@ -37,12 +37,12 @@ namespace BIPortal.Data
     
         public virtual PermissionMaster PermissionMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserAccessRight> UserAccessRights { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkFlowMaster> WorkFlowMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
     }
 }

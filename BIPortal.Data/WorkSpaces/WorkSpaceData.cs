@@ -97,16 +97,16 @@ namespace BIPortal.Data.WorkSpaces
             using (var context = new BIPortalEntities())
             {
                 //var workspaceOwnerResult = context.WorkspaceReportsMasters.Include("WorkSpaceOwnerMaster").ToList();
-                var workspaceOwnerResult = context.GetWorkspaceOwner().ToList();
+                var workspaceOwnerResult = context.GetWorkspaceOwner1().ToList();
                 var config = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<GetWorkspaceOwner_Result, WorkSpaceOwnerDTO>();
+                    cfg.CreateMap<GetWorkspaceOwner1_Result, WorkSpaceOwnerDTO>();
                     //cfg.CreateMap<WorkspaceReportsMaster, WorkspaceReportsDTO>();
                     //cfg.CreateMap<WorkSpaceOwnerMaster,WorkSpaceOwnerDTO>();
                 });
                 IMapper mapper = config.CreateMapper();
 
-                return mapper.Map<List<GetWorkspaceOwner_Result>, List<WorkSpaceOwnerDTO>>(workspaceOwnerResult);
+                return mapper.Map<List<GetWorkspaceOwner1_Result>, List<WorkSpaceOwnerDTO>>(workspaceOwnerResult);
             }
         }
 

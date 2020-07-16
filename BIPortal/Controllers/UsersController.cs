@@ -96,48 +96,58 @@ namespace BIPortal.Controllers
             ViewBag.Message = "My Profile Page";
             IEnumerable<UsersModel> UsersList = null;
 
-            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
-
-            using (var client = new HttpClient())
+            if (Session["UserName"] == null)
             {
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var responseTask = client.GetAsync("api/GetCurrentUser");
-                responseTask.Wait();
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
+                return View();
+            }
+            else
+            {
+                var emailID = Session["UserName"].ToString();
+
+                string Baseurl = ConfigurationManager.AppSettings["baseURL"];
+
+                using (var client = new HttpClient())
                 {
-                    var readTask = result.Content.ReadAsAsync<List<UsersDTO>>();
-                    readTask.Wait();
-
-                    var config = new MapperConfiguration(cfg =>
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //var responseTask = client.GetAsync("api/GetCurrentUser");
+                    var responseTask = client.GetAsync(string.Format("api/GetCurrentUser/?emailID={0}", emailID));
+                    responseTask.Wait();
+                    var result = responseTask.Result;
+                    if (result.IsSuccessStatusCode)
                     {
-                        cfg.CreateMap<UsersDTO, UsersModel>();
-                        cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
-                        cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
-                    });
-                    IMapper mapper = config.CreateMapper();
+                        var readTask = result.Content.ReadAsAsync<List<UsersDTO>>();
+                        readTask.Wait();
 
-                    UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
+                        var config = new MapperConfiguration(cfg =>
+                        {
+                            cfg.CreateMap<UsersDTO, UsersModel>();
+                            cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+                            cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
+                        });
+                        IMapper mapper = config.CreateMapper();
+
+                        UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
+                    }
                 }
+
+                //ViewBag.Name = "Selva";
+                //ViewBag.EmailID = UsersList.Select(l => l.EmailID).ToString();
+
+                foreach (var item in UsersList)
+                {
+                    ViewBag.EmailID = item.EmailID;
+                    ViewBag.FirstName = item.FirstName;
+                    ViewBag.LastName = item.LastName;
+                    //ViewBag.Creationdate = item.CreatedDate;
+                    ViewBag.Creationdate = item.CreatedDate.ToString("dd/MM/yyyy");
+                    ViewBag.PermissionType = item.PermissionMaster.PermissionName;
+                    ViewBag.Saluation = item.Salutation;
+                }
+
+                return View(UsersList);
             }
-
-            //ViewBag.Name = "Selva";
-            //ViewBag.EmailID = UsersList.Select(l => l.EmailID).ToString();
-
-            foreach (var item in UsersList)
-            {
-                ViewBag.EmailID = item.EmailID;
-                ViewBag.FirstName = item.FirstName;
-                ViewBag.LastName = item.LastName;
-                //ViewBag.Creationdate = item.CreatedDate;
-                ViewBag.Creationdate = item.CreatedDate.ToString("dd/MM/yyyy");
-                ViewBag.PermissionType = item.PermissionMaster.PermissionName;
-                ViewBag.Saluation = item.Salutation;
-            }
-
-            return View(UsersList);
         }
 
 
@@ -599,7 +609,9 @@ namespace BIPortal.Controllers
 
             }
 
-                return View(AddUserModel);
+            
+
+            return View(AddUserModel);
         }
 
 

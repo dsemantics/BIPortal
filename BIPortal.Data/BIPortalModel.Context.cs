@@ -30,16 +30,21 @@ namespace BIPortal.Data
         public virtual DbSet<RoleMaster> RoleMasters { get; set; }
         public virtual DbSet<UserRoleMapping> UserRoleMappings { get; set; }
         public virtual DbSet<PermissionMaster> PermissionMasters { get; set; }
-        public virtual DbSet<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
         public virtual DbSet<RoleRightsMapping> RoleRightsMappings { get; set; }
-        public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<WorkspaceReportsMaster> WorkspaceReportsMasters { get; set; }
         public virtual DbSet<UserAccessRight> UserAccessRights { get; set; }
         public virtual DbSet<WorkFlowMaster> WorkFlowMasters { get; set; }
+        public virtual DbSet<WorkSpaceOwnerMaster> WorkSpaceOwnerMasters { get; set; }
+        public virtual DbSet<UserMaster> UserMasters { get; set; }
     
         public virtual ObjectResult<GetWorkspaceOwner_Result> GetWorkspaceOwner()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWorkspaceOwner_Result>("GetWorkspaceOwner");
+        }
+    
+        public virtual ObjectResult<GetWorkspaceOwner1_Result> GetWorkspaceOwner1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWorkspaceOwner1_Result>("GetWorkspaceOwner1");
         }
     }
 }

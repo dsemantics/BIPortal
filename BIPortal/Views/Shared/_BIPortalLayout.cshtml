@@ -541,7 +541,7 @@
             <div id="u679_div" class=""></div>
             <div id="u679_text" class="text ">
                 @*<p><span>Selva</span></p>*@
-                @Html.Label("",(String)ViewBag.UserName)                                
+                @Html.Label("",(String)Session["UserName"])                                
             </div>
         </div>
 
@@ -550,7 +550,7 @@
             <div id="u680_div" class=""></div>
             <div id="u680_text" class="text ">
                 @*<p><span>XXXXX</span></p>*@
-                @Html.Label("", (String)ViewBag.datetime)
+                @Html.Label("", (String)Session["CurrentDateTime"])
             </div>
         </div>
 

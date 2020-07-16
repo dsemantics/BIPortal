@@ -97,11 +97,11 @@ namespace BIPortalServices.Controllers
 
        
         [Route("api/GetCurrentUser")]
-        public IHttpActionResult GetCurrentUser()
+        public IHttpActionResult GetCurrentUser(string emailID)
         {
             try
             {
-                string sCurrentUserDetail = "Selva.kumar@datasematics.in";
+                string sCurrentUserDetail = emailID;
                 UsersData usersData = new UsersData();
                 var users = usersData.GetCurrentUser(sCurrentUserDetail);
 
