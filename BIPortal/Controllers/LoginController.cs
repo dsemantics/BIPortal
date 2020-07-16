@@ -13,6 +13,7 @@ using BIPortal.Models;
 using System.Net.Http.Headers;
 using System.Configuration;
 using System.Net.Http;
+using System.Net;
 
 namespace BIPortal.Controllers
 {
@@ -71,15 +72,27 @@ namespace BIPortal.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //HTTP POST
-                var postTask = client.PostAsJsonAsync<LoginModel>(Baseurl, loginModel);
+                var postTask = client.PostAsJsonAsync<LoginModel>(Baseurl, loginModel);               
                 postTask.Wait();
 
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Index", "Administration");
+                    var readTask = result.Content.ReadAsAsync<string>();
+                    readTask.Wait();
+                    if (readTask.Result == "Authentication failed")
+                    {
+                        ViewBag.ErrorMessage = "The Email and/or Password are incorrect";
+                    }
+                    else
+                    {
+                        Session["UserName"] = readTask.Result;                        
+                        return RedirectToAction("Index", "Administration");
+                    }
                 }
             }
+
+
             return View();
         }
 

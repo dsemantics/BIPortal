@@ -125,7 +125,7 @@ namespace BIPortal.Data.Users
                 cfg.CreateMap<UsersDTO, UserMaster>();
                 cfg.CreateMap<UserRoleMappingDTO, UserRoleMapping>();
                 cfg.CreateMap<WorkFlowMasterDTO, WorkFlowMaster>();
-                cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
+                //cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
 
             });
             IMapper mapper = config.CreateMapper();

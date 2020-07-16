@@ -12,6 +12,8 @@ namespace BIPortal.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Administration Page";
+            ViewBag.UserName = Session["UserName"];
+            ViewBag.datetime = DateTime.Now.ToString();
             return View();
         }
     }

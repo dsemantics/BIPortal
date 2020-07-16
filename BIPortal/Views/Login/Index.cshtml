@@ -80,6 +80,14 @@
             </div>
         </div>
 
+        <div id="u30" class="ax_default heading_1" data-label="Email">
+            @*<div id="u8_div" class=""></div>*@
+            <div id="u30_text" class="text ">
+                @if (@ViewBag.ErrorMessage != null)
+                {@Html.Label((string)@ViewBag.ErrorMessage)}
+            </div>
+        </div>
+
         <!-- Email (Rectangle) -->
         <div id="u8" class="ax_default heading_1" data-label="Email">
             <div id="u8_div" class=""></div>
@@ -96,8 +104,8 @@
             @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", style = "height:28px;", placeholder = "Enter your Email" })
             &nbsp;
             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "error" })
-        </div>          
-        
+        </div>
+
         <!-- Password (Rectangle) -->
         <div id="u10" class="ax_default heading_1" data-label="Password">
             <div id="u10_div" class=""></div>

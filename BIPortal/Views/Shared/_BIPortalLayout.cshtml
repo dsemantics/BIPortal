@@ -537,7 +537,8 @@
         <div id="u679" class="ax_default label" data-label="Logged User">
             <div id="u679_div" class=""></div>
             <div id="u679_text" class="text ">
-                <p><span>Selva</span></p>
+                @*<p><span>Selva</span></p>*@
+                @Html.Label("",(String)ViewBag.UserName)                                
             </div>
         </div>
 
@@ -545,7 +546,8 @@
         <div id="u680" class="ax_default label" data-label="Time">
             <div id="u680_div" class=""></div>
             <div id="u680_text" class="text ">
-                <p><span>XXXXX</span></p>
+                @*<p><span>XXXXX</span></p>*@
+                @Html.Label("", (String)ViewBag.datetime)
             </div>
         </div>
 

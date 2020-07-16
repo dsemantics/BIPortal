@@ -4,149 +4,138 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BIPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="BIPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="PermissionMaster">
           <Key>
             <PropertyRef Name="PermissionID" />
           </Key>
-          <Property Name="PermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PermissionName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PermissionDescription" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PermissionID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="PermissionName" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="PermissionDescription" MaxLength="500" Type="nvarchar" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="RoleMaster">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="RoleDescription" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="RoleName" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="RoleDescription" MaxLength="500" Type="nvarchar" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="RoleRightsMapping">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
           <Property Name="RoleID" Type="int" />
-          <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="WorkspaceName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ReportID" Type="nvarchar" MaxLength="50" />
-          <Property Name="ReportName" Type="nvarchar" MaxLength="200" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkspaceID" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="WorkspaceName" Nullable="false" MaxLength="200" Type="nvarchar" />
+          <Property Name="ReportID" MaxLength="50" Type="nvarchar" />
+          <Property Name="ReportName" MaxLength="200" Type="nvarchar" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="UserAccessRights">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
           <Property Name="UserID" Type="int" />
-          <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="WorkspaceName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ReportID" Type="nvarchar" MaxLength="50" />
-          <Property Name="ReportName" Type="nvarchar" MaxLength="200" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkspaceID" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="WorkspaceName" Nullable="false" MaxLength="200" Type="nvarchar" />
+          <Property Name="ReportID" MaxLength="50" Type="nvarchar" />
+          <Property Name="ReportName" MaxLength="200" Type="nvarchar" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Salutation" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="EmailID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Salutation" Nullable="false" MaxLength="10" Type="nvarchar" />
+          <Property Name="FirstName" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="LastName" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="EmailID" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="PermissionID" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="UserRoleMapping">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
           <Property Name="UserID" Type="int" />
           <Property Name="RoleID" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="WorkFlowDetails">
-          <Key>
-            <PropertyRef Name="RequestDetailID" />
-          </Key>
-          <Property Name="RequestDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RequestID" Type="int" />
-          <Property Name="ReportID" Type="nvarchar" MaxLength="50" />
-          <Property Name="RequestedDate" Type="datetime" />
-          <Property Name="ProcessedDate" Type="datetime" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="WorkFlowMaster">
           <Key>
             <PropertyRef Name="RequestID" />
           </Key>
-          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="RequestID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="WorkspaceID" MaxLength="50" Type="nvarchar" />
           <Property Name="OwnerID" Type="int" />
           <Property Name="RequestedBy" Type="int" />
           <Property Name="RequestedDate" Type="datetime" />
           <Property Name="ProcessedDate" Type="datetime" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" MaxLength="50" Type="nvarchar" />
         </EntityType>
         <EntityType Name="WorkSpaceOwnerMaster">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="WorkspaceID" MaxLength="50" Type="nvarchar" />
           <Property Name="OwnerID" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" Nullable="false" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="Active" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="WorkspaceReportsMaster">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WorkspaceID" Type="nvarchar" MaxLength="50" />
-          <Property Name="WorkspaceName" Type="nvarchar" MaxLength="200" />
-          <Property Name="ReportID" Type="nvarchar" MaxLength="50" />
-          <Property Name="ReportName" Type="nvarchar" MaxLength="200" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="WorkspaceID" MaxLength="50" Type="nvarchar" />
+          <Property Name="WorkspaceName" MaxLength="200" Type="nvarchar" />
+          <Property Name="ReportID" MaxLength="50" Type="nvarchar" />
+          <Property Name="ReportName" MaxLength="200" Type="nvarchar" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="CreatedBy" MaxLength="100" Type="nvarchar" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
-          <Property Name="WorkspaceActive" Type="bit" Nullable="false" />
-          <Property Name="ReportActive" Type="bit" Nullable="false" />
+          <Property Name="ModifiedBy" MaxLength="100" Type="nvarchar" />
+          <Property Name="WorkspaceActive" Nullable="false" Type="bit" />
+          <Property Name="ReportActive" Nullable="false" Type="bit" />
         </EntityType>
         <Association Name="FK__RoleRight__RoleI__797309D9">
-          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="0..1" />
-          <End Role="RoleRightsMapping" Type="Self.RoleRightsMapping" Multiplicity="*" />
+          <End Type="Self.RoleMaster" Multiplicity="0..1" Role="RoleMaster" />
+          <End Type="Self.RoleRightsMapping" Multiplicity="*" Role="RoleRightsMapping" />
           <ReferentialConstraint>
             <Principal Role="RoleMaster">
               <PropertyRef Name="RoleID" />
@@ -157,8 +146,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserAcces__UserI__25518C17">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
-          <End Role="UserAccessRights" Type="Self.UserAccessRights" Multiplicity="*" />
+          <End Type="Self.UserMaster" Multiplicity="0..1" Role="UserMaster" />
+          <End Type="Self.UserAccessRights" Multiplicity="*" Role="UserAccessRights" />
           <ReferentialConstraint>
             <Principal Role="UserMaster">
               <PropertyRef Name="UserID" />
@@ -169,8 +158,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserMaste__Permi__72C60C4A">
-          <End Role="PermissionMaster" Type="Self.PermissionMaster" Multiplicity="0..1" />
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <End Type="Self.PermissionMaster" Multiplicity="0..1" Role="PermissionMaster" />
+          <End Type="Self.UserMaster" Multiplicity="*" Role="UserMaster" />
           <ReferentialConstraint>
             <Principal Role="PermissionMaster">
               <PropertyRef Name="PermissionID" />
@@ -181,8 +170,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserRoleM__RoleI__7E37BEF6">
-          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="0..1" />
-          <End Role="UserRoleMapping" Type="Self.UserRoleMapping" Multiplicity="*" />
+          <End Type="Self.RoleMaster" Multiplicity="0..1" Role="RoleMaster" />
+          <End Type="Self.UserRoleMapping" Multiplicity="*" Role="UserRoleMapping" />
           <ReferentialConstraint>
             <Principal Role="RoleMaster">
               <PropertyRef Name="RoleID" />
@@ -193,8 +182,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserRoleM__UserI__7D439ABD">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
-          <End Role="UserRoleMapping" Type="Self.UserRoleMapping" Multiplicity="*" />
+          <End Type="Self.UserMaster" Multiplicity="0..1" Role="UserMaster" />
+          <End Type="Self.UserRoleMapping" Multiplicity="*" Role="UserRoleMapping" />
           <ReferentialConstraint>
             <Principal Role="UserMaster">
               <PropertyRef Name="UserID" />
@@ -204,21 +193,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WorkFlowD__Reque__09A971A2">
-          <End Role="WorkFlowMaster" Type="Self.WorkFlowMaster" Multiplicity="0..1" />
-          <End Role="WorkFlowDetails" Type="Self.WorkFlowDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkFlowMaster">
-              <PropertyRef Name="RequestID" />
-            </Principal>
-            <Dependent Role="WorkFlowDetails">
-              <PropertyRef Name="RequestID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__WorkFlowM__Owner__05D8E0BE">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
-          <End Role="WorkFlowMaster" Type="Self.WorkFlowMaster" Multiplicity="*" />
+          <End Type="Self.UserMaster" Multiplicity="0..1" Role="UserMaster" />
+          <End Type="Self.WorkFlowMaster" Multiplicity="*" Role="WorkFlowMaster" />
           <ReferentialConstraint>
             <Principal Role="UserMaster">
               <PropertyRef Name="UserID" />
@@ -229,8 +206,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__WorkFlowM__Reque__06CD04F7">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
-          <End Role="WorkFlowMaster" Type="Self.WorkFlowMaster" Multiplicity="*" />
+          <End Type="Self.UserMaster" Multiplicity="0..1" Role="UserMaster" />
+          <End Type="Self.WorkFlowMaster" Multiplicity="*" Role="WorkFlowMaster" />
           <ReferentialConstraint>
             <Principal Role="UserMaster">
               <PropertyRef Name="UserID" />
@@ -241,8 +218,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__WorkSpace__Owner__02084FDA">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
-          <End Role="WorkSpaceOwnerMaster" Type="Self.WorkSpaceOwnerMaster" Multiplicity="*" />
+          <End Type="Self.UserMaster" Multiplicity="0..1" Role="UserMaster" />
+          <End Type="Self.WorkSpaceOwnerMaster" Multiplicity="*" Role="WorkSpaceOwnerMaster" />
           <ReferentialConstraint>
             <Principal Role="UserMaster">
               <PropertyRef Name="UserID" />
@@ -260,45 +237,40 @@
           <EntitySet Name="UserAccessRights" EntityType="Self.UserAccessRights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoleMapping" EntityType="Self.UserRoleMapping" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkFlowDetails" EntityType="Self.WorkFlowDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkFlowMaster" EntityType="Self.WorkFlowMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkSpaceOwnerMaster" EntityType="Self.WorkSpaceOwnerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkspaceReportsMaster" EntityType="Self.WorkspaceReportsMaster" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__RoleRight__RoleI__797309D9" Association="Self.FK__RoleRight__RoleI__797309D9">
-            <End Role="RoleMaster" EntitySet="RoleMaster" />
-            <End Role="RoleRightsMapping" EntitySet="RoleRightsMapping" />
+            <End EntitySet="RoleMaster" Role="RoleMaster" />
+            <End EntitySet="RoleRightsMapping" Role="RoleRightsMapping" />
           </AssociationSet>
           <AssociationSet Name="FK__UserAcces__UserI__25518C17" Association="Self.FK__UserAcces__UserI__25518C17">
-            <End Role="UserMaster" EntitySet="UserMaster" />
-            <End Role="UserAccessRights" EntitySet="UserAccessRights" />
+            <End EntitySet="UserMaster" Role="UserMaster" />
+            <End EntitySet="UserAccessRights" Role="UserAccessRights" />
           </AssociationSet>
           <AssociationSet Name="FK__UserMaste__Permi__72C60C4A" Association="Self.FK__UserMaste__Permi__72C60C4A">
-            <End Role="PermissionMaster" EntitySet="PermissionMaster" />
-            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End EntitySet="PermissionMaster" Role="PermissionMaster" />
+            <End EntitySet="UserMaster" Role="UserMaster" />
           </AssociationSet>
           <AssociationSet Name="FK__UserRoleM__RoleI__7E37BEF6" Association="Self.FK__UserRoleM__RoleI__7E37BEF6">
-            <End Role="RoleMaster" EntitySet="RoleMaster" />
-            <End Role="UserRoleMapping" EntitySet="UserRoleMapping" />
+            <End EntitySet="RoleMaster" Role="RoleMaster" />
+            <End EntitySet="UserRoleMapping" Role="UserRoleMapping" />
           </AssociationSet>
           <AssociationSet Name="FK__UserRoleM__UserI__7D439ABD" Association="Self.FK__UserRoleM__UserI__7D439ABD">
-            <End Role="UserMaster" EntitySet="UserMaster" />
-            <End Role="UserRoleMapping" EntitySet="UserRoleMapping" />
-          </AssociationSet>
-          <AssociationSet Name="FK__WorkFlowD__Reque__09A971A2" Association="Self.FK__WorkFlowD__Reque__09A971A2">
-            <End Role="WorkFlowMaster" EntitySet="WorkFlowMaster" />
-            <End Role="WorkFlowDetails" EntitySet="WorkFlowDetails" />
+            <End EntitySet="UserMaster" Role="UserMaster" />
+            <End EntitySet="UserRoleMapping" Role="UserRoleMapping" />
           </AssociationSet>
           <AssociationSet Name="FK__WorkFlowM__Owner__05D8E0BE" Association="Self.FK__WorkFlowM__Owner__05D8E0BE">
-            <End Role="UserMaster" EntitySet="UserMaster" />
-            <End Role="WorkFlowMaster" EntitySet="WorkFlowMaster" />
+            <End EntitySet="UserMaster" Role="UserMaster" />
+            <End EntitySet="WorkFlowMaster" Role="WorkFlowMaster" />
           </AssociationSet>
           <AssociationSet Name="FK__WorkFlowM__Reque__06CD04F7" Association="Self.FK__WorkFlowM__Reque__06CD04F7">
-            <End Role="UserMaster" EntitySet="UserMaster" />
-            <End Role="WorkFlowMaster" EntitySet="WorkFlowMaster" />
+            <End EntitySet="UserMaster" Role="UserMaster" />
+            <End EntitySet="WorkFlowMaster" Role="WorkFlowMaster" />
           </AssociationSet>
           <AssociationSet Name="FK__WorkSpace__Owner__02084FDA" Association="Self.FK__WorkSpace__Owner__02084FDA">
-            <End Role="UserMaster" EntitySet="UserMaster" />
-            <End Role="WorkSpaceOwnerMaster" EntitySet="WorkSpaceOwnerMaster" />
+            <End EntitySet="UserMaster" Role="UserMaster" />
+            <End EntitySet="WorkSpaceOwnerMaster" Role="WorkSpaceOwnerMaster" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -328,13 +300,8 @@
             <End Role="UserRoleMapping" EntitySet="UserRoleMappings" />
           </AssociationSet>
           <EntitySet Name="PermissionMasters" EntityType="BIPortalModel.PermissionMaster" />
-          <EntitySet Name="WorkFlowDetails" EntityType="BIPortalModel.WorkFlowDetail" />
           <EntitySet Name="WorkFlowMasters" EntityType="BIPortalModel.WorkFlowMaster" />
           <EntitySet Name="WorkSpaceOwnerMasters" EntityType="BIPortalModel.WorkSpaceOwnerMaster" />
-          <AssociationSet Name="FK__WorkFlowD__Reque__09A971A2" Association="BIPortalModel.FK__WorkFlowD__Reque__09A971A2">
-            <End Role="WorkFlowMaster" EntitySet="WorkFlowMasters" />
-            <End Role="WorkFlowDetail" EntitySet="WorkFlowDetails" />
-          </AssociationSet>
           <EntitySet Name="RoleRightsMappings" EntityType="BIPortalModel.RoleRightsMapping" />
           <AssociationSet Name="FK__RoleRight__RoleI__797309D9" Association="BIPortalModel.FK__RoleRight__RoleI__797309D9">
             <End Role="RoleMaster" EntitySet="RoleMasters" />
@@ -410,18 +377,6 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="UserMasters" Relationship="BIPortalModel.FK__UserMaste__Permi__72C60C4A" FromRole="PermissionMaster" ToRole="UserMaster" />
         </EntityType>
-        <EntityType Name="WorkFlowDetail">
-          <Key>
-            <PropertyRef Name="RequestDetailID" />
-          </Key>
-          <Property Name="RequestDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RequestID" Type="Int32" />
-          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
-          <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="WorkFlowMaster" Relationship="BIPortalModel.FK__WorkFlowD__Reque__09A971A2" FromRole="WorkFlowDetail" ToRole="WorkFlowMaster" />
-        </EntityType>
         <EntityType Name="WorkFlowMaster">
           <Key>
             <PropertyRef Name="RequestID" />
@@ -433,7 +388,6 @@
           <Property Name="RequestedDate" Type="DateTime" Precision="3" />
           <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="WorkFlowDetails" Relationship="BIPortalModel.FK__WorkFlowD__Reque__09A971A2" FromRole="WorkFlowMaster" ToRole="WorkFlowDetail" />
           <NavigationProperty Name="UserMaster" Relationship="BIPortalModel.FK__WorkFlowM__Owner__05D8E0BE" FromRole="WorkFlowMaster" ToRole="UserMaster" />
           <NavigationProperty Name="UserMaster1" Relationship="BIPortalModel.FK__WorkFlowM__Reque__06CD04F7" FromRole="WorkFlowMaster" ToRole="UserMaster" />
         </EntityType>
@@ -451,18 +405,6 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="UserMaster" Relationship="BIPortalModel.FK__WorkSpace__Owner__02084FDA" FromRole="WorkSpaceOwnerMaster" ToRole="UserMaster" />
         </EntityType>
-        <Association Name="FK__WorkFlowD__Reque__09A971A2">
-          <End Type="BIPortalModel.WorkFlowMaster" Role="WorkFlowMaster" Multiplicity="0..1" />
-          <End Type="BIPortalModel.WorkFlowDetail" Role="WorkFlowDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkFlowMaster">
-              <PropertyRef Name="RequestID" />
-            </Principal>
-            <Dependent Role="WorkFlowDetail">
-              <PropertyRef Name="RequestID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="RoleRightsMapping">
           <Key>
             <PropertyRef Name="ID" />
@@ -671,18 +613,6 @@
                 <ScalarProperty Name="PermissionDescription" ColumnName="PermissionDescription" />
                 <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
                 <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WorkFlowDetails">
-            <EntityTypeMapping TypeName="BIPortalModel.WorkFlowDetail">
-              <MappingFragment StoreEntitySet="WorkFlowDetails">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ProcessedDate" ColumnName="ProcessedDate" />
-                <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
-                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
-                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
-                <ScalarProperty Name="RequestDetailID" ColumnName="RequestDetailID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

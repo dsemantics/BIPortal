@@ -19,8 +19,8 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                string username = "venkata.murakunda@datasemantics.in"; //loginModel.UserName;
-                string password = "Khammam2";  //loginModel.Password;
+                string username = loginModel.UserName; //"venkata.murakunda@datasemantics.in";
+                string password = loginModel.Password; //"Khammam2";
                 string clientId = System.Configuration.ConfigurationManager.AppSettings["ClientId"];
                 string tenant = System.Configuration.ConfigurationManager.AppSettings["Tenant"];
 
@@ -32,9 +32,9 @@ namespace BIPortalServices.Controllers
                 foreach (char c in password.ToCharArray())
                     securePassword.AppendChar(c);
                 var result = await app.AcquireTokenByUsernamePassword(scopes, username, securePassword).ExecuteAsync();
-                //return result.IdToken;
 
-                return result.IdToken;
+                //return result.IdToken;
+                return result.Account.Username;
             }
             catch (Exception ex)
             {
