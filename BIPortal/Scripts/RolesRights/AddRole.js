@@ -106,6 +106,12 @@
         //    alert("Please select any one workspace");
         //    return false;
         //}
+
+        roleName = document.getElementById("u733_input").value;
+        if (roleName == "") {
+            alert("Please enter a role");
+            return false;
+        }
                
         //var data = { WorkspaceandReportList: workSpacesdata, RoleName: roleName };
         if (selectedItems.length == 0) {

@@ -1,0 +1,132 @@
+﻿@{
+    
+    Layout = "~/Views/Shared/_BIPortalLayout.cshtml";
+    ViewBag.Title = "CreateNewRequest";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>New Access Req</title>
+    <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Styles/Common/layout.css" type="text/css" rel="stylesheet" />
+    <link href="~/Styles/CreateRequest/new_access_req.css" type="text/css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script type="text/javascript">        
+        var selectedItems = [];
+        $(function () {
+            $('#u723').on('changed.jstree', function (e, data) {
+                var i, j;
+               
+                selectedItems = [];
+                
+                var selectedElms = $('#u723').jstree("get_selected", true);
+                $.each(selectedElms, function (i, selectedElm) {
+
+                    selectedItems.push(
+                        {
+                            id: this.id,
+                            parent: this.parent,
+                            text: this.text,
+                            parenttext: this.original.parenttext
+                        }
+                    );
+                });
+                
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                    },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+        });
+
+
+        $(document).ready(function () {
+            $(".btnSaveRights").click(function () {
+
+                if (selectedItems.length == 0) {
+                    alert("Please select any one workspace or report");
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    @using (Html.BeginForm())
+    {
+        <!-- Welcome out (Rectangle) -->
+        <div class="ax_default label" id="u1773" data-label="Welcome out">
+            <div id="u1773_div"></div>
+            <div class="text " id="u1773_text">
+                <p><span>New Request</span></p>
+            </div>
+        </div>
+
+
+        <!-- User Panel (Dynamic Panel) -->
+        <div class="ax_default" id="u1794" data-label="User Panel">
+            <div class="panel_state" id="u1794_state0" style="" data-label="FINSUPER">
+                <div class="panel_state_content" id="u1794_state0_content">
+
+                    <!-- SaveCloseButton (Shape) -->
+                    <div class="ax_default button" id="u1795" style="cursor: pointer;" data-label="SaveCloseButton">
+                        <img tabindex="0" class="img" id="u1795_img" src="~/images/users/adduserbutton_u832.svg">
+                        <div class="text " id="u1795_text">
+                            <input type="hidden" name="selectedItems" id="selectedItems" />
+                            <input id="btnSaveRights" value="Send for Approval" type="submit" class="btnSaveRights" />
+                        </div>
+                    </div>
+
+                    <!-- RolesEditPanel (Dynamic Panel) -->
+                    <div class="ax_default" id="u1796" data-label="RolesEditPanel">
+                        <div class="panel_state" id="u1796_state0" style="" data-label="State1">
+                            <div class="panel_state_content" id="u1796_state0_content">
+
+                                <!-- Unnamed (Rectangle) -->
+                                <div class="ax_default box_1" id="u1797">
+                                    <div id="u1797_div"></div>
+                                    <div class="text " id="u1797_text" style="display:none; visibility: hidden">
+                                        <p></p>
+                                    </div>
+                                </div>
+
+                                <!-- Unnamed (Rectangle) -->
+                                <div class="ax_default box_1" id="u1798">
+                                    <div id="u1798_div"></div>
+                                    <div class="text " id="u1798_text">
+                                        <p><span>Select</span></p>
+                                    </div>
+                                </div>
+
+                                <!-- HRWsPanel (Dynamic Panel) -->
+                                <div id="u723" class="ax_default" data-label="HRWsPanel">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </body>
+</html>
+

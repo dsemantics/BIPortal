@@ -250,6 +250,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\CreateRequestController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -345,6 +346,8 @@
     <Content Include="Images\Administration\user_menu_line_u171.svg" />
     <Content Include="Images\Administration\user_menu_line_u221.svg" />
     <Content Include="Images\Administration\user_menu_line_u232.svg" />
+    <Content Include="Images\new_access_req\new_request_u1769.svg" />
+    <Content Include="Images\new_access_req\new_request_u1770.svg" />
     <Content Include="Images\Dashboard\hide_panel_button_u39.png" />
     <Content Include="Images\Dashboard\hide_panel_button_u49.png" />
     <Content Include="Images\Dashboard\open_panel_u29.png" />
@@ -471,6 +474,8 @@
     <Content Include="Styles\Common\axure_rp_page.css" />
     <Content Include="Styles\Common\bootstrap.min.css" />
     <Content Include="Styles\Common\Data_Styles.css" />
+    <Content Include="Styles\Common\layout.css" />
+    <Content Include="Styles\CreateRequest\new_access_req.css" />
     <Content Include="Styles\Dashboard\Dashboard.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
     <Content Include="Styles\MyProfile\MyProfile_Styles.css" />
@@ -504,6 +509,7 @@
     <Content Include="Views\Users\ViewUser.cshtml" />
     <Content Include="Views\Users\LoadEditUser.cshtml" />
     <Content Include="Views\Users\MyProfile.cshtml" />
+    <Content Include="Views\CreateRequest\CreateNewRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
