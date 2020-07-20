@@ -19,8 +19,8 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                string username = loginModel.UserName; //"venkata.murakunda@datasemantics.in";
-                string password = loginModel.Password; //"Khammam2";
+                string username = loginModel.UserName; 
+                string password = loginModel.Password; 
                 string clientId = System.Configuration.ConfigurationManager.AppSettings["ClientId"];
                 string tenant = System.Configuration.ConfigurationManager.AppSettings["Tenant"];
 
