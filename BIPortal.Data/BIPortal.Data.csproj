@@ -76,6 +76,7 @@
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="NewRequest\NewRequestData.cs" />
+    <Compile Include="PendingApprovals\PendingApprovalsData.cs" />
     <Compile Include="PermissionMaster.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>
     </Compile>

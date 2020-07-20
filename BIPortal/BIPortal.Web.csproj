@@ -256,6 +256,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RolesRightsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\PendingApprovalsController.cs" />
     <Compile Include="Controllers\WorkspacesReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -383,6 +384,30 @@
     <Content Include="Images\Login\u1.png" />
     <Content Include="Images\Login\u14.svg" />
     <Content Include="Images\Login\u6.png" />
+    <Content Include="Images\pending_approvals\saveclosebutton_u2322.svg" />
+    <Content Include="Images\pending_approvals\saveclosebutton_u2322_mouseOver.svg" />
+    <Content Include="Images\pending_approvals\saveclosebutton_u2323.svg" />
+    <Content Include="Images\pending_approvals\saveclosebutton_u2323_mouseOver.svg" />
+    <Content Include="Images\pending_approvals\u2265.png" />
+    <Content Include="Images\pending_approvals\u2266.png" />
+    <Content Include="Images\pending_approvals\u2267.png" />
+    <Content Include="Images\pending_approvals\u2268.png" />
+    <Content Include="Images\pending_approvals\u2271.png" />
+    <Content Include="Images\pending_approvals\u2272.png" />
+    <Content Include="Images\pending_approvals\u2273.png" />
+    <Content Include="Images\pending_approvals\u2274.png" />
+    <Content Include="Images\pending_requests\saveclosebutton_u2044.svg" />
+    <Content Include="Images\pending_requests\saveclosebutton_u2044_mouseOver.svg" />
+    <Content Include="Images\pending_requests\saveclosebutton_u2045.svg" />
+    <Content Include="Images\pending_requests\saveclosebutton_u2045_mouseOver.svg" />
+    <Content Include="Images\pending_requests\u2046.png" />
+    <Content Include="Images\pending_requests\u2047.png" />
+    <Content Include="Images\pending_requests\u2048.png" />
+    <Content Include="Images\pending_requests\u2049.png" />
+    <Content Include="Images\pending_requests\u2055.png" />
+    <Content Include="Images\pending_requests\u2056.png" />
+    <Content Include="Images\pending_requests\u2057.png" />
+    <Content Include="Images\pending_requests\u2058.png" />
     <Content Include="Images\Roles_Rights\addrolebutton_u475.svg" />
     <Content Include="Images\Roles_Rights\addrolebutton_u475_mouseOver.svg" />
     <Content Include="Images\Roles_Rights\finwscb_u430.svg" />
@@ -464,6 +489,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PendingApprovals\ViewPendingApprovals.js" />
     <Content Include="Scripts\RolesRights\AddRole.js" />
     <Content Include="Scripts\RolesRights\ViewRole.js" />
     <Content Include="Scripts\Users\AddUser.js" />
@@ -479,6 +505,7 @@
     <Content Include="Styles\Dashboard\Dashboard.css" />
     <Content Include="Styles\Login\Login_Styles.css" />
     <Content Include="Styles\MyProfile\MyProfile_Styles.css" />
+    <Content Include="Styles\PendingApprovals\pending_approvals.css" />
     <Content Include="Styles\Roles_Rights\Roles_Rights.css" />
     <Content Include="Styles\Users\AddUser_Styles.css" />
     <Content Include="Styles\Users\EditUser_Styles.css" />
@@ -510,9 +537,11 @@
     <Content Include="Views\Users\LoadEditUser.cshtml" />
     <Content Include="Views\Users\MyProfile.cshtml" />
     <Content Include="Views\CreateRequest\CreateNewRequest.cshtml" />
+    <Content Include="Views\PendingApprovals\ViewPendingApprovals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ViewPendingApprovals\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
