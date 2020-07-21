@@ -16,6 +16,7 @@ namespace BIPortal.Data.NewRequest
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<WorkFlowMasterDTO, WorkFlowMaster>();
+                cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
             });
             IMapper mapper = config.CreateMapper();
 
@@ -23,29 +24,9 @@ namespace BIPortal.Data.NewRequest
 
             using (var context = new BIPortalEntities())
             {
-                foreach (var f in workFlowMasterDTO)
-                {
-                    // Insert WorkFlowMaster
-                    var ownerIDResult = (from u in context.WorkSpaceOwnerMasters
-                                         where u.WorkspaceID == f.WorkspaceID
-                                         select u).ToList();
-
-                    var userWorkFlowMasterMapping = new WorkFlowMaster
-                    {
-                        WorkspaceID = f.WorkspaceID,
-                        WorkspaceName = f.WorkspaceName,
-                        ReportID = f.ReportID,
-                        ReportName = f.ReportName,
-                        OwnerID = ownerIDResult[0].OwnerID,
-                        RequestedBy = "Venkat", // user(logged In) email address should come here
-                        RequestedDate = DateTime.Now,
-                        Status = "PENDING"
-                    };
-                    context.WorkFlowMasters.Add(userWorkFlowMasterMapping);                    
-                }
+                context.WorkFlowMasters.AddRange(workFlowMasterDetails);
                 context.SaveChanges();
             }
-
         }
     }
 }

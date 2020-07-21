@@ -43,6 +43,79 @@
     height: 15px;
 }
 
+#u452 {
+    border-width: 0px;
+    position: absolute;
+    left: 4px;
+    top: 45px;
+    width: 300px;
+    height: 20px;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#btnApprove {
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: -11px;
+    width: 132px;
+    height: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+    background-color: rgba(92, 205, 222, 1);
+    border-radius: 5px;
+}
+
+#btnApprove:hover {
+    border-width: 1px;
+    position: absolute;
+    left: 0px;
+    top: -11px;
+    width: 132px;
+    height: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000;
+    background-color: rgba(255, 255, 255,1);
+    border-radius: 5px;
+}
+
+#btnReject {
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: -11px;
+    width: 132px;
+    height: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+    background-color: rgba(92, 205, 222, 1);
+    border-radius: 5px;
+}
+
+    #btnReject:hover {
+        border-width: 1px;
+        position: absolute;
+        left: 0px;
+        top: -11px;
+        width: 132px;
+        height: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: #000000;
+        background-color: rgba(255, 255, 255,1);
+        border-radius: 5px;
+    }
+
 #u2213_div {
     border-width: 0px;
     position: absolute;

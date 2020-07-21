@@ -10,13 +10,13 @@
 
 
         $.ajax({
-            url: geRightsurl,
+            url: getRequestDetailssurl,
             //data: { roleid: $('#txtSearch').val() },
             data: { requestId: tr.find('input[name="RequestID"]').val() },
             type: "GET",
             dataType: "json",
             success: function (data) {                
-                //loadTree(data);
+                loadTree(data);
             },
             error: function () {
                 alert("Failed to get request details! Please try again.");
@@ -27,11 +27,9 @@
 
     function loadTree(data) {
 
-        document.getElementById("u425").style.display = "block";
-        document.getElementById("u452").style.display = "block";
-        //document.getElementById("lblRoleName").innerHTML = roleName;
-        $('#u452').jstree('destroy');
-        //var selectedItems = [];
+        document.getElementById("u2274").style.display = "block";
+        document.getElementById("u452").style.display = "block";        
+        $('#u452').jstree('destroy');        
         $(function () {
             $('#u452').on('changed.jstree', function (e, data) {
                 var i, j;
@@ -74,16 +72,27 @@
     };
 
 
-    $(".btnSaveRoleRights").click(function () {
+    $(".btnApprove").click(function () {
         
-        //var data = { WorkspaceandReportList: workSpacesdata, RoleID: roleId };
-        //var data = { WorkspaceandReportList: workSpacesdata };
         if (selectedItems.length == 0) {
             alert("Please select any one workspace or report");
             return false;
         }
-        var data = { WorkspaceandReportList: selectedItems, RoleID: roleId };
-        $.post(updateRolesandRightsurl, data, function (result) {
+        var data = { WorkspaceandReportList: selectedItems, RequestID: requestId };
+        $.post(approveRequesturl, data, function (result) {
+            // TODO: do something with the response from the controller action
+            window.location.reload();
+        });
+    });
+
+    $(".btnReject").click(function () {
+
+        if (selectedItems.length == 0) {
+            alert("Please select any one workspace or report");
+            return false;
+        }
+        var data = { WorkspaceandReportList: selectedItems, RequestID: requestId };
+        $.post(rejectRequesturl, data, function (result) {
             // TODO: do something with the response from the controller action
             window.location.reload();
         });

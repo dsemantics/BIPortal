@@ -20,5 +20,7 @@ namespace BIPortal.DTO
         public string Status { get; set; }
 
         public UsersDTO UserMaster { get; set; }
+
+        public IEnumerable<WorkFlowDetailsDTO> WorkFlowDetails { get; set; }
     }
 }

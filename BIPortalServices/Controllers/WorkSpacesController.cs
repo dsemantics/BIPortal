@@ -55,6 +55,22 @@ namespace BIPortalServices.Controllers
             }
         }
 
+        [Route("api/GetWorkSpaceOwnerByWorkspaceId")]
+        public IHttpActionResult GetWorkSpaceOwnerByWorkspaceId(string workspaceId)
+        {
+            try
+            {
+                WorkSpaceData workSpaceData = new WorkSpaceData();
+                var workSpaceOwner = workSpaceData.GetWorkSpaceOwnerByWorkspaceId(workspaceId);
+                return Ok(workSpaceOwner);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch workspace details");
+            }
+        }
+
         [Route("api/GetReportsAndOwner")]
         public IHttpActionResult GetReportsAndOwner(string workspaceid)
         {

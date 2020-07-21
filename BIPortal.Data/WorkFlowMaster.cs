@@ -14,11 +14,15 @@ namespace BIPortal.Data
     
     public partial class WorkFlowMaster
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public WorkFlowMaster()
+        {
+            this.WorkFlowDetails = new HashSet<WorkFlowDetail>();
+        }
+    
         public int RequestID { get; set; }
         public string WorkspaceID { get; set; }
         public string WorkspaceName { get; set; }
-        public string ReportID { get; set; }
-        public string ReportName { get; set; }
         public Nullable<int> OwnerID { get; set; }
         public string RequestedBy { get; set; }
         public System.DateTime RequestedDate { get; set; }
@@ -26,5 +30,7 @@ namespace BIPortal.Data
         public string Status { get; set; }
     
         public virtual UserMaster UserMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkFlowDetail> WorkFlowDetails { get; set; }
     }
 }

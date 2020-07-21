@@ -2533,7 +2533,7 @@
     border-width: 0px;
     position: absolute;
     left: 8px;
-    top: 11px;
+    top: 20px;
     width: 357px;
     height: 358px;
 }
@@ -11956,3 +11956,24 @@
     word-wrap: break-word;
     text-transform: none;
 }
+
+#u30 {
+    border-width: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 46px;
+    height: 19px;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    //font-size: 16px;
+}
+
+#u30_text {
+    border-width: 0px;
+    white-space: nowrap;
+    text-transform: none;
+    font-size: 10pt;
+    color: red;

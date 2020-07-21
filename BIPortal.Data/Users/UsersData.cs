@@ -197,8 +197,8 @@ namespace BIPortal.Data.Users
                     {
                         WorkspaceID = f.WorkspaceID,
                         WorkspaceName = f.WorkspaceName,
-                        ReportID = f.ReportID,
-                        ReportName = f.ReportName,
+                        //ReportID = f.ReportID,
+                        //ReportName = f.ReportName,
                         OwnerID = ownerIDResult[0].OwnerID,
                         RequestedBy = "selva", // user(logged In) email address should come here
                         RequestedDate = DateTime.Now,
@@ -318,8 +318,8 @@ namespace BIPortal.Data.Users
                             {
                                 WorkspaceID = f.WorkspaceID,
                                 WorkspaceName = f.WorkspaceName,
-                                ReportID = f.ReportID,
-                                ReportName = f.ReportName,
+                                //ReportID = f.ReportID,
+                                //ReportName = f.ReportName,
                                 OwnerID = ownerIDResult[0].OwnerID,
                                 RequestedBy = "selva", // user(logged In) email address should come here
                                 RequestedDate = DateTime.Now,

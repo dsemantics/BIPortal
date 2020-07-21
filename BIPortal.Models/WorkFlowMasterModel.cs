@@ -23,5 +23,7 @@ namespace BIPortal.Models
 
         public UsersModel UserMaster { get; set; }
 
+        public IEnumerable<WorkFlowDetailsModel> WorkFlowDetails { get; set; }
+
     }
 }

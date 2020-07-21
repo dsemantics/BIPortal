@@ -31,6 +31,7 @@ namespace BIPortalServices.Controllers
                     var config = new MapperConfiguration(cfg =>
                     {
                         cfg.CreateMap<WorkFlowMasterModel, WorkFlowMasterDTO>();
+                        cfg.CreateMap<WorkFlowDetailsModel, WorkFlowDetailsDTO>();
                     });
                     IMapper mapper = config.CreateMapper();
 

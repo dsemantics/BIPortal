@@ -110,6 +110,26 @@ namespace BIPortal.Data.WorkSpaces
             }
         }
 
+        //To get workspaceowner by workspace id
+        public WorkSpaceOwnerDTO GetWorkSpaceOwnerByWorkspaceId(string workspaceId)
+        {
+            using (var context = new BIPortalEntities())
+            {
+                //var workspaceOwnerResult = context.WorkspaceReportsMasters.Include("WorkSpaceOwnerMaster").ToList();
+                var workspaceOwnerResult = context.WorkSpaceOwnerMasters.Where(x => x.WorkspaceID == workspaceId).FirstOrDefault();
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<WorkSpaceOwnerMaster, WorkSpaceOwnerDTO>();
+                    cfg.CreateMap<UserMaster, UsersDTO>();
+                    cfg.CreateMap<PermissionMaster, PermissionMasterDTO>();
+                    cfg.CreateMap<UserRoleMapping, UserRoleMappingDTO>();
+                });
+                IMapper mapper = config.CreateMapper();
+
+                return mapper.Map<WorkSpaceOwnerMaster, WorkSpaceOwnerDTO>(workspaceOwnerResult);
+            }
+        }
+
         //To get workspaces
         public ReportsDTO GetReportsAndOwner(string workspaceid)
         {

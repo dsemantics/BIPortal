@@ -9,10 +9,13 @@ namespace BIPortal.Models
     public class WorkFlowDetailsModel
     {
         public int RequestDetailID { get; set; }
-        public int RequestID { get; set; }
+        public Nullable<int> RequestID { get; set; }
         public string ReportID { get; set; }
-        public DateTime RequestedDate { get; set; }
-        public DateTime ProcessedDate { get; set; }
+        public string ReportName { get; set; }
+        public Nullable<System.DateTime> RequestedDate { get; set; }
+        public Nullable<System.DateTime> ProcessedDate { get; set; }
         public string Status { get; set; }
+        
+        public WorkFlowMasterModel WorkFlowMaster { get; set; }
     }
 }
