@@ -19,6 +19,11 @@ namespace BIPortal.Controllers
         // GET: CreateRequest        
         public ActionResult CreateNewRequest()
         {
+            if (Session["UserName"] == null || Session["UserID"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             List<WorkspaceReportsModel> roleRights = new List<WorkspaceReportsModel>();
 
             string Baseurl = ConfigurationManager.AppSettings["baseURL"];
@@ -93,6 +98,8 @@ namespace BIPortal.Controllers
         [HttpPost]
         public ActionResult CreateNewRequest(WorkFlowMasterModel workFlowMasterModel)
         {
+            var loggedinUser = Session["UserName"].ToString();
+
             var treelist = Request.Form["selectedItems"];
 
             var treeViewModel = JsonConvert.DeserializeObject<List<TreeViewNode>>(treelist);
@@ -103,13 +110,14 @@ namespace BIPortal.Controllers
             {
                 if (a.parent == "#")
                 {
-                    WorkFlowMasterModel workFlowMasterValues = new WorkFlowMasterModel() 
+                    WorkFlowMasterModel workFlowMasterValues = new WorkFlowMasterModel()
                     {
                         WorkspaceID = a.id,
                         WorkspaceName = a.text,
                         ReportID = null,
                         ReportName = null,
-                        RequestedBy = "Venkat",
+                        RequestFor = loggedinUser,
+                        RequestedBy = loggedinUser,
                         RequestedDate = DateTime.Now,
                         Status = "PENDING"
                     };
@@ -123,7 +131,8 @@ namespace BIPortal.Controllers
                         WorkspaceName = a.parenttext,
                         ReportID = a.id,
                         ReportName = a.text,
-                        RequestedBy = "Venkat",
+                        RequestFor = loggedinUser,
+                        RequestedBy = loggedinUser,
                         RequestedDate = DateTime.Now,
                         Status = "PENDING"
                     };
@@ -204,7 +213,9 @@ namespace BIPortal.Controllers
                     {
                         WorkspaceID = workFlowMasterList[i].WorkspaceID,
                         WorkspaceName = workFlowMasterList[i].WorkspaceName,
-                        OwnerID=workspaceOnwer.OwnerID,
+                        OwnerID = workspaceOnwer.OwnerID,
+                        OwnerEmail = workspaceOnwer.UserMaster.EmailID,
+                        RequestFor = workFlowMasterList[i].RequestFor,
                         RequestedBy = workFlowMasterList[i].RequestedBy,
                         RequestedDate = workFlowMasterList[i].RequestedDate,
                         Status = workFlowMasterList[i].Status,
@@ -228,12 +239,39 @@ namespace BIPortal.Controllers
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
+                    var subject = "New request created";
+                    var body = "Kindly approve the request by clicking following link";
+                    //send email
+                    string baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/SendEmail";
+                    foreach (var a in workspaces)
+                    {
+                        EmailModel emailModel = new EmailModel();
+                        emailModel.ToEmail = a.OwnerEmail;
+                        emailModel.Subject = subject;
+                        emailModel.Body = body;
+                        using (var client1 = new HttpClient())
+                        {
+                            client1.BaseAddress = new Uri(baseurl);
+                            client1.DefaultRequestHeaders.Accept.Clear();
+                            client1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    return RedirectToAction("CreateNewRequest");
+                            //HTTP POST
+                            var postEmailTask = client1.PostAsJsonAsync<EmailModel>(baseurl, emailModel);
+                            postEmailTask.Wait();
+                            var emailResult = postEmailTask.Result;
+                            if (emailResult.IsSuccessStatusCode)
+                            {
+
+                                //return RedirectToAction("CreateNewRequest");
+                            }
+                        }
+                    }
                 }
             }
 
-            return View();
+            return RedirectToAction("CreateNewRequest");
+
+            //return View();
         }
     }
 }

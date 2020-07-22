@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using BIPortal.DTO;
+using BIPortal.Data.Email;
 
 namespace BIPortal.Data.WorkSpaces
 {
@@ -97,16 +98,14 @@ namespace BIPortal.Data.WorkSpaces
             using (var context = new BIPortalEntities())
             {
                 //var workspaceOwnerResult = context.WorkspaceReportsMasters.Include("WorkSpaceOwnerMaster").ToList();
-                var workspaceOwnerResult = context.GetWorkspaceOwner1().ToList();
+                var workspaceOwnerResult = context.GetWorkspaceOwner().ToList();
                 var config = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<GetWorkspaceOwner1_Result, WorkSpaceOwnerDTO>();
-                    //cfg.CreateMap<WorkspaceReportsMaster, WorkspaceReportsDTO>();
-                    //cfg.CreateMap<WorkSpaceOwnerMaster,WorkSpaceOwnerDTO>();
+                    cfg.CreateMap<GetWorkspaceOwner_Result1, WorkSpaceOwnerDTO>();                    
                 });
                 IMapper mapper = config.CreateMapper();
 
-                return mapper.Map<List<GetWorkspaceOwner1_Result>, List<WorkSpaceOwnerDTO>>(workspaceOwnerResult);
+                return mapper.Map<List<GetWorkspaceOwner_Result1>, List<WorkSpaceOwnerDTO>>(workspaceOwnerResult);
             }
         }
 
@@ -115,7 +114,6 @@ namespace BIPortal.Data.WorkSpaces
         {
             using (var context = new BIPortalEntities())
             {
-                //var workspaceOwnerResult = context.WorkspaceReportsMasters.Include("WorkSpaceOwnerMaster").ToList();
                 var workspaceOwnerResult = context.WorkSpaceOwnerMasters.Where(x => x.WorkspaceID == workspaceId).FirstOrDefault();
                 var config = new MapperConfiguration(cfg =>
                 {
@@ -161,8 +159,8 @@ namespace BIPortal.Data.WorkSpaces
                 if (workspaceOwnerExists != null)
                 {
                     workspaceOwnerExists.OwnerID = workspaceOwner.OwnerID;
-                    workspaceOwnerExists.ModifiedDate = DateTime.Now;
-                    workspaceOwnerExists.ModifiedBy = "Venkat";
+                    workspaceOwnerExists.ModifiedDate = workspaceOwner.ModifiedDate;
+                    workspaceOwnerExists.ModifiedBy = workspaceOwner.ModifiedBy;
                 }
                 else
                 {
@@ -170,15 +168,60 @@ namespace BIPortal.Data.WorkSpaces
                     {
                         WorkspaceID = workspaceOwner.WorkspaceID,
                         OwnerID = workspaceOwner.OwnerID,
-                        CreatedDate = DateTime.Now,
-                        CreatedBy = "Venkat",
-                        Active = true
+                        CreatedDate = workspaceOwner.CreatedDate,
+                        CreatedBy = workspaceOwner.CreatedBy,
+                        Active = workspaceOwner.Active
                     };
                     context.WorkSpaceOwnerMasters.Add(workspaceOwnerMaster);
                 }
 
                 context.SaveChanges();
             }
+        }
+
+        //Add a new user to a workspace
+        public string AddPowerBIWorkspaceUser(List<WorkFlowMasterDTO> workFlowMasterDTO, string powerBIUserName, string powerBIPWD, string smtpHost, int smtpPort)
+        {
+            // Create the InitialSessionState Object
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+
+            // Initialize PowerShell Engine
+            var shell = PowerShell.Create(iss);
+            shell.Commands.AddCommand("Connect-PowerBIServiceAccount");
+
+            System.Security.SecureString theSecureString = new NetworkCredential(powerBIUserName, powerBIPWD).SecurePassword;
+            PSCredential cred = new PSCredential(powerBIUserName, theSecureString);
+
+            shell.Commands.AddParameter("Credential", cred);
+
+            var results = shell.Invoke();
+            if (results.Count > 0)
+            {
+                using (var context = new BIPortalEntities())
+                {
+                    foreach (var a in workFlowMasterDTO)
+                    {
+                        var workflowMasterEntity = context.WorkFlowMasters.FirstOrDefault(x => x.RequestID == a.RequestID);
+                        if (workflowMasterEntity != null)
+                        {
+                            // Initialize PowerShell Engine
+                            var shell2 = PowerShell.Create(iss);
+                            shell2.Commands.AddCommand("Add-PowerBIWorkspaceUser");
+                            shell2.Commands.AddParameter("Id", workflowMasterEntity.WorkspaceID);
+                            shell2.Commands.AddParameter("UserEmailAddress", workflowMasterEntity.RequestFor);
+                            shell2.Commands.AddParameter("AccessRight", "Member");
+                            var resaddUser = shell2.Invoke();
+
+                            //send email
+                            var subject = "Your request is approved.";
+                            var body = "Your request for access to workspace " + workflowMasterEntity.WorkspaceName + " has been approved.";
+                            EmailData emailData = new EmailData();
+                            emailData.SendEmail(powerBIUserName, powerBIPWD, smtpHost, smtpPort, workflowMasterEntity.RequestFor, subject, body);
+                        }
+                    }
+                }
+            }
+            return "User added to workspace successfully";
         }
 
         //To get workspaces

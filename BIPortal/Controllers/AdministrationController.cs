@@ -19,11 +19,11 @@ namespace BIPortal.Controllers
         {
             ViewBag.Message = "Administration Page";
 
-            IEnumerable<UsersModel> UsersList = null;
+            List<UsersModel> UsersList = null;
 
             if (Session["UserName"] == null)
             {
-                return View();
+                return RedirectToAction("Index", "Login");
             }
             else
             {
@@ -52,12 +52,16 @@ namespace BIPortal.Controllers
                         });
                         IMapper mapper = config.CreateMapper();
 
-                        UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
+                        UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);                        
                     }
                 }
                 if (UsersList.Count() == 0)
                 {
                     ViewBag.InfoMessage = "You don't have access to the portal, kindly contact Admin to enable";
+                }
+                else
+                {
+                    Session["UserID"] = UsersList[0].UserID;
                 }
 
                 return View(UsersList);

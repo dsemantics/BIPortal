@@ -38,14 +38,9 @@ namespace BIPortal.Data
         public virtual DbSet<WorkFlowDetail> WorkFlowDetails { get; set; }
         public virtual DbSet<WorkFlowMaster> WorkFlowMasters { get; set; }
     
-        public virtual ObjectResult<GetWorkspaceOwner_Result> GetWorkspaceOwner()
+        public virtual ObjectResult<GetWorkspaceOwner_Result1> GetWorkspaceOwner()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWorkspaceOwner_Result>("GetWorkspaceOwner");
-        }
-    
-        public virtual ObjectResult<GetWorkspaceOwner1_Result> GetWorkspaceOwner1()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWorkspaceOwner1_Result>("GetWorkspaceOwner1");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWorkspaceOwner_Result1>("GetWorkspaceOwner");
         }
     }
 }

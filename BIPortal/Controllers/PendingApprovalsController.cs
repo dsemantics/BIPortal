@@ -18,6 +18,13 @@ namespace BIPortal.Controllers
         // GET: ViewPendingApprovals
         public ActionResult ViewPendingApprovals()
         {
+            if (Session["UserName"] == null || Session["UserID"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
+            var userID = Session["UserID"].ToString();
+
             List<WorkFlowMasterModel> pendingApprovals = new List<WorkFlowMasterModel>();
 
             string Baseurl = ConfigurationManager.AppSettings["baseURL"];
@@ -25,8 +32,8 @@ namespace BIPortal.Controllers
             {
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var responseTask = client.GetAsync("api/GetPendingApprovals");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));                
+                var responseTask = client.GetAsync(string.Format("api/GetPendingApprovals/?ownerID={0}", userID));
                 responseTask.Wait();
 
                 var result = responseTask.Result;
@@ -126,6 +133,8 @@ namespace BIPortal.Controllers
         [HttpPost]        
         public ActionResult ApproveRequest(List<TreeViewNode> WorkspaceandReportList, int RequestID)
         {
+            var loggedinUser = Session["UserName"].ToString();
+
             List<WorkFlowMasterModel> workFlowMasterList = new List<WorkFlowMasterModel>();
 
             foreach (var a in WorkspaceandReportList)
@@ -138,8 +147,7 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.id,
                         WorkspaceName = a.text,
                         ReportID = null,
-                        ReportName = null,
-                        //RequestedBy = "Venkat",
+                        ReportName = null,                        
                         ProcessedDate = DateTime.Now,
                         Status = "APPROVED"
                     };
@@ -153,8 +161,7 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.parent,
                         WorkspaceName = a.parenttext,
                         ReportID = a.id,
-                        ReportName = a.text,
-                        //RequestedBy = "Venkat",
+                        ReportName = a.text,                        
                         ProcessedDate = DateTime.Now,
                         Status = "APPROVED"
                     };
@@ -187,8 +194,7 @@ namespace BIPortal.Controllers
                             {
                                 RequestID = b.RequestID,
                                 ReportID = b.ReportID,
-                                ReportName = b.ReportName,
-                                //RequestedDate = b.RequestedDate,
+                                ReportName = b.ReportName,                                
                                 ProcessedDate = b.ProcessedDate,
                                 Status = b.Status
                             };
@@ -230,9 +236,7 @@ namespace BIPortal.Controllers
                         RequestID = workFlowMasterList[i].RequestID,
                         WorkspaceID = workFlowMasterList[i].WorkspaceID,
                         WorkspaceName = workFlowMasterList[i].WorkspaceName,
-                        OwnerID = workspaceOnwer.OwnerID,
-                        //RequestedBy = workFlowMasterList[i].RequestedBy,
-                        //RequestedDate = workFlowMasterList[i].RequestedDate,
+                        OwnerID = workspaceOnwer.OwnerID,                        
                         ProcessedDate = workFlowMasterList[i].ProcessedDate,
                         Status = workFlowMasterList[i].Status,
                         WorkFlowDetails = workFlowDetailsList
@@ -265,6 +269,8 @@ namespace BIPortal.Controllers
         [HttpPost]
         public ActionResult RejectRequest(List<TreeViewNode> WorkspaceandReportList, int RequestID)
         {
+            var loggedinUser = Session["UserName"].ToString();
+
             List<WorkFlowMasterModel> workFlowMasterList = new List<WorkFlowMasterModel>();
 
             foreach (var a in WorkspaceandReportList)
@@ -277,8 +283,7 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.id,
                         WorkspaceName = a.text,
                         ReportID = null,
-                        ReportName = null,
-                        //RequestedBy = "Venkat",
+                        ReportName = null,                        
                         ProcessedDate = DateTime.Now,
                         Status = "REJECT"
                     };
@@ -292,8 +297,7 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.parent,
                         WorkspaceName = a.parenttext,
                         ReportID = a.id,
-                        ReportName = a.text,
-                        //RequestedBy = "Venkat",
+                        ReportName = a.text,                        
                         ProcessedDate = DateTime.Now,
                         Status = "REJECT"
                     };
@@ -326,8 +330,7 @@ namespace BIPortal.Controllers
                             {
                                 RequestID = b.RequestID,
                                 ReportID = b.ReportID,
-                                ReportName = b.ReportName,
-                                //RequestedDate = b.RequestedDate,
+                                ReportName = b.ReportName,                                
                                 ProcessedDate = b.ProcessedDate,
                                 Status = b.Status
                             };
@@ -369,9 +372,7 @@ namespace BIPortal.Controllers
                         RequestID = workFlowMasterList[i].RequestID,
                         WorkspaceID = workFlowMasterList[i].WorkspaceID,
                         WorkspaceName = workFlowMasterList[i].WorkspaceName,
-                        OwnerID = workspaceOnwer.OwnerID,
-                        //RequestedBy = workFlowMasterList[i].RequestedBy,
-                        //RequestedDate = workFlowMasterList[i].RequestedDate,
+                        OwnerID = workspaceOnwer.OwnerID,                        
                         ProcessedDate = workFlowMasterList[i].ProcessedDate,
                         Status = workFlowMasterList[i].Status,
                         WorkFlowDetails = workFlowDetailsList

@@ -21,6 +21,10 @@ namespace BIPortal.Controllers
         public ActionResult AddRole()
         {
             ViewBag.Message = "AddRole Page";
+            if (Session["UserName"] == null || Session["UserID"] == null)
+            {
+                return RedirectToAction("Index","Login");
+            }
             RolesModel rolesModel = new RolesModel();
 
 
@@ -292,6 +296,11 @@ namespace BIPortal.Controllers
         public ActionResult ViewRoles()
         {
             ViewBag.Message = "View Roles Page";
+            if (Session["UserName"] == null || Session["UserID"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IEnumerable<RolesModel> rolesList = null;
 
             string Baseurl = ConfigurationManager.AppSettings["baseURL"];
@@ -346,6 +355,7 @@ namespace BIPortal.Controllers
             //roleRightsViewModel.RoleRightsMapping = roleRightsMappingModel;
 
             List<RoleRightsMappingModel> roleRightsMappingModelList = new List<RoleRightsMappingModel>();
+            var loggedinUser = Session["UserName"].ToString();
 
             foreach (var a in WorkspaceandReportList)
             {
@@ -357,7 +367,10 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.id,
                         WorkspaceName = a.text,
                         ReportID = null,
-                        ReportName = null
+                        ReportName = null,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = loggedinUser,
+                        Active = true
                     };
                     roleRightsMappingModelList.Add(roleRightsMapping);
                 }
@@ -369,7 +382,10 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.parent,
                         WorkspaceName = a.parenttext,
                         ReportID = a.id,
-                        ReportName = a.text
+                        ReportName = a.text,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = loggedinUser,
+                        Active = true
                     };
                     roleRightsMappingModelList.Add(roleRightsMapping);
                 }
@@ -378,6 +394,9 @@ namespace BIPortal.Controllers
             RolesModel rolesModel = new RolesModel()
             {
                 RoleName = RoleName,
+                CreatedDate = DateTime.Now,
+                CreatedBy = loggedinUser,
+                Active = true,
                 RoleRightsMappings = roleRightsMappingModelList
             };
 
@@ -405,6 +424,8 @@ namespace BIPortal.Controllers
         //public ActionResult UpdateRoleAndRights(List<RoleRightsMappingModel> WorkspaceandReportList)
         public ActionResult UpdateRoleAndRights(List<TreeViewNode> WorkspaceandReportList, int RoleID)
         {
+            var loggedinUser = Session["UserName"].ToString();
+
             List<RoleRightsMappingModel> roleRightsMappingModelList = new List<RoleRightsMappingModel>();
 
             foreach (var a in WorkspaceandReportList)
@@ -413,11 +434,16 @@ namespace BIPortal.Controllers
                 {
                     RoleRightsMappingModel roleRightsMapping = new RoleRightsMappingModel()
                     {
-                        RoleID= RoleID,
+                        RoleID = RoleID,
                         WorkspaceID = a.id,
                         WorkspaceName = a.text,
                         ReportID = null,
-                        ReportName = null
+                        ReportName = null,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = loggedinUser,
+                        ModifiedDate = DateTime.Now,
+                        ModifiedBy = loggedinUser,
+                        Active = true
                     };
                     roleRightsMappingModelList.Add(roleRightsMapping);
                 }
@@ -429,7 +455,12 @@ namespace BIPortal.Controllers
                         WorkspaceID = a.parent,
                         WorkspaceName = a.parenttext,
                         ReportID = a.id,
-                        ReportName = a.text
+                        ReportName = a.text,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = loggedinUser,
+                        ModifiedDate = DateTime.Now,
+                        ModifiedBy = loggedinUser,
+                        Active = true
                     };
                     roleRightsMappingModelList.Add(roleRightsMapping);
                 }

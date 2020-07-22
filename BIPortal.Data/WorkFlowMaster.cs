@@ -24,6 +24,7 @@ namespace BIPortal.Data
         public string WorkspaceID { get; set; }
         public string WorkspaceName { get; set; }
         public Nullable<int> OwnerID { get; set; }
+        public string RequestFor { get; set; }
         public string RequestedBy { get; set; }
         public System.DateTime RequestedDate { get; set; }
         public Nullable<System.DateTime> ProcessedDate { get; set; }

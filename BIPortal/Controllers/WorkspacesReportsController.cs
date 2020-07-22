@@ -57,6 +57,11 @@ namespace BIPortal.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "WorkSpaces and Reports Page";
+            if (Session["UserName"] == null || Session["UserID"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IEnumerable<WorkSpaceOwnerModel> workspaceOwnerList = null;
 
             string Baseurl = ConfigurationManager.AppSettings["baseURL"];
@@ -125,6 +130,18 @@ namespace BIPortal.Controllers
         [HttpPost]
         public ActionResult SaveWorkspaceOwner(WorkSpaceOwnerModel WorkspaceOwnerdata)
         {
+            var loggedinUser = Session["UserName"].ToString();
+
+            WorkSpaceOwnerModel workspaceOwnerModel = new WorkSpaceOwnerModel()
+            {
+                WorkspaceID = WorkspaceOwnerdata.WorkspaceID,
+                OwnerID = WorkspaceOwnerdata.OwnerID,
+                CreatedDate = DateTime.Now,
+                CreatedBy = loggedinUser,
+                ModifiedDate = DateTime.Now,
+                ModifiedBy = loggedinUser,
+                Active = true
+            };
 
             string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/SaveWorkspaceOwner";
             using (var client = new HttpClient())
@@ -134,7 +151,7 @@ namespace BIPortal.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //HTTP POST
-                var postTask = client.PostAsJsonAsync<WorkSpaceOwnerModel>(Baseurl, WorkspaceOwnerdata);
+                var postTask = client.PostAsJsonAsync<WorkSpaceOwnerModel>(Baseurl, workspaceOwnerModel);
                 postTask.Wait();
 
                 var result = postTask.Result;

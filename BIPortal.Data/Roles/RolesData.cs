@@ -81,9 +81,9 @@ namespace BIPortal.Data.Roles
                 var roleMaster = new RoleMaster
                 {
                     RoleName = roleAndRights.RoleName,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = "Venkat",
-                    Active = true              
+                    CreatedDate = roleAndRights.CreatedDate,
+                    CreatedBy = roleAndRights.CreatedBy,
+                    Active = roleAndRights.Active              
                 };
 
                 foreach (var d in roleAndRights.RoleRightsMappings)
@@ -94,9 +94,9 @@ namespace BIPortal.Data.Roles
                         WorkspaceName = d.WorkspaceName,
                         ReportID = d.ReportID,
                         ReportName = d.ReportName,
-                        CreatedDate = DateTime.Now,
-                        CreatedBy = "Venkat",
-                        Active = true
+                        CreatedDate = d.CreatedDate,
+                        CreatedBy = d.CreatedBy,
+                        Active = d.Active
                     };
                     roleMaster.RoleRightsMappings.Add(rolerightsmapping);                    
                 }
@@ -123,12 +123,13 @@ namespace BIPortal.Data.Roles
             using (var context = new BIPortalEntities())
             {
                 var roleRightsMappingExists = context.RoleRightsMappings.Where(c => c.RoleID == roleID);
-                if (roleRightsMappingExists!=null)
+
+                if (roleRightsMappingExists != null)
                 {
                     context.RoleRightsMappings.RemoveRange(roleRightsMappingExists);
                     context.SaveChanges();
                 }
-                
+
                 foreach (var d in roleAndRights)
                 {
                     var rolerightsmapping = new RoleRightsMapping
@@ -138,15 +139,14 @@ namespace BIPortal.Data.Roles
                         WorkspaceName = d.WorkspaceName,
                         ReportID = d.ReportID,
                         ReportName = d.ReportName,
-                        CreatedDate = DateTime.Now,
-                        CreatedBy = "Venkat",
-                        ModifiedDate = DateTime.Now,
-                        ModifiedBy = "Venkat",
-                        Active = true
+                        CreatedDate = d.CreatedDate,
+                        CreatedBy = d.CreatedBy,
+                        ModifiedDate = d.ModifiedDate,
+                        ModifiedBy = d.ModifiedBy,
+                        Active = d.Active
                     };
                     context.RoleRightsMappings.Add(rolerightsmapping);
                 }
-
                 context.SaveChanges();
             }
         }        

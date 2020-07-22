@@ -138,24 +138,7 @@ namespace BIPortalServices.Controllers
         //        return BadRequest("Could not fetch workspace details");
         //    }
         //}
-
-
-        //Add a new user to a workspace
-        public string AddPowerBIWorkspaceUser()
-        {
-            // Create the InitialSessionState Object
-            InitialSessionState iss = InitialSessionState.CreateDefault2();
-
-            // Initialize PowerShell Engine
-            var shell2 = PowerShell.Create(iss);
-            shell2.Commands.AddCommand("Add-PowerBIWorkspaceUser");
-            shell2.Commands.AddParameter("Id", "ea5ec2c2-def9-4b74-9133-305511d96fdf");
-            shell2.Commands.AddParameter("UserEmailAddress", "venkata.murakunda@datasemantics.in");
-            shell2.Commands.AddParameter("AccessRight", "Member");
-            var resaddUser = shell2.Invoke();
-            //AddResult.Text = "User added to workspace successfully";
-            return "User added to workspace successfully";
-        }
+                
 
         //Remove a user from a given workspace
         public string RemovePowerBIWorkspaceUser()

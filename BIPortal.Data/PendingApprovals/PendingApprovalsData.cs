@@ -12,13 +12,13 @@ namespace BIPortal.Data.PendingApprovals
     public class PendingApprovalsData
     {
         //To get pending approvals
-        public IEnumerable<WorkFlowMasterDTO> GetPendingApprovals()
+        public IEnumerable<WorkFlowMasterDTO> GetPendingApprovals(int? ownerID)
         {
             //List<RolesDTO> rolesDTO = new List<RolesDTO>();
             using (var context = new BIPortalEntities())
             {
                 var status = "PENDING";
-                var workFlowResult = context.WorkFlowMasters.Where(x => x.Status == status).ToList();
+                var workFlowResult = context.WorkFlowMasters.Where(x => x.Status == status && x.OwnerID == ownerID).ToList();
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<WorkFlowMaster, WorkFlowMasterDTO>();
@@ -70,26 +70,28 @@ namespace BIPortal.Data.PendingApprovals
                 foreach (var f in workFlowMasterDTO)
                 {
                     var workflowMasterEntity = context.WorkFlowMasters.FirstOrDefault(x => x.RequestID == f.RequestID);
-
-                    workflowMasterEntity.Status = f.Status;
-                    workflowMasterEntity.ProcessedDate = f.ProcessedDate;
-
-                    context.WorkFlowMasters.AddOrUpdate(workflowMasterEntity);
-                    context.SaveChanges();
-
-                    foreach (var e in f.WorkFlowDetails)
+                    if (workflowMasterEntity != null)
                     {
-                        var workflowDetailEntity = context.WorkFlowDetails.FirstOrDefault(x => x.RequestID == e.RequestID && x.ReportID==e.ReportID);
+                        workflowMasterEntity.Status = f.Status;
+                        workflowMasterEntity.ProcessedDate = f.ProcessedDate;
 
-                        workflowDetailEntity.Status = e.Status;
-                        workflowDetailEntity.ProcessedDate = e.ProcessedDate;
-
-                        context.WorkFlowDetails.AddOrUpdate(workflowDetailEntity);
+                        context.WorkFlowMasters.AddOrUpdate(workflowMasterEntity);
                         context.SaveChanges();
                     }
-                }               
-            }
+                    foreach (var e in f.WorkFlowDetails)
+                    {
+                        var workflowDetailEntity = context.WorkFlowDetails.FirstOrDefault(x => x.RequestID == e.RequestID && x.ReportID == e.ReportID);
+                        if (workflowDetailEntity != null)
+                        {
+                            workflowDetailEntity.Status = e.Status;
+                            workflowDetailEntity.ProcessedDate = e.ProcessedDate;
 
+                            context.WorkFlowDetails.AddOrUpdate(workflowDetailEntity);
+                            context.SaveChanges();
+                        }
+                    }                   
+                }
+            }
         }
 
         public void RejectRequest(List<WorkFlowMasterDTO> workFlowMasterDTO)
@@ -108,26 +110,28 @@ namespace BIPortal.Data.PendingApprovals
                 foreach (var f in workFlowMasterDTO)
                 {
                     var workflowMasterEntity = context.WorkFlowMasters.FirstOrDefault(x => x.RequestID == f.RequestID);
+                    if (workflowMasterEntity != null)
+                    {
+                        workflowMasterEntity.Status = f.Status;
+                        workflowMasterEntity.ProcessedDate = f.ProcessedDate;
 
-                    workflowMasterEntity.Status = f.Status;
-                    workflowMasterEntity.ProcessedDate = f.ProcessedDate;
-
-                    context.WorkFlowMasters.AddOrUpdate(workflowMasterEntity);
-                    context.SaveChanges();
-
+                        context.WorkFlowMasters.AddOrUpdate(workflowMasterEntity);
+                        context.SaveChanges();
+                    }
                     foreach (var e in f.WorkFlowDetails)
                     {
                         var workflowDetailEntity = context.WorkFlowDetails.FirstOrDefault(x => x.RequestID == e.RequestID && x.ReportID == e.ReportID);
+                        if (workflowDetailEntity != null)
+                        {
+                            workflowDetailEntity.Status = e.Status;
+                            workflowDetailEntity.ProcessedDate = e.ProcessedDate;
 
-                        workflowDetailEntity.Status = e.Status;
-                        workflowDetailEntity.ProcessedDate = e.ProcessedDate;
-
-                        context.WorkFlowDetails.AddOrUpdate(workflowDetailEntity);
-                        context.SaveChanges();
+                            context.WorkFlowDetails.AddOrUpdate(workflowDetailEntity);
+                            context.SaveChanges();
+                        }
                     }
                 }
             }
-
         }
     }
 }

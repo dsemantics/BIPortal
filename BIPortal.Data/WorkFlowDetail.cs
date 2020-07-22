@@ -12,7 +12,7 @@ namespace BIPortal.Data
     using System;
     using System.Collections.Generic;
     
-    public class WorkFlowDetail
+    public partial class WorkFlowDetail
     {
         public int RequestDetailID { get; set; }
         public Nullable<int> RequestID { get; set; }
@@ -20,7 +20,8 @@ namespace BIPortal.Data
         public string ReportName { get; set; }
         public Nullable<System.DateTime> RequestedDate { get; set; }
         public Nullable<System.DateTime> ProcessedDate { get; set; }
-        public string Status { get; set; }        
-        public WorkFlowMaster WorkFlowMaster { get; set; }
+        public string Status { get; set; }
+    
+        public virtual WorkFlowMaster WorkFlowMaster { get; set; }
     }
 }

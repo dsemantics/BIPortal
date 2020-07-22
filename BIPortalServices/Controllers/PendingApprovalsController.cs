@@ -6,8 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using BIPortal.Data.PendingApprovals;
+using BIPortal.Data.WorkSpaces;
 using BIPortal.DTO;
 using BIPortal.Models;
+using BIPortal.Data.Email;
+using System.Configuration;
 
 namespace BIPortalServices.Controllers
 {
@@ -15,12 +18,12 @@ namespace BIPortalServices.Controllers
     {
         [Route("api/GetPendingApprovals")]
         //To get roles
-        public IHttpActionResult GetPendingApprovals()
+        public IHttpActionResult GetPendingApprovals(int? ownerID)
         {
             try
             {
                 PendingApprovalsData pendingApprovalsData = new PendingApprovalsData();
-                var pendingApprovals = pendingApprovalsData.GetPendingApprovals();
+                var pendingApprovals = pendingApprovalsData.GetPendingApprovals(ownerID);
 
                 return Ok(pendingApprovals);
             }
@@ -69,10 +72,18 @@ namespace BIPortalServices.Controllers
                     });
                     IMapper mapper = config.CreateMapper();
 
-                    var workFlowMasterData = mapper.Map<List<WorkFlowMasterModel>, List<WorkFlowMasterDTO>>(workFlowMasterModel);
+                    var workFlowMasterData = mapper.Map<List<WorkFlowMasterModel>, List<WorkFlowMasterDTO>>(workFlowMasterModel);                    
 
                     pendingApprovalData.ApproveRequest(workFlowMasterData);
 
+                    string powerBIUserName = ConfigurationManager.AppSettings["powerBIUserName"];
+                    string powerBIPWD = ConfigurationManager.AppSettings["powerBIPWD"];
+                    string smtpHost = ConfigurationManager.AppSettings["smtpHost"];
+                    int smtpPort = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+
+                    WorkSpaceData workSpaceData = new WorkSpaceData();
+                    var s = workSpaceData.AddPowerBIWorkspaceUser(workFlowMasterData, powerBIUserName, powerBIPWD, smtpHost, smtpPort);               
+                    
                     return Created("api/ApproveRequest", true);
                 }
             }
