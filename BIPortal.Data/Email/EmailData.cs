@@ -16,7 +16,7 @@ namespace BIPortal.Data.Email
             MailMessage mailmessage = new MailMessage(fromEmail, toEmail);
             mailmessage.Subject = subject;
             mailmessage.Body = body;
-            mailmessage.IsBodyHtml = false;
+            mailmessage.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = smtpHost;
             smtp.Port = smtpPort;

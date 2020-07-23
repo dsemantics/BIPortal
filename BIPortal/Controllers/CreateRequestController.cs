@@ -240,7 +240,8 @@ namespace BIPortal.Controllers
                 if (result.IsSuccessStatusCode)
                 {
                     var subject = "New request created";
-                    var body = "Kindly approve the request by clicking following link";
+                    var link = ConfigurationManager.AppSettings["redirectUri"] + "PendingApprovals/ViewPendingApprovals";
+                    var body = "Kindly approve the request by clicking following link.<br>" + "\n\n<a Href= " + link + "> Click here </a>";
                     //send email
                     string baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/SendEmail";
                     foreach (var a in workspaces)
