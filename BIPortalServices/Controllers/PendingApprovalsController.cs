@@ -33,6 +33,23 @@ namespace BIPortalServices.Controllers
             }
         }
 
+        [Route("api/GetUsersPendingApprovals")]
+        //To get roles
+        public IHttpActionResult GetUsersPendingApprovals(string emailID)
+        {
+            try
+            {
+                PendingApprovalsData pendingApprovalsData = new PendingApprovalsData();
+                var pendingApprovals = pendingApprovalsData.GetPendingApprovals(emailID);
+
+                return Ok(pendingApprovals);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch users pending approvals");
+            }
+        }
+
         [Route("api/GetRequestDetails")]
         //To get access rights
         public IHttpActionResult GetRequestDetails(int requestID)

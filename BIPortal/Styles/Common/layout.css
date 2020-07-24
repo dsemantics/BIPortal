@@ -849,7 +849,8 @@
     left: 0px;
     top: 57px;
     width: 200px;
-    height: 38px;
+    /*height: 38px;*/
+    height: 100px;
 }
 
 #u644_state0 {
@@ -858,7 +859,8 @@
     left: 0px;
     top: 0px;
     width: 200px;
-    height: 38px;
+    /*height: 38px;*/
+    height: 80px;
     -ms-overflow-x: hidden;
     overflow-x: hidden;
     -ms-overflow-y: hidden;
@@ -908,7 +910,8 @@
     left: 0px;
     top: 0px;
     width: 200px;
-    height: 38px;
+    /*height: 38px;*/
+    height: 71px;
     display: flex;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;

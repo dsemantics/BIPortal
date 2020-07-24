@@ -1,40 +1,30 @@
 ﻿$(document).ready(function () {
-    // This is for Get All Data
-    var roleName;
-    //var roleID = [];
-    //alert("test");
+    $("#u342_img").click(function () {
+        $("#u33333").hide();
+    });
+
+    var requestId;
+    $(".btnViewPendingRequests").click(function () {
 
 
+        document.getElementById("u33333").style.display = "block";
 
+        var tr = $(this).closest('tr');
+        requestId = tr.find('input[name="RequestID"]').val();
+        //roleName = tr.find('input[name="RoleName"]').val();
 
-    $(".btnViewRights").click(function () {
-
-        var selectedValues = [];
-        $("#lstSelect :selected").each(function () {
-            selectedValues.push($(this).val());
-        });
-
-
-        // need to add if condition for selectedValues
-        if (selectedValues.length == 0) {
-            alert("Please select any one Role");
-            return false;
-        }
-
-        var userarray = { roleID: selectedValues };
 
         $.ajax({
-            url: geRightsurl,
-            data: userarray,
+            url: getRequestDetailssurl,
+            //data: { roleid: $('#txtSearch').val() },
+            data: { requestId: tr.find('input[name="RequestID"]').val() },
             type: "GET",
             dataType: "json",
-            traditional: true,
             success: function (data) {
-                //loadData(data);
                 loadTree(data);
             },
             error: function () {
-                alert("Failed to get rights! Please try again.");
+                alert("Failed to get request details! Please try again.");
             }
         });
 
@@ -42,13 +32,9 @@
 
     function loadTree(data) {
 
-        document.getElementById("u425").style.display = "block";
+        //document.getElementById("u33333").style.display = "block";
         document.getElementById("u452").style.display = "block";
-        //document.getElementById("lblRoleName").innerHTML = roleName;
-        document.getElementById("lblRoleName").innerHTML = "Has Access To";
-
         $('#u452').jstree('destroy');
-        //var selectedItems = [];
         $(function () {
             $('#u452').on('changed.jstree', function (e, data) {
                 var i, j;
@@ -91,16 +77,5 @@
     };
 
 
-    $(".btnSaveRoleRights").click(function () {
-
-        if (selectedItems.length == 0) {
-            alert("Please select any one workspace or report");
-            return false;
-        }
-        var data = { WorkspaceandReportList: selectedItems, RoleID: roleId };
-        $.post(updateRolesandRightsurl, data, function (result) {
-            // TODO: do something with the response from the controller action
-            window.location.reload();
-        });
-    });
+   
 });

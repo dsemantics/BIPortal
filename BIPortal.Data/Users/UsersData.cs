@@ -63,15 +63,15 @@ namespace BIPortal.Data.Users
 
             using (var context = new BIPortalEntities())
             {
-                var CurusersResult = (from u in context.UserMasters
-                                      where u.UserID == iUSERID
-                                      select u).ToList();
+                //var CurusersResult = (from u in context.UserMasters
+                //                      where u.UserID == iUSERID
+                //                      select u).ToList();
 
                 // Join 2 Tables
-                //var CurusersResult = (from a in context.UserMasters
-                //                      join b in context.UserRoleMappings on a.UserID equals b.UserID
-                //                      where a.UserID == iUSERID
-                //                      select a).ToList();
+                var CurusersResult = (from a in context.UserMasters
+                                      join b in context.UserRoleMappings on a.UserID equals b.UserID
+                                      where a.UserID == iUSERID
+                                      select a).ToList();
 
                 var config = new MapperConfiguration(cfg =>
                 {
@@ -126,13 +126,15 @@ namespace BIPortal.Data.Users
                 cfg.CreateMap<UsersDTO, UserMaster>();
                 cfg.CreateMap<UserRoleMappingDTO, UserRoleMapping>();
                 cfg.CreateMap<WorkFlowMasterDTO, WorkFlowMaster>();
-                //cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
+                cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
                 cfg.CreateMap<UserAccessRightsDTO, UserAccessRight>();
 
             });
             IMapper mapper = config.CreateMapper();
 
             var SaveUserDetails = mapper.Map<UsersDTO, UserMaster>(userDTO);
+
+            var workFlowMasterDetails = mapper.Map<List<WorkFlowMasterDTO>, List<WorkFlowMaster>>(userDTO.WorkFlowMasterMappings);
 
             using (var context = new BIPortalEntities())
             {
@@ -147,7 +149,7 @@ namespace BIPortal.Data.Users
                     PermissionID = SaveUserDetails.PermissionID,
                     CreatedDate = DateTime.Now,
                     //CreatedDate = SaveUserDetails.CreatedDate,
-                    CreatedBy = "SK",
+                    CreatedBy = SaveUserDetails.CreatedBy,
                     ModifiedDate = DateTime.Now,
                     Active = SaveUserDetails.Active
 
@@ -161,7 +163,7 @@ namespace BIPortal.Data.Users
                         //RoleID = 1, //should come from UI
                         RoleID = d,
                         CreatedDate = DateTime.Now,
-                        CreatedBy = "Selva",
+                        CreatedBy = SaveUserDetails.CreatedBy,
                         Active = true
                     };
                     saveUserMaster.UserRoleMappings.Add(userrolemapping);
@@ -186,28 +188,47 @@ namespace BIPortal.Data.Users
                     saveUserMaster.UserAccessRights.Add(userRightsAccessMapping);
                 }
 
-                foreach (var f in userDTO.UserAccessRightsMappings)
-                {
-                    // Insert WorkFlowMaster
-                    var ownerIDResult = (from u in context.WorkSpaceOwnerMasters
-                                            where u.WorkspaceID == f.WorkspaceID
-                                            select u).ToList();
 
-                    var userWorkFlowMasterMapping = new WorkFlowMaster
-                    {
-                        WorkspaceID = f.WorkspaceID,
-                        WorkspaceName = f.WorkspaceName,
-                        //ReportID = f.ReportID,
-                        //ReportName = f.ReportName,
-                        OwnerID = ownerIDResult[0].OwnerID,
-                        RequestedBy = "selva", // user(logged In) email address should come here
-                        RequestedDate = DateTime.Now,
-                        Status = "PENDING"
-                    };
-                    saveUserMaster.WorkFlowMasters.Add(userWorkFlowMasterMapping);
-                }
+               
+
+                //foreach (var f in userDTO.UserAccessRightsMappings)
+                //{
+                //    // Insert WorkFlowMaster
+                //    var ownerIDResult = (from u in context.WorkSpaceOwnerMasters
+                //                            where u.WorkspaceID == f.WorkspaceID
+                //                            select u).ToList();
+
+                //    var userWorkFlowMasterMapping = new WorkFlowMaster
+                //    {
+                //        WorkspaceID = f.WorkspaceID,
+                //        WorkspaceName = f.WorkspaceName,
+                //        //ReportID = f.ReportID,
+                //        //ReportName = f.ReportName,
+                //        OwnerID = ownerIDResult[0].OwnerID,
+                //        RequestedBy = "selva", // user(logged In) email address should come here
+                //        RequestedDate = DateTime.Now,
+                //        Status = "PENDING"
+                //    };
+                //    saveUserMaster.WorkFlowMasters.Add(userWorkFlowMasterMapping);
+
+                //    // Insert WorkFlowDetails --> ReportID,ReportName
+                //    var userWorkFlowDetailMapping = new WorkFlowDetail
+                //    {
+                //        ReportID = f.ReportID,
+                //        ReportName = f.ReportName,
+                //        RequestedDate = DateTime.Now,
+                //        Status = "PENDING"
+                //    };
+                //    //saveUserMaster..Add(userWorkFlowDetailMapping);
+                //    saveUserMaster.
+
+                //}
 
                 context.UserMasters.Add(saveUserMaster);
+                context.SaveChanges();
+
+
+                context.WorkFlowMasters.AddRange(workFlowMasterDetails);
                 context.SaveChanges();
             }
         }
@@ -223,13 +244,15 @@ namespace BIPortal.Data.Users
                     cfg.CreateMap<UsersDTO, UserMaster>();
                     cfg.CreateMap<UserRoleMappingDTO, UserRoleMapping>();
                     cfg.CreateMap<WorkFlowMasterDTO, WorkFlowMaster>();
-                   // cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
+                    cfg.CreateMap<WorkFlowDetailsDTO, WorkFlowDetail>();
                     cfg.CreateMap<UserAccessRightsDTO, UserAccessRight>();
 
                 });
                 IMapper mapper = config.CreateMapper();
 
                 var updateUserDetails = mapper.Map<UsersDTO, UserMaster>(userDTO);
+
+                var workFlowMasterDetails = mapper.Map<List<WorkFlowMasterDTO>, List<WorkFlowMaster>>(userDTO.WorkFlowMasterMappings);
 
                 using (var context = new BIPortalEntities())
                 {
@@ -242,10 +265,11 @@ namespace BIPortal.Data.Users
                         EditUserData.LastName = updateUserDetails.LastName;
                         EditUserData.PermissionID = updateUserDetails.PermissionID;
                         EditUserData.Salutation = updateUserDetails.Salutation;
-                        //EditUserData.CreatedDate = EditUserModel.CreatedDate;
-                        EditUserData.ModifiedBy = "Selva";
+                        EditUserData.CreatedDate = DateTime.Now;
+                        //EditUserData.ModifiedBy = "Selva";
+                        EditUserData.ModifiedBy = updateUserDetails.ModifiedBy;
                         EditUserData.ModifiedDate = DateTime.Now;
-                        //EditUserData.CreatedBy = EditUserModel.CreatedBy;
+                        //EditUserData.CreatedBy = updateUserDetails.CreatedBy;
                         EditUserData.Active = updateUserDetails.Active;
                         context.SaveChanges();
                     }
@@ -267,7 +291,8 @@ namespace BIPortal.Data.Users
                             //RoleID = 1, //should come from UI
                             RoleID = d,
                             CreatedDate = DateTime.Now,
-                            CreatedBy = "Selva",
+                            //CreatedBy = "Selva",
+                            CreatedBy = updateUserDetails.CreatedBy,
                             Active = true
                         };
                         EditUserData.UserRoleMappings.Add(userrolemapping);
@@ -292,10 +317,8 @@ namespace BIPortal.Data.Users
                             WorkspaceName = e.WorkspaceName,
                             ReportID = e.ReportID,
                             ReportName = e.ReportName,
-                            //CreatedDate = e.CreatedDate,
                             CreatedDate = DateTime.Now,
                             CreatedBy = e.CreatedBy,
-                            //ModifiedDate = e.ModifiedDate,
                             ModifiedDate = DateTime.Now,
                             ModifiedBy = e.ModifiedBy,
                             Active = e.Active
@@ -307,35 +330,34 @@ namespace BIPortal.Data.Users
                     // save only active users
                     if (userDTO.Active)
                     {
-                        foreach (var f in userDTO.UserAccessRightsMappings)
-                        {
-                            // Insert WorkFlowMaster
-                            var ownerIDResult = (from u in context.WorkSpaceOwnerMasters
-                                                 where u.WorkspaceID == f.WorkspaceID
-                                                 select u).ToList();
+                        //foreach (var f in userDTO.UserAccessRightsMappings)
+                        //{
+                        //    // Insert WorkFlowMaster
+                        //    var ownerIDResult = (from u in context.WorkSpaceOwnerMasters
+                        //                         where u.WorkspaceID == f.WorkspaceID
+                        //                         select u).ToList();
 
-                            var userWorkFlowMasterMapping = new WorkFlowMaster
-                            {
-                                WorkspaceID = f.WorkspaceID,
-                                WorkspaceName = f.WorkspaceName,
-                                //ReportID = f.ReportID,
-                                //ReportName = f.ReportName,
-                                OwnerID = ownerIDResult[0].OwnerID,
-                                RequestedBy = "selva", // user(logged In) email address should come here
-                                RequestedDate = DateTime.Now,
-                                Status = "PENDING"
-                            };
-                            EditUserData.WorkFlowMasters.Add(userWorkFlowMasterMapping);
-                        }
+                        //    var userWorkFlowMasterMapping = new WorkFlowMaster
+                        //    {
+                        //        WorkspaceID = f.WorkspaceID,
+                        //        WorkspaceName = f.WorkspaceName,
+                        //        //ReportID = f.ReportID,
+                        //        //ReportName = f.ReportName,
+                        //        OwnerID = ownerIDResult[0].OwnerID,
+                        //        RequestedBy = "selva", // user(logged In) email address should come here
+                        //        RequestedDate = DateTime.Now,
+                        //        Status = "PENDING"
+                        //    };
+                        //    EditUserData.WorkFlowMasters.Add(userWorkFlowMasterMapping);
+                        //}
+                        //context.SaveChanges();
+
+                        context.WorkFlowMasters.AddRange(workFlowMasterDetails);
                         context.SaveChanges();
+
                     }
-
-                    
-
                 }
-
             }
-
             catch (Exception e)
             { 
                 Console.WriteLine(e.StackTrace);
@@ -343,7 +365,7 @@ namespace BIPortal.Data.Users
            
         }
 
-        //To get access rights for the given roleid
+        //To get access rights for the given roleids
         public IEnumerable<RoleRightsMappingDTO> GetRights(List<string> roleID)
         {
             using (var context = new BIPortalEntities())
@@ -372,7 +394,7 @@ namespace BIPortal.Data.Users
             }
         }
 
-
+        //To get access rights for the given user
         public IEnumerable<UserAccessRightsDTO> GetEditUserRights(int userID)
         {
             using (var context = new BIPortalEntities())
@@ -387,6 +409,31 @@ namespace BIPortal.Data.Users
                 });
                 IMapper mapper = config.CreateMapper();
                 return mapper.Map<List<UserAccessRight>, List<UserAccessRightsDTO>>(edituserResult.ToList());
+            }
+        }
+
+        public IEnumerable<WorkFlowMasterDTO> GetPendingRequests()
+        {
+
+            using (var context = new BIPortalEntities())
+            {
+
+                var workFlowPendingResult = context.WorkFlowMasters.ToList();
+
+                var config = new MapperConfiguration(cfg =>
+                {
+
+                    cfg.CreateMap<UserMaster, UsersDTO>();
+                    //cfg.CreateMap<PermissionMaster, PermissionMasterDTO>();
+                    //cfg.CreateMap<UserRoleMapping, UserRoleMappingDTO>();
+                    //cfg.CreateMap<WorkFlowMaster, WorkFlowMasterDTO>();
+
+
+                });
+                IMapper mapper = config.CreateMapper();
+
+                return mapper.Map<List<WorkFlowMaster>, List<WorkFlowMasterDTO>>(workFlowPendingResult);
+
             }
         }
 

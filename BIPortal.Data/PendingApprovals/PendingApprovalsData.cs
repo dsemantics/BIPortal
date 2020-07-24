@@ -11,7 +11,7 @@ namespace BIPortal.Data.PendingApprovals
 {
     public class PendingApprovalsData
     {
-        //To get pending approvals
+        //To get pending approvals based on owner id
         public IEnumerable<WorkFlowMasterDTO> GetPendingApprovals(int? ownerID)
         {
             //List<RolesDTO> rolesDTO = new List<RolesDTO>();
@@ -19,6 +19,30 @@ namespace BIPortal.Data.PendingApprovals
             {
                 var status = "PENDING";
                 var workFlowResult = context.WorkFlowMasters.Where(x => x.Status == status && x.OwnerID == ownerID).ToList();
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<WorkFlowMaster, WorkFlowMasterDTO>();
+                    cfg.CreateMap<WorkFlowDetail, WorkFlowDetailsDTO>();
+                    cfg.CreateMap<UserMaster, UsersDTO>();
+                    cfg.CreateMap<PermissionMaster, PermissionMasterDTO>();
+                    cfg.CreateMap<UserRoleMapping, UserRoleMappingDTO>();
+                });
+                IMapper mapper = config.CreateMapper();
+
+                return mapper.Map<List<WorkFlowMaster>, List<WorkFlowMasterDTO>>(workFlowResult);
+            }
+        }
+
+        //To get pending approvals forthe users
+        public IEnumerable<WorkFlowMasterDTO> GetPendingApprovals(string emailID)
+        {
+            //List<RolesDTO> rolesDTO = new List<RolesDTO>();
+            using (var context = new BIPortalEntities())
+            {
+                var status = "PENDING";
+                //var workFlowResult = context.WorkFlowMasters.Where(x => x.Status == status).ToList();
+                var workFlowResult = context.WorkFlowMasters.Where(x => x.Status == status && x.RequestFor == emailID).ToList();
+
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<WorkFlowMaster, WorkFlowMasterDTO>();

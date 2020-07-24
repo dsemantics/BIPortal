@@ -36,7 +36,8 @@ namespace BIPortal.Models
         public List<UserRoleMappingModel> UserRoleMappings { get; set; }
         public string UserName { get; set; }
         public List<WorkFlowMasterModel> WorkFlowMasterMappings { get; set; }
-        public List<WorkFlowDetailsModel> WorkFlowDetailsMappings { get; set; }
+
+        //public List<WorkFlowDetailsModel> WorkFlowDetailsMappings { get; set; }
         public List<UserAccessRightsModel> UserAccessRightsMappings { get; set; }
 
     }

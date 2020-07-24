@@ -32,6 +32,7 @@ namespace BIPortalServices.Controllers
                 else
                 {
                     UsersData SaveUserData = new UsersData();
+
                     var config = new MapperConfiguration(cfg =>
                     {
                         cfg.CreateMap<UsersModel, UsersDTO>();
@@ -145,6 +146,20 @@ namespace BIPortalServices.Controllers
         //    }
         //}
 
+        [Route("api/GetPendingRequests")]
+        public IHttpActionResult GetPendingRequests()
+        {
+            try
+            {
+                UsersData usersData = new UsersData();
+                var users = usersData.GetPendingRequests();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch roles");
+            }
+        }
 
         [Route("api/GetUserRights")]
         //To get access rights
@@ -224,6 +239,48 @@ namespace BIPortalServices.Controllers
 
                 var workspaceReports = roleRightsData.GetWorkspacesAndReports();
 
+
+                // User Access right mapping to roles rights
+                List<RoleRightsMappingDTO> roleAccessRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var b in accessRights)
+                {
+                    RoleRightsMappingDTO c = new RoleRightsMappingDTO();
+                    c.WorkspaceID = b.WorkspaceID;
+                    c.WorkspaceName = b.WorkspaceName;
+                    c.ReportID = b.ReportID;
+                    c.ReportName = b.ReportName;
+                    c.Active = b.Active;
+                    roleAccessRightsMappingsList.Add(c);
+                }
+
+                List<RoleRightsMappingDTO> updateUserRightsMappingsList = new List<RoleRightsMappingDTO>();
+
+                foreach (var s in roleAccessRightsMappingsList)
+                {
+                    updateUserRightsMappingsList.Add(s);
+                }
+
+                foreach (var l1 in roleAccessRightsMappingsList)
+                {
+                    bool existed = false;
+                    foreach (var l2 in roleRights)
+                    {
+                        if (l1.WorkspaceID == l2.WorkspaceID && l1.ReportID == l2.ReportID)
+                        {
+                            existed = true;
+                            break;
+                        }
+                    }
+                    if (existed)
+                    {
+                        updateUserRightsMappingsList.Remove(l1);
+                    }
+                }
+
+                roleRights = roleRights.Concat(updateUserRightsMappingsList);
+
+
                 List<RoleRightsMappingDTO> roleRightsMappingsList = new List<RoleRightsMappingDTO>();
 
                 foreach (var b in workspaceReports)
@@ -261,46 +318,6 @@ namespace BIPortalServices.Controllers
                 }
 
                 roleRights = roleRights.Concat(updatedRoleRightsMappingsList);
-
-                // User Access right mapping to roles rights
-                List<RoleRightsMappingDTO> roleAccessRightsMappingsList = new List<RoleRightsMappingDTO>();
-
-                foreach (var b in accessRights)
-                {
-                    RoleRightsMappingDTO c = new RoleRightsMappingDTO();
-                    c.WorkspaceID = b.WorkspaceID;
-                    c.WorkspaceName = b.WorkspaceName;
-                    c.ReportID = b.ReportID;
-                    c.ReportName = b.ReportName;
-                    roleAccessRightsMappingsList.Add(c);
-                }
-
-                List<RoleRightsMappingDTO> updateUserRightsMappingsList = new List<RoleRightsMappingDTO>();
-
-                foreach (var s in roleAccessRightsMappingsList)
-                {
-                    updateUserRightsMappingsList.Add(s);
-                }
-
-                foreach (var l1 in roleAccessRightsMappingsList)
-                {
-                    bool existed = false;
-                    foreach (var l2 in roleRights)
-                    {
-                        if (l1.WorkspaceID == l2.WorkspaceID && l1.ReportID == l2.ReportID)
-                        {
-                            existed = true;
-                            break;
-                        }
-                    }
-                    if (existed)
-                    {
-                        updateUserRightsMappingsList.Remove(l1);
-                    }
-                }
-
-                roleRights = roleRights.Concat(updateUserRightsMappingsList);
-
 
                 return Ok(roleRights);
             }

@@ -7,6 +7,7 @@
 
     <link href="~/Styles/Common/Data_Styles.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/Common/axure_rp_page.css" type="text/css" rel="stylesheet" />
+    <link href="~/Styles/Common/layout.css" type="text/css" rel="stylesheet" />
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
@@ -181,7 +182,10 @@
                                 <div id="u645" class="ax_default box_1">
                                     <div id="u645_div" class=""></div>
                                     <div id="u645_text" class="text ">
-                                        <p><span>Requests</span></p>
+                                        @*<p><span>Requests</span></p>*@
+                                        <a href="@Url.Action("createnewrequest","createrequest")">Create New Request</a> <br>
+                                        <a href="@Url.Action("ViewPendingRequests","PendingRequests")">View Pending Requests</a> <br>
+                                        <a href="@Url.Action("ViewPendingApprovals","PendingApprovals")">View Pending Approvals</a> <br>
                                     </div>
                                 </div>
                             </div>

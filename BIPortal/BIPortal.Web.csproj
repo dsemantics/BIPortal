@@ -254,6 +254,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PendingRequestsController.cs" />
     <Compile Include="Controllers\RolesRightsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\PendingApprovalsController.cs" />
@@ -490,6 +491,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PendingApprovals\ViewPendingApprovals.js" />
+    <Content Include="Scripts\PendingRequests\ViewPendingRequests.js" />
     <Content Include="Scripts\RolesRights\AddRole.js" />
     <Content Include="Scripts\RolesRights\ViewRole.js" />
     <Content Include="Scripts\Users\AddUser.js" />
@@ -506,6 +508,7 @@
     <Content Include="Styles\Login\Login_Styles.css" />
     <Content Include="Styles\MyProfile\MyProfile_Styles.css" />
     <Content Include="Styles\PendingApprovals\pending_approvals.css" />
+    <Content Include="Styles\PendingRequests\Pending_RequestsStyles.css" />
     <Content Include="Styles\Roles_Rights\Roles_Rights.css" />
     <Content Include="Styles\Users\AddUser_Styles.css" />
     <Content Include="Styles\Users\EditUser_Styles.css" />
@@ -538,6 +541,7 @@
     <Content Include="Views\Users\MyProfile.cshtml" />
     <Content Include="Views\CreateRequest\CreateNewRequest.cshtml" />
     <Content Include="Views\PendingApprovals\ViewPendingApprovals.cshtml" />
+    <Content Include="Views\PendingRequests\ViewPendingRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

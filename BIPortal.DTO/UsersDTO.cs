@@ -25,7 +25,7 @@ namespace BIPortal.DTO
         public List<UserRoleMappingDTO> UserRoleMappings { get; set; }
         public string UserName { get; set; }
         public List<WorkFlowMasterDTO> WorkFlowMasterMappings { get; set; }
-        public List<WorkFlowDetailsDTO> WorkFlowDetailsMappings { get; set; }
+       // public List<WorkFlowDetailsDTO> WorkFlowDetailsMappings { get; set; }
         public List<UserAccessRightsDTO> UserAccessRightsMappings { get; set; }
         
 

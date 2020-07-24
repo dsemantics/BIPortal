@@ -7,6 +7,57 @@
     //var userID;
 
 
+    // page load 
+    $(document).ready(function () {
+
+        var selectedValues = [];
+        $("#lstSelect :selected").each(function () {
+            selectedValues.push($(this).val());
+        });
+
+        //var id = $("#loadselectedroles").val();
+
+        var userID = $("#UserID").val();
+
+
+
+        //var selectedValues = $('#loadselectedroles').val();
+
+        //$("#loadselectedroles").each(function () {
+        //    var val = $(this).val();
+        //});
+
+        //$("#loadselectedroles :selected").each(function () {
+        //    selectedValues.push($(this).val());
+        //});
+
+        // need to add if condition for selectedValues
+        //if (selectedValues.length == 0) {
+        //    alert("Please select any one Role");
+        //    return false;
+        //}
+
+        //var userarray = { UserID: selectedValues };
+        var userarray = { roleID: selectedValues, userID: userID };
+
+        $.ajax({
+            url: geRightsurl,
+            data: userarray,
+            type: "GET",
+            dataType: "json",
+            traditional: true,
+            success: function (data) {
+                //loadData(data);
+                loadTree(data);
+            },
+            error: function () {
+                alert("Failed to get rights! Please try again.");
+            }
+        });
+    });
+
+
+
     $(".btnViewRights").click(function () {
 
         var selectedValues = [];
@@ -49,7 +100,7 @@
         //document.getElementById("lblRoleName").innerHTML = roleName;
         document.getElementById("lblRoleName").innerHTML = "Has Access To";
 
-        // $('#u452').jstree('destroy');
+         $('#u452').jstree('destroy');
         //var selectedItems = [];
         $(function () {
             $('#u452').on('changed.jstree', function (e, data) {

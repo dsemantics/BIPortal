@@ -31,6 +31,7 @@
         //var SaveUserRightsurl = '@Url.Action("AddUser", "Users")';
         var userID;
         var selectedItems = [];
+        var loadselectedroles = [];
     </script>
 
 </head>
@@ -85,6 +86,10 @@
                     @*@Html.TextBoxFor(Model => Model.EmailID, new { @class = "form-control", style = "height:28px;" })*@
                     @*@Html.TextBox("Name", (object)ViewBag.EmailID, new { @class = "form-control", style = "height:28px;" })*@
                     @Html.HiddenFor(Model => Model.UserID)
+                    @*@Html.HiddenFor(Model => Model.SelectedRolesValues, new { id = "loadselectedroles" })*@
+
+                    @*<input type="hidden" class="mail-contacts" name="to[]" value="@Model => Model.SelectedRolesValues">*@
+
                     @*@Html.HiddenFor(Model => Model.PermissionID)*@
                     @*@Html.HiddenFor(Model => Model.CreatedBy)*@
                     @* @Html.HiddenFor(Model => Model.PermissionMaster.PermissionID)*@
