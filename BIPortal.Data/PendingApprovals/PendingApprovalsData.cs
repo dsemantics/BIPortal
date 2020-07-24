@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using BIPortal.Data.Email;
 using BIPortal.DTO;
 
 namespace BIPortal.Data.PendingApprovals
@@ -118,7 +119,7 @@ namespace BIPortal.Data.PendingApprovals
             }
         }
 
-        public void RejectRequest(List<WorkFlowMasterDTO> workFlowMasterDTO)
+        public void RejectRequest(List<WorkFlowMasterDTO> workFlowMasterDTO, string powerBIUserName, string powerBIPWD, string smtpHost, int smtpPort)
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -141,6 +142,12 @@ namespace BIPortal.Data.PendingApprovals
 
                         context.WorkFlowMasters.AddOrUpdate(workflowMasterEntity);
                         context.SaveChanges();
+
+                        //send email
+                        var subject = "Your request is rejected.";
+                        var body = "Your request for access to workspace " + workflowMasterEntity.WorkspaceName + " has been rejected.";
+                        EmailData emailData = new EmailData();
+                        emailData.SendEmail(powerBIUserName, powerBIPWD, smtpHost, smtpPort, workflowMasterEntity.RequestFor, subject, body);
                     }
                     foreach (var e in f.WorkFlowDetails)
                     {

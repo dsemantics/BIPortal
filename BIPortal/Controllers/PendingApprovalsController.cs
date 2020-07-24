@@ -285,7 +285,7 @@ namespace BIPortal.Controllers
                         ReportID = null,
                         ReportName = null,                        
                         ProcessedDate = DateTime.Now,
-                        Status = "REJECT"
+                        Status = "REJECTED"
                     };
                     workFlowMasterList.Add(workFlowMasterValues);
                 }
@@ -299,7 +299,7 @@ namespace BIPortal.Controllers
                         ReportID = a.id,
                         ReportName = a.text,                        
                         ProcessedDate = DateTime.Now,
-                        Status = "REJECT"
+                        Status = "REJECTED"
                     };
                     workFlowMasterList.Add(workFlowMasterValues);
                 }

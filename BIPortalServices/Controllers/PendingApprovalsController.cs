@@ -134,7 +134,12 @@ namespace BIPortalServices.Controllers
 
                     var workFlowMasterData = mapper.Map<List<WorkFlowMasterModel>, List<WorkFlowMasterDTO>>(workFlowMasterModel);
 
-                    pendingApprovalData.RejectRequest(workFlowMasterData);
+                    string powerBIUserName = ConfigurationManager.AppSettings["powerBIUserName"];
+                    string powerBIPWD = ConfigurationManager.AppSettings["powerBIPWD"];
+                    string smtpHost = ConfigurationManager.AppSettings["smtpHost"];
+                    int smtpPort = Convert.ToInt32(ConfigurationManager.AppSettings["smtpPort"]);
+
+                    pendingApprovalData.RejectRequest(workFlowMasterData, powerBIUserName, powerBIPWD, smtpHost, smtpPort);
 
                     return Created("api/RejectRequest", true);
                 }
