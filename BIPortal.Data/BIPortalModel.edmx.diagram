@@ -14,15 +14,15 @@
         <EntityTypeShape EntityType="BIPortalModel.WorkspaceReportsMaster" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="BIPortalModel.UserAccessRight" Width="1.5" PointX="5.25" PointY="20.375" />
         <EntityTypeShape EntityType="BIPortalModel.WorkSpaceOwnerMaster" Width="1.5" PointX="5.25" PointY="24.5" />
-        <EntityTypeShape EntityType="BIPortalModel.UserMaster" Width="1.5" PointX="3" PointY="14.875" />
+        <EntityTypeShape EntityType="BIPortalModel.WorkFlowDetail" Width="1.5" PointX="7.5" PointY="15.625" />
+        <EntityTypeShape EntityType="BIPortalModel.WorkFlowMaster" Width="1.5" PointX="5.25" PointY="15.375" />
+        <AssociationConnector Association="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36" />
+        <EntityTypeShape EntityType="BIPortalModel.UserMaster" Width="1.5" PointX="3" PointY="14.75" />
         <AssociationConnector Association="BIPortalModel.FK__UserMaste__Permi__72C60C4A" />
         <AssociationConnector Association="BIPortalModel.FK__UserAcces__UserI__25518C17" />
         <AssociationConnector Association="BIPortalModel.FK__UserRoleM__UserI__7D439ABD" />
-        <AssociationConnector Association="BIPortalModel.FK__WorkSpace__Owner__02084FDA" />
-        <EntityTypeShape EntityType="BIPortalModel.WorkFlowDetail" Width="1.5" PointX="7.5" PointY="15.625" />
-        <EntityTypeShape EntityType="BIPortalModel.WorkFlowMaster" Width="1.5" PointX="5.25" PointY="15.375" />
         <AssociationConnector Association="BIPortalModel.FK__WorkFlowM__Owner__37703C52" />
-        <AssociationConnector Association="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36" />
+        <AssociationConnector Association="BIPortalModel.FK__WorkSpace__Owner__02084FDA" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

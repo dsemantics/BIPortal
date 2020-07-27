@@ -30,8 +30,8 @@ namespace BIPortal.Data
         public Nullable<System.DateTime> ProcessedDate { get; set; }
         public string Status { get; set; }
     
-        public virtual UserMaster UserMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkFlowDetail> WorkFlowDetails { get; set; }
+        public virtual UserMaster UserMaster { get; set; }
     }
 }

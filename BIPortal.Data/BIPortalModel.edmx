@@ -78,6 +78,7 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="BIObjectType" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="UserRoleMapping">
           <Key>
@@ -323,6 +324,13 @@
           <EntitySet Name="WorkspaceReportsMasters" EntityType="BIPortalModel.WorkspaceReportsMaster" />
           <EntitySet Name="UserAccessRights" EntityType="BIPortalModel.UserAccessRight" />
           <EntitySet Name="WorkSpaceOwnerMasters" EntityType="BIPortalModel.WorkSpaceOwnerMaster" />
+          <EntitySet Name="WorkFlowDetails" EntityType="BIPortalModel.WorkFlowDetail" />
+          <EntitySet Name="WorkFlowMasters" EntityType="BIPortalModel.WorkFlowMaster" />
+          <AssociationSet Name="FK__WorkFlowD__Reque__3B40CD36" Association="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36">
+            <End Role="WorkFlowMaster" EntitySet="WorkFlowMasters" />
+            <End Role="WorkFlowDetail" EntitySet="WorkFlowDetails" />
+          </AssociationSet>
+          <FunctionImport Name="GetWorkspaceOwner" ReturnType="Collection(BIPortalModel.GetWorkspaceOwner_Result1)" />
           <EntitySet Name="UserMasters" EntityType="BIPortalModel.UserMaster" />
           <AssociationSet Name="FK__UserMaste__Permi__72C60C4A" Association="BIPortalModel.FK__UserMaste__Permi__72C60C4A">
             <End Role="PermissionMaster" EntitySet="PermissionMasters" />
@@ -336,21 +344,14 @@
             <End Role="UserMaster" EntitySet="UserMasters" />
             <End Role="UserRoleMapping" EntitySet="UserRoleMappings" />
           </AssociationSet>
-          <AssociationSet Name="FK__WorkSpace__Owner__02084FDA" Association="BIPortalModel.FK__WorkSpace__Owner__02084FDA">
-            <End Role="UserMaster" EntitySet="UserMasters" />
-            <End Role="WorkSpaceOwnerMaster" EntitySet="WorkSpaceOwnerMasters" />
-          </AssociationSet>
-          <EntitySet Name="WorkFlowDetails" EntityType="BIPortalModel.WorkFlowDetail" />
-          <EntitySet Name="WorkFlowMasters" EntityType="BIPortalModel.WorkFlowMaster" />
           <AssociationSet Name="FK__WorkFlowM__Owner__37703C52" Association="BIPortalModel.FK__WorkFlowM__Owner__37703C52">
             <End Role="UserMaster" EntitySet="UserMasters" />
             <End Role="WorkFlowMaster" EntitySet="WorkFlowMasters" />
           </AssociationSet>
-          <AssociationSet Name="FK__WorkFlowD__Reque__3B40CD36" Association="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36">
-            <End Role="WorkFlowMaster" EntitySet="WorkFlowMasters" />
-            <End Role="WorkFlowDetail" EntitySet="WorkFlowDetails" />
+          <AssociationSet Name="FK__WorkSpace__Owner__02084FDA" Association="BIPortalModel.FK__WorkSpace__Owner__02084FDA">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="WorkSpaceOwnerMaster" EntitySet="WorkSpaceOwnerMasters" />
           </AssociationSet>
-          <FunctionImport Name="GetWorkspaceOwner" ReturnType="Collection(BIPortalModel.GetWorkspaceOwner_Result1)" />
         </EntityContainer>
         <EntityType Name="UserRoleMapping">
           <Key>
@@ -476,6 +477,70 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="UserMaster" Relationship="BIPortalModel.FK__WorkSpace__Owner__02084FDA" FromRole="WorkSpaceOwnerMaster" ToRole="UserMaster" />
         </EntityType>
+        <ComplexType Name="GetWorkspaceOwner1_Result">
+          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="OwnerID" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="201" />
+          <Property Type="Int32" Name="ReportCount" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="WorkFlowDetail">
+          <Key>
+            <PropertyRef Name="RequestDetailID" />
+          </Key>
+          <Property Name="RequestDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestID" Type="Int32" />
+          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WorkFlowMaster" Relationship="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36" FromRole="WorkFlowDetail" ToRole="WorkFlowMaster" />
+        </EntityType>
+        <EntityType Name="WorkFlowMaster">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkspaceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkspaceName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerID" Type="Int32" />
+          <Property Name="RequestFor" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RequestedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RequestedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WorkFlowDetails" Relationship="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36" FromRole="WorkFlowMaster" ToRole="WorkFlowDetail" />
+          <NavigationProperty Name="UserMaster" Relationship="BIPortalModel.FK__WorkFlowM__Owner__37703C52" FromRole="WorkFlowMaster" ToRole="UserMaster" />
+        </EntityType>
+        <Association Name="FK__WorkFlowD__Reque__3B40CD36">
+          <End Type="BIPortalModel.WorkFlowMaster" Role="WorkFlowMaster" Multiplicity="0..1" />
+          <End Type="BIPortalModel.WorkFlowDetail" Role="WorkFlowDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowMaster">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="WorkFlowDetail">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetWorkspaceOwner2_Result">
+          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="OwnerID" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="201" />
+          <Property Type="String" Name="OwnerEmail" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ReportCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetWorkspaceOwner_Result1">
+          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="OwnerID" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="201" />
+          <Property Type="String" Name="OwnerEmail" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ReportCount" Nullable="true" />
+        </ComplexType>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="UserID" />
@@ -491,11 +556,12 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="BIObjectType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PermissionMaster" Relationship="BIPortalModel.FK__UserMaste__Permi__72C60C4A" FromRole="UserMaster" ToRole="PermissionMaster" />
           <NavigationProperty Name="UserAccessRights" Relationship="BIPortalModel.FK__UserAcces__UserI__25518C17" FromRole="UserMaster" ToRole="UserAccessRight" />
           <NavigationProperty Name="UserRoleMappings" Relationship="BIPortalModel.FK__UserRoleM__UserI__7D439ABD" FromRole="UserMaster" ToRole="UserRoleMapping" />
-          <NavigationProperty Name="WorkSpaceOwnerMasters" Relationship="BIPortalModel.FK__WorkSpace__Owner__02084FDA" FromRole="UserMaster" ToRole="WorkSpaceOwnerMaster" />
           <NavigationProperty Name="WorkFlowMasters" Relationship="BIPortalModel.FK__WorkFlowM__Owner__37703C52" FromRole="UserMaster" ToRole="WorkFlowMaster" />
+          <NavigationProperty Name="WorkSpaceOwnerMasters" Relationship="BIPortalModel.FK__WorkSpace__Owner__02084FDA" FromRole="UserMaster" ToRole="WorkSpaceOwnerMaster" />
         </EntityType>
         <Association Name="FK__UserMaste__Permi__72C60C4A">
           <End Type="BIPortalModel.PermissionMaster" Role="PermissionMaster" Multiplicity="0..1" />
@@ -533,54 +599,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WorkSpace__Owner__02084FDA">
-          <End Type="BIPortalModel.UserMaster" Role="UserMaster" Multiplicity="0..1" />
-          <End Type="BIPortalModel.WorkSpaceOwnerMaster" Role="WorkSpaceOwnerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserMaster">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="WorkSpaceOwnerMaster">
-              <PropertyRef Name="OwnerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="GetWorkspaceOwner1_Result">
-          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="OwnerID" Nullable="true" />
-          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="201" />
-          <Property Type="Int32" Name="ReportCount" Nullable="true" />
-        </ComplexType>
-        <EntityType Name="WorkFlowDetail">
-          <Key>
-            <PropertyRef Name="RequestDetailID" />
-          </Key>
-          <Property Name="RequestDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RequestID" Type="Int32" />
-          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ReportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
-          <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="WorkFlowMaster" Relationship="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36" FromRole="WorkFlowDetail" ToRole="WorkFlowMaster" />
-        </EntityType>
-        <EntityType Name="WorkFlowMaster">
-          <Key>
-            <PropertyRef Name="RequestID" />
-          </Key>
-          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WorkspaceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WorkspaceName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="OwnerID" Type="Int32" />
-          <Property Name="RequestFor" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="RequestedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="RequestedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserMaster" Relationship="BIPortalModel.FK__WorkFlowM__Owner__37703C52" FromRole="WorkFlowMaster" ToRole="UserMaster" />
-          <NavigationProperty Name="WorkFlowDetails" Relationship="BIPortalModel.FK__WorkFlowD__Reque__3B40CD36" FromRole="WorkFlowMaster" ToRole="WorkFlowDetail" />
-        </EntityType>
         <Association Name="FK__WorkFlowM__Owner__37703C52">
           <End Type="BIPortalModel.UserMaster" Role="UserMaster" Multiplicity="0..1" />
           <End Type="BIPortalModel.WorkFlowMaster" Role="WorkFlowMaster" Multiplicity="*" />
@@ -593,34 +611,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WorkFlowD__Reque__3B40CD36">
-          <End Type="BIPortalModel.WorkFlowMaster" Role="WorkFlowMaster" Multiplicity="0..1" />
-          <End Type="BIPortalModel.WorkFlowDetail" Role="WorkFlowDetail" Multiplicity="*" />
+        <Association Name="FK__WorkSpace__Owner__02084FDA">
+          <End Type="BIPortalModel.UserMaster" Role="UserMaster" Multiplicity="0..1" />
+          <End Type="BIPortalModel.WorkSpaceOwnerMaster" Role="WorkSpaceOwnerMaster" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="WorkFlowMaster">
-              <PropertyRef Name="RequestID" />
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="WorkFlowDetail">
-              <PropertyRef Name="RequestID" />
+            <Dependent Role="WorkSpaceOwnerMaster">
+              <PropertyRef Name="OwnerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetWorkspaceOwner2_Result">
-          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="OwnerID" Nullable="true" />
-          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="201" />
-          <Property Type="String" Name="OwnerEmail" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="ReportCount" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetWorkspaceOwner_Result1">
-          <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="OwnerID" Nullable="true" />
-          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="201" />
-          <Property Type="String" Name="OwnerEmail" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="ReportCount" Nullable="true" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -734,23 +736,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserMasters">
-            <EntityTypeMapping TypeName="BIPortalModel.UserMaster">
-              <MappingFragment StoreEntitySet="UserMaster">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WorkFlowDetails">
             <EntityTypeMapping TypeName="BIPortalModel.WorkFlowDetail">
               <MappingFragment StoreEntitySet="WorkFlowDetails">
@@ -791,6 +776,24 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="BIPortalModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="BIObjectType" ColumnName="BIObjectType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
