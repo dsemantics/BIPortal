@@ -87,6 +87,22 @@ namespace BIPortalServices.Controllers
             }
         }
 
+        [Route("api/GetReportsAndEmbedUrl")]
+        public IHttpActionResult GetReportsAndEmbedUrl(int? requestId)
+        {
+            try
+            {
+                WorkSpaceData workSpaceData = new WorkSpaceData();
+                var reports = workSpaceData.GetReportsAndEmbedUrl(requestId);
+                return Ok(reports);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch reports");
+            }
+        }
+
         [HttpPost]
         [Route("api/SaveWorkspaceOwner")]
         //To save role and access rights

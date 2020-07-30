@@ -21,7 +21,7 @@ namespace BIPortal.Controllers
 
             List<UsersModel> UsersList = null;
 
-            if (Session["UserName"] == null)
+            if (Session["UserName"] == null || Session["UserID"] == null)
             {
                 return RedirectToAction("Index", "Login");
             }

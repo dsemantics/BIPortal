@@ -141,6 +141,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CreateRequestController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PendingApprovalsController.cs" />

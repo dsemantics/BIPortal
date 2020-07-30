@@ -142,6 +142,27 @@ namespace BIPortal.Data.WorkSpaces
             }
         }
 
+        //To get workspaces
+        public ReportsDTO GetReportsAndEmbedUrl(int? requestId)
+        {
+            using (var context = new BIPortalEntities())
+            {
+                var result = new ReportsDTO();
+                //result.Users = context.UserMasters.Where(x => x.Active == true).Select(x => new UsersDTO() { UserID = x.UserID, UserName = x.FirstName + " " + x.LastName }).ToList();
+
+                //result.Reports = context.WorkspaceReportsMasters.Where(x => x.WorkspaceID == workspaceid && x.ReportID != null).Select(x => new ReportsDTO() { ReportId = x.ReportID, ReportName = x.ReportName,ReportEmbedUrl=x.ReportEmbedUrl }).ToList();
+                //result.Reports = context.WorkFlowDetails.Where(x => x.RequestID == requestId).Select(x => new ReportsDTO() { ReportId = x.ReportID, ReportName = x.ReportName }).ToList();
+
+                result.Reports = (from d in context.WorkFlowDetails
+                                  join e in context.WorkspaceReportsMasters on d.ReportID equals e.ReportID
+                                  where d.RequestID == requestId
+                                  select new { d.ReportID, d.ReportName, e.ReportEmbedUrl })
+                             .Select(x => new ReportsDTO() { ReportId = x.ReportID, ReportName = x.ReportName, ReportEmbedUrl = x.ReportEmbedUrl }).ToList();
+                
+                return result;
+            }
+        }
+
         //Save workspace Owner
         public void SaveWorkspaceOwner(WorkSpaceOwnerDTO workspaceOwnerDTO)
         {

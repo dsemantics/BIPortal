@@ -25,5 +25,6 @@ namespace BIPortal.Data
         public string ModifiedBy { get; set; }
         public bool WorkspaceActive { get; set; }
         public bool ReportActive { get; set; }
+        public string ReportEmbedUrl { get; set; }
     }
 }

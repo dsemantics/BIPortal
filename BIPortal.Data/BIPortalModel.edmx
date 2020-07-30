@@ -147,6 +147,7 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="WorkspaceActive" Type="bit" Nullable="false" />
           <Property Name="ReportActive" Type="bit" Nullable="false" />
+          <Property Name="ReportEmbedUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK__RoleRight__RoleI__797309D9">
           <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="0..1" />
@@ -321,7 +322,6 @@
             <End Role="RoleMaster" EntitySet="RoleMasters" />
             <End Role="RoleRightsMapping" EntitySet="RoleRightsMappings" />
           </AssociationSet>
-          <EntitySet Name="WorkspaceReportsMasters" EntityType="BIPortalModel.WorkspaceReportsMaster" />
           <EntitySet Name="UserAccessRights" EntityType="BIPortalModel.UserAccessRight" />
           <EntitySet Name="WorkSpaceOwnerMasters" EntityType="BIPortalModel.WorkSpaceOwnerMaster" />
           <EntitySet Name="WorkFlowDetails" EntityType="BIPortalModel.WorkFlowDetail" />
@@ -352,6 +352,7 @@
             <End Role="UserMaster" EntitySet="UserMasters" />
             <End Role="WorkSpaceOwnerMaster" EntitySet="WorkSpaceOwnerMasters" />
           </AssociationSet>
+          <EntitySet Name="WorkspaceReportsMasters" EntityType="BIPortalModel.WorkspaceReportsMaster" />
         </EntityContainer>
         <EntityType Name="UserRoleMapping">
           <Key>
@@ -423,22 +424,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="WorkspaceReportsMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WorkspaceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WorkspaceName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ReportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="WorkspaceActive" Type="Boolean" Nullable="false" />
-          <Property Name="ReportActive" Type="Boolean" Nullable="false" />
-        </EntityType>
         <ComplexType Name="GetWorkspaceOwner_Result">
           <Property Type="String" Name="WorkspaceID" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="WorkspaceName" Nullable="true" MaxLength="200" />
@@ -623,6 +608,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="WorkspaceReportsMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkspaceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkspaceName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReportID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WorkspaceActive" Type="Boolean" Nullable="false" />
+          <Property Name="ReportActive" Type="Boolean" Nullable="false" />
+          <Property Name="ReportEmbedUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -684,23 +686,6 @@
                 <ScalarProperty Name="WorkspaceName" ColumnName="WorkspaceName" />
                 <ScalarProperty Name="WorkspaceID" ColumnName="WorkspaceID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WorkspaceReportsMasters">
-            <EntityTypeMapping TypeName="BIPortalModel.WorkspaceReportsMaster">
-              <MappingFragment StoreEntitySet="WorkspaceReportsMaster">
-                <ScalarProperty Name="ReportActive" ColumnName="ReportActive" />
-                <ScalarProperty Name="WorkspaceActive" ColumnName="WorkspaceActive" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
-                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
-                <ScalarProperty Name="WorkspaceName" ColumnName="WorkspaceName" />
-                <ScalarProperty Name="WorkspaceID" ColumnName="WorkspaceID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -791,6 +776,24 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Salutation" ColumnName="Salutation" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkspaceReportsMasters">
+            <EntityTypeMapping TypeName="BIPortalModel.WorkspaceReportsMaster">
+              <MappingFragment StoreEntitySet="WorkspaceReportsMaster">
+                <ScalarProperty Name="ReportEmbedUrl" ColumnName="ReportEmbedUrl" />
+                <ScalarProperty Name="ReportActive" ColumnName="ReportActive" />
+                <ScalarProperty Name="WorkspaceActive" ColumnName="WorkspaceActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="WorkspaceName" ColumnName="WorkspaceName" />
+                <ScalarProperty Name="WorkspaceID" ColumnName="WorkspaceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

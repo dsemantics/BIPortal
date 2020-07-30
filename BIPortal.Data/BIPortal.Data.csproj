@@ -69,6 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BIPortalModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\DashboardData.cs" />
     <Compile Include="Email\EmailData.cs" />
     <Compile Include="GetWorkspaceOwner1_Result.cs">
       <DependentUpon>BIPortalModel.tt</DependentUpon>

@@ -266,12 +266,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Antlr3.Runtime.dll" />    
+    <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\BIPortal.dll" />
     <Content Include="bin\BIPortal.pdb" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />    
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />    
+    <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csi.exe" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
@@ -311,14 +311,14 @@
     <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="bin\System.Management.Automation.dll" />    
-    <Content Include="bin\System.Web.Helpers.dll" />    
-    <Content Include="bin\System.Web.Mvc.dll" />    
-    <Content Include="bin\System.Web.Optimization.dll" />    
-    <Content Include="bin\System.Web.Razor.dll" />    
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />    
+    <Content Include="bin\System.Management.Automation.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
     <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />    
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -336,6 +336,9 @@
     <Content Include="Images\Administration\user_menu_line_u171.svg" />
     <Content Include="Images\Administration\user_menu_line_u221.svg" />
     <Content Include="Images\Administration\user_menu_line_u232.svg" />
+    <Content Include="Images\Dashboard\u75.png" />
+    <Content Include="Images\Dashboard\u76.png" />
+    <Content Include="Images\Dashboard\u78.png" />
     <Content Include="Images\new_access_req\new_request_u1769.svg" />
     <Content Include="Images\new_access_req\new_request_u1770.svg" />
     <Content Include="Images\Dashboard\hide_panel_button_u39.png" />
@@ -469,6 +472,7 @@
     <Content Include="Connected Services\AzureAD\ConnectedService.json" />
     <None Include="Properties\PublishProfiles\BIPortal - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Dashboard\Dashboard.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
