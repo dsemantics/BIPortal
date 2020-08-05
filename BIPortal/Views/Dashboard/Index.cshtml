@@ -24,6 +24,14 @@
 <body>
     <div id="base" class="">
 
+        <!-- Welcome In (Rectangle) -->
+        <div class="ax_default label" id="u30" data-label="Welcome In" style="visibility:hidden;">
+            <div id="u30_div"></div>
+            <div class="text " id="u30_text">
+                <p><span>WELCOME</span></p>
+            </div>
+        </div>
+
         <!-- Welcome out (Rectangle) -->
         <div id="u50" class="ax_default label" data-label="Welcome out">
             <div id="u50_div" class=""></div>
@@ -60,19 +68,19 @@
                                 <div id="@("u"+i+"_div")" class=""></div>
                                 <div id="@("u"+i+"_text")" class="text ">
                                     <table id="tblViewWorkspaces" class="table table table-bordered table-striped mb-0 table-hover">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="display:none;">
-                                                        <input type="text" value="@Model[i].RequestID" name="RequestID" />
-                                                    </td>
-                                                    <td style="display:none;">
-                                                        <input type="text" value="@Model[i].WorkspaceName" name="WorkspaceName" />
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link btnViewReports">@Model[i].WorkspaceName</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>                                        
+                                        <tbody>
+                                            <tr>
+                                                <td style="display:none;">
+                                                    <input type="text" value="@Model[i].RequestID" name="RequestID" />
+                                                </td>
+                                                <td style="display:none;">
+                                                    <input type="text" value="@Model[i].WorkspaceName" name="WorkspaceName" />
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-link btnViewReports">@Model[i].WorkspaceName</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -80,90 +88,90 @@
                     }
                     else
                     {
-                            <div id="u200"> No workspaces available!</div>
+                        <div id="u200"> No workspaces available!</div>
                     }
 
-                        @*< !--Finance(Rectangle)-- >*@
-                @*<div id="u85" class="ax_default box_1" data-label="Finance">
-        <div id="u85_div" class=""></div>
-        <div id="u85_text" class="text ">            
+                    @*< !--Finance(Rectangle)-- >*@
+                    @*<div id="u85" class="ax_default box_1" data-label="Finance">
+                        <div id="u85_div" class=""></div>
+                        <div id="u85_text" class="text ">
 
-        </div>
-    </div>*@
+                        </div>
+                    </div>*@
 
-                @*< !--Procurement(Rectangle)-- >*@
-                @*<div id="u86" class="ax_default box_1" data-label="Procurement">
-        <div id="u86_div" class=""></div>
-        <div id="u86_text" class="text ">
-            <p><span>Procurement</span></p>
-        </div>
-    </div>*@
+                    @*< !--Procurement(Rectangle)-- >*@
+                    @*<div id="u86" class="ax_default box_1" data-label="Procurement">
+                        <div id="u86_div" class=""></div>
+                        <div id="u86_text" class="text ">
+                            <p><span>Procurement</span></p>
+                        </div>
+                    </div>*@
 
-                @*< !--Sales(Rectangle)-- >*@
-                @*<div id="u87" class="ax_default box_1" data-label="Sales">
-        <div id="u87_div" class=""></div>
-        <div id="u87_text" class="text ">
-            <p><span>Sales</span></p>
-        </div>
-    </div>*@
+                    @*< !--Sales(Rectangle)-- >*@
+                    @*<div id="u87" class="ax_default box_1" data-label="Sales">
+                        <div id="u87_div" class=""></div>
+                        <div id="u87_text" class="text ">
+                            <p><span>Sales</span></p>
+                        </div>
+                    </div>*@
 
-                @*< !--Marketing(Rectangle)-- >*@
-                @*<div id="u88" class="ax_default box_1" data-label="Marketing">
-        <div id="u88_div" class=""></div>
-        <div id="u88_text" class="text ">
-            <p><span>Marketing</span></p>
-        </div>
-    </div>*@
+                    @*< !--Marketing(Rectangle)-- >*@
+                    @*<div id="u88" class="ax_default box_1" data-label="Marketing">
+                        <div id="u88_div" class=""></div>
+                        <div id="u88_text" class="text ">
+                            <p><span>Marketing</span></p>
+                        </div>
+                    </div>*@
 
-                @*< !--Logistics(Rectangle)-- >*@
-                @*<div id="u89" class="ax_default box_1" data-label="Logistics">
-        <div id="u89_div" class=""></div>
-        <div id="u89_text" class="text ">
-            <p><span>Logistics</span></p>
-        </div>
-    </div>*@
+                    @*< !--Logistics(Rectangle)-- >*@
+                    @*<div id="u89" class="ax_default box_1" data-label="Logistics">
+                        <div id="u89_div" class=""></div>
+                        <div id="u89_text" class="text ">
+                            <p><span>Logistics</span></p>
+                        </div>
+                    </div>*@
 
-                @*< !--Human Resources(Rectangle)-- >*@
-                @*<div id="u90" class="ax_default box_1" data-label="Human Resources">
-        <div id="u90_div" class=""></div>
-        <div id="u90_text" class="text ">
-            <p><span>Human Resources</span></p>
-        </div>
-    </div>*@
+                    @*< !--Human Resources(Rectangle)-- >*@
+                    @*<div id="u90" class="ax_default box_1" data-label="Human Resources">
+                        <div id="u90_div" class=""></div>
+                        <div id="u90_text" class="text ">
+                            <p><span>Human Resources</span></p>
+                        </div>
+                    </div>*@
 
-                @*< !--Payroll(Rectangle)-- >*@
-                @*<div id="u91" class="ax_default box_1" data-label="Payroll">
-        <div id="u91_div" class=""></div>
-        <div id="u91_text" class="text ">
-            <p><span>Payroll</span></p>
-        </div>
-    </div>*@
+                    @*< !--Payroll(Rectangle)-- >*@
+                    @*<div id="u91" class="ax_default box_1" data-label="Payroll">
+                        <div id="u91_div" class=""></div>
+                        <div id="u91_text" class="text ">
+                            <p><span>Payroll</span></p>
+                        </div>
+                    </div>*@
 
-                @*< !--Unnamed(Rectangle)-- >*@
-                @*<div id="u92" class="ax_default box_1">
-        <div id="u92_div" class=""></div>
-        <div id="u92_text" class="text ">
-            <p><span>Manufacturing</span></p>
-        </div>
-    </div>*@
+                    @*< !--Unnamed(Rectangle)-- >*@
+                    @*<div id="u92" class="ax_default box_1">
+                        <div id="u92_div" class=""></div>
+                        <div id="u92_text" class="text ">
+                            <p><span>Manufacturing</span></p>
+                        </div>
+                    </div>*@
                 </div>
             </div>
-            <div id = "u83_state1" class="panel_state" data-label="Reports" style="visibility:hidden;">
-                <div id = "u83_state1_content" class="panel_state_content">
+            <div id="u83_state1" class="panel_state" data-label="Reports" style="visibility:hidden;">
+                <div id="u83_state1_content" class="panel_state_content">
 
                     <!-- Workspace Label(Rectangle) -->
-                    <div id = "u93" class="ax_default label" data-label="Workspace Label">
-                        <div id = "u93_div" class=""></div>
-                        <div id = "u93_text" class="text ">
+                    <div id="u93" class="ax_default label" data-label="Workspace Label">
+                        <div id="u93_div" class=""></div>
+                        <div id="u93_text" class="text ">
                             <p><span id="spnWorkspaceName">Finance / Reports</span></p>
                         </div>
                     </div>
 
                     <!-- Report1(Rectangle) -->
-                    <div id = "u94" class="ax_default label" data-label="Report1">
-                        <div id = "u94_div" class=""></div>
+                    <div id="u94" class="ax_default label" data-label="Report1">
+                        <div id="u94_div" class=""></div>
                         <div id="u94_text" class="text ">
-                            @*<p><span>Report 1</span></p>*@                            
+                            @*<p><span>Report 1</span></p>*@
                         </div>
                     </div>
 
@@ -184,20 +192,20 @@
                     </div>*@
                 </div>
             </div>
-            <div id = "u83_state2" class="panel_state" data-label="Pages" style="visibility: hidden;">
-                <div id = "u83_state2_content" class="panel_state_content">
+            <div id="u83_state2" class="panel_state" data-label="Pages" style="visibility: hidden;">
+                <div id="u83_state2_content" class="panel_state_content">
 
                     <!-- Workspace Label(Rectangle) -->
-                    <div id = "u97" class="ax_default label" data-label="Workspace Label">
-                        <div id = "u97_div" class=""></div>
-                        <div id = "u97_text" class="text ">
+                    <div id="u97" class="ax_default label" data-label="Workspace Label">
+                        <div id="u97_div" class=""></div>
+                        <div id="u97_text" class="text ">
                             <p><span id="spnReportName">Finance / Reports /Pages</span></p>
                         </div>
                     </div>
 
                     <!-- Page1(Rectangle) -->
-                    <div id = "u98" class="ax_default label" data-label="Page1">
-                        <div id = "u98_div" class=""></div>
+                    <div id="u98" class="ax_default label" data-label="Page1">
+                        <div id="u98_div" class=""></div>
                         <div id="u98_text" class="text ">
                             @*<p><span>Page 1</span></p>*@
                             @*<iframe id="ifrmReport" width="840" height="500" src="https://app.powerbi.com/reportEmbed?reportId=cc005a89-fb8a-4641-a5ad-3575c089d966&autoAuth=true&ctid=86fb359e-1360-4ab3-b90d-2a68e8c007b9&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>*@

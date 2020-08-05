@@ -53,7 +53,7 @@
                                 </th>
                                 <th style="text-align:left;">
                                     Date Modified
-                                </th>                               
+                                </th>
                             </tr>
                         </thead>
                         @foreach (var item in Model)
@@ -66,7 +66,7 @@
                                     <td style="display:none;">
                                         <input type="text" value="@item.RoleName" name="RoleName" />
                                     </td>
-                                    <td style="text-align:left;">                                        
+                                    <td style="text-align:left;">
                                         <button type="button" class="btn btn-link btnViewRights">@item.RoleName</button>
                                     </td>
                                     <td style="text-align:left;">
@@ -74,7 +74,7 @@
                                     </td>
                                     <td style="text-align:left;">
                                         @Html.DisplayFor(modelItem => item.ModifiedDate)
-                                    </td>                                    
+                                    </td>
                                 </tr>
                             </tbody>
                         }
@@ -132,6 +132,14 @@
             </div>
         </div>
 
+        <!-- Welcome In (Rectangle) -->
+        <div class="ax_default label" id="u123" data-label="Welcome In" style="visibility:hidden;">
+            <div id="u123_div"></div>
+            <div class="text " id="u123_text">
+                <p><span>ADMINISTRATION - Roles &amp; Rights</span></p>
+            </div>
+        </div>
+
         <!-- Welcome out (Rectangle) -->
         <div id="u654" class="ax_default label" data-label="Welcome out">
             <div id="u654_div" class=""></div>
@@ -146,7 +154,7 @@
             <div id="u475_text" class="text ">
                 <input id="btnAddRole" value="Add Role" type="button" style="width:175px" onclick="location.href='@Url.Action("AddRole", "RolesRights")'" />
             </div>
-        </div>       
+        </div>
 
     }
 

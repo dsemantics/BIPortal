@@ -44,6 +44,14 @@
 
     <div id="base" class="">
 
+        <!-- Welcome In (Rectangle) -->
+        <div class="ax_default label" id="u123" data-label="Welcome In" style="visibility:hidden;">
+            <div id="u123_div"></div>
+            <div class="text " id="u123_text">
+                <p><span>ADMINISTRATION - Edit User</span></p>
+            </div>
+        </div>
+
         <!-- Welcome out (Rectangle) -->
         <div id="u654" class="ax_default label" data-label="Welcome out">
             <div id="u654_div" class=""></div>
@@ -185,7 +193,7 @@
 
                 <!-- Role Selection (List Box) -->
                 <div id="u1376" class="ax_default list_box">
-                    @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new {  @class = "listbox",  @id = "lstSelect" })
+                    @Html.ListBoxFor(model => model.SelectedRolesValues, (IEnumerable<SelectListItem>)ViewBag.RoleSelection, new { @class = "listbox", @id = "lstSelect" })
                     &nbsp;
                     @Html.ValidationMessageFor(m => m.SelectedRolesValues, "", new { @class = "error" })
                 </div>

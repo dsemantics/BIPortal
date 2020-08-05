@@ -15,24 +15,32 @@
 <body>
     <div id="base" class="">
 
+        <!-- Welcome In (Rectangle) -->
+        <div class="ax_default label" id="u123" data-label="Welcome In" style="visibility:hidden;">
+            <div id="u123_div"></div>
+            <div class="text " id="u123_text">
+                <p><span>ADMINISTRATION</span></p>
+            </div>
+        </div>
+
+        <!-- Welcome out (Rectangle) -->
+        <div id="u654" class="ax_default label" data-label="Welcome out">
+            <div id="u654_div" class=""></div>
+            <div id="u654_text" class="text ">
+                <p><span>ADMINISTRATION</span></p>
+            </div>
+        </div>
+
+        <div id="u300" class="ax_default box_1" data-label="User Box Large">
+            @*<div id="u160_div" class=""></div>*@
+            <div id="u300_text" class="text ">
+                @if (@ViewBag.InfoMessage != null)
+                {@Html.Label((string)@ViewBag.InfoMessage)}
+            </div>
+        </div>
+
         <!-- User Menu Pnael (Group) -->
         <div id="u159" class="ax_default" data-label="User Menu Pnael" data-left="258" data-top="87" data-width="200" data-height="158">
-
-            <!-- Welcome out (Rectangle) -->
-            <div id="u654" class="ax_default label" data-label="Welcome out">
-                <div id="u654_div" class=""></div>
-                <div id="u654_text" class="text ">
-                    <p><span>ADMINISTRATION</span></p>
-                </div>
-            </div>
-
-            <div id="u300" class="ax_default box_1" data-label="User Box Large">
-                @*<div id="u160_div" class=""></div>*@
-                <div id="u300_text" class="text ">
-                    @if (@ViewBag.InfoMessage != null)
-                    {@Html.Label((string)@ViewBag.InfoMessage)}
-                </div>
-            </div>
 
             <!-- User Box Large (Rectangle) -->
             <div id="u160" class="ax_default box_1" data-label="User Box Large">
@@ -63,6 +71,14 @@
                 <div id="u163_div" class=""></div>
                 <div id="u163_text" class="text ">
                     <p><span>Users</span></p>
+                </div>
+            </div>
+
+            <!-- User Menu Line (Line) -->
+            <div id="u171" class="ax_default line" data-label="User Menu Line">
+                <img id="u171_img" class="img " src="~/Images/administration/user_menu_line_u171.svg" />
+                <div id="u171_text" class="text " style="display:none; visibility: hidden">
+                    <p></p>
                 </div>
             </div>
 
@@ -117,13 +133,7 @@
             </div>
         </div>
 
-        <!-- User Menu Line (Line) -->
-        <div id="u171" class="ax_default line" data-label="User Menu Line">
-            <img id="u171_img" class="img " src="~/Images/administration/user_menu_line_u171.svg" />
-            <div id="u171_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-            </div>
-        </div>
+
 
 
         <!-- WS & Reps Panel (Group) -->
@@ -258,7 +268,7 @@
                     <div id="u235_div" class=""></div>
                     <div id="u235_text" class="text ">
                         @*<p><span>Add Role</span></p>*@
-                        <p><span>@Html.ActionLink("Add Role","AddRole", "RolesRights", null, null)</span></p>
+                        <p><span>@Html.ActionLink("Add Role", "AddRole", "RolesRights", null, null)</span></p>
                     </div>
                 </div>
 

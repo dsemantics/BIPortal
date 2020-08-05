@@ -12,6 +12,66 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#u653_img").click(function () {
+                $("#u630_state0").css('visibility', 'hidden');
+                $("#u50").css('visibility', 'hidden'); //Welcome
+                $("#u653_img").css('visibility', 'hidden');
+                $("#u638").css('visibility', 'hidden');                
+                $("#u654").css('visibility', 'hidden'); //Administration, My Profile, Add Role, View Role, Workspaces & Reports, Create Request, View Pending Approvals, View Pending Requests, Add User, Edit User, View User
+
+                $("#u630_state1").css('visibility', 'visible');
+                $("#u30").css('visibility', 'visible'); //Welcome 
+                $("#u123").css('visibility', 'visible'); //Administration, My Profile, Add Role, View Role, Workspaces & Reports, Create Request, View Pending Approvals, View Pending Requests, Add User, Edit User, View User
+                $("#u83").css('left', '58px'); //Dashboard body
+                $("#u159").css('left', '-200px'); //Administration body
+                $("#u217").css('left', '-200px'); //Administration body
+                $("#u227").css('left', '-200px'); //Administration body
+                $("#u1581").css('left', '50px'); //Myprofile and Edit User body
+                $("#u681").css('left', '50px'); //Add Role body
+                $("#u399").css('left', '50px'); //View Role body
+                $("#u425").css('left', '525px'); //View Role body
+                $("#u475").css('left', '60px'); //View Role body
+                $("#u304").css('left', '50px'); //Workspace and Reports body
+                $("#u333").css('left', '150px'); //Workspace and Reports body
+                $("#u1794").css('left', '50px'); //Create New Request body
+                $("#u2262").css('left', '50px'); //View Pending Approvals body
+                $("#u790").css('left', '50px'); //View Pending Requests and View User body
+                $("#u33333").css('left', '150px'); //View Pending Requests body
+                $("#u1311").css('left', '50px'); //Add User body                
+            });
+
+            $("#u634_img").click(function () {
+                $("#u630_state1").css('visibility', 'hidden');
+                $("#u30").css('visibility', 'hidden');  //Welcome
+                $("#u123").css('visibility', 'hidden'); //Administration, My Profile, Add Role, View Role, Workspaces & Reports, Create Request, View Pending Approvals, View Pending Requests, Add User, Edit User, View User
+
+                $("#u630_state0").css('visibility', 'visible');
+                $("#u50").css('visibility', 'visible'); //Welcome
+                $("#u653_img").css('visibility', 'visible');
+                $("#u638").css('visibility', 'visible');                
+                $("#u654").css('visibility', 'visible'); //Administration, My Profile, Add Role, View Role, Workspaces & Reports, Create Request, View Pending Approvals, View Pending Requests, Add User, Edit User, View User
+                $("#u83").css('left', '258px'); //Dashboard body
+                $("#u159").css('left', '0px'); //Administration body
+                $("#u217").css('left', '0px'); //Administration body
+                $("#u227").css('left', '0px'); //Administration body
+                $("#u1581").css('left', '250px'); //Myprofile and Edit User body
+                $("#u681").css('left', '250px'); //Add Role body
+                $("#u399").css('left', '250px'); //View Role body
+                $("#u425").css('left', '725px'); //View Role body
+                $("#u475").css('left', '260px'); //View Role body
+                $("#u304").css('left', '250px'); //Workspace and Reports body
+                $("#u333").css('left', '350px'); //Workspace and Reports body
+                $("#u1794").css('left', '250px'); //Create New Request body
+                $("#u2262").css('left', '250px'); //View Pending Approvals body
+                $("#u790").css('left', '250px'); //View Pending Requests and View User body
+                $("#u33333").css('left', '350px'); //View Pending Requests body
+                $("#u1311").css('left', '250px'); //Add User body
+            });
+        });
+    </script>
+
 </head>
 
 <body>
@@ -94,12 +154,12 @@
 
 
                     <!-- Welcome In (Rectangle) -->
-                    <div id="u635" class="ax_default label" data-label="Welcome In">
+                    @*<div id="u635" class="ax_default label" data-label="Welcome In">
                         <div id="u635_div" class=""></div>
                         <div id="u635_text" class="text ">
                             <p style="font-size:16px;text-align:left;"><span>ADMINISTRATION</span></p><p style="font-size:12px;text-align:center;"><span>Roles &amp; Rights</span></p>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -272,7 +332,7 @@
             </div>
         </div>
 
-        
+
 
         <!-- Welcome out (Rectangle) -->
         @*<div id="u654" class="ax_default label" data-label="Welcome out">
@@ -458,7 +518,7 @@
             </div><div id="u70_state0" class="panel_state" data-label="Shaded" style="visibility: inherit; position: absolute;">
                 <div id="u70_state0_content" class="panel_state_content">
 
-                   
+
 
                     <!-- Unnamed (Rectangle) -->
                     <div id="u72" class="ax_default box_1">
@@ -546,7 +606,7 @@
             <div id="u679_div" class=""></div>
             <div id="u679_text" class="text ">
                 @*<p><span>Selva</span></p>*@
-                @Html.Label("",(String)Session["UserName"])                                
+                @Html.Label("",(String)Session["UserName"])
             </div>
         </div>
 
@@ -569,7 +629,7 @@
 
 
 
- 
+
 
 
 </html>
