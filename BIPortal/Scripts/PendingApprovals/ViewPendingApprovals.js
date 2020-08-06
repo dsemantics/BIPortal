@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
-    // This is for Get All Data
-    //var roleName;
+    $("#u649").css('visibility', 'visible');
+    $("#u644_state1").css('visibility', 'visible');
+
     var requestId;
     $(".btnViewPendingApprovals").click(function () {
 

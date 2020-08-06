@@ -20,6 +20,8 @@
                 $("#u653_img").css('visibility', 'hidden');
                 $("#u638").css('visibility', 'hidden');                
                 $("#u654").css('visibility', 'hidden'); //Administration, My Profile, Add Role, View Role, Workspaces & Reports, Create Request, View Pending Approvals, View Pending Requests, Add User, Edit User, View User
+                $("#u649").css('visibility', 'hidden');
+                $("#u644_state1").css('visibility', 'hidden');
 
                 $("#u630_state1").css('visibility', 'visible');
                 $("#u30").css('visibility', 'visible'); //Welcome 
@@ -68,6 +70,16 @@
                 $("#u790").css('left', '250px'); //View Pending Requests and View User body
                 $("#u33333").css('left', '350px'); //View Pending Requests body
                 $("#u1311").css('left', '250px'); //Add User body
+            });
+
+            $("#u644_state0").click(function () {
+                $("#u649").css('visibility', 'visible');
+                $("#u644_state1").css('visibility', 'visible');                
+            });
+
+            $("#u644_state1").click(function () {
+                $("#u649").css('visibility', 'hidden');
+                $("#u644_state1").css('visibility', 'hidden');
             });
         });
     </script>
@@ -235,7 +247,7 @@
                     </div>
 
                     <!-- Requests (Dynamic Panel) -->
-                    <div id="u644" class="ax_default" data-label="Requests">
+                    <div id="u644" class="ax_default" data-label="Requests" style="cursor: pointer;">
                         <div id="u644_state0" class="panel_state" data-label="Grey" style="">
                             <div id="u644_state0_content" class="panel_state_content">
 
@@ -243,10 +255,10 @@
                                 <div id="u645" class="ax_default box_1">
                                     <div id="u645_div" class=""></div>
                                     <div id="u645_text" class="text ">
-                                        @*<p><span>Requests</span></p>*@
-                                        <a href="@Url.Action("createnewrequest","createrequest")">Create New Request</a> <br>
+                                        <p><span>Requests</span></p>
+                                        @*<a href="@Url.Action("createnewrequest","createrequest")">Create New Request</a> <br>
                                         <a href="@Url.Action("ViewPendingRequests","PendingRequests")">View Pending Requests</a> <br>
-                                        <a href="@Url.Action("ViewPendingApprovals","PendingApprovals")">View Pending Approvals</a> <br>
+                                        <a href="@Url.Action("ViewPendingApprovals","PendingApprovals")">View Pending Approvals</a> <br>*@
                                     </div>
                                 </div>
                             </div>
@@ -290,7 +302,7 @@
                     </div>
 
                     <!-- Requests Addon Panel (Dynamic Panel) -->
-                    <div id="u649" class="ax_default ax_default_hidden" data-label="Requests Addon Panel" style="display:none; visibility: hidden">
+                    <div id="u649" class="ax_default" data-label="Requests Addon Panel" style="visibility: hidden">
                         <div id="u649_state0" class="panel_state" data-label="State1" style="">
                             <div id="u649_state0_content" class="panel_state_content">
 
@@ -298,7 +310,8 @@
                                 <div id="u650" class="ax_default label" data-label="New Request">
                                     <div id="u650_div" class=""></div>
                                     <div id="u650_text" class="text ">
-                                        <p><span>Create New Request</span></p>
+                                        @*<p><span>Create New Request</span></p>*@
+                                        <a href="@Url.Action("createnewrequest","createrequest")">Create New Request</a>
                                     </div>
                                 </div>
 
@@ -306,7 +319,8 @@
                                 <div id="u651" class="ax_default label" data-label="View Requests">
                                     <div id="u651_div" class=""></div>
                                     <div id="u651_text" class="text ">
-                                        <p><span>View Pending Requests</span></p>
+                                        @*<p><span>View Pending Requests</span></p>*@
+                                        <a href="@Url.Action("ViewPendingRequests","PendingRequests")">View Pending Requests</a>
                                     </div>
                                 </div>
 
@@ -314,7 +328,8 @@
                                 <div id="u652" class="ax_default label" data-label="View Approvals">
                                     <div id="u652_div" class=""></div>
                                     <div id="u652_text" class="text ">
-                                        <p><span>View Pending Approvals</span></p>
+                                        @*<p><span>View Pending Approvals</span></p>*@
+                                        <a href="@Url.Action("ViewPendingApprovals","PendingApprovals")">View Pending Approvals</a>
                                     </div>
                                 </div>
                             </div>
@@ -348,12 +363,14 @@
                 <div id="u655_state0_content" class="panel_state_content">
 
                     <!-- Unnamed (Image) -->
-                    <div id="u656" class="ax_default image">
-                        <img id="u656_img" class="img " src="~/Images/Dashboard/u52.png" />
-                        <div id="u656_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
+                    <a href="@Url.Action("Index","Dashboard")" class="defaultpage_menu">
+                        <div id="u656" class="ax_default image">
+                            <img id="u656_img" class="img " src="~/Images/Dashboard/u52.png" />
+                            <div id="u656_text" class="text " style="display:none; visibility: hidden">
+                                <p></p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div id="u655_state1" class="panel_state" data-label="White" style="visibility: hidden;">
@@ -537,12 +554,14 @@
                 <div id="u672_state0_content" class="panel_state_content">
 
                     <!-- Unnamed (Image) -->
-                    <div id="u673" class="ax_default image">
-                        <img id="u673_img" class="img " src="~/Images/Dashboard/u150.png" />
-                        <div id="u673_text" class="text " style="display:none; visibility: hidden">
-                            <p></p>
+                    <a href="@Url.Action("Index","Dashboard")" class="defaultpage_menu">
+                        <div id="u673" class="ax_default image">
+                            <img id="u673_img" class="img " src="~/Images/Dashboard/u150.png" />
+                            <div id="u673_text" class="text " style="display:none; visibility: hidden">
+                                <p></p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div id="u672_state1" class="panel_state" data-label="White" style="visibility: hidden;">

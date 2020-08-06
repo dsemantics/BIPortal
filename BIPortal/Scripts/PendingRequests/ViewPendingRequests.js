@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    $("#u649").css('visibility', 'visible');
+    $("#u644_state1").css('visibility', 'visible');
+
     $("#u342_img").click(function () {
         $("#u33333").hide();
     });
