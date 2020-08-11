@@ -14,9 +14,6 @@
 
     <link href="~/Styles/Common/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Styles/PendingRequests/Pending_RequestsStyles.css" type="text/css" rel="stylesheet" />
-    @*<link href="~/Styles/MyProfile/MyProfile_Styles.css" type="text/css" rel="stylesheet" />*@
-
-    @*<link href="~/Styles/Users/AddUser_Styles.css" type="text/css" rel="stylesheet" />*@
     <link href="~/Styles/WorkSpaces_Reports/ws_repos.css" type="text/css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
@@ -27,9 +24,47 @@
 
     <script type="text/javascript">
         var getRequestDetailssurl = '@Url.Action("GetRequestDetails", "PendingRequests")';
+        var sendRemainderEmailurl = '@Url.Action("SendRemainderMail", "PendingRequests")';
         @*var approveRequesturl = '@Url.Action("ApproveRequest", "PendingRequests")';
         var rejectRequesturl = '@Url.Action("RejectRequest", "PendingRequests")';*@
         var selectedItems = [];
+
+        //var selectedItems = [];
+        $(function () {
+            $('#u452').on('changed.jstree', function (e, data) {
+                var i, j;
+               
+                selectedItems = [];
+                
+                var selectedElms = $('#u452').jstree("get_selected", true);
+                $.each(selectedElms, function (i, selectedElm) {
+
+                    selectedItems.push(
+                        {
+                            id: this.id,
+                            parent: this.parent,
+                            text: this.text,
+                            parenttext: this.original.parenttext
+                        }
+                    );
+                });
+                
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            })
+        });
+
+
+        //$(document).ready(function () {
+        //    $(".btnSendremainder").click(function () {
+
+        //        if (selectedItems.length == 0) {
+        //            alert("Please select any one workspace or report");
+        //            return false;
+        //        }
+        //    });
+        //});
     </script>
 
 
@@ -99,6 +134,7 @@
                                         <input type="text" value="@item.RequestID" name="RoleName" />
                                     </td>*@
                                 <td style="text-align:left;">
+                                    @*<input type="hidden" name="selectedItems" id="selectedItems" />*@
                                     <button type="button" class="btn btn-link btnViewPendingRequests">@item.RequestID</button>
                                 </td>
                                 <td style="text-align:left;">
@@ -136,7 +172,8 @@
                     <div id="u335" class="ax_default box_1">
                         <div id="u335_div" class=""></div>
                         <div id="u335_text" class="text ">
-                            @*<label id="lblWorkspaceName" style="color:black" />*@
+                            @*<label id="lblWorkspaceName" style="color:black" />*@ <br>
+                            <p><span>Pending Requests</span></p>
                         </div>
                     </div>
 
@@ -180,17 +217,19 @@
                         </div>*@
 
                     <!-- Unnamed (Rectangle) -->
-                    @*<div id="u341" class="ax_default button">
-                            <div id="u341_div" class=""></div>
-                            <div id="u341_text" class="text ">
+                    <div id="u341111" class="ax_default label">
+                        <div id="u341111_text" class="text ">
+                            <input type="hidden" name="selectedItems" id="selectedItems" />
+                            @*<input id="btnSendremainder" value="Send Reminder" type="button" class="btnSendremainder" />*@
 
-                                <input id="btnSaveOwner" value="Save" type="button" class="btnSaveOwner" />
-                            </div>
-                        </div>*@
+                            @*<input id="btnSendremainder" value="Send Reminder" type="button" class="btnSendremainder" onclick="location.href='@Url.Action("SendRemainderMail", "PendingRequests")'" />*@
+                            
+                        </div>
+                    </div>
 
                     <!-- Unnamed (Image) -->
                     <div id="u342" class="ax_default image">
-                        <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" />
+                        <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" style="cursor: pointer" />
                         <div id="u342_text" class="text " style="display:none; visibility: hidden">
                             <p></p>
                         </div>
@@ -202,10 +241,12 @@
 
                     </div>
 
+                    
+
                     <!-- Unnamed (Droplist) -->
                     @*<div id="u343" class="ax_default droplist">
-                            <div id="u343_div" class=""></div>
-                        </div>*@
+            <div id="u343_div" class=""></div>
+        </div>*@
                 </div>
             </div>
         </div>

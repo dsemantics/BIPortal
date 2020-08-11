@@ -30,6 +30,7 @@ namespace BIPortal.Models
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
         public int PermissionID { get; set; }
+        public string BIObjectType { get; set; }
         public PermissionMasterModel PermissionMaster { get; set; }
         [Required(ErrorMessage = "Role Selection is required.")]
         public int[] SelectedRolesValues { get; set; }

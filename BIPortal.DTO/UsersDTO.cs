@@ -20,6 +20,7 @@ namespace BIPortal.DTO
         public string ModifiedBy { get; set; }
         public bool Active { get; set; }
         public int PermissionID { get; set; }
+        public string BIObjectType { get; set; }
         public PermissionMasterDTO PermissionMaster { get; set; }
         public int[] SelectedRolesValues { get; set; }
         public List<UserRoleMappingDTO> UserRoleMappings { get; set; }

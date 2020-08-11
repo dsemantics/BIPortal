@@ -8,14 +8,12 @@
 
     var requestId;
     $(".btnViewPendingRequests").click(function () {
-
-
+        
         document.getElementById("u33333").style.display = "block";
 
         var tr = $(this).closest('tr');
         requestId = tr.find('input[name="RequestID"]').val();
         //roleName = tr.find('input[name="RoleName"]').val();
-
 
         $.ajax({
             url: getRequestDetailssurl,
@@ -32,6 +30,32 @@
         });
 
     });
+
+    //$(".btnSendremainder").click(function () {
+
+    //    //document.getElementById("u33333").style.display = "block";
+
+    //    var tr = $(this).closest('tr');
+    //    //requestId = tr.find('input[name="RequestID"]').val();
+    //    //roleName = tr.find('input[name="RoleName"]').val();
+
+    //    $.ajax({
+    //        url: sendRemainderEmailurl,
+    //        //data: { roleid: $('#txtSearch').val() },
+    //        //data: { requestId: tr.find('input[name="RequestID"]').val() },
+    //       // data: { requestId: requestId },
+    //        data: { },
+    //        type: "GET",
+    //        dataType: "json",
+    //        success: function (data) {
+    //           // loadTree(data);
+    //        },
+    //        error: function () {
+    //            alert("Failed to get request details! Please try again.");
+    //        }
+    //    });
+
+    //});
 
     function loadTree(data) {
 
@@ -79,6 +103,5 @@
 
     };
 
-
-   
+    
 });

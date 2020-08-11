@@ -92,7 +92,7 @@ namespace BIPortalServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Could not fetch roles");
+                return BadRequest("Could not fetch Users");
             }
         }
 
@@ -112,7 +112,30 @@ namespace BIPortalServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Could not fetch roles");
+                return BadRequest("Could not fetch Current Users");
+            }
+        }
+
+        //Validating Exixting users
+        [Route("api/CheckUserExists")]
+       // [Route("api/CheckUserExists/customers/{customerId}/orders/{orderId}")]
+        public IHttpActionResult CheckUserExists(UsersModel editUserModel)
+        {
+            try
+            {
+                int userID = editUserModel.UserID;
+                string emailID = editUserModel.EmailID;
+                UsersData usersData = new UsersData();
+                var users = usersData.CheckUserExists(userID, emailID);
+
+                //return Ok(users);
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not fetch existing");
             }
         }
 

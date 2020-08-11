@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BIPortal.DTO;
 using BIPortal.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -128,6 +129,41 @@ namespace BIPortal.Controllers
                     });
                 }
             }
+
+            //Serialize to JSON string.
+            ViewBag.Json = (new JavaScriptSerializer()).Serialize(nodes);
+
+            var nodesJason = (new JavaScriptSerializer()).Serialize(nodes);
+            return new JsonResult { Data = nodes, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+        //public JsonResult SendRemainderMail(int requestId)
+        //{
+        //    List<WorkFlowMasterModel> pendingApprovals = new List<WorkFlowMasterModel>();
+
+        //    List<TreeViewNode> nodes = new List<TreeViewNode>();
+
+        //    var treelist = Request.Form["selectedItems"];
+
+        //    //var treeViewModel = JsonConvert.DeserializeObject<List<TreeViewNode>>(treelist);
+
+        //    //Serialize to JSON string.
+        //    ViewBag.Json = (new JavaScriptSerializer()).Serialize(nodes);
+
+        //    var nodesJason = (new JavaScriptSerializer()).Serialize(nodes);
+        //    return new JsonResult { Data = nodes, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        //}
+
+        public JsonResult SendRemainderMail()
+        {
+            List<WorkFlowMasterModel> pendingApprovals = new List<WorkFlowMasterModel>();
+
+            List<TreeViewNode> nodes = new List<TreeViewNode>();
+
+            var treelist = Request.Form["selectedItems"];
+
+            //var treeViewModel = JsonConvert.DeserializeObject<List<TreeViewNode>>(treelist);
 
             //Serialize to JSON string.
             ViewBag.Json = (new JavaScriptSerializer()).Serialize(nodes);

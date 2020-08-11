@@ -36,6 +36,11 @@ namespace BIPortal.Controllers
             items.Add(new SelectListItem { Text = "Mrs.", Value = "3" });
             items.Add(new SelectListItem { Text = "Ms.", Value = "4" });
 
+            //BI Object Type
+            List<SelectListItem> biObjType = new List<SelectListItem>();
+            biObjType.Add(new SelectListItem { Text = "PowerBI", Value = "1", Selected = true });
+
+
             IEnumerable<PermissionMasterModel> PermissionTypeList = null;
             IEnumerable<RolesModel> rolesList = null;
 
@@ -86,13 +91,82 @@ namespace BIPortal.Controllers
             }
 
 
-            ViewBag.Salutation = new SelectList(items, "Text", "Text"); 
+            ViewBag.Salutation = new SelectList(items, "Text", "Text");
+            ViewBag.BiObjType = new SelectList(biObjType, "Text", "Text");
             ViewBag.PermissionTypes = new SelectList(PermissionTypeList.ToList(), "PermissionID", "PermissionName");
             ViewBag.Roles = new SelectList(rolesList.ToList(), "RoleID", "RoleName");
 
 
             return View();
         }
+
+        // Permission Types
+        public IEnumerable<PermissionMasterModel> GetPermissionTypes()
+        {
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
+
+            IEnumerable<PermissionMasterModel> PermissionTypeList = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var responseTask = client.GetAsync("api/GetPermissionTypes");
+                responseTask.Wait();
+
+                //Permission Type List
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<List<PermissionMasterDTO>>();
+                    readTask.Wait();
+                    var config = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+                    });
+                    IMapper mapper = config.CreateMapper();
+                    PermissionTypeList = mapper.Map<List<PermissionMasterDTO>, List<PermissionMasterModel>>(readTask.Result);
+                }
+            }
+            return PermissionTypeList;
+        }
+
+        // Roles List
+        public IEnumerable<RolesModel> GetRolesLists()
+        {
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
+
+            IEnumerable<RolesModel> rolesList = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+               
+                //Roles List
+                var rolesResponseTask = client.GetAsync("api/GetRoles");
+                rolesResponseTask.Wait();
+                var rolesresult = rolesResponseTask.Result;
+                if (rolesresult.IsSuccessStatusCode)
+                {
+                    var readRolesTask = rolesresult.Content.ReadAsAsync<List<RolesDTO>>();
+                    readRolesTask.Wait();
+
+                    var config = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<RolesDTO, RolesModel>();
+                        cfg.CreateMap<RoleRightsMappingDTO, RoleRightsMappingModel>();
+                    });
+                    IMapper mapper = config.CreateMapper();
+
+                    rolesList = mapper.Map<List<RolesDTO>, List<RolesModel>>(readRolesTask.Result);
+                }
+            }
+            return rolesList;
+        }
+
 
         // GET: MyProfile
         public ActionResult MyProfile()
@@ -217,6 +291,10 @@ namespace BIPortal.Controllers
             items.Add(new SelectListItem { Text = "Mrs.", Value = "3" });
             items.Add(new SelectListItem { Text = "Ms.", Value = "4" });
 
+            //BI Object Type
+            List<SelectListItem> biObjType = new List<SelectListItem>();
+            biObjType.Add(new SelectListItem { Text = "PowerBI", Value = "1", Selected = true });
+
             IEnumerable<UsersModel> UsersList = null;
             IEnumerable<PermissionMasterModel> PermissionTypeList = null;
             List<RolesModel> rolesList = null;
@@ -315,6 +393,8 @@ namespace BIPortal.Controllers
             ViewBag.PermissionTypes = new SelectList(PermissionTypeList.ToList(), "PermissionID", "PermissionName");
 
             ViewBag.RoleSelection = new SelectList(rolesList.ToList(), "RoleID", "RoleName");
+
+            ViewBag.BiObjType = new SelectList(biObjType, "Text", "Text");
 
             return View(LoadEditUserModel);
             
@@ -535,7 +615,6 @@ namespace BIPortal.Controllers
         public ActionResult AddUser(UsersModel AddUserModel)
         {
             string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/" + "api/AddNewUser";
-            //string Baseurl = "https://localhost:44383/api/AddNewUser";
 
             var loggedinUser = Session["UserName"].ToString();
 
@@ -544,6 +623,34 @@ namespace BIPortal.Controllers
             var treeViewModel = JsonConvert.DeserializeObject<List<TreeViewNode>>(treelist);
 
             List<UserAccessRightsModel> userAccessRightsList = new List<UserAccessRightsModel>();
+
+            //CheckUser already Exists in DB
+            //var userExists = CheckUserExixts(AddUserModel.EmailID);
+            //if (userExists == true)
+            //{
+            //    ViewBag.ErrorMessage = "Given User Already Exists in the System, Kindly Check once";
+
+            //    //saluation
+            //    List<SelectListItem> items = new List<SelectListItem>();
+            //    items.Add(new SelectListItem { Text = "Mr.", Value = "1", Selected = true });
+            //    items.Add(new SelectListItem { Text = "Miss.", Value = "2" });
+            //    items.Add(new SelectListItem { Text = "Mrs.", Value = "3" });
+            //    items.Add(new SelectListItem { Text = "Ms.", Value = "4" });
+
+            //    //BI Object Type
+            //    List<SelectListItem> biObjType = new List<SelectListItem>();
+            //    biObjType.Add(new SelectListItem { Text = "PowerBI", Value = "1", Selected = true });
+
+            //    ViewBag.Salutation = new SelectList(items, "Text", "Text");
+
+            //    ViewBag.PermissionTypes = new SelectList(GetPermissionTypes(), "PermissionID", "PermissionName");
+
+            //    ViewBag.Roles = new SelectList(GetRolesLists(), "RoleID", "RoleName");
+
+            //    ViewBag.BiObjType = new SelectList(biObjType, "Text", "Text");
+
+            //    return View();
+            //}
 
             // Mapping UserAccessRights table
             foreach (var a in treeViewModel)
@@ -688,6 +795,7 @@ namespace BIPortal.Controllers
                                 nodes = (List<TreeViewNode>)Session["Nodes"];
                                 ViewBag.Json = (new JavaScriptSerializer()).Serialize(nodes);
 
+
                                 return View();
                             }
                         }
@@ -807,6 +915,32 @@ namespace BIPortal.Controllers
             var treeViewModel = JsonConvert.DeserializeObject<List<TreeViewNode>>(treelist);
 
             List<UserAccessRightsModel> userAccessRightsList = new List<UserAccessRightsModel>();
+
+
+            //CheckUser already Exists in DB
+            //var userExists = CheckUserExixts(EditUserModel);
+            //if (userExists == true)
+            //{
+            //    ViewBag.ErrorMessage = "Given User Already Exists in the System, Kindly Check once";
+
+            //    //saluation
+            //    List<SelectListItem> items = new List<SelectListItem>();
+            //    items.Add(new SelectListItem { Text = "Mr.", Value = "1", Selected = true });
+            //    items.Add(new SelectListItem { Text = "Miss.", Value = "2" });
+            //    items.Add(new SelectListItem { Text = "Mrs.", Value = "3" });
+            //    items.Add(new SelectListItem { Text = "Ms.", Value = "4" });
+
+            //    ViewBag.Salutation = new SelectList(items, "Text", "Text");
+
+            //    ViewBag.PermissionTypes = new SelectList(GetPermissionTypes(), "PermissionID", "PermissionName");
+
+            //    ViewBag.Roles = new SelectList(GetRolesLists(), "RoleID", "RoleName");
+
+            //   // return RedirectToAction("LoadEditUser", "Users", new { UserId = EditUserModel.UserID });
+
+            //    return View();
+            //    //return View(EditUserModel);
+            //}
 
 
             foreach (var a in treeViewModel)
@@ -1022,6 +1156,7 @@ namespace BIPortal.Controllers
                 CreatedBy = loggedinUser,
                 ModifiedDate = DateTime.Now,
                 Active = EditUserModel.Active,
+                BIObjectType = EditUserModel.BIObjectType,
                 SelectedRolesValues = EditUserModel.SelectedRolesValues,
                 UserAccessRightsMappings = userAccessRightsList,
                 WorkFlowMasterMappings = workspaces
@@ -1075,6 +1210,108 @@ namespace BIPortal.Controllers
                 }
             }
             return View(EditUserModel);
+        }
+
+        //Check user exixts for add page(validation emaild)
+        public bool CheckUserExixts(string eMaildID)
+        {
+            try
+            {
+
+                //var emailID = Session["UserName"].ToString();
+
+                var emailID = eMaildID;
+
+                string Baseurl = ConfigurationManager.AppSettings["baseURL"];
+
+                IEnumerable<UsersModel> UsersList = null;
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //var responseTask = client.GetAsync("api/GetCurrentUser");
+                    var responseTask = client.GetAsync(string.Format("api/GetCurrentUser/?emailID={0}", emailID));
+                    responseTask.Wait();
+                    var result = responseTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var readTask = result.Content.ReadAsAsync<List<UsersDTO>>();
+                        readTask.Wait();
+
+                        var config = new MapperConfiguration(cfg =>
+                        {
+                            cfg.CreateMap<UsersDTO, UsersModel>();
+                            cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+                            cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
+                        });
+                        IMapper mapper = config.CreateMapper();
+                        UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
+                    }                   
+                }
+                return (UsersList == null) ? false : true;
+
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        //Check user exixts for edit page (validating userid & emaild)
+
+        public bool CheckUserExixts(UsersModel editUserModel)
+        {
+            try
+            {
+
+                //var emailID = Session["UserName"].ToString();
+
+                //var emailID = eMaildID;
+
+                //string Baseurl = ConfigurationManager.AppSettings["baseURL"];
+
+                string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/CheckUserExists";
+
+                IEnumerable<UsersModel> UsersList = null;
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var postTask = client.PostAsJsonAsync<UsersModel>(Baseurl, editUserModel);
+                    postTask.Wait();
+
+
+                    var result = postTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var readTask = result.Content.ReadAsAsync<List<UsersDTO>>();
+                        readTask.Wait();
+
+                        var config = new MapperConfiguration(cfg =>
+                        {
+                            cfg.CreateMap<UsersDTO, UsersModel>();
+                            cfg.CreateMap<PermissionMasterDTO, PermissionMasterModel>();
+                            cfg.CreateMap<UserRoleMappingDTO, UserRoleMappingModel>();
+                        });
+                        IMapper mapper = config.CreateMapper();
+                        UsersList = mapper.Map<List<UsersDTO>, List<UsersModel>>(readTask.Result);
+                    }
+                }
+                return (UsersList == null) ? false : true;
+
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
 
     }
