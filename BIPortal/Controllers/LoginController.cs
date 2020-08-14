@@ -88,6 +88,7 @@ namespace BIPortal.Controllers
                     {
                         Session["UserName"] = readTask.Result;
                         Session["CurrentDateTime"] = DateTime.Now.ToString();
+                        Session["Pwd"] = loginModel.Password;
                         return RedirectToAction("Index", "Dashboard");
                     }
                 }

@@ -8,6 +8,7 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BIPortal.Models;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace BIPortalServices.Controllers
 {
@@ -39,6 +40,44 @@ namespace BIPortalServices.Controllers
             catch (Exception ex)
             {
                 return "Authentication failed";
+            }
+        }
+
+        [Route("api/AuthenticatePowerBIUser")]
+        [HttpPost]
+        public async Task<string> AuthenticatePowerBIUser(LoginModel loginModel)
+        {
+            try
+            {
+                //The client id that Azure AD created when you registered your client app.
+                string clientID = System.Configuration.ConfigurationManager.AppSettings["powerBIClientId"];
+
+                //RedirectUri you used when you register your app.
+                //For a client app, a redirect uri gives Azure AD more details on the application that it will authenticate.
+                // You can use this redirect uri for your client app
+                //string redirectUri = "urn:ietf:wg:oauth:2.0:oob";
+
+                //Resource Uri for Power BI API
+                string resourceUri = System.Configuration.ConfigurationManager.AppSettings["powerBIresourceUri"];
+
+                //OAuth2 authority Uri
+                string authorityUri = System.Configuration.ConfigurationManager.AppSettings["powerBIauthorityUri"];
+
+                string username = loginModel.UserName;
+                string password = loginModel.Password;
+                //Get access token:
+                // To call a Power BI REST operation, create an instance of AuthenticationContext and call AcquireToken             
+                // AcquireToken will acquire an Azure access token
+                // Call AcquireToken to get an Azure token from Azure Active Directory token issuance endpoint
+                AuthenticationContext authContext = new AuthenticationContext(authorityUri);                
+                var credential = new UserPasswordCredential(username, password);
+                Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationResult res = authContext.AcquireTokenAsync(resourceUri, clientID, credential).Result;
+                                
+                return res.AccessToken;
+            }
+            catch (Exception ex)
+            {
+                return "PowerBI Authentication failed";
             }
         }
     }

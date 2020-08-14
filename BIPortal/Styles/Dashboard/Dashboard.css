@@ -75,6 +75,11 @@
     width: 100%;
 }
 
+#reportContainer {    
+    width: 840px;
+    height: 430px;
+}
+
 #u21_div {
     border-width: 0px;
     position: absolute;
@@ -3286,9 +3291,9 @@
 #u83 {
     border-width: 0px;
     position: absolute;
-    left: 258px;
+    left: 250px;
     top: 68px;
-    width: 825px;
+    width: 835px;
     height: 480px;
 }
 
@@ -3298,7 +3303,7 @@
     left: 0px;
     top: 0px;
     width: 825px;
-    height: 800px;
+    height: 480px;
     -ms-overflow-x: hidden;
     overflow-x: hidden;
     -ms-overflow-y: hidden;
@@ -4002,7 +4007,7 @@
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 825px;
+    width: 835px;
     height: 480px;
     -ms-overflow-x: hidden;
     overflow-x: hidden;
@@ -4097,10 +4102,10 @@
 #u98 {
     border-width: 0px;
     position: absolute;
-    left: 14px;
+    left: 0px;
     top: 100px;
     width: 287px;
-    height: 400px;
+    height: 300px;
     display: flex;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;

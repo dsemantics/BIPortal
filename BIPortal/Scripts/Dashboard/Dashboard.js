@@ -28,13 +28,13 @@
     });
 
     function loadData(data) {
-        
         var tab = $('<table class="tblReports"></table>');
         $.each(data.Reports, function (i, report) {
             var trow = $('<tr></tr>');
             trow.append('<td style="display:none;">' + '<input type="text" value="' + report.ReportId + '" name="ReportId" />' + '</td>');
             trow.append('<td>' + '<button type="button" id="btnViewReport" class="btn btn-link btnViewReport">' + report.ReportName + '</button>' + '</td>');
-            trow.append('<td style="display:none;">' + '<input type="text" value="' + report.ReportEmbedUrl + '" name="ReportEmbedUrl" />' + '</td>');            
+            trow.append('<td style="display:none;">' + '<input type="text" value="' + report.ReportEmbedUrl + '" name="ReportEmbedUrl" />' + '</td>');
+            trow.append('<td style="display:none;">' + '<input type="text" value="' + data.PowerBIAccessToken + '" name="PowerBIAccessToken" />' + '</td>');
             tab.append(trow);
         });
         $("#u94").html(tab);        
@@ -45,12 +45,24 @@
         var tr = $(this).closest('tr');
         reportId = tr.find('input[name="ReportId"]').val();
         reportEmbedUrl = tr.find('input[name="ReportEmbedUrl"]').val();
+        powerBIAccessToken = tr.find('input[name="PowerBIAccessToken"]').val();
         document.getElementById("spnReportName").innerHTML = workspaceName + " / Reports";
         
         document.getElementById("u83_state1").style.visibility = "hidden";
         document.getElementById("u83_state2").style.visibility = "visible"; 
         if (reportEmbedUrl != "null") {
-            $('#ifrmReport').attr('src', reportEmbedUrl);
+            //$('#ifrmReport').attr('src', reportEmbedUrl);
+            var config = {
+                type: 'report',
+                accessToken: powerBIAccessToken,
+                embedUrl: reportEmbedUrl
+            };
+
+            // Grab the reference to the div HTML element that will host the report.
+            var reportContainer = document.getElementById('reportContainer');
+
+            // Embed the report and display it within the div container.
+            var report = powerbi.embed(reportContainer, config);
         }
     });
     

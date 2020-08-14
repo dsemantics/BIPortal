@@ -15,9 +15,10 @@
     <link href="~/Styles/Dashboard/Dashboard.css" type="text/css" rel="stylesheet" />
 
     <script language="JavaScript" type="text/javascript" src="~/Scripts/Dashboard/Dashboard.js"></script>
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/powerbi.js"></script>
     <script type="text/javascript">
         var getReportsAndEmbedUrl = '@Url.Action("GetReportsAndEmbedUrl", "Dashboard")';
-
+        
     </script>
 </head>
 
@@ -67,7 +68,7 @@
                             <div id="@("u"+i)" class="ax_default box_1" data-label="Finance">
                                 <div id="@("u"+i+"_div")" class=""></div>
                                 <div id="@("u"+i+"_text")" class="text ">
-                                    <table id="tblViewWorkspaces" class="table table table-bordered table-striped mb-0 table-hover">
+                                    <table id="tblViewWorkspaces" class="">
                                         <tbody>
                                             <tr>
                                                 <td style="display:none;">
@@ -209,7 +210,8 @@
                         <div id="u98_text" class="text ">
                             @*<p><span>Page 1</span></p>*@
                             @*<iframe id="ifrmReport" width="840" height="500" src="https://app.powerbi.com/reportEmbed?reportId=cc005a89-fb8a-4641-a5ad-3575c089d966&autoAuth=true&ctid=86fb359e-1360-4ab3-b90d-2a68e8c007b9&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>*@
-                            <iframe id="ifrmReport" width="840" height="500" src="" frameborder="0" allowFullScreen="true"></iframe>
+                            @*<iframe id="ifrmReport" width="840" height="500" src="" frameborder="0" allowFullScreen="true"></iframe>*@
+                            <div id="reportContainer"></div>
                         </div>
                     </div>
 

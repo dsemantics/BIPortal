@@ -485,6 +485,8 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PendingApprovals\ViewPendingApprovals.js" />
     <Content Include="Scripts\PendingRequests\ViewPendingRequests.js" />
+    <Content Include="Scripts\powerbi.js" />
+    <Content Include="Scripts\powerbi.min.js" />
     <Content Include="Scripts\RolesRights\AddRole.js" />
     <Content Include="Scripts\RolesRights\ViewRole.js" />
     <Content Include="Scripts\Users\AddUser.js" />
@@ -535,6 +537,7 @@
     <Content Include="Views\CreateRequest\CreateNewRequest.cshtml" />
     <Content Include="Views\PendingApprovals\ViewPendingApprovals.cshtml" />
     <Content Include="Views\PendingRequests\ViewPendingRequests.cshtml" />
+    <Content Include="Scripts\powerbi.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace BIPortal.Controllers
 {
@@ -103,7 +104,44 @@ namespace BIPortal.Controllers
             //List<RoleRightsMappingModel> roleRights = new List<RoleRightsMappingModel>();
             var reportsModel = new ReportsModel();
 
-            string Baseurl = ConfigurationManager.AppSettings["baseURL"];
+            if (Session["UserName"] == null)
+            {
+                return Json(new { code = 1 });
+            }
+
+            var loginModel = new LoginModel();
+            loginModel.UserName = Session["UserName"].ToString();
+            loginModel.Password = Session["Pwd"].ToString();
+
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/AuthenticatePowerBIUser";
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<LoginModel>(Baseurl, loginModel);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<string>();
+                    readTask.Wait();
+                    if (readTask.Result == "PowerBI Authentication failed")
+                    {
+                        ViewBag.ErrorMessage = "The Email and/or Password are incorrect";
+                    }
+                    else
+                    {
+                        Session["PowerBIAccessToken"] = readTask.Result;                        
+                    }
+                }
+            }
+
+
+            Baseurl = ConfigurationManager.AppSettings["baseURL"];
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -126,6 +164,8 @@ namespace BIPortal.Controllers
                     IMapper mapper = config.CreateMapper();
 
                     reportsModel = mapper.Map<ReportsDTO, ReportsModel>(readTask.Result);
+                    if (Session["PowerBIAccessToken"] != null)
+                        reportsModel.PowerBIAccessToken = Session["PowerBIAccessToken"].ToString();
                 }
             }
 
