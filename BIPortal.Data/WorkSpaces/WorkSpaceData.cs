@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BIPortal.DTO;
 using BIPortal.Data.Email;
+using Microsoft.PowerBI.Api;
+using Microsoft.Rest;
+using Microsoft.PowerBI.Api.Models;
 
 namespace BIPortal.Data.WorkSpaces
 {
@@ -203,21 +206,21 @@ namespace BIPortal.Data.WorkSpaces
         //Add a new user to a workspace
         public string AddPowerBIWorkspaceUser(List<WorkFlowMasterDTO> workFlowMasterDTO, string powerBIUserName, string powerBIPWD, string smtpHost, int smtpPort)
         {
-            // Create the InitialSessionState Object
-            InitialSessionState iss = InitialSessionState.CreateDefault2();
+            //// Create the InitialSessionState Object
+            //InitialSessionState iss = InitialSessionState.CreateDefault2();
 
-            // Initialize PowerShell Engine
-            var shell = PowerShell.Create(iss);
-            shell.Commands.AddCommand("Connect-PowerBIServiceAccount");
+            //// Initialize PowerShell Engine
+            //var shell = PowerShell.Create(iss);
+            //shell.Commands.AddCommand("Connect-PowerBIServiceAccount");
 
-            System.Security.SecureString theSecureString = new NetworkCredential(powerBIUserName, powerBIPWD).SecurePassword;
-            PSCredential cred = new PSCredential(powerBIUserName, theSecureString);
+            //System.Security.SecureString theSecureString = new NetworkCredential(powerBIUserName, powerBIPWD).SecurePassword;
+            //PSCredential cred = new PSCredential(powerBIUserName, theSecureString);
 
-            shell.Commands.AddParameter("Credential", cred);
+            //shell.Commands.AddParameter("Credential", cred);
 
-            var results = shell.Invoke();
-            if (results.Count > 0)
-            {
+            //var results = shell.Invoke();
+            //if (results.Count > 0)
+            //{
                 using (var context = new BIPortalEntities())
                 {
                     foreach (var a in workFlowMasterDTO)
@@ -226,12 +229,22 @@ namespace BIPortal.Data.WorkSpaces
                         if (workflowMasterEntity != null)
                         {
                             // Initialize PowerShell Engine
-                            var shell2 = PowerShell.Create(iss);
-                            shell2.Commands.AddCommand("Add-PowerBIWorkspaceUser");
-                            shell2.Commands.AddParameter("Id", workflowMasterEntity.WorkspaceID);
-                            shell2.Commands.AddParameter("UserEmailAddress", workflowMasterEntity.RequestFor);
-                            shell2.Commands.AddParameter("AccessRight", "Member");
-                            var resaddUser = shell2.Invoke();
+                            //var shell2 = PowerShell.Create(iss);
+                            //shell2.Commands.AddCommand("Add-PowerBIWorkspaceUser");
+                            //shell2.Commands.AddParameter("Id", workflowMasterEntity.WorkspaceID);
+                            //shell2.Commands.AddParameter("UserEmailAddress", workflowMasterEntity.RequestFor);
+                            //shell2.Commands.AddParameter("AccessRight", "Member");
+                            //var resaddUser = shell2.Invoke();
+
+                            GroupUser userdetails = new GroupUser();
+                            userdetails.EmailAddress = workflowMasterEntity.RequestFor;
+                            userdetails.GroupUserAccessRight = "Member";
+                            var groupId = Guid.Parse(workflowMasterEntity.WorkspaceID);
+                            var accessToken = a.PowerBIAccessToken;
+                            var tokenCredentials = new TokenCredentials(accessToken, "Bearer");
+                            var pbiClient = new PowerBIClient(new Uri("https://api.powerbi.com/"), tokenCredentials);
+                            // You need to provide the workspaceId where the dashboard resides.
+                            pbiClient.Groups.AddGroupUser(groupId, userdetails);                            
 
                             //send email
                             var subject = "Your request is approved.";
@@ -240,7 +253,7 @@ namespace BIPortal.Data.WorkSpaces
                             emailData.SendEmail(powerBIUserName, powerBIPWD, smtpHost, smtpPort, workflowMasterEntity.RequestFor, subject, body);
                         }
                     }
-                }
+                //}
             }
             return "User added to workspace successfully";
         }

@@ -20,6 +20,7 @@ namespace BIPortal.DTO
         public Nullable<System.DateTime> ProcessedDate { get; set; }
         public string Status { get; set; }
         public string OwnerEmail { get; set; }
+        public string PowerBIAccessToken { get; set; }
 
         public UsersDTO UserMaster { get; set; }
 

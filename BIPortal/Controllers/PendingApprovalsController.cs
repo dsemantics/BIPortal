@@ -133,6 +133,11 @@ namespace BIPortal.Controllers
         [HttpPost]        
         public ActionResult ApproveRequest(List<TreeViewNode> WorkspaceandReportList, int RequestID)
         {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var loggedinUser = Session["UserName"].ToString();
 
             List<WorkFlowMasterModel> workFlowMasterList = new List<WorkFlowMasterModel>();
@@ -236,9 +241,10 @@ namespace BIPortal.Controllers
                         RequestID = workFlowMasterList[i].RequestID,
                         WorkspaceID = workFlowMasterList[i].WorkspaceID,
                         WorkspaceName = workFlowMasterList[i].WorkspaceName,
-                        OwnerID = workspaceOnwer.OwnerID,                        
+                        OwnerID = workspaceOnwer.OwnerID,
                         ProcessedDate = workFlowMasterList[i].ProcessedDate,
                         Status = workFlowMasterList[i].Status,
+                        PowerBIAccessToken = Session["PowerBIAccessToken"].ToString(),
                         WorkFlowDetails = workFlowDetailsList
                     };
                     workspaces.Add(workFlowModel);
@@ -269,6 +275,11 @@ namespace BIPortal.Controllers
         [HttpPost]
         public ActionResult RejectRequest(List<TreeViewNode> WorkspaceandReportList, int RequestID)
         {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var loggedinUser = Session["UserName"].ToString();
 
             List<WorkFlowMasterModel> workFlowMasterList = new List<WorkFlowMasterModel>();
@@ -374,7 +385,7 @@ namespace BIPortal.Controllers
                         WorkspaceName = workFlowMasterList[i].WorkspaceName,
                         OwnerID = workspaceOnwer.OwnerID,                        
                         ProcessedDate = workFlowMasterList[i].ProcessedDate,
-                        Status = workFlowMasterList[i].Status,
+                        Status = workFlowMasterList[i].Status,                        
                         WorkFlowDetails = workFlowDetailsList
                     };
                     workspaces.Add(workFlowModel);

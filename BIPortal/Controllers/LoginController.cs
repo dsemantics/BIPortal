@@ -64,7 +64,34 @@ namespace BIPortal.Controllers
         [HttpPost]
         public ActionResult Index(LoginModel loginModel)
         {
-            string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/AuthenticateUser";
+            string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/AuthenticatePowerBIUser";
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<LoginModel>(Baseurl, loginModel);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<string>();
+                    readTask.Wait();
+                    if (readTask.Result == "PowerBI Authentication failed")
+                    {
+                        ViewBag.ErrorMessage = "The Email and/or Password are incorrect";
+                    }
+                    else
+                    {
+                        Session["PowerBIAccessToken"] = readTask.Result;
+                    }
+                }
+            }
+
+            Baseurl = ConfigurationManager.AppSettings["baseURL"] + "api/AuthenticateUser";
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -88,12 +115,11 @@ namespace BIPortal.Controllers
                     {
                         Session["UserName"] = readTask.Result;
                         Session["CurrentDateTime"] = DateTime.Now.ToString();
-                        Session["Pwd"] = loginModel.Password;
+                        //Session["Pwd"] = loginModel.Password;
                         return RedirectToAction("Index", "Dashboard");
                     }
                 }
-            }
-
+            }         
 
             return View();
         }
