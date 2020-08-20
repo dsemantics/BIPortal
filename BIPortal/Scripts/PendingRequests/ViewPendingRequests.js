@@ -6,6 +6,7 @@
         $("#u33333").hide();
     });
 
+
     var requestId;
     $(".btnViewPendingRequests").click(function () {
         
@@ -13,11 +14,9 @@
 
         var tr = $(this).closest('tr');
         requestId = tr.find('input[name="RequestID"]').val();
-        //roleName = tr.find('input[name="RoleName"]').val();
 
         $.ajax({
             url: getRequestDetailssurl,
-            //data: { roleid: $('#txtSearch').val() },
             data: { requestId: tr.find('input[name="RequestID"]').val() },
             type: "GET",
             dataType: "json",
@@ -31,35 +30,20 @@
 
     });
 
-    //$(".btnSendremainder").click(function () {
 
-    //    //document.getElementById("u33333").style.display = "block";
 
-    //    var tr = $(this).closest('tr');
-    //    //requestId = tr.find('input[name="RequestID"]').val();
-    //    //roleName = tr.find('input[name="RoleName"]').val();
+    $(".btnSendremainder").click(function () {
 
-    //    $.ajax({
-    //        url: sendRemainderEmailurl,
-    //        //data: { roleid: $('#txtSearch').val() },
-    //        //data: { requestId: tr.find('input[name="RequestID"]').val() },
-    //       // data: { requestId: requestId },
-    //        data: { },
-    //        type: "GET",
-    //        dataType: "json",
-    //        success: function (data) {
-    //           // loadTree(data);
-    //        },
-    //        error: function () {
-    //            alert("Failed to get request details! Please try again.");
-    //        }
-    //    });
+         var tr = $(this).closest('tr');
 
-    //});
+        var data = { selectednodes: selectedItems};
+        $.post(sendRemainderEmailurl, data, function (result) {
+            window.location.reload();
+        });
+    });
 
     function loadTree(data) {
 
-        //document.getElementById("u33333").style.display = "block";
         document.getElementById("u452").style.display = "block";
         $('#u452').jstree('destroy');
         $(function () {
@@ -89,10 +73,6 @@
                     },
                     "data": data
                 },
-                //"types": {
-                //    "default": { "icon": "//jstree.com/tree.png" },
-                //    "element": { "icon": "//jstree.com/tree.png" }
-                //},
                 "checkbox": {
                     "keep_selected_style": false
                 },
@@ -102,6 +82,4 @@
         });
 
     };
-
-    
 });

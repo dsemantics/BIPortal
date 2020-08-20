@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 
+
 namespace BIPortalServices.Controllers
 {
     public class UsersController : ApiController
@@ -102,40 +103,38 @@ namespace BIPortalServices.Controllers
         {
             try
             {
-                string sCurrentUserDetail = emailID;
-                UsersData usersData = new UsersData();
-                var users = usersData.GetCurrentUser(sCurrentUserDetail);
+                //string sCurrentUserDetail = emailID;
+                //UsersData usersData = new UsersData();
+                //var users = usersData.GetCurrentUser(sCurrentUserDetail);
 
-                return Ok(users);
+                //return Ok(users);
+
+
+                if (emailID.Contains("$") == true)
+                {
+                    string[] tokens = emailID.Split('$');
+                    int userID = Int32.Parse(tokens[0]);
+                    string emailID1 = tokens[1];
+                    UsersData usersData = new UsersData();
+                    var users = usersData.CheckUserExists(userID, emailID1);
+
+                    return Ok(users);
+                }
+                else
+                {
+                    string sCurrentUserDetail = emailID;
+                    UsersData usersData = new UsersData();
+                    var users = usersData.GetCurrentUser(sCurrentUserDetail);
+                    return Ok(users);
+                }
+
+                //return Ok(users);
 
 
             }
             catch (Exception ex)
             {
                 return BadRequest("Could not fetch Current Users");
-            }
-        }
-
-        //Validating Exixting users
-        [Route("api/CheckUserExists")]
-       // [Route("api/CheckUserExists/customers/{customerId}/orders/{orderId}")]
-        public IHttpActionResult CheckUserExists(UsersModel editUserModel)
-        {
-            try
-            {
-                int userID = editUserModel.UserID;
-                string emailID = editUserModel.EmailID;
-                UsersData usersData = new UsersData();
-                var users = usersData.CheckUserExists(userID, emailID);
-
-                //return Ok(users);
-
-                return Ok();
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Could not fetch existing");
             }
         }
 
@@ -154,21 +153,7 @@ namespace BIPortalServices.Controllers
             }
         }
 
-        //[Route("api/GetSelectedUserRoles")]
-        //public IHttpActionResult GetSelectedUserRoles(int iUSERID)
-        //{
-        //    try
-        //    {
-        //        UsersData usersData = new UsersData();
-        //        var users = usersData.GetSelectedUserRoles(iUSERID);
-        //        return Ok(users);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest("Could not fetch roles");
-        //    }
-        //}
-
+ 
         [Route("api/GetPendingRequests")]
         public IHttpActionResult GetPendingRequests()
         {

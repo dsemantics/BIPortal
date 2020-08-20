@@ -65,9 +65,15 @@
             <div id="u1581_state0_content" class="panel_state_content">
 
                 <div id="u3000" class="ax_default heading_1" data-label="Email">
-                    <div id="uu3000_text" class="text ">
-                        @if (@ViewBag.ErrorMessage != null)
-                        {@Html.Label((string)@ViewBag.ErrorMessage)}
+                    <div id="u3000_text" class="text ">
+                        @*@if (@ViewBag.ErrorMessage != null)
+                        {@Html.Label((string)@ViewBag.ErrorMessage)}*@
+
+
+                         @if (@TempData["Message"] != null)
+                        {@Html.Label((string)@TempData["Message"])}
+
+                        @*<h3><strong>@TempData["Message"]</strong></h3>*@
                         <br>
                     </div>
                 </div>

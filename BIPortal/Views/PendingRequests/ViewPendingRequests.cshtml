@@ -25,46 +25,7 @@
     <script type="text/javascript">
         var getRequestDetailssurl = '@Url.Action("GetRequestDetails", "PendingRequests")';
         var sendRemainderEmailurl = '@Url.Action("SendRemainderMail", "PendingRequests")';
-        @*var approveRequesturl = '@Url.Action("ApproveRequest", "PendingRequests")';
-        var rejectRequesturl = '@Url.Action("RejectRequest", "PendingRequests")';*@
         var selectedItems = [];
-
-        //var selectedItems = [];
-        $(function () {
-            $('#u452').on('changed.jstree', function (e, data) {
-                var i, j;
-               
-                selectedItems = [];
-                
-                var selectedElms = $('#u452').jstree("get_selected", true);
-                $.each(selectedElms, function (i, selectedElm) {
-
-                    selectedItems.push(
-                        {
-                            id: this.id,
-                            parent: this.parent,
-                            text: this.text,
-                            parenttext: this.original.parenttext
-                        }
-                    );
-                });
-                
-
-                //Serialize the JSON Array and save in HiddenField.
-                $('#selectedItems').val(JSON.stringify(selectedItems));
-            })
-        });
-
-
-        //$(document).ready(function () {
-        //    $(".btnSendremainder").click(function () {
-
-        //        if (selectedItems.length == 0) {
-        //            alert("Please select any one workspace or report");
-        //            return false;
-        //        }
-        //    });
-        //});
     </script>
 
 
@@ -90,16 +51,9 @@
             </div>
         </div>
 
-        <!-- Welcome out (Rectangle) -->
-        @*<div id="u2022" class="ax_default label" data-label="Welcome out">
-                <div id="u2022_div" class=""></div>
-                <div id="u2022_text" class="text ">
-                    <p><span>Pending Requests</span></p>
-                </div>
-            </div>*@
-
-        <div id="u790" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" style="height:400px" data-label="User Panel">
-
+    
+        <div id="u790" class="ax_default table-wrapper-scroll-y my-custom-scrollbar" style="height:210px" data-label="User Panel">
+            
             @if (Model != null && Model.Count() > 0)
             {
                 <table id="tblViewPendingApprovals" class="table table table-bordered table-striped mb-0 table-hover">
@@ -130,11 +84,7 @@
                                 <td style="display:none;">
                                     <input type="text" value="@item.RequestID" name="RequestID" />
                                 </td>
-                                @*<td style="display:none;">
-                                        <input type="text" value="@item.RequestID" name="RoleName" />
-                                    </td>*@
                                 <td style="text-align:left;">
-                                    @*<input type="hidden" name="selectedItems" id="selectedItems" />*@
                                     <button type="button" class="btn btn-link btnViewPendingRequests">@item.RequestID</button>
                                 </td>
                                 <td style="text-align:left;">
@@ -152,6 +102,8 @@
             {
                 <div> No Pending Requests!</div>
             }
+            
+
         </div>
 
 
@@ -172,58 +124,15 @@
                     <div id="u335" class="ax_default box_1">
                         <div id="u335_div" class=""></div>
                         <div id="u335_text" class="text ">
-                            @*<label id="lblWorkspaceName" style="color:black" />*@ <br>
                             <p><span>Pending Requests</span></p>
                         </div>
                     </div>
 
-                    <!-- Unnamed (Rectangle) -->
-                    @*<div id="u336" class="ax_default label">
-                            <div id="u336_div" class=""></div>
-                            <div id="u336_text" class="text ">
-                            </div>
-                        </div>*@
-
-                    <!-- Unnamed (Vertical Line) -->
-                    @*<div id="u337" class="ax_default line">
-                            <img id="u337_img" class="img " src="~/Images/ws_reps/u337.svg" />
-                            <div id="u337_text" class="text " style="display:none; visibility: hidden">
-                                <p></p>
-                            </div>
-                        </div>*@
-
-                    <!-- Unnamed (Rectangle) -->
-                    @*<div id="u338" class="ax_default label">
-                            <div id="u338_div" class=""></div>
-                            <div id="u338_text" class="text ">
-                                <p><span>Published</span></p><p><span>22nd July 2019</span></p>
-                            </div>
-                        </div>*@
-
-                    <!-- Unnamed (Vertical Line) -->
-                    @*<div id="u339" class="ax_default line">
-                            <img id="u339_img" class="img " src="~/Images/ws_reps/u337.svg" />
-                            <div id="u339_text" class="text " style="display:none; visibility: hidden">
-                                <p></p>
-                            </div>
-                        </div>*@
-
-                    <!-- Unnamed (Rectangle) -->
-                    @*<div id="u340" class="ax_default label">
-                            <div id="u340_div" class=""></div>
-                            <div id="u340_text" class="text ">
-                                <p><span>Owner</span></p>
-                            </div>
-                        </div>*@
-
+ 
                     <!-- Unnamed (Rectangle) -->
                     <div id="u341111" class="ax_default label">
                         <div id="u341111_text" class="text ">
-                            <input type="hidden" name="selectedItems" id="selectedItems" />
-                            @*<input id="btnSendremainder" value="Send Reminder" type="button" class="btnSendremainder" />*@
-
-                            @*<input id="btnSendremainder" value="Send Reminder" type="button" class="btnSendremainder" onclick="location.href='@Url.Action("SendRemainderMail", "PendingRequests")'" />*@
-                            
+                            <input id="btnSendremainder" value="Send Reminder" type="submit" class="btnSendremainder" />
                         </div>
                     </div>
 
@@ -231,6 +140,7 @@
                     <div id="u342" class="ax_default image">
                         <img id="u342_img" class="img " src="~/Images/login/forgot_password_close_u18.png" style="cursor: pointer" />
                         <div id="u342_text" class="text " style="display:none; visibility: hidden">
+                            <input type="hidden" name="selectedItems" id="selectedItems" />
                             <p></p>
                         </div>
                     </div>
@@ -241,12 +151,6 @@
 
                     </div>
 
-                    
-
-                    <!-- Unnamed (Droplist) -->
-                    @*<div id="u343" class="ax_default droplist">
-            <div id="u343_div" class=""></div>
-        </div>*@
                 </div>
             </div>
         </div>
